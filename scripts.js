@@ -177,7 +177,7 @@
     /* ═══════════════════════════════════════════════════════
       6. INTERSECTION OBSERVER — revelar elementos al hacer scroll
       ═══════════════════════════════════════════════════════ */
-  const revealEls = $$('.card, .condemned-card, .genesis-chapter, .genesis-epigraph, .genesis-footer, .section-title, .infierno-intro, .infierno-footer, .stat, #conclusion p, .hero-content, .hero-visual, .timeline-item, .timeline-subtitle');
+  const revealEls = $$('.card, .condemned-card, .genesis-chapter, .genesis-epigraph, .genesis-footer, .section-title, .infierno-intro, .infierno-footer, .stat, #conclusion p, .hero-content, .hero-visual, .timeline-item, .timeline-subtitle, .mapa-mini-wrapper, .index-event-card, #lore-avanzado .card');
 
   revealEls.forEach(el => el.classList.add('reveal-init'));
 

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>404 — El Void te reclama</title>
+    <meta name="description" content="Has llegado al Void. Esta página no existe en el Purgatorio." />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+  </head>
+  <body>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div id="cursor" aria-hidden="true"></div>
+
+    <div class="void-page">
+      <div class="void-content">
+        <h1>404</h1>
+        <h2>Has caído al Void</h2>
+        <p>Esta región del Purgatorio no existe — o fue borrada por el Staff. El vacío entre los mundos te ha reclamado temporalmente.</p>
+        <div style="margin-top:24px;">
+          <a href="index.html" class="btn btn-primary">Volver al Purgatorio</a>
+          <a href="mapa.html" class="btn btn-ghost" style="margin-left:12px;">Explorar el Mapa</a>
+        </div>
+        <p class="void-quote" id="void-quote"></p>
+      </div>
+    </div>
+
+    <script src="scripts.js" defer></script>
+    <script src="easter-eggs.js" defer></script>
+    <script>
+    /* Nota: este inline script se maneja como fallback mínimo para la página 404.
+       Inyecta una cita aleatoria del lore en la página. */
+    </script>
+    <script src="void-quotes.js" defer></script>
+  </body>
+</html>

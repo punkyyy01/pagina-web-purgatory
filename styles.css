@@ -590,3 +590,74 @@ body{
 .timeline-content:hover .timeline-card-icon{transform:scale(1.1)}
 .card-icon{transition:transform .3s}
 .card:hover .card-icon{transform:scale(1.1)}
+
+/* ═══════════════════════════════════════════════════════════
+   MAPA PREVIEW — Sección del mapa en la página principal
+   ═══════════════════════════════════════════════════════════ */
+.mapa-preview-section{
+  position:relative;padding:80px 0;overflow:hidden;
+  background:linear-gradient(180deg,transparent,rgba(0,224,255,.015) 30%,rgba(124,92,255,.025) 50%,rgba(0,224,255,.015) 70%,transparent);
+}
+.mapa-preview-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(600px 400px at 50% 40%,rgba(0,224,255,.04),transparent),
+             radial-gradient(400px 300px at 25% 60%,rgba(124,92,255,.03),transparent);
+}
+.mapa-preview-title{
+  font-family:'Cinzel Decorative',Cinzel,serif !important;
+  text-shadow:0 0 24px rgba(0,224,255,.18);
+}
+.mapa-preview-title::after{background:linear-gradient(90deg,var(--accent),var(--accent2)) !important}
+.mapa-mini-wrapper{
+  position:relative;width:100%;max-width:900px;margin:0 auto;
+  background:radial-gradient(ellipse at center,rgba(124,92,255,.04) 0%,transparent 70%);
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  transition:border-color .3s;
+}
+.mapa-mini-wrapper:hover{border-color:rgba(124,92,255,.15)}
+.mapa-mini-svg{width:100%;height:auto;display:block}
+
+/* ═══════════════════════════════════════════════════════════
+   EVENTOS PREVIEW — Sección de eventos en la página principal
+   ═══════════════════════════════════════════════════════════ */
+.eventos-preview-section{
+  position:relative;padding:80px 0;overflow:hidden;
+  background:linear-gradient(180deg,transparent,rgba(124,92,255,.02) 30%,rgba(0,224,255,.02) 50%,rgba(124,92,255,.02) 70%,transparent);
+}
+.eventos-preview-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(500px 350px at 70% 40%,rgba(124,92,255,.04),transparent),
+             radial-gradient(400px 300px at 30% 60%,rgba(0,224,255,.03),transparent);
+}
+.eventos-preview-title{
+  font-family:'Cinzel Decorative',Cinzel,serif !important;
+  text-shadow:0 0 24px rgba(124,92,255,.18);
+}
+.eventos-preview-title::after{background:linear-gradient(90deg,var(--accent),var(--accent2)) !important}
+.index-events-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;
+}
+.index-event-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:22px;position:relative;overflow:hidden;
+  transition:transform .3s,border-color .3s;
+}
+.index-event-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:.7;
+}
+.index-event-card:hover{transform:translateY(-3px);border-color:rgba(124,92,255,.2)}
+.index-event-card h4{
+  font-family:Cinzel,serif;font-size:16px;margin:0 0 6px;
+  color:rgba(220,225,255,.92);
+}
+.index-event-date{
+  display:flex;align-items:center;gap:6px;font-size:12px;
+  color:var(--accent2);margin-bottom:8px;font-weight:600;
+}
+.index-event-date::before{content:'📅'}
+.index-event-desc{color:var(--muted);font-size:13px;line-height:1.6;margin:0}
+.index-events-empty{
+  text-align:center;padding:40px 20px;color:var(--muted);font-size:14px;
+}
+.index-events-empty span{display:block;font-size:36px;margin-bottom:12px}

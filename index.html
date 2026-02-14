@@ -7,7 +7,7 @@
     <meta name="description" content="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas." />
 
     <!-- Security: Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.discordapp.com; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
 
     <!-- Security: Referrer Policy -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -18,6 +18,7 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap" as="style" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
   </head>
   <body>
     <div id="progress-bar" aria-hidden="true"></div>
@@ -33,11 +34,11 @@
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
         <ul class="nav-links" id="nav-links">
           <li><a href="#timeline">Línea de Tiempo</a></li>
-          <li><a href="#lore">Lore</a></li>
-          <li><a href="#genesis">Génesis</a></li>
-          <li><a href="#personajes">Personajes</a></li>
+          <li><a href="lore.html">Lore</a></li>
+          <li><a href="personajes.html">Personajes</a></li>
+          <li><a href="mapa.html">Mapa</a></li>
+          <li><a href="eventos.html">Eventos</a></li>
           <li><a href="#infierno">Infierno</a></li>
-          <li><a href="#conclusion">Final</a></li>
           <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al server</a></li>
         </ul>
       </nav>
@@ -204,6 +205,9 @@
             <p>Entre nosotros hay mucho 'amor', pero del tipo que requiere terapia. Los chistes kinky son el pan de cada día; tenemos una confianza tan dañada que ya nada nos asusta. Pasamos del insulto más creativo a una declaración de amor bizarra en segundos. Es esa mezcla de afecto real con humor pasado de tono lo que nos mantiene unidos.</p>
           </article>
         </div>
+        <div style="text-align:center;margin-top:24px;">
+          <a href="lore.html" class="btn btn-ghost">Explorar el Lore completo →</a>
+        </div>
       </section>
 
       <section class="section container" id="guion">
@@ -275,6 +279,32 @@
           </div>
 
           <p class="genesis-footer">Esta es la historia que se cuenta en los rincones más antiguos del servidor. Nadie sabe cuánto es verdad y cuánto es mito &mdash; pero todos sienten su presencia.</p>
+          <div style="text-align:center;margin-top:20px;">
+            <a href="lore.html" class="btn btn-primary">Leer el Lore completo</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Lore Avanzado — Teaser de contenido exclusivo de /lore -->
+      <section class="section container" id="lore-avanzado">
+        <h2 class="section-title">Más allá del Mito</h2>
+        <p class="muted">El lore de Purgatory va mucho más profundo. Leyes sagradas, profecías oscuras y un registro de todas las almas.</p>
+        <div class="cards" style="margin-top:18px">
+          <article class="card">
+            <h3>⚖️ Las Leyes Sagradas</h3>
+            <p>Seis leyes que rigen el Purgatorio: la Ley del Bump, la Ley del Salseo, la Ley del Staff, la Ley del Infierno, la Ley del Amorodio y la Ley de los Menores. Rompelas bajo tu propio riesgo.</p>
+          </article>
+          <article class="card">
+            <h3>🌑 La Profecía de la Quinta Era</h3>
+            <p>"Cuando el último bump no sea respondido y el salseo se congele... vendrá la Quinta Era. No será fuego ni hielo. Será silencio." Los veteranos susurran sobre lo que viene.</p>
+          </article>
+          <article class="card">
+            <h3>📜 El Códex de las Almas</h3>
+            <p>Cada miembro es registrado en el Códex: Almas Penitentes, Errantes, Condenadas y Ascendidas. Tu clasificación define tu destino en el servidor.</p>
+          </article>
+        </div>
+        <div style="text-align:center;margin-top:24px;">
+          <a href="lore.html" class="btn btn-primary">Leer el Lore completo →</a>
         </div>
       </section>
 
@@ -341,6 +371,72 @@
             <button class="modal-close" aria-label="Cerrar">×</button>
             <h3 id="modal-title"></h3>
             <p id="modal-body"></p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:24px;">
+          <a href="personajes.html" class="btn btn-ghost">Ver todos los personajes →</a>
+        </div>
+      </section>
+
+      <!-- Sección: Mapa Interactivo — preview del mapa del Purgatorio -->
+      <section class="section mapa-preview-section" id="mapa-preview">
+        <div class="mapa-preview-bg" aria-hidden="true"></div>
+        <div class="container">
+          <h2 class="section-title mapa-preview-title">Mapa del Purgatorio</h2>
+          <p class="muted" style="max-width:700px;margin-bottom:28px;">Explora los reinos y regiones del universo de Purgatory. Desde las ruinas doradas del Olympo hasta los Círculos del Infierno — cada lugar tiene su historia.</p>
+
+          <div class="mapa-mini-wrapper">
+            <svg class="mapa-mini-svg" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="mg-gold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffb627" stop-opacity="0.6"/><stop offset="100%" stop-color="#ffb627" stop-opacity="0"/></radialGradient>
+                <radialGradient id="mg-red" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff3b3b" stop-opacity="0.6"/><stop offset="100%" stop-color="#ff3b3b" stop-opacity="0"/></radialGradient>
+                <radialGradient id="mg-cyan" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00e0ff" stop-opacity="0.6"/><stop offset="100%" stop-color="#00e0ff" stop-opacity="0"/></radialGradient>
+                <radialGradient id="mg-purple" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7c5cff" stop-opacity="0.6"/><stop offset="100%" stop-color="#7c5cff" stop-opacity="0"/></radialGradient>
+                <radialGradient id="mg-dim" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#888" stop-opacity="0.4"/><stop offset="100%" stop-color="#888" stop-opacity="0"/></radialGradient>
+                <filter id="mg-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <!-- Estrellas de fondo -->
+              <g opacity="0.25"><circle cx="80" cy="30" r="0.8" fill="#fff"/><circle cx="220" cy="55" r="1" fill="#fff"/><circle cx="400" cy="20" r="0.7" fill="#fff"/><circle cx="580" cy="45" r="1.1" fill="#fff"/><circle cx="750" cy="25" r="0.6" fill="#fff"/><circle cx="130" cy="350" r="0.9" fill="#fff"/><circle cx="650" cy="370" r="0.7" fill="#fff"/><circle cx="830" cy="280" r="1" fill="#fff"/></g>
+              <!-- Conexiones -->
+              <g opacity="0.3"><line x1="300" y1="80" x2="450" y2="180" stroke="#7c5cff" stroke-width="1" stroke-dasharray="4 4"/><line x1="600" y1="80" x2="450" y2="180" stroke="#7c5cff" stroke-width="1" stroke-dasharray="4 4"/><line x1="150" y1="200" x2="450" y2="180" stroke="#7c5cff" stroke-width="1" stroke-dasharray="4 4"/><line x1="750" y1="200" x2="450" y2="180" stroke="#7c5cff" stroke-width="1" stroke-dasharray="4 4"/><line x1="450" y1="180" x2="450" y2="330" stroke="#ff3b3b" stroke-width="1" stroke-dasharray="4 4"/><line x1="300" y1="280" x2="450" y2="180" stroke="#7c5cff" stroke-width="1" stroke-dasharray="4 4"/><line x1="600" y1="280" x2="450" y2="180" stroke="#7c5cff" stroke-width="1" stroke-dasharray="4 4"/></g>
+              <!-- Olympo -->
+              <g><circle cx="300" cy="80" r="22" fill="url(#mg-gold)" opacity="0.35"/><circle cx="300" cy="80" r="9" fill="#ffb627" fill-opacity="0.5" stroke="#ffb627" stroke-width="1.5" stroke-opacity="0.7" filter="url(#mg-glow)"/><text x="300" y="112" font-family="Cinzel,serif" font-size="10" fill="rgba(220,225,255,.65)" text-anchor="middle">OLYMPO</text></g>
+              <!-- Las Fosas -->
+              <g><circle cx="600" cy="80" r="22" fill="url(#mg-red)" opacity="0.35"/><circle cx="600" cy="80" r="9" fill="#ff3b3b" fill-opacity="0.5" stroke="#ff3b3b" stroke-width="1.5" stroke-opacity="0.7" filter="url(#mg-glow)"/><text x="600" y="112" font-family="Cinzel,serif" font-size="10" fill="rgba(220,225,255,.65)" text-anchor="middle">LAS FOSAS</text></g>
+              <!-- Edén -->
+              <g><circle cx="150" cy="200" r="18" fill="url(#mg-purple)" opacity="0.3"/><circle cx="150" cy="200" r="7" fill="#7c5cff" fill-opacity="0.5" stroke="#7c5cff" stroke-width="1.5" stroke-opacity="0.6" filter="url(#mg-glow)"/><text x="150" y="228" font-family="Cinzel,serif" font-size="10" fill="rgba(220,225,255,.65)" text-anchor="middle">EDÉN</text></g>
+              <!-- El Void -->
+              <g><circle cx="750" cy="200" r="18" fill="url(#mg-dim)" opacity="0.25"/><circle cx="750" cy="200" r="7" fill="#888" fill-opacity="0.4" stroke="#666" stroke-width="1.5" stroke-opacity="0.5" filter="url(#mg-glow)"/><text x="750" y="228" font-family="Cinzel,serif" font-size="10" fill="rgba(220,225,255,.55)" text-anchor="middle">EL VOID</text></g>
+              <!-- PURG4TORY (centro) -->
+              <g><circle cx="450" cy="180" r="32" fill="url(#mg-cyan)" opacity="0.3"/><circle cx="450" cy="180" r="18" fill="transparent" stroke="#00e0ff" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="4 3"/><circle cx="450" cy="180" r="12" fill="#00e0ff" fill-opacity="0.5" stroke="#00e0ff" stroke-width="2" stroke-opacity="0.8" filter="url(#mg-glow)"/><text x="450" y="216" font-family="Cinzel,serif" font-size="12" fill="rgba(0,224,255,.85)" text-anchor="middle" font-weight="700">PURG4TORY</text></g>
+              <!-- Plaza del Salseo -->
+              <g><circle cx="300" cy="280" r="16" fill="url(#mg-purple)" opacity="0.25"/><circle cx="300" cy="280" r="6" fill="#7c5cff" fill-opacity="0.4" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.6" filter="url(#mg-glow)"/><text x="300" y="306" font-family="Cinzel,serif" font-size="9" fill="rgba(220,225,255,.55)" text-anchor="middle">PLAZA DEL SALSEO</text></g>
+              <!-- Sala del Trono -->
+              <g><circle cx="600" cy="280" r="16" fill="url(#mg-cyan)" opacity="0.25"/><circle cx="600" cy="280" r="6" fill="#00e0ff" fill-opacity="0.4" stroke="#00e0ff" stroke-width="1.5" stroke-opacity="0.6" filter="url(#mg-glow)"/><text x="600" y="306" font-family="Cinzel,serif" font-size="9" fill="rgba(220,225,255,.55)" text-anchor="middle">SALA DEL TRONO</text></g>
+              <!-- Infierno -->
+              <g><circle cx="450" cy="330" r="26" fill="url(#mg-red)" opacity="0.35"/><circle cx="450" cy="330" r="16" fill="transparent" stroke="#ff3b3b" stroke-width="1" stroke-opacity="0.15" stroke-dasharray="3 4"/><circle cx="450" cy="330" r="10" fill="#ff3b3b" fill-opacity="0.5" stroke="#ff6b1a" stroke-width="1.5" stroke-opacity="0.7" filter="url(#mg-glow)"/><text x="450" y="365" font-family="Cinzel,serif" font-size="10" fill="rgba(255,100,60,.75)" text-anchor="middle">INFIERNO</text></g>
+            </svg>
+          </div>
+
+          <div style="text-align:center;margin-top:24px;">
+            <a href="mapa.html" class="btn btn-primary">Explorar el Mapa interactivo →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Eventos — feed en vivo desde Discord -->
+      <section class="section eventos-preview-section" id="eventos-preview">
+        <div class="eventos-preview-bg" aria-hidden="true"></div>
+        <div class="container">
+          <h2 class="section-title eventos-preview-title">Eventos del Purgatorio</h2>
+          <p class="muted" style="max-width:700px;margin-bottom:28px;">Los rituales y ceremonias programados en el servidor. Directamente desde Discord, en tiempo real.</p>
+
+          <div id="index-events-container">
+            <div class="loading-spinner" id="index-events-loading">Invocando eventos desde el Void...</div>
+          </div>
+
+          <div style="text-align:center;margin-top:24px;">
+            <a href="eventos.html" class="btn btn-ghost">Ver todos los eventos →</a>
           </div>
         </div>
       </section>
@@ -537,13 +633,18 @@
         </div>
         <div class="links">
           <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
-          <a href="#lore">Lore</a>
+          <a href="lore.html">Lore</a>
+          <a href="personajes.html">Personajes</a>
+          <a href="mapa.html">Mapa</a>
+          <a href="eventos.html">Eventos</a>
           <a href="#infierno">Infierno</a>
         </div>
       </div>
     </footer>
 
     <script src="scripts.js" defer></script>
+    <script src="easter-eggs.js" defer></script>
+    <script src="index-events.js" defer></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

@@ -1,39 +1,54 @@
 /* ═══════════════════════════════════════════════════════════
-   PURGATORY — Eventos Loader (fetches from /api/discord-events)
+   PURGATORY — Eventos Loader
+   ─────────────────────────────────────────────────────────
+   • Carga eventos desde /api/discord-events
+   • Polling automático cada 60 s (solo cuando la pestaña
+     está visible) para mantener los datos siempre frescos.
+   • Usa ETag / If-None-Match: si los eventos no cambiaron,
+     el servidor responde 304 (< 1 KB) y no se re-renderiza.
+   • Sin dependencias externas. Costo Vercel ≈ 0.
    ═══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
   var container = document.getElementById('events-container');
-  var loading = document.getElementById('events-loading');
+  var loading   = document.getElementById('events-loading');
   if (!container) return;
 
+  /* ─── Estado ─── */
+  var POLL_INTERVAL = 60 * 1000; // 60 s entre polls
+  var currentEtag  = null;       // ETag del último fetch exitoso
+  var pollTimer    = null;       // referencia al setInterval
+
+  /* ─── Helpers ─── */
   function formatDate(dateStr) {
     try {
       var d = new Date(dateStr);
-      var options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
+      return d.toLocaleDateString('es-ES', {
+        weekday: 'long', year: 'numeric', month: 'long',
+        day: 'numeric', hour: '2-digit', minute: '2-digit',
         timeZoneName: 'short'
-      };
-      return d.toLocaleDateString('es-ES', options);
-    } catch (e) {
-      return dateStr;
-    }
+      });
+    } catch (_) { return dateStr; }
   }
 
+  function escapeHTML(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  /* ─── Render ─── */
   function renderEvents(events) {
     if (!events || events.length === 0) {
       container.innerHTML =
         '<div class="events-empty">' +
           '<span>🌑</span>' +
           '<p>No hay eventos programados en el Purgatorio por ahora.</p>' +
-          '<p style="font-size:13px;margin-top:8px;">El Void está en calma... por ahora. Visita el servidor para estar atento a los próximos rituales.</p>' +
-          '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:20px;">Unirse al servidor</a>' +
+          '<p style="font-size:13px;margin-top:8px;">El Void está en calma... por ahora. ' +
+          'Visita el servidor para estar atento a los próximos rituales.</p>' +
+          '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" ' +
+          'class="btn btn-primary" style="margin-top:20px;">Unirse al servidor</a>' +
         '</div>';
       return;
     }
@@ -45,7 +60,8 @@
 
       html += '<article class="event-card reveal-init">';
       if (ev.image) {
-        html += '<img src="' + ev.image + '" alt="" style="width:100%;border-radius:10px;margin-bottom:12px;opacity:.85;" loading="lazy" />';
+        html += '<img src="' + ev.image + '" alt="" ' +
+                'style="width:100%;border-radius:10px;margin-bottom:12px;opacity:.85;" loading="lazy" />';
       }
       html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">';
       html += '<span class="event-status ' + statusClass + '">' + statusLabel + '</span>';
@@ -53,10 +69,12 @@
       html += '<h3>' + escapeHTML(ev.name) + '</h3>';
       html += '<div class="event-date">' + formatDate(ev.start) + '</div>';
       if (ev.end) {
-        html += '<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Hasta: ' + formatDate(ev.end) + '</div>';
+        html += '<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Hasta: ' +
+                formatDate(ev.end) + '</div>';
       }
       if (ev.location) {
-        html += '<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">📍 ' + escapeHTML(ev.location) + '</div>';
+        html += '<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">📍 ' +
+                escapeHTML(ev.location) + '</div>';
       }
       if (ev.description) {
         html += '<p class="event-desc">' + escapeHTML(ev.description) + '</p>';
@@ -65,7 +83,8 @@
       if (ev.user_count > 0) {
         html += '<span class="event-users">' + ev.user_count + ' interesados</span>';
       }
-      html += '<a href="https://discord.com/events/' + ev.guild_id + '/' + ev.id + '" target="_blank" rel="noopener noreferrer" class="event-link">Ver en Discord</a>';
+      html += '<a href="https://discord.com/events/' + ev.guild_id + '/' + ev.id +
+              '" target="_blank" rel="noopener noreferrer" class="event-link">Ver en Discord</a>';
       html += '</div>';
       html += '</article>';
     });
@@ -73,7 +92,6 @@
 
     container.innerHTML = html;
 
-    /* Trigger reveal animation */
     requestAnimationFrame(function () {
       container.querySelectorAll('.reveal-init').forEach(function (el) {
         el.classList.add('revealed');
@@ -86,67 +104,80 @@
       '<div class="events-empty">' +
         '<span>⚠️</span>' +
         '<p>' + msg + '</p>' +
-        '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="margin-top:16px;">Ir al servidor directamente</a>' +
+        '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" ' +
+        'class="btn btn-ghost" style="margin-top:16px;">Ir al servidor directamente</a>' +
       '</div>';
   }
 
-  function escapeHTML(str) {
-    var div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
-  /* ─── Cache en sessionStorage para evitar invocaciones redundantes ─── */
-  var CACHE_KEY = 'purgatory_events_cache';
-  var CACHE_TTL = 5 * 60 * 1000; // 5 minutos (sincronizado con s-maxage del servidor)
-
-  function getCachedEvents() {
-    try {
-      var raw = sessionStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      var cached = JSON.parse(raw);
-      if (Date.now() - cached.ts > CACHE_TTL) {
-        sessionStorage.removeItem(CACHE_KEY);
-        return null;
-      }
-      return cached.data;
-    } catch (e) { return null; }
-  }
-
-  function setCachedEvents(data) {
-    try {
-      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: data }));
-    } catch (e) { /* quota exceeded — silencioso */ }
-  }
-
-  /* Fetch events — usa cache local primero, luego API */
-  var cached = getCachedEvents();
-  if (cached) {
-    if (loading) loading.style.display = 'none';
-    if (cached.error) {
-      renderError('No se pudieron cargar los eventos: ' + cached.error);
-    } else {
-      renderEvents(cached);
+  /* ─── Fetch con soporte ETag ─── */
+  function fetchEvents(isFirstLoad) {
+    var headers = {};
+    if (currentEtag) {
+      headers['If-None-Match'] = currentEtag;
     }
-  } else {
-    fetch('/api/discord-events')
+
+    fetch('/api/discord-events', { headers: headers })
       .then(function (res) {
+        /* 304 = no cambió nada, no re-renderizar */
+        if (res.status === 304) return null;
         if (!res.ok) throw new Error('Error ' + res.status);
+
+        /* Guardar el ETag para la próxima vez */
+        var etag = res.headers.get('etag');
+        if (etag) currentEtag = etag;
+
         return res.json();
       })
       .then(function (data) {
+        if (data === null) return; // 304 — sin cambios
+
         if (loading) loading.style.display = 'none';
-        setCachedEvents(data);
+
         if (data.error) {
           renderError('No se pudieron cargar los eventos: ' + data.error);
         } else {
           renderEvents(data);
         }
       })
-      .catch(function (err) {
-        if (loading) loading.style.display = 'none';
-        renderError('No se pudieron invocar los eventos del Void. Puede que la API no esté configurada aún.');
+      .catch(function () {
+        if (isFirstLoad) {
+          if (loading) loading.style.display = 'none';
+          renderError('No se pudieron invocar los eventos del Void. ' +
+                      'Puede que la API no esté configurada aún.');
+        }
+        /* En polls posteriores, si falla simplemente se mantiene
+           lo que ya está renderizado — sin molestar al usuario. */
       });
   }
+
+  /* ─── Polling inteligente (solo con pestaña visible) ─── */
+  function startPolling() {
+    if (pollTimer) return; // ya corriendo
+    pollTimer = setInterval(function () {
+      fetchEvents(false);
+    }, POLL_INTERVAL);
+  }
+
+  function stopPolling() {
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  }
+
+  /* Pausar/reanudar cuando la pestaña se oculta/muestra */
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stopPolling();
+    } else {
+      /* Al volver a la pestaña, hacer un fetch inmediato y reanudar */
+      fetchEvents(false);
+      startPolling();
+    }
+  });
+
+  /* ─── Arranque ─── */
+  fetchEvents(true);
+  startPolling();
 
 })();

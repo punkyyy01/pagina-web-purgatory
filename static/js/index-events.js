@@ -83,21 +83,54 @@
       '</div>';
   }
 
-  /* Fetch events from API */
-  fetch('/api/discord-events')
-    .then(function (res) {
-      if (!res.ok) throw new Error('Error ' + res.status);
-      return res.json();
-    })
-    .then(function (data) {
-      if (data.error) {
-        renderEvents([]);
-      } else {
-        renderEvents(data);
+  /* ─── Cache compartido con eventos-loader (misma key) ─── */
+  var CACHE_KEY = 'purgatory_events_cache';
+  var CACHE_TTL = 5 * 60 * 1000; // 5 minutos
+
+  function getCachedEvents() {
+    try {
+      var raw = sessionStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      var cached = JSON.parse(raw);
+      if (Date.now() - cached.ts > CACHE_TTL) {
+        sessionStorage.removeItem(CACHE_KEY);
+        return null;
       }
-    })
-    .catch(function () {
-      renderError();
-    });
+      return cached.data;
+    } catch (e) { return null; }
+  }
+
+  function setCachedEvents(data) {
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: data }));
+    } catch (e) { /* silencioso */ }
+  }
+
+  /* Fetch events — usa cache local primero */
+  var cached = getCachedEvents();
+  if (cached) {
+    if (cached.error) {
+      renderEvents([]);
+    } else {
+      renderEvents(cached);
+    }
+  } else {
+    fetch('/api/discord-events')
+      .then(function (res) {
+        if (!res.ok) throw new Error('Error ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        setCachedEvents(data);
+        if (data.error) {
+          renderEvents([]);
+        } else {
+          renderEvents(data);
+        }
+      })
+      .catch(function () {
+        renderError();
+      });
+  }
 
 })();

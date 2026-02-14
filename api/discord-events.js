@@ -9,8 +9,8 @@
 module.exports = async function handler(req, res) {
   const token = process.env.DISCORD_BOT_TOKEN;
   const guildId = process.env.DISCORD_GUILD_ID;
-
   if (!token || !guildId) {
+    console.error('ENV MISSING', { hasToken: !!token, hasGuildId: !!guildId });
     return res.status(500).json({
       error: 'Configuración incompleta: falta DISCORD_BOT_TOKEN o DISCORD_GUILD_ID en las variables de entorno.'
     });
@@ -18,9 +18,22 @@ module.exports = async function handler(req, res) {
 
   try {
     const url = 'https://discord.com/api/v10/guilds/' + guildId + '/scheduled-events?with_user_count=true';
+
+    /* Ensure fetch exists in older local Node environments */
+    if (!globalThis.fetch) {
+      try {
+        const nodeFetch = await import('node-fetch');
+        globalThis.fetch = nodeFetch.default;
+      } catch (e) {
+        console.warn('node-fetch no está disponible; ejecutar con Node 18+ o instalar node-fetch para desarrollo local.');
+      }
+    }
+
     const response = await fetch(url, {
       headers: {
-        'Authorization': 'Bot ' + token
+        'Authorization': 'Bot ' + token,
+        'Accept': 'application/json',
+        'User-Agent': 'pagina-web-purgatory/1.0 (+https://github.com)'
       }
     });
 
@@ -58,12 +71,17 @@ module.exports = async function handler(req, res) {
         };
       });
 
-    /* Cache CDN: 60s fresh + 120s stale-while-revalidate */
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=120');
+    /* Cache CDN: 5 min fresh + 10 min stale-while-revalidate + 1h stale-if-error
+       Esto reduce drásticamente las invocaciones de la Serverless Function.
+       Los eventos de Discord no cambian cada segundo — 5 min es más que suficiente. */
+    res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600, stale-if-error=3600');
     res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Vary', 'Accept');
     return res.status(200).json(filtered);
 
   } catch (err) {
-    return res.status(500).json({ error: 'Error interno: ' + err.message });
+    console.error('Discord events fetch error', err);
+    return res.status(500).json({ error: 'Error interno: ' + (err && err.message ? err.message : String(err)) });
   }
 };

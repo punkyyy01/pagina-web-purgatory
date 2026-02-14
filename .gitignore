@@ -48,6 +48,9 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 
+# Local test scripts
+test-api.js
+
 # Private keys, certificates and secrets
 *.pem
 *.key

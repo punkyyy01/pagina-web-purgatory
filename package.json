@@ -1,0 +1,11 @@
+{
+  "name": "pagina-web-purgatory",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "test:api": "node test-api.js"
+  },
+  "devDependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}

@@ -96,21 +96,57 @@
     return div.innerHTML;
   }
 
-  /* Fetch events from API */
-  fetch('/api/discord-events')
-    .then(function (res) {
-      if (!res.ok) throw new Error('Error ' + res.status);
-      return res.json();
-    })
-    .then(function (data) {
-      if (data.error) {
-        renderError('No se pudieron cargar los eventos: ' + data.error);
-      } else {
-        renderEvents(data);
+  /* ─── Cache en sessionStorage para evitar invocaciones redundantes ─── */
+  var CACHE_KEY = 'purgatory_events_cache';
+  var CACHE_TTL = 5 * 60 * 1000; // 5 minutos (sincronizado con s-maxage del servidor)
+
+  function getCachedEvents() {
+    try {
+      var raw = sessionStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      var cached = JSON.parse(raw);
+      if (Date.now() - cached.ts > CACHE_TTL) {
+        sessionStorage.removeItem(CACHE_KEY);
+        return null;
       }
-    })
-    .catch(function (err) {
-      renderError('No se pudieron invocar los eventos del Void. Puede que la API no esté configurada aún.');
-    });
+      return cached.data;
+    } catch (e) { return null; }
+  }
+
+  function setCachedEvents(data) {
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: data }));
+    } catch (e) { /* quota exceeded — silencioso */ }
+  }
+
+  /* Fetch events — usa cache local primero, luego API */
+  var cached = getCachedEvents();
+  if (cached) {
+    if (loading) loading.style.display = 'none';
+    if (cached.error) {
+      renderError('No se pudieron cargar los eventos: ' + cached.error);
+    } else {
+      renderEvents(cached);
+    }
+  } else {
+    fetch('/api/discord-events')
+      .then(function (res) {
+        if (!res.ok) throw new Error('Error ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        if (loading) loading.style.display = 'none';
+        setCachedEvents(data);
+        if (data.error) {
+          renderError('No se pudieron cargar los eventos: ' + data.error);
+        } else {
+          renderEvents(data);
+        }
+      })
+      .catch(function (err) {
+        if (loading) loading.style.display = 'none';
+        renderError('No se pudieron invocar los eventos del Void. Puede que la API no esté configurada aún.');
+      });
+  }
 
 })();

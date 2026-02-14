@@ -342,43 +342,35 @@
   }
 
     /* ═══════════════════════════════════════════════════════
-      11. REINTENTO DE IMÁGENES — reintenta imágenes rotas en túneles (ngrok)
-      ═══════════════════════════════════════════════════════
-      Al servir por túneles como ngrok (plan gratuito), algunas
-      peticiones de imágenes pueden fallar aleatoriamente por límites.
-      Este bloque reintenta imágenes rotas con backoff exponencial hasta 3 veces. */
+      11. REINTENTO DE IMÁGENES — reintenta UNA vez con delay corto
+       - Reducido a 1 solo reintento para no desperdiciar ancho de banda
+       - En producción (Vercel), las imágenes se sirven desde CDN y rara vez fallan
+     ═══════════════════════════════════════════════════════ */
     (function retryBrokenImages() {
-    const MAX_RETRIES = 3;
-    const BASE_DELAY  = 800; // ms
+    var retried = new WeakSet();
 
-    function retryImage(img, attempt) {
-      if (attempt > MAX_RETRIES) return;
-      const delay = BASE_DELAY * Math.pow(2, attempt - 1); // 800, 1600, 3200
-      setTimeout(() => {
-        const src = img.getAttribute('src');
-        if (src) {
-          // Bust cache by appending a unique query param
-          // Forzar recarga añadiendo un parámetro único
-          const separator = src.includes('?') ? '&' : '?';
-          img.src = src.split('?')[0] + separator + '_r=' + Date.now();
-        }
-      }, delay);
-    }
-
-    // Añadir manejadores de error a todas las imágenes ya existentes
-    document.querySelectorAll('img').forEach(img => {
-      let attempts = 0;
+    document.querySelectorAll('img').forEach(function (img) {
       img.addEventListener('error', function handler() {
-        attempts++;
-        if (attempts <= MAX_RETRIES) {
-          retryImage(img, attempts);
-        }
+        if (retried.has(img)) return; // solo 1 reintento
+        retried.add(img);
+        setTimeout(function () {
+          var src = img.getAttribute('src');
+          if (src) {
+            var separator = src.includes('?') ? '&' : '?';
+            img.src = src.split('?')[0] + separator + '_r=' + Date.now();
+          }
+        }, 1200);
       });
-      // If image already failed before JS loaded
       // Si la imagen ya falló antes de que cargara el JS
-      if (img.complete && img.naturalWidth === 0 && img.src) {
-        attempts++;
-        retryImage(img, attempts);
+      if (img.complete && img.naturalWidth === 0 && img.src && !retried.has(img)) {
+        retried.add(img);
+        setTimeout(function () {
+          var src = img.getAttribute('src');
+          if (src) {
+            var separator = src.includes('?') ? '&' : '?';
+            img.src = src.split('?')[0] + separator + '_r=' + Date.now();
+          }
+        }, 1200);
       }
     });
   })();

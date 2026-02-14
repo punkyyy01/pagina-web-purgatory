@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <defs>
+    <linearGradient id="gMoon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d4deff" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#7c5cff" stop-opacity="0.2"/>
+    </linearGradient>
+    <radialGradient id="gMoonR" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#d4deff" stop-opacity="0.25"/>
+      <stop offset="0.7" stop-color="#7c5cff" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="transparent"/>
+    </radialGradient>
+    <linearGradient id="gPillar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b8c8ff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#7c5cff" stop-opacity="0.05"/>
+    </linearGradient>
+    <filter id="gmGlow">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="gmGlow2">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Moon glow background -->
+  <circle cx="250" cy="120" r="140" fill="url(#gMoonR)" filter="url(#gmGlow)"/>
+  <!-- Moon crescent -->
+  <circle cx="250" cy="120" r="70" fill="url(#gMoon)" opacity="0.15"/>
+  <circle cx="270" cy="110" r="60" fill="#05060a" opacity="0.8"/>
+  <!-- Moon rim glow -->
+  <circle cx="250" cy="120" r="70" fill="none" stroke="#b8c8ff" stroke-width="1" opacity="0.2" filter="url(#gmGlow2)"/>
+
+  <!-- Stars -->
+  <circle cx="80" cy="60" r="1.5" fill="#d4deff" opacity="0.7"/>
+  <circle cx="150" cy="30" r="1" fill="#b8c8ff" opacity="0.5"/>
+  <circle cx="400" cy="50" r="1.5" fill="#d4deff" opacity="0.6"/>
+  <circle cx="350" cy="80" r="1" fill="#00e0ff" opacity="0.4"/>
+  <circle cx="420" cy="140" r="0.8" fill="#7c5cff" opacity="0.4"/>
+  <circle cx="100" cy="160" r="1" fill="#d4deff" opacity="0.4"/>
+  <circle cx="450" cy="90" r="1.2" fill="#b8c8ff" opacity="0.5"/>
+
+  <!-- Broken temple pillars -->
+  <rect x="90" y="200" width="14" height="160" rx="3" fill="url(#gPillar)" opacity="0.6"/>
+  <rect x="86" y="190" width="22" height="12" rx="2" fill="url(#gPillar)" opacity="0.5"/>
+  <!-- Broken top -->
+  <polygon points="86,190 97,170 108,190" fill="url(#gPillar)" opacity="0.3"/>
+
+  <rect x="396" y="220" width="14" height="140" rx="3" fill="url(#gPillar)" opacity="0.6"/>
+  <rect x="392" y="212" width="22" height="10" rx="2" fill="url(#gPillar)" opacity="0.5"/>
+
+  <!-- Fallen pillar pieces -->
+  <rect x="140" y="340" width="60" height="10" rx="3" fill="url(#gPillar)" opacity="0.25" transform="rotate(-15 170 345)"/>
+  <rect x="320" y="350" width="40" height="8" rx="3" fill="url(#gPillar)" opacity="0.2" transform="rotate(10 340 354)"/>
+
+  <!-- Ground mist -->
+  <ellipse cx="250" cy="380" rx="220" ry="30" fill="#7c5cff" opacity="0.05"/>
+  <ellipse cx="200" cy="370" rx="150" ry="20" fill="#b8c8ff" opacity="0.03"/>
+
+  <!-- Floating goddess symbol (crescent + arrow) -->
+  <g transform="translate(250,200)" opacity="0.5" filter="url(#gmGlow2)">
+    <path d="M-15,-5 C-15,-20 15,-20 15,-5 C15,5 5,15 0,20 C-5,15 -15,5 -15,-5Z" fill="none" stroke="#b8c8ff" stroke-width="1" opacity="0.5"/>
+    <line x1="0" y1="-25" x2="0" y2="25" stroke="#b8c8ff" stroke-width="0.8" opacity="0.4"/>
+    <line x1="-10" y1="-15" x2="10" y2="-15" stroke="#b8c8ff" stroke-width="0.8" opacity="0.4"/>
+  </g>
+
+  <!-- Floating particles -->
+  <circle cx="180" cy="250" r="2" fill="#7c5cff" opacity="0.3" filter="url(#gmGlow2)"/>
+  <circle cx="320" cy="280" r="1.5" fill="#00e0ff" opacity="0.25"/>
+  <circle cx="220" cy="300" r="1" fill="#b8c8ff" opacity="0.3"/>
+  <circle cx="300" cy="240" r="1.5" fill="#7c5cff" opacity="0.2"/>
+</svg>

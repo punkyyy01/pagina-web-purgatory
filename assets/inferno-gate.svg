@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 360">
+  <defs>
+    <linearGradient id="fireG" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ff3b3b" stop-opacity="0.8"/>
+      <stop offset="0.5" stop-color="#ff6b1a" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#ffb627" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="gateG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6b1a" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#3a0a0a" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="chainG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6b1a" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#882200" stop-opacity="0.5"/>
+    </linearGradient>
+    <radialGradient id="hellGlow" cx="50%" cy="80%" r="60%">
+      <stop offset="0" stop-color="#ff3b3b" stop-opacity="0.15"/>
+      <stop offset="0.6" stop-color="#ff6b1a" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="fGlow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="fSoft">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <!-- Background hell glow -->
+  <rect width="500" height="360" fill="url(#hellGlow)"/>
+
+  <!-- Gate left pillar -->
+  <rect x="100" y="40" width="30" height="280" rx="4" fill="url(#gateG)" opacity="0.7"/>
+  <rect x="95" y="30" width="40" height="14" rx="3" fill="url(#gateG)" opacity="0.6"/>
+  <rect x="95" y="310" width="40" height="14" rx="3" fill="url(#gateG)" opacity="0.6"/>
+  <!-- Pillar details -->
+  <line x1="108" y1="50" x2="108" y2="305" stroke="#ff6b1a" stroke-width="0.5" opacity="0.3"/>
+  <line x1="122" y1="50" x2="122" y2="305" stroke="#ff6b1a" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Gate right pillar -->
+  <rect x="370" y="40" width="30" height="280" rx="4" fill="url(#gateG)" opacity="0.7"/>
+  <rect x="365" y="30" width="40" height="14" rx="3" fill="url(#gateG)" opacity="0.6"/>
+  <rect x="365" y="310" width="40" height="14" rx="3" fill="url(#gateG)" opacity="0.6"/>
+  <line x1="378" y1="50" x2="378" y2="305" stroke="#ff6b1a" stroke-width="0.5" opacity="0.3"/>
+  <line x1="392" y1="50" x2="392" y2="305" stroke="#ff6b1a" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Gate arch -->
+  <path d="M100,40 C100,-20 400,-20 400,40" fill="none" stroke="url(#gateG)" stroke-width="6" opacity="0.7"/>
+  <path d="M110,40 C110,-10 390,-10 390,40" fill="none" stroke="#ff6b1a" stroke-width="1" opacity="0.2"/>
+
+  <!-- Skull decoration on arch -->
+  <g transform="translate(250, 5)" opacity="0.6">
+    <ellipse cx="0" cy="0" rx="14" ry="16" fill="#3a0a0a" stroke="#ff6b1a" stroke-width="1"/>
+    <ellipse cx="-5" cy="-3" rx="3" ry="4" fill="#ff3b3b" opacity="0.5"/>
+    <ellipse cx="5" cy="-3" rx="3" ry="4" fill="#ff3b3b" opacity="0.5"/>
+    <path d="M-4,6 L-2,10 L0,7 L2,10 L4,6" fill="none" stroke="#ff6b1a" stroke-width="0.8" opacity="0.5"/>
+  </g>
+
+  <!-- Inner gate bars -->
+  <line x1="180" y1="35" x2="180" y2="320" stroke="#882200" stroke-width="3" opacity="0.3"/>
+  <line x1="220" y1="25" x2="220" y2="320" stroke="#882200" stroke-width="3" opacity="0.3"/>
+  <line x1="250" y1="20" x2="250" y2="320" stroke="#882200" stroke-width="3" opacity="0.35"/>
+  <line x1="280" y1="25" x2="280" y2="320" stroke="#882200" stroke-width="3" opacity="0.3"/>
+  <line x1="320" y1="35" x2="320" y2="320" stroke="#882200" stroke-width="3" opacity="0.3"/>
+
+  <!-- Chains -->
+  <g opacity="0.4">
+    <path d="M130,80 C140,85 145,90 140,100 C135,110 130,105 130,115 C130,125 140,125 140,135" fill="none" stroke="url(#chainG)" stroke-width="2"/>
+    <path d="M370,80 C360,85 355,90 360,100 C365,110 370,105 370,115 C370,125 360,125 360,135" fill="none" stroke="url(#chainG)" stroke-width="2"/>
+  </g>
+
+  <!-- Flames at base -->
+  <g filter="url(#fGlow)" opacity="0.6">
+    <path d="M150,320 C155,290 160,300 165,280 C170,300 175,290 180,320" fill="url(#fireG)" opacity="0.5"/>
+    <path d="M200,320 C205,285 215,300 220,270 C225,295 230,285 235,320" fill="url(#fireG)" opacity="0.6"/>
+    <path d="M250,320 C255,275 262,295 268,265 C274,290 280,278 285,320" fill="url(#fireG)" opacity="0.7"/>
+    <path d="M310,320 C315,290 320,300 325,280 C330,300 335,290 340,320" fill="url(#fireG)" opacity="0.5"/>
+  </g>
+
+  <!-- Embers/particles -->
+  <circle cx="200" cy="250" r="2" fill="#ff6b1a" opacity="0.5" filter="url(#fGlow)"/>
+  <circle cx="300" cy="230" r="1.5" fill="#ffb627" opacity="0.4"/>
+  <circle cx="250" cy="200" r="2" fill="#ff3b3b" opacity="0.4" filter="url(#fGlow)"/>
+  <circle cx="180" cy="180" r="1" fill="#ffb627" opacity="0.3"/>
+  <circle cx="330" cy="190" r="1.5" fill="#ff6b1a" opacity="0.3"/>
+  <circle cx="220" cy="150" r="1" fill="#ff3b3b" opacity="0.25"/>
+  <circle cx="280" cy="120" r="1.5" fill="#ffb627" opacity="0.2"/>
+
+  <!-- Pentagram subtle in center -->
+  <g transform="translate(250,180)" opacity="0.1">
+    <polygon points="0,-40 10,-12 40,-12 18,6 25,35 0,18 -25,35 -18,6 -40,-12 -10,-12" fill="none" stroke="#ff3b3b" stroke-width="1"/>
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#ff3b3b" stroke-width="0.8"/>
+  </g>
+</svg>

@@ -1,0 +1,62 @@
+# Node modules
+node_modules/
+
+# Build directories
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Coverage
+coverage/
+.nyc_output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Other
+.sass-cache/
+.cache-loader
+*.tmp
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+.pytest_cache/
+.mypy_cache/
+
+# Private keys, certificates and secrets
+*.pem
+*.key
+secrets/**
+
+# Ignore local IDE settings
+.vscode/
+.idea/
+
+# OS files (Windows)
+ehthumbs.db
+Icon?

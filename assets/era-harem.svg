@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#ff3b3b"/>
+    </linearGradient>
+  </defs>
+  <!-- Heart with orbiting figures - Harem -->
+  <g transform="translate(60,60)">
+    <!-- Heart -->
+    <path d="M0,30 C-18,18 -32,5 -32,-8 C-32,-18 -24,-26 -16,-26 C-10,-26 -4,-22 0,-15 C4,-22 10,-26 16,-26 C24,-26 32,-18 32,-8 C32,5 18,18 0,30Z" fill="url(#lg)" fill-opacity="0.12" stroke="url(#lg)" stroke-width="1.2" stroke-opacity="0.5"/>
+    <!-- Orbit ring -->
+    <ellipse cx="0" cy="0" rx="38" ry="15" fill="none" stroke="url(#lg)" stroke-width="0.8" opacity="0.25" transform="rotate(-20)"/>
+    <!-- Orbiting dots (people) -->
+    <circle cx="-35" cy="8" r="4" fill="#7c5cff" opacity="0.4"/>
+    <circle cx="35" cy="-8" r="4" fill="#ff3b3b" opacity="0.4"/>
+    <circle cx="0" cy="-15" r="3" fill="#00e0ff" opacity="0.3"/>
+    <!-- Sparkles -->
+    <circle cx="-10" cy="-30" r="1" fill="#7c5cff" opacity="0.3"/>
+    <circle cx="15" cy="28" r="1" fill="#ff3b3b" opacity="0.3"/>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00e0ff"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+    <filter id="peGlow">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Purgatory era - eye of surveillance / dictator -->
+  <g transform="translate(60,60)">
+    <!-- Triangle base -->
+    <polygon points="0,-45 42,30 -42,30" fill="url(#pg)" fill-opacity="0.08" stroke="url(#pg)" stroke-width="1.2" stroke-opacity="0.5"/>
+    <!-- Eye -->
+    <path d="M-20,0 C-10,-15 10,-15 20,0 C10,15 -10,15 -20,0Z" fill="url(#pg)" fill-opacity="0.1" stroke="url(#pg)" stroke-width="1.2" stroke-opacity="0.6"/>
+    <circle cx="0" cy="0" r="6" fill="url(#pg)" opacity="0.25" filter="url(#peGlow)"/>
+    <circle cx="0" cy="0" r="2.5" fill="#00e0ff" opacity="0.6"/>
+    <!-- Rays -->
+    <line x1="0" y1="-50" x2="0" y2="-55" stroke="#00e0ff" stroke-width="0.8" opacity="0.3"/>
+    <line x1="-30" y1="-25" x2="-35" y2="-28" stroke="#7c5cff" stroke-width="0.8" opacity="0.25"/>
+    <line x1="30" y1="-25" x2="35" y2="-28" stroke="#7c5cff" stroke-width="0.8" opacity="0.25"/>
+    <line x1="-45" y1="32" x2="-50" y2="36" stroke="#00e0ff" stroke-width="0.8" opacity="0.2"/>
+    <line x1="45" y1="32" x2="50" y2="36" stroke="#00e0ff" stroke-width="0.8" opacity="0.2"/>
+  </g>
+</svg>

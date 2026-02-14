@@ -1,0 +1,533 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Purgatory — Crónica de PURG4TORY</title>
+    <meta name="description" content="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="progress-bar" aria-hidden="true"></div>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div id="cursor" aria-hidden="true"></div>
+
+    <header class="site-header" id="site-header">
+      <nav class="nav container">
+        <a class="brand" href="#">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='120' rx='28' fill='%23060712'/%3E%3Cpath d='M30 80 L60 30 L90 80 Z' fill='url(%23g)' opacity='0.95'/%3E%3Ccircle cx='60' cy='48' r='6' fill='%23021027'/%3E%3C/svg%3E" alt="Logo" class="logo" />
+          <span class="brand-name">Purgatory</span>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#timeline">Línea de Tiempo</a></li>
+          <li><a href="#lore">Lore</a></li>
+          <li><a href="#genesis">Génesis</a></li>
+          <li><a href="#personajes">Personajes</a></li>
+          <li><a href="#infierno">Infierno</a></li>
+          <li><a href="#conclusion">Final</a></li>
+          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al server</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-grid container">
+          <div class="hero-content">
+            <h1>Bienvenido a <span class="accent">Purgatory</span></h1>
+            <p class="lead">Un mundo forjado en secretos, alianzas y ambición. Explora el lore, conoce a los protagonistas y descubre los eventos que cambiaron la historia.</p>
+            <div class="hero-actions">
+              <a href="#lore" class="btn btn-primary">Explorar el Lore</a>
+              <a href="#timeline" class="btn btn-ghost">Ver Línea de Tiempo</a>
+            </div>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <img src="assets/artema-hero.svg" alt="Artema, Guardiana de los Penitentes" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Línea de tiempo — eventos y eras importantes (cronología del servidor) -->
+      <section class="section timeline-section" id="timeline">
+        <div class="timeline-bg" aria-hidden="true"></div>
+        <div class="container">
+          <div class="section-header-with-img">
+            <img src="assets/timeline-hourglass.svg" alt="" class="section-header-icon" loading="lazy" decoding="async" />
+            <div>
+              <h2 class="section-title timeline-title">Línea de Tiempo</h2>
+              <p class="timeline-subtitle">El recorrido cronológico de nuestra comunidad — desde el caos primigenio hasta la dictadura actual.</p>
+            </div>
+          </div>
+
+          <div class="timeline">
+
+            <article class="timeline-item left">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Era I</span>
+                <img src="assets/era-chaos.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>Las Fosas — El Big Bang</h3>
+                <p>El salvaje oeste de Discord: sin reglas, puro caos y el origen de los famosos "audios prohibidos". Aquí nació la leyenda de Nelcon y se forjó el "Amorodio". La pelea entre Daku y Nelcon fracturó la comunidad original y marcó el fin de una era.</p>
+                <span class="timeline-tag tag-chaos">Caos Absoluto</span>
+              </div>
+            </article>
+
+            <article class="timeline-item right">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Evento</span>
+                <img src="assets/era-love.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>"Te amo miamor" — Nelcon &amp; Ozy</h3>
+                <p>Un momento icónico que quedó grabado en los logs para siempre. Nelcon le soltó un sincero "Te amo miamor" a Ozy. Nadie lo pidió, pero Purgatory nunca pide permiso.</p>
+                <span class="timeline-tag tag-lore">Momento Icónico</span>
+              </div>
+            </article>
+
+            <article class="timeline-item left">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Era II</span>
+                <img src="assets/era-dark.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>Los Pibes Shitposters — El Bache</h3>
+                <p>Tras el cierre de Las Fosas, el grupo migró a un servidor provisional sin dirección ni estructura. Fue un desastre administrativo, una etapa de transición oscura donde la comunidad casi se desintegra por completo.</p>
+                <span class="timeline-tag tag-dark">Edad Oscura</span>
+              </div>
+            </article>
+
+            <article class="timeline-item right">
+              <div class="timeline-dot dot-gold"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Era III</span>
+                <img src="assets/era-gold.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>OLYMPO — La Edad de Oro</h3>
+                <p>De las cenizas surgió el mayor período de gloria. El "Éxodo Blanco" trajo nombres como Ivan, Matiti y Twoky. Se consolidaron los personajes canónicos, nacieron los chistes internos más legendarios y la comunidad vivió su apogeo.</p>
+                <span class="timeline-tag tag-gold">Edad de Oro</span>
+              </div>
+            </article>
+
+            <article class="timeline-item left">
+              <div class="timeline-dot dot-gold"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Evento</span>
+                <img src="assets/era-harem.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>El Harem de Cyber</h3>
+                <p>Fenómeno social donde Emi y Frambuesa orbitaban alrededor de Cyber, generando un triángulo de lealtad, celos y caos emocional que se convirtió en lore canon del servidor.</p>
+                <span class="timeline-tag tag-lore">Lore Canónico</span>
+              </div>
+            </article>
+
+            <article class="timeline-item right">
+              <div class="timeline-dot dot-fire"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Transición</span>
+                <img src="assets/era-fall.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>La Caída del Olympo</h3>
+                <p>Todo Olimpo tiene su ocaso. Conflictos internos, dramas irreconciliables y decisiones administrativas cuestionables llevaron al cierre del servidor. Las almas se dispersaron una vez más.</p>
+                <span class="timeline-tag tag-dark">Declive</span>
+              </div>
+            </article>
+
+            <article class="timeline-item left">
+              <div class="timeline-dot dot-accent"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Era IV — Actual</span>
+                <img src="assets/era-purgatory.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>PURG4TORY — La Dictadura</h3>
+                <p>De la oscuridad nació Purgatory: no un castigo, sino un refugio. Bajo la autodenominada "Dictadura de Renasarenas", el servidor sobrevive entre vigilancia del Staff, rituales como el /bump, y el salseo cotidiano que nos mantiene vivos.</p>
+                <span class="timeline-tag tag-current">Era Actual</span>
+              </div>
+            </article>
+
+            <article class="timeline-item right">
+              <div class="timeline-dot dot-accent"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Evento</span>
+                <img src="assets/era-fall.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>La Purga de los Menores — Éxodo a Instagram</h3>
+                <p>Tras una purga masiva en el servidor, el grupo de menores se redujo drásticamente hasta que solo quedaron Matiti, Sammy y Ninja, junto a un cuarto integrante, quienes simplemente no pudieron con la intensidad del void. En un acto de misericordia para preservar su salud mental (y la paz del chat), decidimos "salvarlos" de la profundidad del servidor y otorgarles un retiro permanente en Instagram. El abismo no es para todos, y ellos estarán mucho más cómodos compartiendo historias que intentando sobrevivir aquí.</p>
+                <span class="timeline-tag tag-current">Era Actual</span>
+              </div>
+            </article>
+
+            <article class="timeline-item left">
+              <div class="timeline-dot dot-accent"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Legado</span>
+                <img src="assets/era-scroll.svg" alt="" class="timeline-card-icon" loading="lazy" decoding="async" />
+                <h3>Los Círculos del Infierno</h3>
+                <p>Se documenta públicamente a los condenados del servidor como advertencia eterna. Los nombres de los que cruzaron las líneas imperdonables quedan grabados en los muros del Infierno para que nadie olvide.</p>
+                <span class="timeline-tag tag-fire">Justicia Eterna</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="section container" id="lore">
+        <h2 class="section-title">BLOQUE NUEVO: EL DÍA A DÍA</h2>
+        <p class="muted">Salseo, memes y amor kinky — la vida cotidiana de PURG4TORY.</p>
+
+        <div class="cards" style="margin-top:18px">
+          <article class="card">
+            <img src="assets/icon-salseo.svg" alt="" class="card-icon" loading="lazy" decoding="async" />
+            <h3>El 'Salseo' constante</h3>
+            <p>Aquí el chisme es nuestra moneda de cambio. Si no hay una tramoya nueva, nos la inventamos. Purgatory funciona como un reality show de bajo presupuesto donde todos estamos pendientes de quién se peleó con quién o quién dejó de hablarle a quién en el canal de voz. El salseo no es un problema, es el combustible que nos hace revisar el celular cada cinco minutos.</p>
+          </article>
+          <article class="card">
+            <img src="assets/icon-memes.svg" alt="" class="card-icon" loading="lazy" decoding="async" />
+            <h3>Memes y chistes internos</h3>
+            <p>Tenemos un lenguaje que solo nosotros hablamos. Desde los edits deformes de los miembros hasta los stickers que usamos para humillarnos entre nosotros. El humor aquí es ácido, negro y, muchas veces, fronterizo. Si no aguantas que te agarren de punto, duras menos que un usuario nuevo intentando hacer /bump.</p>
+          </article>
+          <article class="card">
+            <img src="assets/icon-kinky.svg" alt="" class="card-icon" loading="lazy" decoding="async" />
+            <h3>El lado 'Kinky' y el 'Amor' extraño</h3>
+            <p>Entre nosotros hay mucho 'amor', pero del tipo que requiere terapia. Los chistes kinky son el pan de cada día; tenemos una confianza tan dañada que ya nada nos asusta. Pasamos del insulto más creativo a una declaración de amor bizarra en segundos. Es esa mezcla de afecto real con humor pasado de tono lo que nos mantiene unidos.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container" id="guion">
+        <h2 class="section-title">GUION INTEGRAL: CRÓNICA DE PURG4TORY</h2>
+        <h3>Introducción: El origen</h3>
+        <p class="muted">Bienvenidos. Hoy vamos a repasar la historia de cómo llegamos hasta aquí. Lo que hoy conocen como PURG4TORY no nació de la nada; es el resultado de una serie de servidores fallidos, administraciones cuestionables y un lore de personajes que parece sacado de un manicomio.</p>
+
+        <div class="cards" style="margin-top:18px">
+          <article class="card">
+            <h4>1. Las Fosas: El Big Bang</h4>
+            <p>Todo comenzó en Las Fosas. Era el salvaje oeste de Discord: sin reglas, puro caos y el origen de los famosos "audios prohibidos". Fue la época del "Amorodio", donde las amistades se forjaban en medio de una toxicidad absoluta. Aquí nació la leyenda de Nelcon. El punto de quiebre fue la pelea entre Daku y Nelcon, un evento que terminó fracturando a la comunidad original.</p>
+          </article>
+
+          <article class="card">
+            <h4>2. El Bache y la Edad de Oro: De Los Pibes a OLYMPO</h4>
+            <p>Tras el cierre de Las Fosas, pasamos por un bache llamado Los Pibes Shitposters. Fue un desastre administrativo... hasta que surgió OLYMPO, donde vivimos nuestra era dorada con el "Éxodo Blanco" y la llegada de miembros como Ivan, Matiti y Twoky.</p>
+          </article>
+
+          <article class="card">
+            <h4>3. Personajes canónicos y lore extraño</h4>
+            <p>Luigi: famoso por repetir "mantequilla negra". El Harem de Cyber: fenómeno social con Emi y Frambuesa orbitando a Cyber. Ozy y Nelcon: momento icónico con un sincero "Te amo miamor" que quedará en los logs.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Sección: Génesis — mito y origen de Artema -->
+      <section class="section genesis-section" id="genesis">
+        <div class="genesis-bg" aria-hidden="true"></div>
+        <div class="container">
+        <div class="genesis-header-visual">
+          <img src="assets/genesis-temple.svg" alt="" class="genesis-illustration" loading="lazy" decoding="async" />
+        </div>
+
+          <h2 class="section-title genesis-title">Génesis — El Mito de Artema</h2>
+          <p class="genesis-epigraph">"Si la luz del Olympo no llega a este reino de sombras, entonces yo me convertiré en su oscuridad. Y de esa oscuridad surgirá la luz."</p>
+
+          <div class="genesis-chapters">
+
+            <article class="genesis-chapter">
+              <span class="chapter-numeral">I</span>
+              <h3>La Diosa que Observaba</h3>
+              <p>En las cumbres del Olympo, donde la luz del sol coronaba templos de mármol, una joven diosa llamada Artemisa pasaba sus días contemplando el mundo de los mortales. Sus risas, sus lágrimas, sus guerras absurdas y sus amores imposibles. Veía las almas perdidas entre los reinos &mdash; los no muertos, los olvidados, los que no pertenecían a ningún lado &mdash; y sentía algo que los otros dioses habían olvidado hace mucho: compasión.</p>
+            </article>
+
+            <article class="genesis-chapter">
+              <span class="chapter-numeral">II</span>
+              <h3>La Traición del Olympo</h3>
+              <p>Con el corazón cargado de propósito, Artemisa se presentó ante los grandes dioses. Les habló de los mortales, del sufrimiento de las almas atrapadas entre mundos. Y los dioses, desde sus tronos de indiferencia, se rieron. <em>"¿Por qué deberíamos preocuparnos por las sombras?"</em>, resonó como un trueno. Los seres que creía encarnación de la justicia no eran más que guardianes egoístas de su propio poder. Su fe se hizo añicos.</p>
+            </article>
+
+            <article class="genesis-chapter">
+              <span class="chapter-numeral">III</span>
+              <h3>El Descenso</h3>
+              <p>Vagó sin rumbo mientras su luz se atenuaba con cada paso. Las columnas del cielo se disolvieron tras ella. Su camino la llevó más allá de los bordes del Edén, atravesando las montañas de un reino de crepúsculo perpetuo: el Purgatorio. Allí no había templos de mármol ni altares de oro. Solo almas llorando por vidas que ya no podían vivir, anhelando un toque, una palabra amable, un momento de paz. Y en sus ojos vacíos, vio un reflejo de su propio corazón roto.</p>
+            </article>
+
+            <article class="genesis-chapter">
+              <span class="chapter-numeral">IV</span>
+              <h3>El Nacimiento de Artema</h3>
+              <p>Si los dioses no ayudaban a las almas olvidadas, entonces ella lo haría sola. Abrazó la oscuridad &mdash; no como agente del mal, sino como un manto para proteger a los desamparados. Su arco, antes símbolo de la caza divina, se convirtió en herramienta de protección. Sus flechas ya no quitaban la vida; defendían a los que ya la habían perdido. Dejó de ser Artemisa. Se convirtió en <strong>Artema</strong>, Guardiana de los Penitentes.</p>
+            </article>
+
+            <article class="genesis-chapter">
+              <span class="chapter-numeral">V</span>
+              <h3>Reina del Crepúsculo</h3>
+              <p>Los no muertos que vagaban sin rumbo encontraron consuelo en su presencia. Ya no estaban solos. Aunque el Olympo la desterró de su memoria y el mundo de los mortales nunca supo su nombre, la leyenda de la diosa de cabello luz de luna fue susurrada para siempre en el reino de los penitentes. Un faro de esperanza en la noche eterna. Así nació Purgatory: no un castigo, sino un refugio forjado en la oscuridad por alguien que eligió quedarse.</p>
+            </article>
+
+          </div>
+
+          <p class="genesis-footer">Esta es la historia que se cuenta en los rincones más antiguos del servidor. Nadie sabe cuánto es verdad y cuánto es mito &mdash; pero todos sienten su presencia.</p>
+        </div>
+      </section>
+
+      <section class="section container" id="personajes">
+        <h2 class="section-title">Personajes canónicos</h2>
+        <p class="muted">Pulsa una ficha para ver más detalles.</p>
+        <div class="cards" style="margin-top:18px">
+          <article class="card small character-card" data-character="Luigi" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Luigi — "mantequilla negra"</span>
+          </article>
+          <article class="card small character-card" data-character="Emi" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Emi — Mitad del Harem de Cyber</span>
+          </article>
+          <article class="card small character-card" data-character="Twoky" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Twoky — El titán de los videos, figura influyente</span>
+          </article>
+          <article class="card small character-card" data-character="Ozy" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Ozy — objetivo del famoso "Te amo"</span>
+          </article>
+          <article class="card small character-card" data-character="Nelcon" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Nelcon — arquitecto del caos</span>
+          </article>
+
+          <!-- Personajes canónicos añadidos recientemente -->
+          <article class="card small character-card" data-character="Batido" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Batido — Ítalo-venezolano, humorista de voz que empuja el límite en llamadas</span>
+          </article>
+
+          <article class="card small character-card" data-character="Sting" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Sting — Colombiano, actitud provocadora y lenguaje irreverente</span>
+          </article>
+
+          <article class="card small character-card" data-character="Renas" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Renas — Autodenominado dictador de Purgatory</span>
+          </article>
+
+          <article class="card small character-card" data-character="Frambuesa" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Frambuesa — Co-pilar del Harem de Cyber y moderadora implacable</span>
+          </article>
+
+          <article class="card small character-card" data-character="Inquisidor" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Inquisidor — Pareja de Twoky; agente sigiloso y espía</span>
+          </article>
+
+          <article class="card small character-card" data-character="Guacamayo" role="button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='cg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(60,60)'%3E%3Cpath d='M-20,-40 C-30,-30 -35,-10 -35,5 L35,5 C35,-10 30,-30 20,-40 C10,-50 -10,-50 -20,-40Z' fill='url(%23cg)' fill-opacity='0.15' stroke='url(%23cg)' stroke-width='1.2' stroke-opacity='0.5'/%3E%3Cellipse cx='0' cy='-15' rx='12' ry='14' fill='%2305060a' opacity='0.6'/%3E%3Ccircle cx='-5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Ccircle cx='5' cy='-18' r='2' fill='%2300e0ff' opacity='0.7'/%3E%3Cpath d='M-35,5 C-40,25 -42,45 -40,55 L40,55 C42,45 40,25 35,5Z' fill='url(%23cg)' opacity='0.08'/%3E%3Ccircle cx='0' cy='-10' r='35' fill='none' stroke='url(%23cg)' stroke-width='0.5' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E" alt="" class="character-avatar" />
+            <span>Guacamayo — Creador de guacamayadas.com y autor de frases célebres</span>
+          </article>
+
+        </div>
+
+        <div id="character-modal" class="modal" aria-hidden="true">
+          <div class="modal-panel">
+            <button class="modal-close" aria-label="Cerrar">×</button>
+            <h3 id="modal-title"></h3>
+            <p id="modal-body"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Los Círculos del Infierno — registros y advertencias públicas -->
+      <section class="section infierno-section" id="infierno">
+        <div class="infierno-bg" aria-hidden="true"></div>
+        <div class="container">
+          <div class="infierno-header-visual">
+            <img src="assets/inferno-gate.svg" alt="" class="infierno-illustration" loading="lazy" decoding="async" />
+          </div>
+          <h2 class="section-title infierno-title">Los Circulos del Infierno</h2>
+          <p class="infierno-intro">En Purgatory existe un castigo peor que el baneo: la condena eterna. Aquellos que cruzaron las lineas imperdonables no solo fueron expulsados &mdash; fueron documentados publicamente como advertencia para toda la comunidad. Sus nombres quedaron grabados en los muros del Infierno para que nadie olvide lo que pasa cuando se rompen los pecados capitales del servidor.</p>
+          <p class="infierno-intro muted" style="margin-top:8px;font-size:14px;">Si ves a una cuenta alternativa de alguno de estos usuarios, reportala inmediatamente. No hay redencion para los condenados.</p>
+
+          <div class="severity-filter" style="margin:24px 0 8px;">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="critical">Imperdonable</button>
+            <button class="filter-btn" data-filter="high">Grave</button>
+            <button class="filter-btn" data-filter="medium">Condenado</button>
+            <button class="filter-btn" data-filter="low">Meme</button>
+          </div>
+
+          <div class="condemned-grid">
+
+            <article class="condemned-card" data-severity="critical">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#9760;</span>
+                <h3>Onil</h3>
+                <span class="severity-badge critical">Imperdonable</span>
+              </div>
+              <p>Actitudes de acoso repetidas, presuntas actitudes indebidas con menores de edad, envio lacayos a trollear con cuentas alternativas, y un sentimiento de traicion que marco al servidor para siempre.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="critical">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#9760;</span>
+                <h3>Cloudde</h3>
+                <span class="severity-badge critical">Imperdonable</span>
+              </div>
+              <p>Comprometio activamente a miembros del servidor con lenguaje inapropiado para su edad, acoso constante, multiples intentos de sobrepasar limites establecidos, mintio sobre su edad, y desperdicio su ultima oportunidad de redencion molestando y acosando a usuarios nuevos.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="critical">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#9760;</span>
+                <h3>Vahn <span class="alias">/giopengiun</span></h3>
+                <span class="severity-badge critical">Imperdonable</span>
+              </div>
+              <p>Artista con aires de grandeza, abiertamente racista y negacionista del holocausto y la segregacion. Normalizaba el abuso, tenia discusiones con familiares mujeres en llamada constantemente, y presunto interes indebido en una ex-usuario menor de edad a pesar de saberlo.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="critical">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#9760;</span>
+                <h3>SrtaMystia <span class="alias">/MystiaOficial /MystiArts</span></h3>
+                <span class="severity-badge critical">Imperdonable</span>
+              </div>
+              <p>Acusaciones de grooming por parte de su propia comunidad, se disculpo usando un avatar de Loquendo City, estafadora serial y autopromocionaba comisiones falsas multiples veces.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="critical">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#9760;</span>
+                <h3>Matus</h3>
+                <span class="severity-badge critical">Imperdonable</span>
+              </div>
+              <p>El DocTops del server. Baneado tras ser agarrado con las manos en el Mario Kart siendo fan del COD Point.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="high">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#128293;</span>
+                <h3>Toro <span class="alias">/AnthonyRose</span></h3>
+                <span class="severity-badge high">Grave</span>
+              </div>
+              <p>Solicito dinero en el servidor y por privado, actitudes abiertamente machistas y acosadoras con mujeres dentro y fuera del servidor, buscaba validacion en actos delictivos como robar del Soriana porque "no le pagaban lo suficiente". En general, un gigafracasado.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="high">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#128293;</span>
+                <h3>Macondobastard</h3>
+                <span class="severity-badge high">Grave</span>
+              </div>
+              <p>Actitudes antisociales, machistas, acoso e irrespeto al staff entre otros comportamientos que comprometen las reglas del servidor.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="high">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#128293;</span>
+                <h3>VonKitami</h3>
+                <span class="severity-badge high">Grave</span>
+              </div>
+              <p>Incomodo activamente a las mujeres del servidor, fuckboy de closet, tibio de mierda y un playo.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="medium">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#9888;</span>
+                <h3>Onyx</h3>
+                <span class="severity-badge medium">Condenado</span>
+              </div>
+              <p>Artista fracasado con delirios de grandeza. Se creia mejor que todos porque "esta estudiando para algo en el futuro" &mdash; estudiando arte de manera "autodidacta" en internet.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="medium">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#9888;</span>
+                <h3>Cirrosis</h3>
+                <span class="severity-badge medium">Condenado</span>
+              </div>
+              <p>Promovia el satanismo y se drogaba en llamada. En general tenia una vibra muy void que incomodaba a la comunidad.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="medium">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#9888;</span>
+                <h3>Catouo</h3>
+                <span class="severity-badge medium">Condenado</span>
+              </div>
+              <p>Actitudes antisociales con el servidor, esparcir rumores, burlarse y hablar mal de multiples usuarios a sus espaldas.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="low">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#128128;</span>
+                <h3>Frankklinton765 &#128523;</h3>
+                <span class="severity-badge low">Meme eterno</span>
+              </div>
+              <p>"Holaa, estoy aqui por que con un grupo de amigos tenemos un circulo de play station y queriamos saber si es que hay algunas chicas que se quieran unir, es para traer mas diversidad..." &mdash; Si, eso fue real.</p>
+            </article>
+
+            
+
+            <article class="condemned-card" data-severity="low">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#128128;</span>
+                <h3>luissuburbios</h3>
+                <span class="severity-badge low">Daño colateral</span>
+              </div>
+              <p>Arruinamos su reputacion en lugar de ignorar su comentario si tanto nos incomodaba. A veces el Infierno tambien es injusto.</p>
+            </article>
+
+            <article class="condemned-card" data-severity="low">
+              <div class="condemned-header">
+                <span class="condemned-icon">&#128128;</span>
+                <h3>F.Ghostus88</h3>
+                <span class="severity-badge low">R.I.P.</span>
+              </div>
+              <p>Descanse en paz... o no. Ya nadie se acuerda por que cayo aqui, pero aqui se queda.</p>
+            </article>
+
+          </div>
+
+          <p class="infierno-footer">La lista puede crecer. Si no estas aqui, felicidades &mdash; no formas parte del club de los fracasados.</p>
+        </div>
+      </section>
+      <section class="section container" id="conclusion">
+        <img src="assets/throne.svg" alt="" class="conclusion-illustration" loading="lazy" decoding="async" />
+        <h2 class="section-title">Conclusión: La dictadura actual</h2>
+        <p>Hoy, Purgatory sobrevive bajo la autodenominada "Dictadura de Renasarenas". Somos una comunidad que convive entre la vigilancia del Staff y los rituales vacíos como el comando Bump. Si no estás en la lista de ejecuciones, felicidades. Si acabas de llegar, prepárate: aquí las cosas nunca son normales.</p>
+      </section>
+      <!-- Barra de estadísticas — contadores animados y métricas -->
+      <section class="stats-bar">
+        <div class="container stats-grid">
+          <div class="stat">
+            <span class="stat-number" data-target="15">0</span>
+            <span class="stat-label">Condenados</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="4">0</span>
+            <span class="stat-label">Eras del servidor</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="11">0</span>
+            <span class="stat-label">Personajes canónicos</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="1">0</span>
+            <span class="stat-label">Dictadura vigente</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button id="back-to-top" aria-label="Volver arriba" title="Volver arriba">&uarr;</button>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='120' rx='28' fill='%23060712'/%3E%3Cpath d='M30 80 L60 30 L90 80 Z' fill='url(%23g)' opacity='0.95'/%3E%3Ccircle cx='60' cy='48' r='6' fill='%23021027'/%3E%3C/svg%3E" alt="" class="logo small" />
+          <p class="muted">Purgatory — Donde las historias no mueren, solo arden.</p>
+        </div>
+        <div class="links">
+          <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
+          <a href="#lore">Lore</a>
+          <a href="#infierno">Infierno</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts.js" defer></script>
+  </body>
+</html>

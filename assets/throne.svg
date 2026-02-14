@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="crownG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#00e0ff"/>
+    </linearGradient>
+    <linearGradient id="scepterG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb627"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+    <radialGradient id="throneGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#7c5cff" stop-opacity="0.12"/>
+      <stop offset="0.7" stop-color="#00e0ff" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="cGlow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background glow -->
+  <ellipse cx="200" cy="150" rx="180" ry="140" fill="url(#throneGlow)"/>
+
+  <!-- Throne back -->
+  <path d="M120,100 L120,260 L280,260 L280,100 C280,60 250,40 200,35 C150,40 120,60 120,100Z" fill="#0d1225" fill-opacity="0.5" stroke="url(#crownG)" stroke-width="1" stroke-opacity="0.3"/>
+  <!-- Throne details -->
+  <path d="M130,110 L130,250 L270,250 L270,110 C270,75 245,55 200,50 C155,55 130,75 130,110Z" fill="none" stroke="url(#crownG)" stroke-width="0.5" opacity="0.2"/>
+
+  <!-- Crown floating above throne -->
+  <g transform="translate(200,65)" filter="url(#cGlow)">
+    <path d="M-35,15 L-35,0 L-22,-18 L-10,0 L0,-25 L10,0 L22,-18 L35,0 L35,15 Z" fill="url(#crownG)" fill-opacity="0.3" stroke="url(#crownG)" stroke-width="1.5" stroke-opacity="0.7"/>
+    <!-- Crown gems -->
+    <circle cx="0" cy="-15" r="3" fill="#00e0ff" opacity="0.6"/>
+    <circle cx="-22" cy="-8" r="2" fill="#7c5cff" opacity="0.5"/>
+    <circle cx="22" cy="-8" r="2" fill="#7c5cff" opacity="0.5"/>
+    <!-- Crown base -->
+    <rect x="-35" y="15" width="70" height="6" rx="2" fill="url(#crownG)" opacity="0.4"/>
+  </g>
+
+  <!-- Scepter -->
+  <line x1="200" y1="120" x2="200" y2="240" stroke="url(#scepterG)" stroke-width="3" opacity="0.4"/>
+  <circle cx="200" cy="115" r="8" fill="url(#crownG)" fill-opacity="0.2" stroke="url(#crownG)" stroke-width="1" stroke-opacity="0.5" filter="url(#cGlow)"/>
+
+  <!-- Eye of dictator -->
+  <g transform="translate(200,115)" opacity="0.6">
+    <path d="M-8,0 C-4,-6 4,-6 8,0 C4,6 -4,6 -8,0Z" fill="none" stroke="#00e0ff" stroke-width="1"/>
+    <circle cx="0" cy="0" r="2.5" fill="#00e0ff" opacity="0.7"/>
+  </g>
+
+  <!-- Floating particles -->
+  <circle cx="150" cy="80" r="1.5" fill="#7c5cff" opacity="0.4" filter="url(#cGlow)"/>
+  <circle cx="250" cy="90" r="1" fill="#00e0ff" opacity="0.3"/>
+  <circle cx="130" cy="200" r="1.5" fill="#7c5cff" opacity="0.3"/>
+  <circle cx="270" cy="180" r="1" fill="#00e0ff" opacity="0.25"/>
+  <circle cx="170" cy="250" r="1" fill="#7c5cff" opacity="0.2"/>
+  <circle cx="240" cy="240" r="1.5" fill="#00e0ff" opacity="0.2"/>
+
+  <!-- Chains of power -->
+  <path d="M120,200 C110,205 105,195 110,190 C115,185 125,190 120,195" stroke="#7c5cff" stroke-width="1" fill="none" opacity="0.25"/>
+  <path d="M280,200 C290,205 295,195 290,190 C285,185 275,190 280,195" stroke="#00e0ff" stroke-width="1" fill="none" opacity="0.25"/>
+</svg>

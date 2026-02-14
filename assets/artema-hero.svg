@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 700">
+  <defs>
+    <linearGradient id="moonGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b8c8ff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#7c5cff" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#3a1f8f"/>
+    </linearGradient>
+    <linearGradient id="bowGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00e0ff"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00e0ff"/>
+      <stop offset="1" stop-color="#b8c8ff"/>
+    </linearGradient>
+    <linearGradient id="cloakGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1040"/>
+      <stop offset="0.5" stop-color="#0d0820"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d4deff"/>
+      <stop offset="0.5" stop-color="#b8c8ff"/>
+      <stop offset="1" stop-color="#8898cc"/>
+    </linearGradient>
+    <radialGradient id="moonRadial" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#d4deff" stop-opacity="0.35"/>
+      <stop offset="0.5" stop-color="#7c5cff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#7c5cff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="auraGlow" cx="50%" cy="45%" r="50%">
+      <stop offset="0" stop-color="#7c5cff" stop-opacity="0.15"/>
+      <stop offset="0.7" stop-color="#00e0ff" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="moonFilter">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background aura -->
+  <ellipse cx="400" cy="320" rx="380" ry="340" fill="url(#auraGlow)"/>
+
+  <!-- Moon -->
+  <circle cx="400" cy="180" r="120" fill="url(#moonRadial)" filter="url(#softGlow)"/>
+  <circle cx="400" cy="180" r="80" fill="none" stroke="url(#moonGlow)" stroke-width="1.5" opacity="0.5" filter="url(#moonFilter)"/>
+  <circle cx="400" cy="180" r="60" fill="url(#moonGlow)" opacity="0.08"/>
+  <!-- Moon craters subtle -->
+  <circle cx="380" cy="165" r="8" fill="#b8c8ff" opacity="0.04"/>
+  <circle cx="420" cy="190" r="5" fill="#b8c8ff" opacity="0.03"/>
+  <circle cx="395" cy="200" r="6" fill="#b8c8ff" opacity="0.03"/>
+
+  <!-- Stars -->
+  <circle cx="120" cy="80" r="1.5" fill="#d4deff" opacity="0.7"/>
+  <circle cx="200" cy="50" r="1" fill="#b8c8ff" opacity="0.5"/>
+  <circle cx="650" cy="90" r="1.5" fill="#d4deff" opacity="0.6"/>
+  <circle cx="700" cy="150" r="1" fill="#b8c8ff" opacity="0.4"/>
+  <circle cx="150" cy="200" r="1" fill="#d4deff" opacity="0.5"/>
+  <circle cx="680" cy="250" r="1.2" fill="#00e0ff" opacity="0.4"/>
+  <circle cx="100" cy="350" r="1" fill="#7c5cff" opacity="0.4"/>
+  <circle cx="300" cy="60" r="1.2" fill="#d4deff" opacity="0.6"/>
+  <circle cx="520" cy="40" r="1" fill="#b8c8ff" opacity="0.5"/>
+  <circle cx="580" cy="120" r="0.8" fill="#d4deff" opacity="0.4"/>
+  <circle cx="250" cy="130" r="0.8" fill="#00e0ff" opacity="0.3"/>
+  <circle cx="550" cy="200" r="1" fill="#7c5cff" opacity="0.5"/>
+
+  <!-- Artema silhouette - goddess figure -->
+  <g transform="translate(400, 280)">
+    <!-- Cloak/robe flowing down -->
+    <path d="M-5,-100 C-20,-60 -45,20 -80,180 C-95,240 -120,300 -140,360 L140,360 C120,300 95,240 80,180 C45,20 20,-60 5,-100 Z" 
+          fill="url(#cloakGrad)" opacity="0.9"/>
+    <!-- Cloak inner glow -->
+    <path d="M-5,-100 C-15,-60 -35,20 -60,180 C-70,230 -80,280 -90,340 L90,340 C80,280 70,230 60,180 C35,20 15,-60 5,-100 Z" 
+          fill="#7c5cff" opacity="0.04"/>
+
+    <!-- Body/torso -->
+    <path d="M-22,-95 C-28,-70 -30,-40 -32,0 C-33,20 -30,40 -28,50 L28,50 C30,40 33,20 32,0 C30,-40 28,-70 22,-95 Z" 
+          fill="url(#bodyGrad)" opacity="0.7"/>
+
+    <!-- Shoulders -->
+    <ellipse cx="0" cy="-85" rx="35" ry="12" fill="url(#bodyGrad)" opacity="0.6"/>
+
+    <!-- Head -->
+    <ellipse cx="0" cy="-120" rx="18" ry="22" fill="#0d0820" stroke="url(#bodyGrad)" stroke-width="1" opacity="0.9"/>
+
+    <!-- Hair flowing - moonlit -->
+    <path d="M-18,-135 C-25,-130 -35,-110 -40,-90 C-45,-70 -50,-40 -55,-10 C-57,0 -58,15 -55,20"
+          stroke="url(#hairGrad)" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>
+    <path d="M-16,-138 C-22,-132 -30,-115 -33,-95 C-36,-75 -38,-50 -40,-25"
+          stroke="url(#hairGrad)" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+    <path d="M18,-135 C22,-130 28,-118 30,-108 C32,-98 33,-90 32,-85"
+          stroke="url(#hairGrad)" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+
+    <!-- Crown/tiara -->
+    <path d="M-12,-142 L-8,-152 L-3,-144 L0,-155 L3,-144 L8,-152 L12,-142"
+          stroke="#b8c8ff" stroke-width="1.5" fill="none" opacity="0.6" filter="url(#glow)"/>
+
+    <!-- Eyes - glowing -->
+    <ellipse cx="-6" cy="-122" rx="2" ry="1.5" fill="#00e0ff" opacity="0.8" filter="url(#glow)"/>
+    <ellipse cx="6" cy="-122" rx="2" ry="1.5" fill="#00e0ff" opacity="0.8" filter="url(#glow)"/>
+
+    <!-- Left arm holding bow -->
+    <path d="M-30,-80 C-50,-70 -75,-55 -90,-40 C-100,-32 -108,-25 -110,-20"
+          stroke="url(#bodyGrad)" stroke-width="5" fill="none" opacity="0.7" stroke-linecap="round"/>
+
+    <!-- Right arm drawing string -->
+    <path d="M30,-80 C45,-75 55,-70 60,-68 C65,-66 68,-64 70,-60"
+          stroke="url(#bodyGrad)" stroke-width="5" fill="none" opacity="0.7" stroke-linecap="round"/>
+
+    <!-- Bow -->
+    <path d="M-115,-60 C-130,-30 -130,10 -115,40" 
+          stroke="url(#bowGrad)" stroke-width="3" fill="none" opacity="0.9" filter="url(#glow)" stroke-linecap="round"/>
+    <!-- Bowstring -->
+    <line x1="-115" y1="-60" x2="65" y2="-62" stroke="#00e0ff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="-115" y1="40" x2="65" y2="-62" stroke="#00e0ff" stroke-width="0.8" opacity="0.5"/>
+
+    <!-- Arrow -->
+    <line x1="-115" y1="-10" x2="70" y2="-62" stroke="url(#arrowGrad)" stroke-width="1.5" opacity="0.8" filter="url(#glow)"/>
+    <!-- Arrowhead -->
+    <polygon points="72,-62 62,-58 64,-68" fill="#00e0ff" opacity="0.9" filter="url(#glow)"/>
+
+    <!-- Energy particles around bow -->
+    <circle cx="-120" cy="-10" r="2" fill="#00e0ff" opacity="0.6" filter="url(#glow)"/>
+    <circle cx="-125" cy="20" r="1.5" fill="#7c5cff" opacity="0.5"/>
+    <circle cx="-110" cy="-45" r="1.5" fill="#00e0ff" opacity="0.4"/>
+    <circle cx="-108" cy="30" r="1" fill="#b8c8ff" opacity="0.5"/>
+
+    <!-- Floating runes/particles around figure -->
+    <circle cx="-60" cy="-20" r="1.5" fill="#7c5cff" opacity="0.5" filter="url(#glow)"/>
+    <circle cx="50" cy="-30" r="1" fill="#00e0ff" opacity="0.4"/>
+    <circle cx="-40" cy="60" r="1.2" fill="#b8c8ff" opacity="0.3"/>
+    <circle cx="45" cy="40" r="1.5" fill="#7c5cff" opacity="0.4"/>
+    <circle cx="-70" cy="100" r="1" fill="#00e0ff" opacity="0.3"/>
+    <circle cx="60" cy="90" r="1.2" fill="#7c5cff" opacity="0.3"/>
+  </g>
+
+  <!-- Ground mist -->
+  <ellipse cx="400" cy="640" rx="300" ry="40" fill="#7c5cff" opacity="0.04"/>
+  <ellipse cx="350" cy="650" rx="200" ry="25" fill="#00e0ff" opacity="0.03"/>
+  <ellipse cx="450" cy="645" rx="180" ry="20" fill="#b8c8ff" opacity="0.02"/>
+</svg>

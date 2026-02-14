@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#00e0ff"/>
+    </linearGradient>
+  </defs>
+  <!-- Comedy mask -->
+  <path d="M20,25 C20,14 30,8 40,8 C50,8 60,14 60,25 L60,40 C60,55 50,65 40,65 C30,65 20,55 20,40 Z" fill="url(#mg)" fill-opacity="0.12" stroke="url(#mg)" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- Happy eyes -->
+  <path d="M30,28 C30,25 34,25 34,28" stroke="url(#mg)" stroke-width="1.5" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <path d="M46,28 C46,25 50,25 50,28" stroke="url(#mg)" stroke-width="1.5" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <!-- Big smile -->
+  <path d="M28,42 C32,52 48,52 52,42" stroke="url(#mg)" stroke-width="1.5" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <!-- Deformation/glitch lines -->
+  <line x1="15" y1="35" x2="22" y2="33" stroke="#7c5cff" stroke-width="0.8" opacity="0.3"/>
+  <line x1="58" y1="38" x2="65" y2="36" stroke="#00e0ff" stroke-width="0.8" opacity="0.3"/>
+  <line x1="35" y1="70" x2="45" y2="72" stroke="#7c5cff" stroke-width="0.8" opacity="0.3"/>
+  <!-- Sparkles -->
+  <circle cx="16" cy="20" r="1.5" fill="#7c5cff" opacity="0.4"/>
+  <circle cx="64" cy="18" r="1" fill="#00e0ff" opacity="0.3"/>
+  <circle cx="14" cy="50" r="1" fill="#00e0ff" opacity="0.3"/>
+</svg>

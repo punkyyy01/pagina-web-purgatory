@@ -120,7 +120,19 @@
       .then(function (res) {
         /* 304 = no cambió nada, no re-renderizar */
         if (res.status === 304) return null;
-        if (!res.ok) throw new Error('Error ' + res.status);
+
+        if (!res.ok) {
+          /* Leer el body del error antes de lanzar, para mostrar el
+             mensaje real de la API en vez de un genérico. */
+          return res.json().catch(function () {
+            return { error: 'HTTP ' + res.status };
+          }).then(function (body) {
+            var msg = (body && body.error) ? body.error : 'HTTP ' + res.status;
+            var err = new Error(msg);
+            err.apiMessage = msg;
+            throw err;
+          });
+        }
 
         /* Guardar el ETag para la próxima vez */
         var etag = res.headers.get('etag');
@@ -139,11 +151,12 @@
           renderEvents(data);
         }
       })
-      .catch(function () {
+      .catch(function (err) {
         if (isFirstLoad) {
           if (loading) loading.style.display = 'none';
-          renderError('No se pudieron invocar los eventos del Void. ' +
-                      'Puede que la API no esté configurada aún.');
+          var detail = (err && err.apiMessage) ? err.apiMessage
+                     : 'No se pudo conectar con la API.';
+          renderError('Error al invocar los eventos del Void: ' + detail);
         }
         /* En polls posteriores, si falla simplemente se mantiene
            lo que ya está renderizado — sin molestar al usuario. */

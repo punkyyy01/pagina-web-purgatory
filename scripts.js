@@ -384,3 +384,16 @@
   })();
 
 })();
+
+/* ===== Header height helper: ensure banner sits below fixed header ===== */
+(function setHeaderCSSVar(){
+  try{
+    const hdr = document.getElementById('site-header');
+    function apply(){
+      const h = hdr ? Math.ceil(hdr.getBoundingClientRect().height) + 'px' : '64px';
+      document.documentElement.style.setProperty('--site-header-height', h);
+    }
+    apply();
+    window.addEventListener('resize', apply, { passive: true });
+  }catch(e){/* silent */}
+})();

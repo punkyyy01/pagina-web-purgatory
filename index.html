@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Purgatory — Crónica de PURG4TORY</title>
     <meta name="description" content="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas." />
+
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+
+    <!-- Security: Referrer Policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Preconnect & preload fonts for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap" as="style" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -46,7 +55,7 @@
             </div>
           </div>
           <div class="hero-visual" aria-hidden="true">
-            <img src="assets/artema-hero.svg" alt="Artema, Guardiana de los Penitentes" />
+            <img src="assets/artema-hero.svg" alt="Artema, Guardiana de los Penitentes" decoding="async" fetchpriority="high" />
           </div>
         </div>
       </section>

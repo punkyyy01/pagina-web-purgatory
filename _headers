@@ -1,0 +1,26 @@
+# ══════════════════════════════════════════════════════════
+# Security Headers — para despliegues en Netlify / Cloudflare Pages
+# Si usas otro hosting, configura estos headers en tu servidor.
+# ══════════════════════════════════════════════════════════
+
+/*
+  # Previene clickjacking (no se puede embeber en iframe ajeno)
+  X-Frame-Options: DENY
+
+  # Evita MIME-type sniffing
+  X-Content-Type-Options: nosniff
+
+  # Protección XSS del navegador (legacy pero útil)
+  X-XSS-Protection: 1; mode=block
+
+  # Controla qué info se envía como referrer
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permisos del navegador restringidos
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
+  # Content Security Policy completa
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+
+  # Fuerza HTTPS (descomentar solo si tienes certificado SSL)
+  # Strict-Transport-Security: max-age=63072000; includeSubDomains; preload

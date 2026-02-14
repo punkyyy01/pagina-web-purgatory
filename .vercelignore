@@ -1,0 +1,27 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.example
+
+# Development
+.vscode/
+.idea/
+.git/
+node_modules/
+
+# Docs
+README.md
+
+# Netlify/Cloudflare specific
+_headers
+
+# OS
+.DS_Store
+Thumbs.db

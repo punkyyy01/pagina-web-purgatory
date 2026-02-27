@@ -38,10 +38,7 @@
       title: 'Luigi — El poeta de lo absurdo',
       body: 'Su frase "mantequilla negra" no tiene origen claro, pero se convirtió en el grito de guerra más estúpido y memorable de la comunidad. Luigi representa esa zona de Purgatory donde el sinsentido es sagrado.'
     },
-    Emi: {
-      title: 'Emi — Mitad del Harem de Cyber',
-      body: 'Junto a Frambuesa sostiene el equilibrio imposible del Harem de Cyber; mezcla celos con lealtad y convierte cualquier sala de voz en telenovela premium.'
-    },
+    
     Twoky: {
       title: 'Twoky — Titán de los videos',
       body: 'Editor incansable y figura influyente. Sus montajes mantienen viva la mitología del servidor y recuerdan que el drama también se exporta en formato MP4.'

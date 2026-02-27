@@ -46,19 +46,7 @@
       relations: ['La comunidad — Inventor de jerga', 'Mantequilla Negra — Su legado eterno'],
       role: 'Poeta del Absurdo'
     },
-    {
-      id: 'emi',
-      name: 'Emi',
-      alias: 'Mitad del Harem de Cyber',
-      era: 'olympo',
-      eraLabel: 'Olympo',
-      eraClass: 'era-olympo',
-      desc: 'Junto a Frambuesa sostiene el equilibrio imposible del Harem de Cyber; mezcla celos con lealtad.',
-      quote: '"El drama no me busca, yo lo convoco."',
-      fullBio: 'Emi es una de las dos figuras centrales del fenómeno conocido como "El Harem de Cyber". Junto con Frambuesa, orbita(ba) alrededor de Cyber en un triángulo de lealtad, celos y caos emocional que se convirtió en lore canónico del servidor. Tiene la capacidad de convertir cualquier sala de voz en telenovela premium y su presencia garantiza que el nivel de drama nunca baje del máximo.',
-      relations: ['Cyber — Centro del Harem', 'Frambuesa — Rival y aliada', 'Canal de voz — Su escenario'],
-      role: 'Miembro del Harem'
-    },
+    
     {
       id: 'frambuesa',
       name: 'Frambuesa',
@@ -67,7 +55,7 @@
       eraLabel: 'Olympo',
       eraClass: 'era-olympo',
       desc: 'La contraparte de Emi en el Harem: moderadora con poder real, celos legendarios y radar de dramas.',
-      quote: '"Ya sé lo que dijiste. Siempre lo sé."',
+      quote: '"renas explicale"',
       fullBio: 'Frambuesa es la otra mitad del Harem de Cyber y una moderadora con poder real en el servidor. Su combinación de celos legendarios y un radar que detecta dramas antes de que estallen la convierte en una de las figuras más temidas y respetadas. Si dijiste algo en un canal que creías privado, Frambuesa ya lo sabe. Si pensaste algo inapropiado, Frambuesa ya lo sospecha.',
       relations: ['Cyber — Centro del Harem', 'Emi — Rival y cómplice', 'Staff — Moderadora implacable'],
       role: 'Moderadora / Harem'
@@ -119,7 +107,7 @@
       eraLabel: 'Purgatory',
       eraClass: 'era-purgatory',
       desc: 'Lenguaje irreverente, actitud incendiaria y cero paciencia. Convierte el chat en campo minado.',
-      quote: '"¿Ofendido? Perfecto, ese era el objetivo."',
+      quote: '"si"',
       fullBio: 'Sting es el colombiano cuya misión en la vida parece ser incomodar a todos en el servidor hasta que el canal general se convierta en un campo minado. Con lenguaje irreverente, actitud incendiaria y cero paciencia para la diplomacia, Sting es el catalizador de discusiones que nadie pidió pero que todos disfrutan secretamente. Es la prueba de que en Purgatory, la provocación es un arte.',
       relations: ['Canal general — Su campo de batalla', 'La paciencia ajena — Su víctima favorita'],
       role: 'Provocador Profesional'
@@ -149,6 +137,20 @@
       fullBio: 'Guacamayo es el cronista oficial de las estupideces del servidor. Creador de guacamayadas.com, se ha dedicado a documentar y archivar cada frase célebre, cada momento vergonzoso y cada guacamayada memorable que se ha dicho en Purgatory. Si algo no aparece en su archivo, oficialmente no pasó. Es el historiador que nadie pidió pero que todos necesitan.',
       relations: ['guacamayadas.com — Su legado', 'Todos los miembros — Sus víctimas/fuentes'],
       role: 'Cronista Oficial'
+    }
+    ,
+    {
+      id: 'gmorning',
+      name: 'gmorning',
+      alias: 'Terapeuta del servidor',
+      era: 'purgatory',
+      eraLabel: 'Purgatory',
+      eraClass: 'era-purgatory',
+      desc: 'Se cree psicólogo y anda por ahí dando consejos; su única característica destacable es que es argentino.',
+      quote: '"Estoy para escucharte."',
+      fullBio: 'gmorning es el terapeuta autoproclamado del servidor: se pasea por los canales dando consejos, opinando sobre relaciones y comportamientos, y asumiendo el rol de psicólogo amateur. Su sello distintivo es su acento y costumbres argentinas, que utiliza como parte de su identidad en el chat.',
+      relations: [],
+      role: 'Terapeuta autoproclamado'
     }
   ];
 
@@ -182,8 +184,7 @@
             '<span class="char-card-era ' + c.eraClass + '">' + c.eraLabel + '</span>' +
           '</div>' +
         '</div>' +
-        '<p class="char-card-desc">' + c.desc + '</p>' +
-        '<p class="char-card-quote">"' + c.quote.replace(/^"|"$/g, '') + '"</p>';
+        '<p class="char-card-desc">' + c.desc + '</p>';
       grid.appendChild(card);
 
       /* animate reveal */
@@ -247,10 +248,6 @@
       '<div class="char-modal-section">' +
         '<h4>Relaciones</h4>' +
         '<div class="char-relations">' + relationsHTML + '</div>' +
-      '</div>' +
-      '<div class="char-modal-section">' +
-        '<h4>Cita Icónica</h4>' +
-        '<p style="font-style:italic;color:rgba(180,200,255,.55)">' + c.quote + '</p>' +
       '</div>';
 
     modal.classList.add('open');

@@ -464,9 +464,9 @@
   pointer-events: none;
 }
 .map-line {
-  stroke: rgba(124, 92, 255, .15);
-  stroke-width: 1;
-  stroke-dasharray: 4 4;
+  stroke: rgba(124, 92, 255, .45);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
 }
 .map-tooltip {
   position: absolute;

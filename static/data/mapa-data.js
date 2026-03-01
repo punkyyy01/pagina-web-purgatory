@@ -5,50 +5,68 @@
   'use strict';
 
   var regions = {
-    olympo: {
-      title: 'Olympo — La Ciudad Dorada (Caída)',
-      desc: 'Las cumbres donde los dioses vivían en templos de mármol. Fue la era más gloriosa del servidor, donde el Éxodo Blanco trajo las mejores almas. Ahora yace en ruinas, recuerdo de que todo Olympo tiene su ocaso.',
-      tag: 'Era III — Edad de Oro'
+    /* ─── SERVIDORES (nodos de color) ─── */
+    serverFosas: {
+      title: 'Las Fosas — Servidor Origen',
+      desc: 'El salvaje oeste de Discord: sin reglas, puro caos y los audios prohibidos. Aquí nació la leyenda de Nelcon y el Amorodio que moldeó a toda la comunidad.',
+      tag: 'Servidor I'
     },
-    eden: {
-      title: 'El Edén — Jardín de la Inocencia',
-      desc: 'Un lugar mítico donde las almas llegaban antes de ser corrompidas por el salseo. Nadie ha vuelto al Edén desde que el primer chisme fue creado. Algunos dicen que nunca existió realmente.',
-      tag: 'Mítico'
+    serverPibes: {
+      title: 'Los Pibes — El Bache',
+      desc: 'Servidor provisional tras el cierre de Las Fosas. Shitposters sin rumbo, mala administración y riesgo de desintegración total.',
+      tag: 'Servidor II'
     },
-    portal: {
-      title: 'El Void — El Vacío Entre Mundos',
-      desc: 'El espacio oscuro que separa los reinos. Aquí las almas errantes vagan sin rumbo, desconectadas hace meses. El Void no es un castigo — es indiferencia. Es peor.',
-      tag: 'Limbo'
+    serverOlympo: {
+      title: 'Olympo — Edad de Oro',
+      desc: 'El templo dorado de la comunidad. El Éxodo Blanco trajo a Ivan, Matiti, Twoky y consolidó el lore. También aquí empezó la caída.',
+      tag: 'Servidor III'
     },
-    purgatorio: {
-      title: 'PURG4TORY — El Refugio Actual',
-      desc: 'El corazón del servidor actual. No un castigo, sino un refugio forjado en la oscuridad por Artema. Bajo la Dictadura de Renasarenas, aquí convergen el salseo, los rituales del bump y el caos cotidiano que nos mantiene vivos.',
-      tag: 'Era IV — Actual'
+    serverPurgatory: {
+      title: 'Purg4tory — Refugio Actual',
+      desc: 'El servidor vigente, forjado en la oscuridad por Artema. Bajo la dictadura de Renasarenas conviven el salseo, el bump y la vigilancia del Staff.',
+      tag: 'Servidor IV'
     },
-    bache: {
-      title: 'El Bache — Tierra de Nadie',
-      desc: 'La zona de transición entre eras. Un desierto digital sin estructura ni dirección, donde la comunidad casi se desintegra. Nadie quiere volver aquí. Nadie debería.',
-      tag: 'Era II — Transición'
+
+    /* ─── EVENTOS (nodos grises conectados a su servidor) ─── */
+    eventAudios: {
+      title: 'Audios Prohibidos',
+      desc: 'Los clips caóticos y legendarios que definieron el tono de Las Fosas. Mitología oral convertida en arma.',
+      tag: 'Evento — Fosas'
     },
-    fosas: {
-      title: 'Las Fosas — El Big Bang',
-      desc: 'El salvaje oeste de Discord. Sin reglas, puro caos y el origen de los audios prohibidos. Aquí nació la leyenda de Nelcon, se forjó el Amorodio y todo comenzó. Terreno hostil, pero sagrado.',
-      tag: 'Era I — Origen'
+    eventPelea: {
+      title: 'Daku vs Nelcon',
+      desc: 'La pelea que fracturó el servidor original y empujó a la comunidad al éxodo. Punto de no retorno.',
+      tag: 'Evento — Fosas'
     },
-    salseo: {
-      title: 'La Plaza del Salseo',
-      desc: 'El corazón social del Purgatorio. Aquí el chisme es moneda de cambio, los rumores se convierten en ley, y si no hay drama fresco, se fabrica. Es el canal general convertido en punto de encuentro cósmico.',
-      tag: 'Zona Social'
+    eventBache: {
+      title: 'Migración al Bache',
+      desc: 'El salto improvisado a Los Pibes Shitposters. Caos administrativo y falta de rumbo que casi rompe todo.',
+      tag: 'Evento — Pibes'
     },
-    trono: {
-      title: 'La Sala del Trono',
-      desc: 'Desde aquí, Renasarenas gobierna con mano firme. El Staff ejecuta sus decretos, los bumps son monitoreados, y las sentencias del Infierno se dictan. Todo poder emana de esta sala.',
-      tag: 'Centro de Poder'
+    eventDrift: {
+      title: 'Comunidad al Límite',
+      desc: 'Dispersión y desgaste: las almas se desconectan, algunos se pierden en el Void, otros esperan un nuevo hogar.',
+      tag: 'Evento — Pibes'
     },
-    infierno: {
-      title: 'Los Círculos del Infierno',
-      desc: 'El destino final de los condenados. Sus nombres están grabados en los muros como advertencia eterna. No hay redención, no hay apelación. Cada círculo desciende más profundo: desde los memes eternos hasta los imperdonables.',
-      tag: 'Castigo Eterno'
+    eventExodo: {
+      title: 'Éxodo Blanco',
+      desc: 'Llegada masiva de miembros clave (Ivan, Matiti, Twoky). El servidor alcanza su pico creativo y de salseo.',
+      tag: 'Evento — Olympo'
+    },
+    eventCaida: {
+      title: 'Caída del Olympo',
+      desc: 'Conflictos internos, dramas irreconciliables y malas decisiones cierran la Edad de Oro. Las almas vuelven a migrar.',
+      tag: 'Evento — Olympo'
+    },
+    eventDictadura: {
+      title: 'Dictadura de Renasarenas',
+      desc: 'Renas asume el mando absoluto. Ritual del /bump, control estricto y chisme vigilado mantienen unido al refugio.',
+      tag: 'Evento — Purgatory'
+    },
+    eventPurga: {
+      title: 'Purga de los Menores',
+      desc: 'Exilio “misericordioso” a Instagram para salvar la paz mental. Marca la limpieza del servidor actual.',
+      tag: 'Evento — Purgatory'
     }
   };
 

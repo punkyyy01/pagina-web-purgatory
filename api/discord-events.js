@@ -62,13 +62,20 @@ function transformEvents(raw) {
 }
 
 module.exports = async function handler(req, res) {
-  var token = process.env.DISCORD_BOT_TOKEN;
-  var guildId = process.env.DISCORD_GUILD_ID;
+  var rawToken = process.env.DISCORD_BOT_TOKEN;
+  var token = normalizeDiscordToken(rawToken);
+  var guildId = normalizeEnvValue(process.env.DISCORD_GUILD_ID);
 
   if (!token || !guildId) {
     console.error('ENV MISSING', { hasToken: !!token, hasGuildId: !!guildId });
     return res.status(500).json({
       error: 'Configuración incompleta: falta DISCORD_BOT_TOKEN o DISCORD_GUILD_ID en las variables de entorno.'
+    });
+  }
+
+  if (!/^\d+$/.test(guildId)) {
+    return res.status(500).json({
+      error: 'Configuración inválida: DISCORD_GUILD_ID debe ser un ID numérico (sin comillas).' 
     });
   }
 
@@ -102,13 +109,28 @@ module.exports = async function handler(req, res) {
 
     if (!response.ok) {
       var errorText = await response.text();
+
+      if (response.status === 401) {
+        console.error('DISCORD AUTH ERROR', {
+          tokenLength: token.length,
+          tokenHadBotPrefix: /^\s*bot\s+/i.test(String(rawToken || '')),
+          tokenHadQuotes: hasWrappingQuotes(String(rawToken || ''))
+        });
+      }
+
       /* Si hay caché viejo, mejor devolver datos stale que un error */
       if (_cache.data) {
         console.warn('Discord API error, returning stale cache:', errorText);
         return sendResponse(req, res, _cache);
       }
+
+      var message = 'Error de la API de Discord: ' + errorText;
+      if (response.status === 401) {
+        message += ' | Revisa DISCORD_BOT_TOKEN: usa solo el token (sin prefijo "Bot ", sin comillas) y vuelve a desplegar.';
+      }
+
       return res.status(response.status).json({
-        error: 'Error de la API de Discord: ' + errorText
+        error: message
       });
     }
 
@@ -137,6 +159,30 @@ module.exports = async function handler(req, res) {
     });
   }
 };
+
+/** Quita espacios y comillas envolventes de una variable de entorno */
+function normalizeEnvValue(value) {
+  if (value == null) return '';
+  var clean = String(value).trim();
+  if (hasWrappingQuotes(clean)) {
+    clean = clean.slice(1, -1).trim();
+  }
+  return clean;
+}
+
+/** Discord requiere `Authorization: Bot <token>`, aquí guardamos solo `<token>`. */
+function normalizeDiscordToken(value) {
+  var clean = normalizeEnvValue(value);
+  clean = clean.replace(/^bot\s+/i, '').trim();
+  return clean;
+}
+
+function hasWrappingQuotes(value) {
+  return (value.length >= 2) && (
+    (value[0] === '"' && value[value.length - 1] === '"') ||
+    (value[0] === '\'' && value[value.length - 1] === '\'')
+  );
+}
 
 /**
  * Envía la respuesta con headers óptimos.

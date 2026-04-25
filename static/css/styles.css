@@ -580,7 +580,7 @@ body{
 
 /* ═══ Hero float — uses transform only ═══ */
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.hero-visual img{animation:floaty 5s ease-in-out infinite}
+.hero-visual img{animation:floaty 5s ease-in-out infinite;will-change:transform}
 
 /* Subtle hover glow on section illustrations */
 .genesis-illustration:hover{opacity:.85;transition:opacity .4s}

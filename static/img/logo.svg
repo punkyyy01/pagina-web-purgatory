@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Outer diamond frame -->
+  <polygon points="60,4 116,60 60,116 4,60" fill="none" stroke="currentColor" stroke-width="2"/>
+  <!-- Inner diamond -->
+  <polygon points="60,18 102,60 60,102 18,60" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Cross arms -->
+  <line x1="60" y1="28" x2="60" y2="92" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="28" y1="60" x2="92" y2="60" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Center diamond -->
+  <polygon points="60,50 70,60 60,70 50,60" fill="currentColor"/>
+  <!-- Corner small diamonds on outer diamond -->
+  <polygon points="60,4 65,9 60,14 55,9" fill="currentColor"/>
+  <polygon points="116,60 111,55 106,60 111,65" fill="currentColor"/>
+  <polygon points="60,116 65,111 60,106 55,111" fill="currentColor"/>
+  <polygon points="4,60 9,55 14,60 9,65" fill="currentColor"/>
+  <!-- Tick marks on inner cross midpoints -->
+  <polygon points="60,36 63,39 60,42 57,39" fill="currentColor"/>
+  <polygon points="84,60 81,57 78,60 81,63" fill="currentColor"/>
+  <polygon points="60,84 63,81 60,78 57,81" fill="currentColor"/>
+  <polygon points="36,60 39,57 42,60 39,63" fill="currentColor"/>
+</svg>

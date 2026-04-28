@@ -9,23 +9,21 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap"></noscript>
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"></noscript>
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
     <meta name="theme-color" content="#08020a">
     <link rel="stylesheet" href="static/css/tokens.css">
     <link rel="stylesheet" href="static/css/styles.css">
-    <link rel="stylesheet" href="static/css/pages.css">
   </head>
   <body>
-    <div id="progress-bar" aria-hidden="true"></div>
-    <canvas id="particles" aria-hidden="true"></canvas>
-    <div id="cursor" aria-hidden="true"></div>
 
     <header class="site-header" id="site-header">
-      <nav class="nav container">
+      <nav class="nav">
         <a class="brand" href="index.html">
-          <img src="static/img/logo.svg" alt="Logo" class="logo" />
+          <img src="static/img/logo.svg" alt="Purgatory" />
           <span class="brand-name">Purgatory</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
@@ -35,228 +33,86 @@
           <li><a href="personajes.html">Personajes</a></li>
           <li><a href="mapa.html" aria-current="page">Mapa</a></li>
           <li><a href="eventos.html">Eventos</a></li>
-          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al server</a></li>
+          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
+
+      <!-- Hero -->
       <section class="page-hero">
         <div class="container">
-          <a href="index.html" class="back-link">Volver al inicio</a>
-          <h1>Mapa del Purgatorio</h1>
-          <p class="lead">Un mapa de los reinos y regiones del universo de Purgatory. Haz clic en cada nodo para explorar su lore.</p>
+          <div class="divider"><span class="divider-text">Cartografía</span></div>
+          <h1 class="section-title" style="font-size: var(--fs-hero)">Mapa del Purgatorio</h1>
+          <p class="section-lead">Un mapa de los reinos y regiones del universo de Purgatory. Haz clic en cada carta para explorar su lore.</p>
         </div>
       </section>
 
-      <section class="section container">
-        <div class="map-wrapper" id="map-wrapper">
-          <svg class="map-svg" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="glow-purple" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#7c5cff" stop-opacity="0.6"/>
-                <stop offset="100%" stop-color="#7c5cff" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="glow-gold" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ffb627" stop-opacity="0.6"/>
-                <stop offset="100%" stop-color="#ffb627" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="glow-red" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ff3b3b" stop-opacity="0.6"/>
-                <stop offset="100%" stop-color="#ff3b3b" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="glow-cyan" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#00e0ff" stop-opacity="0.6"/>
-                <stop offset="100%" stop-color="#00e0ff" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="glow-dim" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#888" stop-opacity="0.4"/>
-                <stop offset="100%" stop-color="#888" stop-opacity="0"/>
-              </radialGradient>
-              <filter id="star-glow">
-                <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
+      <section class="section">
+        <div class="container">
 
-            <!-- Estrellas de fondo -->
-            <g opacity="0.3">
-              <circle cx="50" cy="30" r="1" fill="#fff"/>
-              <circle cx="150" cy="80" r="0.7" fill="#fff"/>
-              <circle cx="280" cy="45" r="1.2" fill="#fff"/>
-              <circle cx="400" cy="20" r="0.8" fill="#fff"/>
-              <circle cx="520" cy="65" r="1" fill="#fff"/>
-              <circle cx="680" cy="35" r="0.6" fill="#fff"/>
-              <circle cx="800" cy="55" r="1.1" fill="#fff"/>
-              <circle cx="100" cy="200" r="0.9" fill="#fff"/>
-              <circle cx="750" cy="180" r="0.7" fill="#fff"/>
-              <circle cx="350" cy="150" r="1" fill="#fff"/>
-              <circle cx="600" cy="250" r="0.8" fill="#fff"/>
-              <circle cx="180" cy="400" r="1" fill="#fff"/>
-              <circle cx="720" cy="420" r="0.6" fill="#fff"/>
-              <circle cx="550" cy="500" r="0.9" fill="#fff"/>
-              <circle cx="100" cy="500" r="0.7" fill="#fff"/>
-              <circle cx="830" cy="350" r="1.2" fill="#fff"/>
-              <circle cx="60" cy="320" r="0.5" fill="#fff"/>
-              <circle cx="480" cy="380" r="0.8" fill="#fff"/>
-            </g>
-
-            <!-- Líneas de conexión -->
-            <g class="map-connections">
-              <!-- Cadena cronológica entre servidores (Fosas → Pibes → Olympo → Purgatory) -->
-              <line class="map-line" x1="130" y1="100" x2="330" y2="320" stroke-width="1.5"/>
-              <line class="map-line" x1="330" y1="320" x2="570" y2="120" stroke-width="1.5"/>
-              <line class="map-line" x1="570" y1="120" x2="770" y2="360" stroke-width="1.5"/>
-
-              <!-- Fosas → sus eventos -->
-              <line class="map-line" x1="130" y1="100" x2="60" y2="250"/>
-              <line class="map-line" x1="130" y1="100" x2="240" y2="180"/>
-
-              <!-- Pibes → sus eventos -->
-              <line class="map-line" x1="330" y1="320" x2="200" y2="440"/>
-              <line class="map-line" x1="330" y1="320" x2="450" y2="450"/>
-
-              <!-- Olympo → sus eventos -->
-              <line class="map-line" x1="570" y1="120" x2="430" y2="45"/>
-              <line class="map-line" x1="570" y1="120" x2="700" y2="195"/>
-
-              <!-- Purgatory → sus eventos -->
-              <line class="map-line" x1="770" y1="360" x2="650" y2="490"/>
-              <line class="map-line" x1="770" y1="360" x2="850" y2="230"/>
-            </g>
-
-            <!-- ═══ SERVIDORES (nodos grandes, dispersos por el mapa) ═══ -->
-            <g class="map-node" data-region="serverFosas">
-              <circle cx="130" cy="100" r="36" fill="url(#glow-red)" opacity="0.4"/>
-              <circle class="map-node-circle" cx="130" cy="100" r="16" fill="#ff3b3b" fill-opacity="0.5" stroke="#ff3b3b" stroke-width="2" stroke-opacity="0.7" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="130" y="60" style="font-size:13px;font-weight:700">FOSAS</text>
-            </g>
-
-            <g class="map-node" data-region="serverPibes">
-              <circle cx="330" cy="320" r="36" fill="url(#glow-purple)" opacity="0.4"/>
-              <circle class="map-node-circle" cx="330" cy="320" r="16" fill="#7c5cff" fill-opacity="0.5" stroke="#a78bfa" stroke-width="2" stroke-opacity="0.7" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="330" y="360" style="font-size:13px;font-weight:700">PIBES</text>
-            </g>
-
-            <g class="map-node" data-region="serverOlympo">
-              <circle cx="570" cy="120" r="38" fill="url(#glow-gold)" opacity="0.45"/>
-              <circle class="map-node-circle" cx="570" cy="120" r="17" fill="#ffb627" fill-opacity="0.55" stroke="#ffb627" stroke-width="2" stroke-opacity="0.7" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="570" y="160" style="font-size:13px;font-weight:700">OLYMPO</text>
-            </g>
-
-            <g class="map-node" data-region="serverPurgatory">
-              <circle cx="770" cy="360" r="38" fill="url(#glow-cyan)" opacity="0.45"/>
-              <circle cx="770" cy="360" r="26" fill="transparent" stroke="#00e0ff" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="4 3"/>
-              <circle class="map-node-circle" cx="770" cy="360" r="17" fill="#00e0ff" fill-opacity="0.55" stroke="#00e0ff" stroke-width="2.5" stroke-opacity="0.8" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="770" y="320" style="font-size:14px;font-weight:700;fill:rgba(0,224,255,.9)">PURGATORY</text>
-            </g>
-
-            <!-- ═══ EVENTOS (nodos grises, orbitando cada servidor) ═══ -->
-            <!-- Fosas: abajo-izquierda y derecha -->
-            <g class="map-node" data-region="eventAudios">
-              <circle cx="60" cy="250" r="20" fill="url(#glow-dim)" opacity="0.3"/>
-              <circle class="map-node-circle" cx="60" cy="250" r="9" fill="#888" fill-opacity="0.45" stroke="#666" stroke-width="1.4" stroke-opacity="0.6" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="60" y="282">Audios</text>
-              <text class="map-node-label" x="60" y="295">prohibidos</text>
-            </g>
-
-            <g class="map-node" data-region="eventPelea">
-              <circle cx="240" cy="180" r="20" fill="url(#glow-dim)" opacity="0.3"/>
-              <circle class="map-node-circle" cx="240" cy="180" r="9" fill="#888" fill-opacity="0.45" stroke="#666" stroke-width="1.4" stroke-opacity="0.6" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="240" y="212">Daku vs</text>
-              <text class="map-node-label" x="240" y="225">Nelcon</text>
-            </g>
-
-            <!-- Pibes: abajo-izquierda y abajo-derecha -->
-            <g class="map-node" data-region="eventBache">
-              <circle cx="200" cy="440" r="20" fill="url(#glow-dim)" opacity="0.3"/>
-              <circle class="map-node-circle" cx="200" cy="440" r="9" fill="#888" fill-opacity="0.45" stroke="#666" stroke-width="1.4" stroke-opacity="0.6" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="200" y="472">Migración</text>
-              <text class="map-node-label" x="200" y="485">al Bache</text>
-            </g>
-
-            <g class="map-node" data-region="eventDrift">
-              <circle cx="450" cy="450" r="20" fill="url(#glow-dim)" opacity="0.3"/>
-              <circle class="map-node-circle" cx="450" cy="450" r="9" fill="#888" fill-opacity="0.45" stroke="#666" stroke-width="1.4" stroke-opacity="0.6" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="450" y="482">Comunidad</text>
-              <text class="map-node-label" x="450" y="495">al límite</text>
-            </g>
-
-            <!-- Olympo: arriba-izquierda y derecha -->
-            <g class="map-node" data-region="eventExodo">
-              <circle cx="430" cy="45" r="20" fill="url(#glow-dim)" opacity="0.3"/>
-              <circle class="map-node-circle" cx="430" cy="45" r="9" fill="#888" fill-opacity="0.45" stroke="#666" stroke-width="1.4" stroke-opacity="0.6" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="430" y="77">Éxodo</text>
-              <text class="map-node-label" x="430" y="90">Blanco</text>
-            </g>
-
-            <g class="map-node" data-region="eventCaida">
-              <circle cx="700" cy="195" r="20" fill="url(#glow-dim)" opacity="0.3"/>
-              <circle class="map-node-circle" cx="700" cy="195" r="9" fill="#888" fill-opacity="0.45" stroke="#666" stroke-width="1.4" stroke-opacity="0.6" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="700" y="227">Caída del</text>
-              <text class="map-node-label" x="700" y="240">Olympo</text>
-            </g>
-
-            <!-- Purgatory: abajo-izquierda y arriba-derecha -->
-            <g class="map-node" data-region="eventDictadura">
-              <circle cx="650" cy="490" r="20" fill="url(#glow-dim)" opacity="0.3"/>
-              <circle class="map-node-circle" cx="650" cy="490" r="9" fill="#888" fill-opacity="0.45" stroke="#666" stroke-width="1.4" stroke-opacity="0.6" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="650" y="522">Dictadura</text>
-              <text class="map-node-label" x="650" y="535">de Renas</text>
-            </g>
-
-            <g class="map-node" data-region="eventPurga">
-              <circle cx="850" cy="230" r="20" fill="url(#glow-dim)" opacity="0.3"/>
-              <circle class="map-node-circle" cx="850" cy="230" r="9" fill="#888" fill-opacity="0.45" stroke="#666" stroke-width="1.4" stroke-opacity="0.6" filter="url(#star-glow)"/>
-              <text class="map-node-label" x="850" y="262">Purga de</text>
-              <text class="map-node-label" x="850" y="275">los menores</text>
-            </g>
-          </svg>
-
-          <!-- Tooltip -->
-          <div class="map-tooltip" id="map-tooltip">
-            <h4 id="tooltip-title"></h4>
-            <p id="tooltip-desc"></p>
-            <span class="map-tooltip-tag" id="tooltip-tag"></span>
+          <!-- Canvas del mapa con pan+zoom -->
+          <div class="mapa-container" id="mapa-container">
+            <div class="mapa-canvas" id="mapa-canvas">
+              <!-- Las cartas-nodo son generadas por mapa-data.js + scripts.js -->
+            </div>
+            <div class="mapa-controls">
+              <button class="mapa-btn" id="mapa-zoom-in" title="Acercar">+</button>
+              <button class="mapa-btn" id="mapa-zoom-out" title="Alejar">−</button>
+              <button class="mapa-btn" id="mapa-reset" title="Centrar">&#8635;</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Leyenda -->
-        <div class="map-legend">
-          <div class="map-legend-item">
-            <span class="map-legend-dot" style="background:#ff3b3b"></span> Servidor Fosas
+          <!-- Leyenda -->
+          <div style="display:flex; gap: var(--space-5); flex-wrap:wrap; margin-top: var(--space-5); justify-content:center">
+            <div style="display:flex; align-items:center; gap: var(--space-2); font-family: var(--font-display); font-size: var(--fs-xs); letter-spacing:0.2em; color: var(--text-muted)">
+              <span style="width:10px;height:10px;background:var(--blood-bright);display:inline-block;transform:rotate(45deg)"></span>
+              Servidores
+            </div>
+            <div style="display:flex; align-items:center; gap: var(--space-2); font-family: var(--font-display); font-size: var(--fs-xs); letter-spacing:0.2em; color: var(--text-muted)">
+              <span style="width:10px;height:10px;background:var(--text-dim);display:inline-block;transform:rotate(45deg)"></span>
+              Eventos
+            </div>
           </div>
-          <div class="map-legend-item">
-            <span class="map-legend-dot" style="background:#7c5cff"></span> Servidor Pibes
-          </div>
-          <div class="map-legend-item">
-            <span class="map-legend-dot" style="background:#ffb627"></span> Servidor Olympo
-          </div>
-          <div class="map-legend-item">
-            <span class="map-legend-dot" style="background:#00e0ff"></span> Servidor Purgatory
-          </div>
-          <div class="map-legend-item">
-            <span class="map-legend-dot" style="background:#888"></span> Eventos ligados a cada servidor
-          </div>
+
         </div>
       </section>
+
+      <!-- Tooltip modal -->
+      <div class="mapa-tooltip" id="mapa-tooltip" aria-hidden="true">
+        <div class="mapa-tooltip-panel">
+          <img src="static/img/ornaments/corner-tl.svg" alt="" style="position:absolute;width:28px;height:28px;top:8px;left:8px;color:var(--blood-bright);pointer-events:none">
+          <img src="static/img/ornaments/corner-tr.svg" alt="" style="position:absolute;width:28px;height:28px;top:8px;right:8px;color:var(--blood-bright);pointer-events:none;transform:scaleX(-1)">
+          <img src="static/img/ornaments/corner-bl.svg" alt="" style="position:absolute;width:28px;height:28px;bottom:8px;left:8px;color:var(--blood-bright);pointer-events:none;transform:scaleY(-1)">
+          <img src="static/img/ornaments/corner-br.svg" alt="" style="position:absolute;width:28px;height:28px;bottom:8px;right:8px;color:var(--blood-bright);pointer-events:none;transform:scale(-1,-1)">
+          <button class="modal-close" id="mapa-tooltip-close" aria-label="Cerrar">&#215;</button>
+          <div id="mapa-tooltip-content"></div>
+        </div>
+      </div>
+
     </main>
 
+    <button id="back-to-top" aria-label="Volver arriba">&uarr;</button>
+
     <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <img src="static/img/logo.svg" alt="" class="logo small" />
-          <p class="muted">Purgatory — Donde las historias no mueren, solo arden.</p>
-        </div>
-        <div class="links">
-          <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
-          <a href="lore.html">Lore</a>
-          <a href="personajes.html">Personajes</a>
-          <a href="mapa.html">Mapa</a>
-          <a href="eventos.html">Eventos</a>
+      <div class="container">
+        <div class="divider"><span class="divider-text">PURG4TORY</span></div>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="static/img/logo.svg" alt="">
+            <div>
+              <div class="footer-brand-text">PURGATORY</div>
+              <div class="footer-tagline">Donde las historias no mueren, solo arden.</div>
+            </div>
+          </div>
+          <nav class="footer-links">
+            <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="lore.html">Lore</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="mapa.html">Mapa</a>
+            <a href="eventos.html">Eventos</a>
+          </nav>
         </div>
       </div>
     </footer>

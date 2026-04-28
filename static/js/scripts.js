@@ -100,11 +100,10 @@
       5. MENÚ HAMBURGUESA (abrir/cerrar en pantallas pequeñas)
       ═══════════════════════════════════════════════════════ */
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-    /* Close on outside click */
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('is-open'));
     document.addEventListener('click', (e) => {
-      if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && e.target !== navToggle) {
-        navLinks.classList.remove('open');
+      if (navLinks.classList.contains('is-open') && !navLinks.contains(e.target) && e.target !== navToggle) {
+        navLinks.classList.remove('is-open');
       }
     });
   }
@@ -153,13 +152,13 @@
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target.classList.contains('modal') || e.target.classList.contains('modal-close')) {
-        modal.classList.remove('open');
+        modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
       }
     });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) {
-        modal.classList.remove('open');
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+        modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
       }
     });
@@ -262,7 +261,7 @@
         if (p.y > H) p.y = 0;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, 6.283);
-        ctx.fillStyle = `rgba(124,92,255,${p.a})`;
+        ctx.fillStyle = `rgba(168,0,31,${p.a})`;
         ctx.fill();
       }
       animId = requestAnimationFrame(draw);

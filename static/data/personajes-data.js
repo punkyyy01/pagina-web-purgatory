@@ -154,6 +154,8 @@
     }
   ];
 
+  window.PURGATORY_CHARS = characters;
+
   /* ─── Render cards ─── */
   var grid = document.getElementById('char-grid');
   var modal = document.getElementById('char-detail-modal');

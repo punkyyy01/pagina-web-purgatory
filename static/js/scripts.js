@@ -13,69 +13,8 @@
   const btnTop   = $('#back-to-top');
   const navToggle = $('#nav-toggle');
   const navLinks  = $('#nav-links');
-  const modal     = $('#character-modal');
-  const modalTitle = $('#modal-title');
-  const modalBody  = $('#modal-body');
-
-    /* ZOOM: aplica un zoom por defecto al cargar, guardado en localStorage.
-      Usa la propiedad no estándar `zoom` por simplicidad; si no está soportada, hace un fallback silencioso. */
-  const ZOOM_KEY = 'purgatory_zoom';
-  let zoomFactor = parseFloat(localStorage.getItem(ZOOM_KEY)) || 1.15;
-  function applyZoom(factor) {
-    try {
-      document.body.style.zoom = factor; // ampliamente soportado en navegadores de escritorio
-      localStorage.setItem(ZOOM_KEY, String(factor));
-    } catch (e) {
-      // fallback silencioso
-    }
-  }
-  // Apply on initial load
-  applyZoom(zoomFactor);
-
-  /* ─── Datos de personajes ─── */
-  const characterData = {
-    Luigi: {
-      title: 'Luigi — El poeta de lo absurdo',
-      body: 'Su frase "mantequilla negra" no tiene origen claro, pero se convirtió en el grito de guerra más estúpido y memorable de la comunidad. Luigi representa esa zona de Purgatory donde el sinsentido es sagrado.'
-    },
-    
-    Twoky: {
-      title: 'Twoky — Titán de los videos',
-      body: 'Editor incansable y figura influyente. Sus montajes mantienen viva la mitología del servidor y recuerdan que el drama también se exporta en formato MP4.'
-    },
-    Ozy: {
-      title: 'Ozy — El objetivo del "Te amo"',
-      body: 'Destinatario del icónico "Te amo miamor" de Nelcon que quedó grabado en los logs para siempre. Nadie lo pidió, pero Purgatory nunca pide permiso. Ozy es prueba viviente de que aquí el afecto llega sin aviso.'
-    },
-    Nelcon: {
-      title: 'Nelcon — Arquitecto del caos',
-      body: 'Desde Las Fosas hasta la era actual, Nelcon ha sido catalizador de los momentos más turbulentos y memorables. Su pelea con Daku fracturó la comunidad original y dio pie a todo lo que vino después.'
-    },
-    Batido: {
-      title: 'Batido — Bufón ítalo-venezolano',
-      body: 'Dueño de una voz que parece programa nocturno de radio pirata. Empuja los límites de lo permitido en llamada y hace que el cringe sea patrimonio cultural.'
-    },
-    Sting: {
-      title: 'Sting — Provocador colombiano',
-      body: 'Lenguaje irreverente, actitud incendiaria y cero paciencia. Su misión es incomodar hasta que el canal general se convierta en campo minado.'
-    },
-    Renas: {
-      title: 'Renas — Dictador de Purgatory',
-      body: 'Autoproclamado líder supremo. Administra el caos con mano firme, ritualiza el /bump y recuerda que en Purgatory la democracia es un mito.'
-    },
-    Frambuesa: {
-      title: 'Frambuesa — Co-pilar del Harem de Cyber',
-      body: 'La contraparte de Emi en el Harem: moderadora con poder real, celos legendarios y un radar que detecta dramas antes de que estallen.'
-    },
-    Inquisidor: {
-      title: 'Inquisidor — Espía sigiloso',
-      body: 'Pareja de Twoky y agente encubierto del salseo. Lo ves poco, pero cuando aparece ya tiene recopilado todo lo que dijeron de ti.'
-    },
-    Guacamayo: {
-      title: 'Guacamayo — Cronista de guacamayadas',
-      body: 'Creador de guacamayadas.com y archivo viviente de frases célebres. Si no documenta algo, oficialmente no pasó.'
-    }
-  };
+  const modal        = $('#char-detail-modal');
+  const modalContent = $('#char-modal-content');
   let cx = -100, cy = -100, cursorReq = 0, cursorActive = false;
   const isTouchDevice = matchMedia('(hover: none)').matches;
 
@@ -100,8 +39,7 @@
   }
 
   function moveCursor() {
-    const z = parseFloat(document.body.style.zoom) || 1;
-    cursor.style.transform = `translate3d(${cx / z}px,${cy / z}px,0)`;
+    cursor.style.transform = `translate3d(${cx}px,${cy}px,0)`;
     cursorReq = 0;
   }
 
@@ -190,23 +128,28 @@
   revealEls.forEach(el => revealObs.observe(el));
 
     /* ═══════════════════════════════════════════════════════
-      7. MODAL DE PERSONAJES
+      7. MODAL DE PERSONAJES — usa PURGATORY_CHARS (fuente única)
       ═══════════════════════════════════════════════════════ */
   document.addEventListener('click', (e) => {
     const card = e.target.closest('[data-character]');
-    if (card && modal) {
-      const key = card.dataset.character;
-      const data = characterData[key];
-      if (data) {
-        modalTitle.textContent = data.title;
-        modalBody.textContent = data.body;
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-      }
-    }
+    if (!card || !modal || !modalContent) return;
+    const id = card.dataset.character.toLowerCase();
+    const chars = window.PURGATORY_CHARS || [];
+    const c = chars.find(ch => ch.id === id);
+    if (!c) return;
+    const relationsHTML = c.relations
+      .map(r => `<span class="char-relation-tag">${r}</span>`)
+      .join('');
+    modalContent.innerHTML =
+      `<h3>${c.name}</h3>` +
+      `<span class="char-modal-alias">${c.alias} — ${c.role}</span>` +
+      `<p>${c.fullBio}</p>` +
+      `<div class="char-modal-section"><h4>Relaciones</h4>` +
+      `<div class="char-relations">${relationsHTML}</div></div>`;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
   });
 
-  /* Close modal */
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target.classList.contains('modal') || e.target.classList.contains('modal-close')) {

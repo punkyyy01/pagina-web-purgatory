@@ -9,23 +9,21 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap"></noscript>
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"></noscript>
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
     <meta name="theme-color" content="#08020a">
     <link rel="stylesheet" href="static/css/tokens.css">
     <link rel="stylesheet" href="static/css/styles.css">
-    <link rel="stylesheet" href="static/css/pages.css">
   </head>
   <body>
-    <div id="progress-bar" aria-hidden="true"></div>
-    <canvas id="particles" aria-hidden="true"></canvas>
-    <div id="cursor" aria-hidden="true"></div>
 
     <header class="site-header" id="site-header">
-      <nav class="nav container">
+      <nav class="nav">
         <a class="brand" href="index.html">
-          <img src="static/img/logo.svg" alt="Logo" class="logo" />
+          <img src="static/img/logo.svg" alt="Purgatory" />
           <span class="brand-name">Purgatory</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
@@ -35,56 +33,73 @@
           <li><a href="personajes.html" aria-current="page">Personajes</a></li>
           <li><a href="mapa.html">Mapa</a></li>
           <li><a href="eventos.html">Eventos</a></li>
-          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al server</a></li>
+          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
+
+      <!-- Hero -->
       <section class="page-hero">
         <div class="container">
-          <a href="index.html" class="back-link">Volver al inicio</a>
-          <h1>Personajes Canónicos</h1>
-          <p class="lead">Las almas que forjaron la leyenda. Cada uno con su historia, sus pecados y sus momentos icónicos.</p>
+          <div class="divider"><span class="divider-text">PURG4TORY</span></div>
+          <h1 class="section-title" style="font-size: var(--fs-hero)">Personajes Canónicos</h1>
+          <p class="section-lead">Las almas que forjaron la leyenda. Cada una con su historia, sus pecados y sus momentos icónicos.</p>
         </div>
       </section>
 
-      <section class="section container">
-        <div class="char-search-bar">
-          <input type="text" class="char-search-input" id="char-search" placeholder="Buscar personaje..." autocomplete="off" />
-          <div class="char-filters" id="char-filters">
-            <button class="char-filter-btn active" data-filter="all">Todos</button>
-            <button class="char-filter-btn" data-filter="fosas">Las Fosas</button>
-            <button class="char-filter-btn" data-filter="olympo">Olympo</button>
-            <button class="char-filter-btn" data-filter="purgatory">Purgatory</button>
-          </div>
-        </div>
+      <section class="section">
+        <div class="container">
 
-        <div class="char-grid" id="char-grid">
-          <!-- Las tarjetas se generan por JS -->
-        </div>
-
-        <div id="char-detail-modal" class="modal" aria-hidden="true">
-          <div class="modal-panel" style="max-width:650px">
-            <button class="modal-close" aria-label="Cerrar">×</button>
-            <div class="char-modal-content" id="char-modal-content"></div>
+          <!-- Filtros con divisores diamante -->
+          <div class="filter-tabs" id="char-filters">
+            <button class="filter-tab active" data-filter="all">Todos</button>
+            <button class="filter-tab" data-filter="fosas">Las Fosas</button>
+            <button class="filter-tab" data-filter="olympo">Olympo</button>
+            <button class="filter-tab" data-filter="purgatory">Purgatory</button>
           </div>
+
+          <!-- Grid de naipes — generado por JS -->
+          <div class="naipe-grid" id="char-grid"></div>
+
         </div>
       </section>
+
+      <!-- Modal ficha de personaje -->
+      <div id="char-detail-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-char-name">
+        <div class="modal-panel" style="max-width:700px">
+          <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="" style="position:absolute;width:32px;height:32px;top:12px;left:12px;color:var(--blood-bright);pointer-events:none">
+          <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="" style="position:absolute;width:32px;height:32px;top:12px;right:12px;color:var(--blood-bright);pointer-events:none;transform:scaleX(-1)">
+          <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="" style="position:absolute;width:32px;height:32px;bottom:12px;left:12px;color:var(--blood-bright);pointer-events:none;transform:scaleY(-1)">
+          <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="" style="position:absolute;width:32px;height:32px;bottom:12px;right:12px;color:var(--blood-bright);pointer-events:none;transform:scale(-1,-1)">
+          <button class="modal-close" id="modal-close" aria-label="Cerrar">&#215;</button>
+          <div id="char-modal-content"></div>
+        </div>
+      </div>
+
     </main>
 
+    <button id="back-to-top" aria-label="Volver arriba">&uarr;</button>
+
     <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <img src="static/img/logo.svg" alt="" class="logo small" />
-          <p class="muted">Purgatory — Donde las historias no mueren, solo arden.</p>
-        </div>
-        <div class="links">
-          <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
-          <a href="lore.html">Lore</a>
-          <a href="personajes.html">Personajes</a>
-          <a href="mapa.html">Mapa</a>
-          <a href="eventos.html">Eventos</a>
+      <div class="container">
+        <div class="divider"><span class="divider-text">PURG4TORY</span></div>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="static/img/logo.svg" alt="">
+            <div>
+              <div class="footer-brand-text">PURGATORY</div>
+              <div class="footer-tagline">Donde las historias no mueren, solo arden.</div>
+            </div>
+          </div>
+          <nav class="footer-links">
+            <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="lore.html">Lore</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="mapa.html">Mapa</a>
+            <a href="eventos.html">Eventos</a>
+          </nav>
         </div>
       </div>
     </footer>

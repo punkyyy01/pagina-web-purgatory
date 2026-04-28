@@ -40,73 +40,66 @@
 
   /* ─── Render ─── */
   function renderEvents(events) {
+    var emptyEl = document.getElementById('events-empty');
+
     if (!events || events.length === 0) {
-      container.innerHTML =
-        '<div class="events-empty">' +
-          '<span>🌑</span>' +
-          '<p>No hay eventos programados en el Purgatorio por ahora.</p>' +
-          '<p style="font-size:13px;margin-top:8px;">El Void está en calma... por ahora. ' +
-          'Visita el servidor para estar atento a los próximos rituales.</p>' +
-          '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" ' +
-          'class="btn btn-primary" style="margin-top:20px;">Unirse al servidor</a>' +
-        '</div>';
+      if (emptyEl) emptyEl.style.display = '';
       return;
     }
 
-    var html = '<div class="events-grid">';
-    events.forEach(function (ev) {
-      var statusClass = ev.status === 'active' ? 'active' : 'scheduled';
-      var statusLabel = ev.status === 'active' ? 'En vivo' : 'Programado';
+    if (emptyEl) emptyEl.style.display = 'none';
 
-      html += '<article class="event-card reveal-init">';
-      if (ev.image) {
-        html += '<img src="' + ev.image + '" alt="" ' +
-                'style="width:100%;border-radius:10px;margin-bottom:12px;opacity:.85;" loading="lazy" />';
-      }
-      html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">';
-      html += '<span class="event-status ' + statusClass + '">' + statusLabel + '</span>';
-      html += '</div>';
-      html += '<h3>' + escapeHTML(ev.name) + '</h3>';
-      html += '<div class="event-date">' + formatDate(ev.start) + '</div>';
-      if (ev.end) {
-        html += '<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Hasta: ' +
-                formatDate(ev.end) + '</div>';
+    var html = '';
+    events.forEach(function (ev) {
+      var now = Date.now();
+      var start = new Date(ev.start).getTime();
+      var end   = ev.end ? new Date(ev.end).getTime() : null;
+      var isActive   = ev.status === 'active' || (start <= now && (!end || end > now));
+      var isPast     = end ? end < now : false;
+      var isUpcoming = !isActive && !isPast;
+
+      var cardClass = 'evento-card';
+      if (isActive)   cardClass += ' evento-card--active';
+      if (isPast)     cardClass += ' evento-card--past';
+
+      var statusClass = isActive ? 'evento-status--active' : (isUpcoming ? 'evento-status--upcoming' : 'evento-status--past');
+      var statusLabel = isActive ? 'En Curso' : (isUpcoming ? 'Próximo' : 'Pasado');
+
+      var d = new Date(ev.start);
+      var day   = d.getDate();
+      var month = d.toLocaleDateString('es-ES', { month: 'short' }).toUpperCase().replace('.','');
+
+      html += '<article class="' + cardClass + '">';
+      html +=   '<div class="evento-date-col"><div class="evento-day">' + day + '</div><div class="evento-month">' + month + '</div></div>';
+      html +=   '<div>';
+      html +=     '<div class="evento-title">' + escapeHTML(ev.name) + '</div>';
+      if (ev.description) {
+        html +=   '<div class="evento-desc">' + escapeHTML(ev.description) + '</div>';
       }
       if (ev.location) {
-        html += '<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">📍 ' +
-                escapeHTML(ev.location) + '</div>';
+        html +=   '<div style="font-size:var(--fs-xs);color:var(--text-dim);margin-top:var(--space-2);letter-spacing:0.1em">' + escapeHTML(ev.location) + '</div>';
       }
-      if (ev.description) {
-        html += '<p class="event-desc">' + escapeHTML(ev.description) + '</p>';
-      }
-      html += '<div class="event-meta">';
+      html +=   '</div>';
+      html +=   '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-2)">';
+      html +=     '<span class="evento-status ' + statusClass + '">' + statusLabel + '</span>';
       if (ev.user_count > 0) {
-        html += '<span class="event-users">' + ev.user_count + ' interesados</span>';
+        html += '<span style="font-size:var(--fs-xs);color:var(--text-dim);font-family:var(--font-display);letter-spacing:0.15em">' + ev.user_count + ' almas</span>';
       }
-      html += '<a href="https://discord.com/events/' + ev.guild_id + '/' + ev.id +
-              '" target="_blank" rel="noopener noreferrer" class="event-link">Ver en Discord</a>';
-      html += '</div>';
+      html +=     '<a href="https://discord.com/events/' + ev.guild_id + '/' + ev.id + '" target="_blank" rel="noopener noreferrer" class="btn" style="padding:8px 16px;font-size:var(--fs-xs)">Ver ritual</a>';
+      html +=   '</div>';
       html += '</article>';
     });
-    html += '</div>';
 
     container.innerHTML = html;
-
-    requestAnimationFrame(function () {
-      container.querySelectorAll('.reveal-init').forEach(function (el) {
-        el.classList.add('revealed');
-      });
-    });
   }
 
   function renderError(msg) {
-    container.innerHTML =
-      '<div class="events-empty">' +
-        '<span>⚠️</span>' +
-        '<p>' + msg + '</p>' +
-        '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" ' +
-        'class="btn btn-ghost" style="margin-top:16px;">Ir al servidor directamente</a>' +
-      '</div>';
+    var emptyEl = document.getElementById('events-empty');
+    if (emptyEl) {
+      emptyEl.style.display = '';
+      emptyEl.innerHTML = '<p>Error al invocar los rituales: ' + msg + '</p>' +
+        '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" class="btn btn-blood" style="margin-top:var(--space-4);display:inline-block">Ir al servidor</a>';
+    }
   }
 
   /* ─── Fetch con soporte ETag ─── */

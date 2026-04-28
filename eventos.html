@@ -9,23 +9,21 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap"></noscript>
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"></noscript>
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
     <meta name="theme-color" content="#08020a">
     <link rel="stylesheet" href="static/css/tokens.css">
     <link rel="stylesheet" href="static/css/styles.css">
-    <link rel="stylesheet" href="static/css/pages.css">
   </head>
   <body>
-    <div id="progress-bar" aria-hidden="true"></div>
-    <canvas id="particles" aria-hidden="true"></canvas>
-    <div id="cursor" aria-hidden="true"></div>
 
     <header class="site-header" id="site-header">
-      <nav class="nav container">
+      <nav class="nav">
         <a class="brand" href="index.html">
-          <img src="static/img/logo.svg" alt="Logo" class="logo" />
+          <img src="static/img/logo.svg" alt="Purgatory" />
           <span class="brand-name">Purgatory</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
@@ -35,39 +33,74 @@
           <li><a href="personajes.html">Personajes</a></li>
           <li><a href="mapa.html">Mapa</a></li>
           <li><a href="eventos.html" aria-current="page">Eventos</a></li>
-          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al server</a></li>
+          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
+
+      <!-- Hero -->
       <section class="page-hero">
         <div class="container">
-          <a href="index.html" class="back-link">Volver al inicio</a>
-          <h1>Eventos del Purgatorio</h1>
-          <p class="lead">Los rituales y ceremonias programados en el servidor. Directamente desde Discord.</p>
+          <div class="divider"><span class="divider-text">Rituales</span></div>
+          <h1 class="section-title" style="font-size: var(--fs-hero)">Eventos del Purgatorio</h1>
+          <p class="section-lead">Los rituales y ceremonias programados en el servidor. Directamente desde Discord, en tiempo real.</p>
         </div>
       </section>
 
-      <section class="section container">
-        <div id="events-container">
-          <div class="loading-spinner" id="events-loading">Invocando eventos desde el Void...</div>
+      <section class="section">
+        <div class="container" style="max-width: 860px">
+
+          <!-- Loading state -->
+          <div class="events-loading" id="events-loading">
+            <div class="loading-diamonds">
+              <div class="loading-diamond"></div>
+              <div class="loading-diamond"></div>
+              <div class="loading-diamond"></div>
+            </div>
+            <p style="font-family: var(--font-display); letter-spacing: 0.3em; color: var(--text-muted); font-size: var(--fs-sm)">INVOCANDO RITUALES...</p>
+          </div>
+
+          <!-- Empty state (se muestra si no hay eventos) -->
+          <div class="events-empty" id="events-empty" style="display:none">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="margin: 0 auto var(--space-5); display:block; color: var(--blood-dark)">
+              <polygon points="40,8 72,24 72,56 40,72 8,56 8,24" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
+              <line x1="40" y1="8" x2="40" y2="72" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+              <line x1="8" y1="40" x2="72" y2="40" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+              <polygon points="40,32 48,40 40,48 32,40" fill="currentColor" opacity="0.3"/>
+            </svg>
+            <p>Las llamas duermen. Vuelve más tarde.</p>
+          </div>
+
+          <!-- Contenedor de eventos — rellenado por eventos-loader.js -->
+          <div id="events-container"></div>
+
         </div>
       </section>
+
     </main>
 
+    <button id="back-to-top" aria-label="Volver arriba">&uarr;</button>
+
     <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <img src="static/img/logo.svg" alt="" class="logo small" />
-          <p class="muted">Purgatory — Donde las historias no mueren, solo arden.</p>
-        </div>
-        <div class="links">
-          <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
-          <a href="lore.html">Lore</a>
-          <a href="personajes.html">Personajes</a>
-          <a href="mapa.html">Mapa</a>
-          <a href="eventos.html">Eventos</a>
+      <div class="container">
+        <div class="divider"><span class="divider-text">PURG4TORY</span></div>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="static/img/logo.svg" alt="">
+            <div>
+              <div class="footer-brand-text">PURGATORY</div>
+              <div class="footer-tagline">Donde las historias no mueren, solo arden.</div>
+            </div>
+          </div>
+          <nav class="footer-links">
+            <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="lore.html">Lore</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="mapa.html">Mapa</a>
+            <a href="eventos.html">Eventos</a>
+          </nav>
         </div>
       </div>
     </footer>

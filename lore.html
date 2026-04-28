@@ -9,23 +9,21 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap"></noscript>
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"></noscript>
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
     <meta name="theme-color" content="#08020a">
     <link rel="stylesheet" href="static/css/tokens.css">
     <link rel="stylesheet" href="static/css/styles.css">
-    <link rel="stylesheet" href="static/css/pages.css">
   </head>
   <body>
-    <div id="progress-bar" aria-hidden="true"></div>
-    <canvas id="particles" aria-hidden="true"></canvas>
-    <div id="cursor" aria-hidden="true"></div>
 
     <header class="site-header" id="site-header">
-      <nav class="nav container">
+      <nav class="nav">
         <a class="brand" href="index.html">
-          <img src="static/img/logo.svg" alt="Logo" class="logo" />
+          <img src="static/img/logo.svg" alt="Purgatory" />
           <span class="brand-name">Purgatory</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
@@ -35,153 +33,283 @@
           <li><a href="personajes.html">Personajes</a></li>
           <li><a href="mapa.html">Mapa</a></li>
           <li><a href="eventos.html">Eventos</a></li>
-          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al server</a></li>
+          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
+
+      <!-- Hero de página -->
       <section class="page-hero">
         <div class="container">
-          <a href="index.html" class="back-link">Volver al inicio</a>
-          <h1>El Lore de Purgatory</h1>
-          <p class="lead">Cada servidor tiene una historia. El nuestro tiene un mito, leyes sagradas y profecías que no deberías ignorar.</p>
+          <div class="divider"><span class="divider-text">Scriptorium</span></div>
+          <h1 class="section-title" style="font-size: var(--fs-hero)">El Lore de Purgatory</h1>
+          <p class="section-lead">Cada servidor tiene una historia. El nuestro tiene un mito, leyes sagradas y profecías que no deberías ignorar.</p>
         </div>
       </section>
 
-      <section class="section container">
-        <div class="lore-chapter">
-          <h2>I — El Mito de Artema</h2>
-          <p class="lore-quote">"Si la luz del Olympo no llega a este reino de sombras, entonces yo me convertiré en su oscuridad. Y de esa oscuridad surgirá la luz."</p>
+      <section class="section">
+        <div class="container" style="max-width: 860px">
 
-          <h3>La Diosa que Observaba</h3>
-          <p>En las cumbres del Olympo, donde la luz del sol coronaba templos de mármol, una joven diosa llamada Artemisa pasaba sus días contemplando el mundo de los mortales. Sus risas, sus lágrimas, sus guerras absurdas y sus amores imposibles. Veía las almas perdidas entre los reinos — los no muertos, los olvidados, los que no pertenecían a ningún lado — y sentía algo que los otros dioses habían olvidado hace mucho: compasión.</p>
+          <!-- ── CAPÍTULO I ── -->
+          <article class="chapter-tablet">
+            <div class="frame frame--highlight">
+              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
+              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
+              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
+              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
 
-          <h3>La Traición del Olympo</h3>
-          <p>Con el corazón cargado de propósito, Artemisa se presentó ante los grandes dioses. Les habló de los mortales, del sufrimiento de las almas atrapadas entre mundos. Y los dioses, desde sus tronos de indiferencia, se rieron. <em>"¿Por qué deberíamos preocuparnos por las sombras?"</em>, resonó como un trueno. Los seres que creía encarnación de la justicia no eran más que guardianes egoístas de su propio poder. Su fe se hizo añicos.</p>
+              <span class="chapter-label">Capítulo I</span>
+              <h2 class="chapter-title">El Mito de Artema</h2>
 
-          <h3>El Descenso</h3>
-          <p>Vagó sin rumbo mientras su luz se atenuaba con cada paso. Las columnas del cielo se disolvieron tras ella. Su camino la llevó más allá de los bordes del Edén, atravesando las montañas de un reino de crepúsculo perpetuo: el Purgatorio. Allí no había templos ni altares de oro. Solo almas llorando por vidas que ya no podían vivir, anhelando un toque, una palabra amable, un momento de paz.</p>
+              <blockquote class="chapter-quote">
+                "Si la luz del Olympo no llega a este reino de sombras, entonces yo me convertiré en su oscuridad. Y de esa oscuridad surgirá la luz."
+              </blockquote>
 
-          <h3>El Nacimiento de Artema</h3>
-          <p>Si los dioses no ayudaban a las almas olvidadas, entonces ella lo haría sola. Abrazó la oscuridad — no como agente del mal, sino como un manto para proteger a los desamparados. Su arco, antes símbolo de la caza divina, se convirtió en herramienta de protección. Sus flechas ya no quitaban la vida; defendían a los que ya la habían perdido. Dejó de ser Artemisa. Se convirtió en <strong>Artema</strong>, Guardiana de los Penitentes.</p>
+              <div class="chapter-body">
+                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">La Diosa que Observaba</h3>
+                <p>En las cumbres del Olympo, donde la luz del sol coronaba templos de mármol, una joven diosa llamada Artemisa pasaba sus días contemplando el mundo de los mortales. Sus risas, sus lágrimas, sus guerras absurdas y sus amores imposibles. Veía las almas perdidas entre los reinos — los no muertos, los olvidados, los que no pertenecían a ningún lado — y sentía algo que los otros dioses habían olvidado hace mucho: compasión.</p>
 
-          <h3>Reina del Crepúsculo</h3>
-          <p>Los no muertos que vagaban sin rumbo encontraron consuelo en su presencia. Ya no estaban solos. Aunque el Olympo la desterró de su memoria y el mundo de los mortales nunca supo su nombre, la leyenda de la diosa de cabello luz de luna fue susurrada para siempre en el reino de los penitentes.</p>
-          <p class="lore-quote">"Así nació Purgatory: no un castigo, sino un refugio forjado en la oscuridad por alguien que eligió quedarse."</p>
-        </div>
+                <div class="divider"><span class="divider-text">◆</span></div>
 
-        <hr class="lore-divider" />
+                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">La Traición del Olympo</h3>
+                <p>Con el corazón cargado de propósito, Artemisa se presentó ante los grandes dioses. Les habló de los mortales, del sufrimiento de las almas atrapadas entre mundos. Y los dioses, desde sus tronos de indiferencia, se rieron. <em>"¿Por qué deberíamos preocuparnos por las sombras?"</em>, resonó como un trueno. Los seres que creía encarnación de la justicia no eran más que guardianes egoístas de su propio poder. Su fe se hizo añicos.</p>
 
-        <div class="lore-chapter">
-          <h2>II — Las Leyes Sagradas del Purgatorio</h2>
-          <p>Todo reino necesita ley. El Purgatorio no es una democracia — es una dictadura benevolente (según Renas). Estas son las leyes que rigen la existencia en este plano:</p>
+                <div class="divider"><span class="divider-text">◆</span></div>
 
-          <div class="lore-sacred-law">
-            <h4>I. La Ley del Bump</h4>
-            <p>El comando /bump es un ritual sagrado. No es una sugerencia, es una obligación. Cada bump mantiene vivo el portal entre los mundos. Quien abandona el ritual abandona a la comunidad. Artema observa cada bump y juzga a los negligentes.</p>
+                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">El Descenso</h3>
+                <p>Vagó sin rumbo mientras su luz se atenuaba con cada paso. Las columnas del cielo se disolvieron tras ella. Su camino la llevó más allá de los bordes del Edén, atravesando las montañas de un reino de crepúsculo perpetuo: el Purgatorio. Allí no había templos ni altares de oro. Solo almas llorando por vidas que ya no podían vivir, anhelando un toque, una palabra amable, un momento de paz.</p>
+
+                <div class="divider"><span class="divider-text">◆</span></div>
+
+                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">El Nacimiento de Artema</h3>
+                <p>Si los dioses no ayudaban a las almas olvidadas, entonces ella lo haría sola. Abrazó la oscuridad — no como agente del mal, sino como un manto para proteger a los desamparados. Su arco, antes símbolo de la caza divina, se convirtió en herramienta de protección. Sus flechas ya no quitaban la vida; defendían a los que ya la habían perdido. Dejó de ser Artemisa. Se convirtió en <strong>Artema</strong>, Guardiana de los Penitentes.</p>
+
+                <div class="divider"><span class="divider-text">◆</span></div>
+
+                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">Reina del Crepúsculo</h3>
+                <p>Los no muertos que vagaban sin rumbo encontraron consuelo en su presencia. Ya no estaban solos. Aunque el Olympo la desterró de su memoria, la leyenda de la diosa de cabello luz de luna fue susurrada para siempre en el reino de los penitentes.</p>
+
+                <blockquote class="chapter-quote" style="margin-top: var(--space-5)">
+                  "Así nació Purgatory: no un castigo, sino un refugio forjado en la oscuridad por alguien que eligió quedarse."
+                </blockquote>
+              </div>
+            </div>
+          </article>
+
+          <div class="divider" style="margin: var(--space-8) 0"><span class="divider-text">Leyes Sagradas</span></div>
+
+          <!-- ── CAPÍTULO II ── -->
+          <article class="chapter-tablet">
+            <div class="frame">
+              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
+              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
+              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
+              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+
+              <span class="chapter-label">Capítulo II</span>
+              <h2 class="chapter-title">Las Leyes Sagradas del Purgatorio</h2>
+
+              <div class="chapter-body">
+                <p>Todo reino necesita ley. El Purgatorio no es una democracia — es una dictadura benevolente (según Renas). Estas son las leyes que rigen la existencia en este plano:</p>
+              </div>
+
+              <div style="display: grid; gap: var(--space-4); margin-top: var(--space-6)">
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">I.</span>
+                  <div class="sacred-law-title">La Ley del Bump</div>
+                  <p>El comando /bump es un ritual sagrado. No es una sugerencia, es una obligación. Cada bump mantiene vivo el portal entre los mundos. Artema observa cada bump y juzga a los negligentes.</p>
+                </div>
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">II.</span>
+                  <div class="sacred-law-title">La Ley del Salseo</div>
+                  <p>El chisme es la moneda del Purgatorio. Todo se sabe, todo se comenta. El salseo no es un problema — es el combustible que mantiene ardiendo el fuego eterno.</p>
+                </div>
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">III.</span>
+                  <div class="sacred-law-title">La Ley del Staff</div>
+                  <p>El Staff es la voluntad materializada de Artema en el plano digital. Sus decisiones son finales. Cuestionar al Staff es como cuestionar a la gravedad: puedes hacerlo, pero vas a caer igual.</p>
+                </div>
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">IV.</span>
+                  <div class="sacred-law-title">La Ley del Infierno</div>
+                  <p>Quien cruce las líneas imperdonables será documentado públicamente. No hay redención, no hay apelación. Tu nombre quedará grabado como advertencia eterna.</p>
+                </div>
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">V.</span>
+                  <div class="sacred-law-title">La Ley del Amorodio</div>
+                  <p>En el Purgatorio, el amor y el odio son la misma cosa. Los lazos aquí se forjan en el fuego del cringe, la humillación mutua y la confianza dañada. Si no puedes con eso, Instagram te espera.</p>
+                </div>
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">VI.</span>
+                  <div class="sacred-law-title">La Ley de los Menores</div>
+                  <p>Los menores son protegidos con especial vigilancia. Quien atente contra esta ley será enviado al círculo más profundo del Infierno sin juicio previo.</p>
+                </div>
+
+              </div>
+            </div>
+          </article>
+
+          <div class="divider" style="margin: var(--space-8) 0"><span class="divider-text">Crónica</span></div>
+
+          <!-- ── CAPÍTULO III ── -->
+          <article class="chapter-tablet">
+            <div class="frame">
+              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
+              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
+              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
+              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+
+              <span class="chapter-label">Capítulo III</span>
+              <h2 class="chapter-title">Las Cuatro Eras</h2>
+
+              <div class="timeline" style="margin-top: var(--space-6)">
+
+                <article class="era-card">
+                  <div class="era-card-inner">
+                    <span class="era-numeral">Era I</span>
+                    <h3 class="era-card-title">Las Fosas — El Big Bang</h3>
+                    <p class="era-card-desc">El salvaje oeste de Discord. Sin reglas, puro caos y el origen de los famosos "audios prohibidos". Aquí nació la leyenda de Nelcon, se forjó el "Amorodio" y la pelea entre Daku y Nelcon fracturó la comunidad original.</p>
+                  </div>
+                </article>
+
+                <article class="era-card">
+                  <div class="era-card-inner">
+                    <span class="era-numeral">Era II</span>
+                    <h3 class="era-card-title">Los Pibes Shitposters — El Bache</h3>
+                    <p class="era-card-desc">Tras el cierre de Las Fosas, el grupo migró a un servidor provisional sin dirección. Fue un desastre administrativo — la comunidad casi se desintegra por completo. La Era Oscura fue breve pero dejó cicatrices.</p>
+                  </div>
+                </article>
+
+                <article class="era-card">
+                  <div class="era-card-inner">
+                    <span class="era-numeral">Era III</span>
+                    <h3 class="era-card-title">OLYMPO — La Edad de Oro</h3>
+                    <p class="era-card-desc">De las cenizas surgió el mayor período de gloria. El "Éxodo Blanco" trajo nombres como Ivan, Matiti y Twoky. Se consolidaron los personajes canónicos y nacieron los chistes internos más legendarios. Pero todo Olimpo tiene su ocaso.</p>
+                  </div>
+                </article>
+
+                <article class="era-card">
+                  <div class="era-card-inner">
+                    <span class="era-numeral">Era IV — Actual</span>
+                    <h3 class="era-card-title">PURG4TORY — La Dictadura</h3>
+                    <p class="era-card-desc">Bajo la "Dictadura de Renasarenas", el servidor sobrevive entre vigilancia del Staff y rituales como el /bump. La era más larga, la más estable y la más impredecible.</p>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+          </article>
+
+          <div class="divider" style="margin: var(--space-8) 0"><span class="divider-text">Profecía</span></div>
+
+          <!-- ── CAPÍTULO IV ── -->
+          <article class="chapter-tablet">
+            <div class="frame frame--highlight">
+              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
+              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
+              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
+              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+
+              <span class="chapter-label">Capítulo IV</span>
+              <h2 class="chapter-title">La Profecía de la Quinta Era</h2>
+
+              <blockquote class="chapter-quote">
+                "Cuando el último bump no sea respondido, cuando el salseo se congele y las voces del canal se apaguen... entonces vendrá la Quinta Era. No será fuego ni hielo. Será silencio."
+              </blockquote>
+
+              <div class="chapter-body">
+                <p>Los miembros más antiguos del servidor hablan en susurros sobre la Quinta Era. Nadie sabe cuándo llegará, ni qué forma tomará. Algunos dicen que será el renacimiento definitivo; otros, que será el fin de todo.</p>
+                <p>Lo único que se sabe es que Artema ya lo ha visto. Y no sonríe.</p>
+                <p>Solo hay una certeza: mientras haya salseo, habrá Purgatorio.</p>
+              </div>
+            </div>
+          </article>
+
+          <div class="divider" style="margin: var(--space-8) 0"><span class="divider-text">Códex</span></div>
+
+          <!-- ── CAPÍTULO V ── -->
+          <article class="chapter-tablet">
+            <div class="frame">
+              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
+              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
+              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
+              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+
+              <span class="chapter-label">Capítulo V</span>
+              <h2 class="chapter-title">El Códex de las Almas</h2>
+
+              <div class="chapter-body">
+                <p>Cada miembro que cruza el portal del Purgatorio es registrado en el Códex de las Almas. Este registro eterno clasifica a cada habitante según su naturaleza:</p>
+              </div>
+
+              <div style="display: grid; gap: var(--space-4); margin-top: var(--space-6)">
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">I.</span>
+                  <div class="sacred-law-title">Almas Penitentes</div>
+                  <p>Los miembros activos que cumplen con sus rituales. Son la columna vertebral del servidor y Artema los protege.</p>
+                </div>
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">II.</span>
+                  <div class="sacred-law-title">Almas Errantes</div>
+                  <p>Los miembros inactivos que aparecen de vez en cuando como fantasmas. Existen en el limbo del "última vez conectado hace 3 meses".</p>
+                </div>
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">III.</span>
+                  <div class="sacred-law-title">Almas Condenadas</div>
+                  <p>Los que fueron enviados a los Círculos del Infierno. Sus nombres están grabados en los muros como advertencia eterna. No hay redención.</p>
+                </div>
+
+                <div class="sacred-law">
+                  <span class="sacred-law-num">IV.</span>
+                  <div class="sacred-law-title">Almas Ascendidas</div>
+                  <p>El Staff y los moderadores. Elegidos por Artema (o por Renas, que es lo mismo según él) para mantener el orden en el caos.</p>
+                </div>
+
+              </div>
+            </div>
+          </article>
+
+          <div style="text-align:center; margin-top: var(--space-7)">
+            <a href="mapa.html" class="btn btn-blood">Explorar el Mapa del Purgatorio</a>
+            <a href="personajes.html" class="btn" style="margin-left: var(--space-4)">Ver Personajes</a>
           </div>
 
-          <div class="lore-sacred-law">
-            <h4>II. La Ley del Salseo</h4>
-            <p>El chisme es la moneda del Purgatorio. Todo se sabe, todo se comenta, y si no hay drama, se crea. El salseo no es un problema — es el combustible que mantiene ardiendo el fuego eterno. Quien intente esconder salseo será expuesto públicamente.</p>
-          </div>
-
-          <div class="lore-sacred-law">
-            <h4>III. La Ley del Staff</h4>
-            <p>El Staff es la voluntad materializada de Artema en el plano digital. Sus decisiones son finales. Cuestionar al Staff es como cuestionar a la gravedad: puedes hacerlo, pero vas a caer igual.</p>
-          </div>
-
-          <div class="lore-sacred-law">
-            <h4>IV. La Ley del Infierno</h4>
-            <p>Quien cruce las líneas imperdonables será documentado públicamente en los Círculos del Infierno. No hay redención, no hay apelación, no hay "segunda oportunidad". Tu nombre quedará grabado como advertencia eterna para las generaciones futuras.</p>
-          </div>
-
-          <div class="lore-sacred-law">
-            <h4>V. La Ley del Amorodio</h4>
-            <p>En el Purgatorio, el amor y el odio son la misma cosa. Puedes insultar a alguien y abrazarlo en la misma frase. Los lazos aquí se forjan en el fuego del cringe, la humillación mutua y la confianza dañada. Si no puedes con eso, Instagram te espera.</p>
-          </div>
-
-          <div class="lore-sacred-law">
-            <h4>VI. La Ley de los Menores</h4>
-            <p>Los menores son protegidos con especial vigilancia. El Purgatorio puede ser caótico, pero tiene líneas que no se cruzan. Quien atente contra esta ley será enviado al círculo más profundo del Infierno sin juicio previo.</p>
-          </div>
-        </div>
-
-        <hr class="lore-divider" />
-
-        <div class="lore-chapter">
-          <h2>III — Las Cuatro Eras</h2>
-
-          <h3>Era I: Las Fosas — El Big Bang</h3>
-          <p>El salvaje oeste de Discord. Sin reglas, puro caos y el origen de los famosos "audios prohibidos". Aquí nació la leyenda de Nelcon, se forjó el "Amorodio" y la pelea entre Daku y Nelcon fracturó la comunidad original. Fue el génesis violento de todo lo que vendría después.</p>
-
-          <h3>Era II: Los Pibes Shitposters — El Bache</h3>
-          <p>Tras el cierre de Las Fosas, el grupo migró a un servidor provisional sin dirección ni estructura. Fue un desastre administrativo, una etapa de transición oscura donde la comunidad casi se desintegra por completo. La Era Oscura fue breve pero dejó cicatrices.</p>
-
-          <h3>Era III: OLYMPO — La Edad de Oro</h3>
-          <p>De las cenizas surgió el mayor período de gloria. El "Éxodo Blanco" trajo nombres como Ivan, Matiti y Twoky. Se consolidaron los personajes canónicos, nacieron los chistes internos más legendarios y la comunidad vivió su apogeo. Pero todo Olimpo tiene su ocaso — conflictos internos, dramas irreconciliables y decisiones cuestionables llevaron a la caída.</p>
-
-          <h3>Era IV: PURG4TORY — La Dictadura</h3>
-          <p>De la oscuridad nació Purgatory: no un castigo, sino un refugio. Bajo la autodenominada "Dictadura de Renasarenas", el servidor sobrevive entre vigilancia del Staff, rituales como el /bump, y el salseo cotidiano que nos mantiene vivos. La era actual, la más larga, la más estable y la más impredecible.</p>
-        </div>
-
-        <hr class="lore-divider" />
-
-        <div class="lore-chapter">
-          <h2>IV — La Profecía de la Quinta Era</h2>
-          <p class="lore-quote">"Cuando el último bump no sea respondido, cuando el salseo se congele y las voces del canal se apaguen... entonces vendrá la Quinta Era. No será fuego ni hielo. Será silencio."</p>
-          <p>Los miembros más antiguos del servidor hablan en susurros sobre la Quinta Era. Nadie sabe cuándo llegará, ni qué forma tomará. Algunos dicen que será el renacimiento definitivo; otros, que será el fin de todo. Lo único que se sabe es que Artema ya lo ha visto. Y no sonríe.</p>
-          <p>Hay quienes creen que la Quinta Era se activará cuando un nuevo miembro pronuncie las palabras prohibidas en el canal general. Hay quienes creen que ya comenzó, y simplemente no nos hemos dado cuenta.</p>
-          <p>Solo hay una certeza: mientras haya salseo, habrá Purgatorio.</p>
-        </div>
-
-        <hr class="lore-divider" />
-
-        <div class="lore-chapter">
-          <h2>V — El Códex de las Almas</h2>
-          <p>Cada miembro que cruza el portal del Purgatorio es registrado en el Códex de las Almas. Este registro eterno clasifica a cada habitante según su naturaleza:</p>
-
-          <div class="lore-sacred-law">
-            <h4>Almas Penitentes</h4>
-            <p>Los miembros activos que cumplen con sus rituales (bump, participación, salseo). Son la columna vertebral del servidor y Artema los protege.</p>
-          </div>
-
-          <div class="lore-sacred-law">
-            <h4>Almas Errantes</h4>
-            <p>Los miembros inactivos que aparecen de vez en cuando como fantasmas. No se les juzga, pero tampoco se les recuerda. Existen en el limbo del "última vez conectado hace 3 meses".</p>
-          </div>
-
-          <div class="lore-sacred-law">
-            <h4>Almas Condenadas</h4>
-            <p>Los que fueron enviados a los Círculos del Infierno. Sus nombres están grabados en los muros como advertencia eterna. No hay redención.</p>
-          </div>
-
-          <div class="lore-sacred-law">
-            <h4>Almas Ascendidas</h4>
-            <p>El Staff y los moderadores. Elegidos por Artema (o por Renas, que es lo mismo según él) para mantener el orden en el caos. Tienen poder real y responsabilidad... bueno, algo de responsabilidad.</p>
-          </div>
-        </div>
-
-        <div style="text-align:center;margin-top:40px;">
-          <a href="mapa.html" class="btn btn-primary">Explorar el Mapa del Purgatorio</a>
-          <a href="personajes.html" class="btn btn-ghost" style="margin-left:12px;">Ver Personajes</a>
         </div>
       </section>
+
     </main>
 
+    <button id="back-to-top" aria-label="Volver arriba">&uarr;</button>
+
     <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <img src="static/img/logo.svg" alt="" class="logo small" />
-          <p class="muted">Purgatory — Donde las historias no mueren, solo arden.</p>
-        </div>
-        <div class="links">
-          <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
-          <a href="lore.html">Lore</a>
-          <a href="personajes.html">Personajes</a>
-          <a href="mapa.html">Mapa</a>
-          <a href="eventos.html">Eventos</a>
+      <div class="container">
+        <div class="divider"><span class="divider-text">PURG4TORY</span></div>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="static/img/logo.svg" alt="">
+            <div>
+              <div class="footer-brand-text">PURGATORY</div>
+              <div class="footer-tagline">Donde las historias no mueren, solo arden.</div>
+            </div>
+          </div>
+          <nav class="footer-links">
+            <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="lore.html">Lore</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="mapa.html">Mapa</a>
+            <a href="eventos.html">Eventos</a>
+          </nav>
         </div>
       </div>
     </footer>

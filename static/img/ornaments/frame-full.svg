@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" fill="none">
+  <!-- Líneas del borde exterior -->
+  <line x1="12" y1="4"   x2="188" y2="4"   stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="12" y1="276" x2="188" y2="276" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="4"  y1="12"  x2="4"   y2="268" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="196" y1="12" x2="196" y2="268" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Líneas interiores sutiles -->
+  <line x1="12" y1="8"   x2="188" y2="8"   stroke="currentColor" stroke-width="0.6" stroke-linecap="round" opacity="0.35"/>
+  <line x1="12" y1="272" x2="188" y2="272" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" opacity="0.35"/>
+  <line x1="8"  y1="12"  x2="8"   y2="268" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" opacity="0.35"/>
+  <line x1="192" y1="12" x2="192" y2="268" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" opacity="0.35"/>
+  <!-- Diamantes en las 4 esquinas -->
+  <polygon points="4,0  8,4  4,8  0,4"   fill="currentColor"/>
+  <polygon points="196,0  200,4  196,8  192,4" fill="currentColor"/>
+  <polygon points="4,272  8,276  4,280  0,276" fill="currentColor"/>
+  <polygon points="196,272  200,276  196,280  192,276" fill="currentColor"/>
+  <!-- Marcas decorativas en bordes (horizontales y verticales) -->
+  <line x1="100" y1="4"   x2="100" y2="9"   stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+  <line x1="100" y1="271" x2="100" y2="276" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+  <line x1="4"   y1="140" x2="9"   y2="140" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+  <line x1="191" y1="140" x2="196" y2="140" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+</svg>

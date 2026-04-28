@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Personajes — Purgatory</title>
     <meta name="description" content="Galería completa de personajes canónicos de Purgatory. Sus historias, alianzas y momentos más icónicos." />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.discordapp.com; object-src 'none'; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap"></noscript>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='120' rx='28' fill='%23060712'/%3E%3Cpath d='M30 80 L60 30 L90 80 Z' fill='url(%23g)' opacity='.95'/%3E%3Ccircle cx='60' cy='48' r='6' fill='%23021027'/%3E%3C/svg%3E" type="image/svg+xml">
-    <meta name="theme-color" content="#05060a">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=Cormorant+Garamond:ital,wght@0,500;0,700;1,500https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapfamily=UnifrakturMaguntiahttps://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swapdisplay=swap"></noscript>
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#08020a">
+    <link rel="stylesheet" href="static/css/tokens.css">
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="static/css/pages.css">
   </head>
@@ -24,14 +25,14 @@
     <header class="site-header" id="site-header">
       <nav class="nav container">
         <a class="brand" href="index.html">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300e0ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='120' rx='28' fill='%23060712'/%3E%3Cpath d='M30 80 L60 30 L90 80 Z' fill='url(%23g)' opacity='0.95'/%3E%3Ccircle cx='60' cy='48' r='6' fill='%23021027'/%3E%3C/svg%3E" alt="Logo" class="logo" />
+          <img src="assets/logo.svg" alt="Logo" class="logo" />
           <span class="brand-name">Purgatory</span>
         </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="lore.html">Lore</a></li>
-          <li><a href="personajes.html">Personajes</a></li>
+          <li><a href="personajes.html" aria-current="page">Personajes</a></li>
           <li><a href="mapa.html">Mapa</a></li>
           <li><a href="eventos.html">Eventos</a></li>
           <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al server</a></li>
@@ -75,12 +76,15 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
+          <img src="assets/logo.svg" alt="" class="logo small" />
           <p class="muted">Purgatory — Donde las historias no mueren, solo arden.</p>
         </div>
         <div class="links">
           <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
           <a href="lore.html">Lore</a>
-          <a href="index.html#infierno">Infierno</a>
+          <a href="personajes.html">Personajes</a>
+          <a href="mapa.html">Mapa</a>
+          <a href="eventos.html">Eventos</a>
         </div>
       </div>
     </footer>
@@ -88,5 +92,6 @@
     <script src="static/js/scripts.js" defer></script>
     <script src="static/js/easter-eggs.js" defer></script>
     <script src="static/data/personajes-data.js" defer></script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>

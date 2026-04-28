@@ -1,0 +1,119 @@
+:root {
+  /* ── Sangre ── */
+  --blood: #a8001f;
+  --blood-bright: #ff1a3c;
+  --blood-dark: #6b0014;
+  --blood-deep: #2a0008;
+
+  /* ── Fondos ── */
+  --bg: #08020a;
+  --bg-1: #0d0408;
+  --bg-2: #15060c;
+  --panel: #0a0306;
+  --panel-hover: #14070d;
+
+  /* ── Texto ── */
+  --text: #f0e6e8;
+  --text-muted: rgba(240, 230, 232, 0.7);
+  --text-dim: rgba(240, 230, 232, 0.45);
+  --text-blood: #ff5560;
+
+  /* ── Bordes ── */
+  --border: rgba(168, 0, 31, 0.3);
+  --border-strong: rgba(255, 26, 60, 0.55);
+  --border-active: var(--blood-bright);
+
+  /* ── Glow ── */
+  --glow-blood: 0 0 24px rgba(255, 26, 60, 0.45),
+                0 0 60px rgba(168, 0, 31, 0.35),
+                0 0 120px rgba(168, 0, 31, 0.15);
+  --glow-blood-strong: 0 0 32px rgba(255, 26, 60, 0.7),
+                       0 0 80px rgba(168, 0, 31, 0.5),
+                       0 0 160px rgba(168, 0, 31, 0.25);
+
+  /* ── Sombras ── */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.7);
+
+  /* ── Tipografía ── */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Cinzel', serif;
+  --font-display: 'UnifrakturMaguntia', 'Cormorant Garamond', serif;
+
+  /* ── Tamaños tipográficos ── */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --fs-3xl: clamp(2.25rem, 1.5rem + 3vw, 3.5rem);
+  --fs-hero: clamp(2.5rem, 1.8rem + 3.5vw, 4rem);
+  --fs-dropcap: 5em;
+
+  /* ── Espaciado ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* ── Radii ── */
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 10px;
+  --r-pill: 999px;
+
+  /* ── Layout ── */
+  --container: 1100px;
+  --header-h: 72px;
+
+  /* ── Z-index ── */
+  --z-base: 1;
+  --z-banner: 5;
+  --z-header: 100;
+  --z-modal: 1000;
+
+  /* ── Motion ── */
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 500ms;
+
+  color-scheme: dark;
+}
+
+html { font-size: 18px; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(168, 0, 31, 0.12), transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(168, 0, 31, 0.08), transparent 60%);
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; }

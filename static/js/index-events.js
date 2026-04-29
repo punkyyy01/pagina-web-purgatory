@@ -35,7 +35,7 @@
         '<div class="index-events-empty">' +
           '<span>🌑</span>' +
           '<p>No hay eventos programados en el Purgatorio por ahora.</p>' +
-          '<p style="font-size:12px;margin-top:6px;color:var(--muted);">El Void está en calma... visita el servidor para estar atento a los próximos rituales.</p>' +
+          '<p style="font-size:12px;margin-top:6px;color:var(--text-muted);">El Void está en calma... visita el servidor para estar atento a los próximos rituales.</p>' +
         '</div>';
       return;
     }
@@ -52,7 +52,7 @@
       html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">';
       html += '<span class="event-status ' + statusClass + '">' + statusLabel + '</span>';
       if (ev.user_count > 0) {
-        html += '<span style="font-size:11px;color:var(--muted)">👥 ' + ev.user_count + ' interesados</span>';
+        html += '<span style="font-size:11px;color:var(--text-muted)">👥 ' + ev.user_count + ' interesados</span>';
       }
       html += '</div>';
       html += '<h4>' + escapeHTML(ev.name) + '</h4>';

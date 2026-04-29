@@ -190,7 +190,8 @@ h3, h4, h5 {
   background: var(--panel);
 }
 .card-name {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
+  font-weight: 700;
   font-size: var(--fs-md);
   color: var(--text);
   line-height: 1.2;
@@ -418,7 +419,8 @@ h3, h4, h5 {
   flex-wrap: wrap;
 }
 .footer-links a {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: var(--fs-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -442,7 +444,8 @@ h3, h4, h5 {
 }
 
 .section-title {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
+  font-weight: 700;
   font-size: var(--fs-3xl);
   color: var(--text);
   text-align: center;
@@ -755,7 +758,8 @@ h3, h4, h5 {
 /* Legacy filter-btn support */
 .severity-filter { display: flex; gap: var(--space-3); flex-wrap: wrap; }
 .filter-btn {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: var(--fs-xs);
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -816,7 +820,8 @@ h3, h4, h5 {
 .modal-close:hover { color: var(--blood-bright); }
 
 .modal-title {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
+  font-weight: 700;
   font-size: var(--fs-2xl);
   color: var(--text);
   text-align: center;

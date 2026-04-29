@@ -14,8 +14,8 @@
 
   /* ── Texto ── */
   --text: #f0e6e8;
-  --text-muted: rgba(240, 230, 232, 0.7);
-  --text-dim: rgba(240, 230, 232, 0.45);
+  --text-muted: rgba(240, 230, 232, 0.8);
+  --text-dim: rgba(240, 230, 232, 0.6);
   --text-blood: #ff5560;
 
   /* ── Bordes ── */
@@ -39,7 +39,7 @@
   /* ── Tipografía ── */
   --font-body: 'Inter', system-ui, sans-serif;
   --font-serif: 'Cormorant Garamond', 'Cinzel', serif;
-  --font-display: 'UnifrakturMaguntia', 'Cormorant Garamond', serif;
+  --font-display: 'Cormorant Garamond', 'UnifrakturMaguntia', serif;
 
   /* ── Tamaños tipográficos ── */
   --fs-xs: 0.75rem;

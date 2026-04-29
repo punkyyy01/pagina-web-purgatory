@@ -92,7 +92,7 @@
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       /* Close mobile nav if open */
-      if (navLinks) navLinks.classList.remove('open');
+      if (navLinks) navLinks.classList.remove('is-open');
     }
   });
 
@@ -102,7 +102,7 @@
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => navLinks.classList.toggle('is-open'));
     document.addEventListener('click', (e) => {
-      if (navLinks.classList.contains('is-open') && !navLinks.contains(e.target) && e.target !== navToggle) {
+      if (navLinks.classList.contains('is-open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
         navLinks.classList.remove('is-open');
       }
     });
@@ -129,37 +129,21 @@
     /* ═══════════════════════════════════════════════════════
       7. MODAL DE PERSONAJES — usa PURGATORY_CHARS (fuente única)
       ═══════════════════════════════════════════════════════ */
-  document.addEventListener('click', (e) => {
-    const card = e.target.closest('[data-character]');
-    if (!card || !modal || !modalContent) return;
-    const id = card.dataset.character.toLowerCase();
-    const chars = window.PURGATORY_CHARS || [];
-    const c = chars.find(ch => ch.id === id);
-    if (!c) return;
-    const relationsHTML = c.relations
-      .map(r => `<span class="char-relation-tag">${r}</span>`)
-      .join('');
-    modalContent.innerHTML =
-      `<h3>${c.name}</h3>` +
-      `<span class="char-modal-alias">${c.alias} — ${c.role}</span>` +
-      `<p>${c.fullBio}</p>` +
-      `<div class="char-modal-section"><h4>Relaciones</h4>` +
-      `<div class="char-relations">${relationsHTML}</div></div>`;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-  });
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
 
   if (modal) {
     modal.addEventListener('click', (e) => {
-      if (e.target.classList.contains('modal') || e.target.classList.contains('modal-close')) {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
+      if (e.target === modal || e.target.classList.contains('modal-close') || e.target.closest('.modal-close')) {
+        closeModal();
       }
     });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
+      if (e.key === 'Escape' && (modal.classList.contains('is-open') || modal.getAttribute('aria-hidden') === 'false')) {
+        closeModal();
       }
     });
   }

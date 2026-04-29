@@ -14,6 +14,12 @@
   padding: 0 var(--space-5);
 }
 
+/* ── Typography hierarchy ─────────────────────────────────── */
+h3, h4, h5 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+
 /* ══════════════════════════════════════════════════════════
    FRAME SYSTEM
 ══════════════════════════════════════════════════════════ */
@@ -28,8 +34,8 @@
 
 .frame > .frame-corner {
   position: absolute;
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   color: var(--blood-bright);
   pointer-events: none;
 }
@@ -43,8 +49,27 @@
   box-shadow: var(--glow-blood);
 }
 .frame--highlight > .frame-corner {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
+}
+
+.frame::before,
+.frame::after {
+  content: "";
+  position: absolute;
+  left: 60px;
+  right: 60px;
+  height: 16px;
+  background: url("../img/ornaments/edge-h.svg") center/contain repeat-x;
+  color: var(--blood-bright);
+  pointer-events: none;
+}
+.frame::before {
+  top: 8px;
+}
+.frame::after {
+  bottom: 8px;
+  transform: scaleY(-1);
 }
 
 /* ── Divider ─────────────────────────────────────────────── */
@@ -189,9 +214,11 @@
    BUTTONS
 ══════════════════════════════════════════════════════════ */
 .btn {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
   font-size: var(--fs-sm);
   padding: 14px 32px;
   border-radius: var(--r-sm);
@@ -250,6 +277,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-6);
 }
 
 .brand {
@@ -260,9 +288,9 @@
   color: var(--text);
 }
 .brand img {
-  width: 36px;
-  height: 36px;
-  filter: drop-shadow(0 0 6px var(--blood)) invert(18%) sepia(100%) saturate(3000%) hue-rotate(330deg) brightness(1.2);
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 0 8px var(--blood-bright));
 }
 .brand-name {
   font-family: var(--font-display);
@@ -276,11 +304,13 @@
   align-items: center;
   gap: var(--space-6);
   list-style: none;
+  flex-wrap: nowrap;
 }
 .nav-links a {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: var(--fs-sm);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
   text-decoration: none;
@@ -295,7 +325,9 @@
   border-bottom-color: var(--blood-bright);
 }
 .nav-links .cta {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-weight: 700;
+  white-space: nowrap;
   background: var(--blood);
   border: 1px solid var(--blood-bright);
   color: var(--text) !important;
@@ -449,11 +481,14 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  filter: saturate(0.4) brightness(0.5);
 }
 .hero-banner-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(42, 0, 8, 0.7);
+  background:
+    radial-gradient(ellipse at center, rgba(168, 0, 31, 0.4), transparent 70%),
+    linear-gradient(180deg, rgba(8, 2, 10, 0.8) 0%, rgba(8, 2, 10, 0.6) 50%, rgba(8, 2, 10, 0.95) 100%);
 }
 
 .hero-content {

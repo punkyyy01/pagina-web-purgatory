@@ -1299,3 +1299,303 @@ h3, h4, h5 {
 @media (max-width: 560px) {
   .char-modal-grid { grid-template-columns: 1fr; }
 }
+
+/* === Eventos: cards === */
+
+/* ── Corner system for event cards ── */
+.evento-naipe > .frame-corner,
+.evento-edicto > .frame-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  filter: invert(18%) sepia(100%) saturate(3000%) hue-rotate(330deg) brightness(1.2);
+}
+.evento-edicto > .frame-corner {
+  width: 24px;
+  height: 24px;
+  filter: invert(25%) sepia(100%) saturate(5000%) hue-rotate(325deg) brightness(1.5);
+}
+.evento-naipe > .frame-corner-tl,
+.evento-edicto > .frame-corner-tl { top: 6px; left: 6px; }
+.evento-naipe > .frame-corner-tr,
+.evento-edicto > .frame-corner-tr { top: 6px; right: 6px; transform: scaleX(-1); }
+.evento-naipe > .frame-corner-bl,
+.evento-edicto > .frame-corner-bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+.evento-naipe > .frame-corner-br,
+.evento-edicto > .frame-corner-br { bottom: 6px; right: 6px; transform: scale(-1, -1); }
+
+/* ── Variante A — Naipe casual ── */
+.evento-naipe {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: var(--space-5);
+  padding: var(--space-7) var(--space-6);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--blood-dark) 40%, transparent) 0%,
+    color-mix(in srgb, var(--blood-dark) 60%, transparent) 100%);
+  border: 1px solid color-mix(in srgb, var(--blood) 25%, transparent);
+  border-radius: var(--r-md);
+  display: grid;
+  grid-template-columns: 110px 1px 1fr auto;
+  gap: var(--space-6);
+  align-items: center;
+  transition: border-color var(--dur-base), box-shadow var(--dur-base);
+}
+.evento-naipe.is-activo {
+  border-color: var(--blood);
+  box-shadow: var(--glow-blood);
+  animation: evento-pulse 3s ease-in-out infinite;
+}
+.evento-naipe.is-pasado {
+  opacity: 0.5;
+  filter: saturate(0.3);
+}
+
+.evento-naipe__sello {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--blood);
+  background: var(--bg);
+  padding: 0 var(--space-3);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.evento-naipe__sello.is-activo { color: var(--blood-bright); }
+.evento-naipe__sello.is-pasado { color: var(--text-dim); }
+.naipe-sello-diamond { font-size: 0.6em; opacity: 0.7; }
+
+.evento-naipe__fecha { text-align: center; }
+.naipe-day {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--blood-bright);
+  font-style: italic;
+}
+.naipe-month {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+.naipe-year {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+}
+
+.evento-naipe__divider {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--blood) 40%, transparent);
+  align-self: center;
+}
+
+.evento-naipe__content { min-width: 0; }
+.naipe-title {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+}
+.naipe-desc {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.naipe-meta {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.evento-naipe__cta { display: flex; align-items: center; }
+.naipe-btn-ritual {
+  font-family: var(--font-display);
+  letter-spacing: 0.3em;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+}
+
+/* ── Variante B — Edicto featured ── */
+.evento-edicto {
+  position: relative;
+  max-width: 460px;
+  margin: 20px auto var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--blood) 25%, transparent);
+  border-radius: var(--r-md);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--blood-dark) 40%, transparent) 0%,
+    color-mix(in srgb, var(--blood-dark) 60%, transparent) 100%);
+  transition: border-color var(--dur-base), box-shadow var(--dur-base);
+}
+.evento-edicto.is-activo {
+  border-color: var(--blood);
+  box-shadow: var(--glow-blood);
+  animation: evento-pulse 3s ease-in-out infinite;
+}
+.evento-edicto.is-pasado {
+  opacity: 0.5;
+  filter: saturate(0.3);
+}
+
+.evento-edicto__hero {
+  position: relative;
+  height: 220px;
+}
+.edicto-portada {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--r-md) var(--r-md) 0 0;
+}
+.evento-edicto.no-image .evento-edicto__hero { display: none; }
+
+.edicto-fecha-medallon {
+  position: absolute;
+  bottom: -16px;
+  left: var(--space-5);
+  width: 64px;
+  height: 64px;
+  transform: rotate(45deg);
+  background: var(--bg);
+  border: 1px solid var(--blood);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.edicto-fecha-medallon-inner {
+  transform: rotate(-45deg);
+  text-align: center;
+}
+.medallon-day {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--blood-bright);
+  font-style: italic;
+  line-height: 1;
+}
+.medallon-month {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.evento-edicto__body {
+  padding: var(--space-7) var(--space-6) var(--space-5);
+  text-align: center;
+}
+
+.edicto-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 3px var(--space-3);
+  border-radius: var(--r-xs);
+  margin-bottom: var(--space-4);
+  background: color-mix(in srgb, var(--blood-dark) 15%, transparent);
+}
+.edicto-badge.is-activo {
+  color: var(--blood-bright);
+  border-color: var(--blood);
+  background: color-mix(in srgb, var(--blood) 15%, transparent);
+}
+.edicto-badge.is-pasado { color: var(--text-dim); }
+
+.edicto-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.edicto-badge.is-activo .edicto-dot { animation: edicto-pulse 2s ease-in-out infinite; }
+
+@keyframes edicto-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.edicto-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 0;
+  font-weight: 500;
+}
+.edicto-desc {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 320px;
+  margin: 0 auto var(--space-4);
+}
+.edicto-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid color-mix(in srgb, var(--blood) 20%, transparent);
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+}
+.edicto-almas {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ── Responsive: naipe y edicto ── */
+@media (max-width: 719px) {
+  .evento-naipe {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    text-align: center;
+  }
+  .evento-naipe__divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--blood) 40%, transparent);
+    margin: 0 auto;
+  }
+  .evento-naipe__fecha { padding-bottom: var(--space-2); }
+  .evento-naipe__cta { justify-content: center; }
+  .naipe-btn-ritual { display: block; text-align: center; }
+  .evento-edicto { max-width: 100%; }
+}

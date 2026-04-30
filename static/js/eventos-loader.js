@@ -39,6 +39,97 @@
   }
 
   /* ─── Render ─── */
+  var CORNERS =
+    '<img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">' +
+    '<img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">' +
+    '<img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">' +
+    '<img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">';
+
+  function getStateInfo(ev) {
+    var now   = Date.now();
+    var start = new Date(ev.start).getTime();
+    var end   = ev.end ? new Date(ev.end).getTime() : null;
+    var isActive = ev.status === 'active' || (start <= now && (!end || end > now));
+    var isPast   = end ? end < now : false;
+    return {
+      cls:   isActive ? 'is-activo' : (isPast ? 'is-pasado'  : 'is-proximo'),
+      label: isActive ? 'ACTIVO'    : (isPast ? 'PASADO'     : 'PRÓXIMO')
+    };
+  }
+
+  function getDateParts(ev) {
+    var d = new Date(ev.start);
+    return {
+      day:   d.getDate(),
+      month: d.toLocaleDateString('es-ES', { month: 'short' }).toUpperCase().replace('.', ''),
+      year:  d.getFullYear()
+    };
+  }
+
+  function renderCasualCard(ev) {
+    var s   = getStateInfo(ev);
+    var dp  = getDateParts(ev);
+    var url = 'https://discord.com/events/' + ev.guild_id + '/' + ev.id;
+    return (
+      '<article class="evento-naipe ' + s.cls + '">' +
+        CORNERS +
+        '<div class="evento-naipe__sello ' + s.cls + '">' +
+          '<span class="naipe-sello-diamond">◆</span>' +
+          escapeHTML(s.label) +
+          '<span class="naipe-sello-diamond">◆</span>' +
+        '</div>' +
+        '<div class="evento-naipe__fecha">' +
+          '<div class="naipe-day">' + dp.day + '</div>' +
+          '<div class="naipe-month">' + dp.month + '</div>' +
+          '<div class="naipe-year">' + dp.year + '</div>' +
+        '</div>' +
+        '<div class="evento-naipe__divider"></div>' +
+        '<div class="evento-naipe__content">' +
+          '<h3 class="naipe-title">' + escapeHTML(ev.name) + '</h3>' +
+          (ev.description ? '<p class="naipe-desc">' + escapeHTML(ev.description) + '</p>' : '') +
+          (ev.user_count > 0 ? '<div class="naipe-meta">◆ ' + ev.user_count + ' almas convocadas</div>' : '') +
+        '</div>' +
+        '<div class="evento-naipe__cta">' +
+          '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn naipe-btn-ritual">VER RITUAL ›</a>' +
+        '</div>' +
+      '</article>'
+    );
+  }
+
+  function renderFeaturedCard(ev) {
+    var s   = getStateInfo(ev);
+    var dp  = getDateParts(ev);
+    var url = 'https://discord.com/events/' + ev.guild_id + '/' + ev.id;
+    return (
+      '<article class="evento-edicto ' + s.cls + '">' +
+        CORNERS +
+        '<div class="evento-edicto__hero">' +
+          '<img class="edicto-portada" src="' + ev.image + '" alt="' + escapeHTML(ev.name) + '"' +
+            ' onerror="this.closest(\'article\').classList.add(\'no-image\')">' +
+          '<div class="edicto-fecha-medallon">' +
+            '<div class="edicto-fecha-medallon-inner">' +
+              '<div class="medallon-day">' + dp.day + '</div>' +
+              '<div class="medallon-month">' + dp.month + '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="evento-edicto__body">' +
+          '<div class="edicto-badge ' + s.cls + '">' +
+            '<span class="edicto-dot"></span>' +
+            'RITUAL ' + escapeHTML(s.label) +
+          '</div>' +
+          '<h3 class="edicto-title">' + escapeHTML(ev.name) + '</h3>' +
+          '<div class="divider"><span class="divider-text"></span></div>' +
+          (ev.description ? '<p class="edicto-desc">' + escapeHTML(ev.description) + '</p>' : '') +
+          '<div class="edicto-footer">' +
+            (ev.user_count > 0 ? '<span class="edicto-almas">' + ev.user_count + ' ALMAS</span>' : '<span></span>') +
+            '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn naipe-btn-ritual">VER RITUAL ›</a>' +
+          '</div>' +
+        '</div>' +
+      '</article>'
+    );
+  }
+
   function renderEvents(events) {
     var emptyEl = document.getElementById('events-empty');
 
@@ -51,43 +142,7 @@
 
     var html = '';
     events.forEach(function (ev) {
-      var now = Date.now();
-      var start = new Date(ev.start).getTime();
-      var end   = ev.end ? new Date(ev.end).getTime() : null;
-      var isActive   = ev.status === 'active' || (start <= now && (!end || end > now));
-      var isPast     = end ? end < now : false;
-      var isUpcoming = !isActive && !isPast;
-
-      var cardClass = 'evento-card';
-      if (isActive)   cardClass += ' evento-card--active';
-      if (isPast)     cardClass += ' evento-card--past';
-
-      var statusClass = isActive ? 'evento-status--active' : (isUpcoming ? 'evento-status--upcoming' : 'evento-status--past');
-      var statusLabel = isActive ? 'En Curso' : (isUpcoming ? 'Próximo' : 'Pasado');
-
-      var d = new Date(ev.start);
-      var day   = d.getDate();
-      var month = d.toLocaleDateString('es-ES', { month: 'short' }).toUpperCase().replace('.','');
-
-      html += '<article class="' + cardClass + '">';
-      html +=   '<div class="evento-date-col"><div class="evento-day">' + day + '</div><div class="evento-month">' + month + '</div></div>';
-      html +=   '<div>';
-      html +=     '<div class="evento-title">' + escapeHTML(ev.name) + '</div>';
-      if (ev.description) {
-        html +=   '<div class="evento-desc">' + escapeHTML(ev.description) + '</div>';
-      }
-      if (ev.location) {
-        html +=   '<div style="font-size:var(--fs-xs);color:var(--text-dim);margin-top:var(--space-2);letter-spacing:0.1em">' + escapeHTML(ev.location) + '</div>';
-      }
-      html +=   '</div>';
-      html +=   '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-2)">';
-      html +=     '<span class="evento-status ' + statusClass + '">' + statusLabel + '</span>';
-      if (ev.user_count > 0) {
-        html += '<span style="font-size:var(--fs-xs);color:var(--text-dim);font-family:var(--font-display);letter-spacing:0.15em">' + ev.user_count + ' almas</span>';
-      }
-      html +=     '<a href="https://discord.com/events/' + ev.guild_id + '/' + ev.id + '" target="_blank" rel="noopener noreferrer" class="btn" style="padding:8px 16px;font-size:var(--fs-xs)">Ver ritual</a>';
-      html +=   '</div>';
-      html += '</article>';
+      html += ev.image ? renderFeaturedCard(ev) : renderCasualCard(ev);
     });
 
     container.innerHTML = html;

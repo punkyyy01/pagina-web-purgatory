@@ -757,6 +757,7 @@ h3, h4, h5 {
 
 /* Legacy filter-btn support */
 .severity-filter { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.hidden { display: none !important; }
 .filter-btn {
   font-family: var(--font-body);
   font-weight: 700;

@@ -1268,6 +1268,11 @@ h3, h4, h5 {
   padding-left: var(--space-4);
   margin: var(--space-4) 0;
 }
+.char-quote--pending {
+  opacity: 0.35;
+  font-style: italic;
+  border-left-style: dashed;
+}
 .char-bio {
   font-size: var(--fs-sm);
   color: var(--text-muted);

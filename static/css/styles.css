@@ -140,7 +140,7 @@ h3, h4, h5 {
     repeating-linear-gradient(
       45deg,
       transparent, transparent 14px,
-      rgba(168, 0, 31, 0.08) 14px, rgba(168, 0, 31, 0.08) 16px
+      rgba(13, 138, 128, 0.08) 14px, rgba(13, 138, 128, 0.08) 16px
     ),
     var(--panel);
 }
@@ -152,7 +152,7 @@ h3, h4, h5 {
   place-items: center;
   border: 2px solid var(--blood-bright);
   border-radius: 50%;
-  background: rgba(168, 0, 31, 0.1);
+  background: rgba(13, 138, 128, 0.1);
   box-shadow: var(--glow-blood);
 }
 .card-back-emblem img {
@@ -487,7 +487,7 @@ h3, h4, h5 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at center, rgba(168, 0, 31, 0.4), transparent 70%),
+    radial-gradient(ellipse at center, rgba(13, 138, 128, 0.35), transparent 70%),
     linear-gradient(180deg, rgba(8, 2, 10, 0.8) 0%, rgba(8, 2, 10, 0.6) 50%, rgba(8, 2, 10, 0.95) 100%);
 }
 
@@ -649,7 +649,7 @@ h3, h4, h5 {
 
 .condemned-card {
   background: var(--panel);
-  border: 1px solid rgba(168, 0, 31, 0.4);
+  border: 1px solid rgba(13, 138, 128, 0.4);
   border-radius: var(--r-md);
   padding: var(--space-5);
   position: relative;
@@ -673,7 +673,7 @@ h3, h4, h5 {
   border-color: var(--blood);
   box-shadow: var(--shadow-md);
 }
-.condemned-card[data-severity="critical"] { border-color: rgba(255, 26, 60, 0.5); }
+.condemned-card[data-severity="critical"] { border-color: rgba(61, 232, 218, 0.45); }
 .condemned-card[data-severity="critical"]:hover { box-shadow: var(--glow-blood); }
 
 .condemned-header {
@@ -712,7 +712,7 @@ h3, h4, h5 {
   font-family: var(--font-display);
   white-space: nowrap;
 }
-.severity-badge.critical { background: rgba(255, 26, 60, 0.15); color: var(--blood-bright); border: 1px solid var(--blood); }
+.severity-badge.critical { background: rgba(61, 232, 218, 0.1); color: var(--blood-bright); border: 1px solid var(--blood); }
 .severity-badge.high     { background: rgba(255, 100, 0, 0.12); color: #ff6400; border: 1px solid rgba(255, 100, 0, 0.4); }
 .severity-badge.medium   { background: rgba(255, 200, 0, 0.1); color: #d4a017; border: 1px solid rgba(212, 160, 23, 0.4); }
 .severity-badge.low      { background: rgba(150, 150, 150, 0.1); color: var(--text-dim); border: 1px solid rgba(150, 150, 150, 0.3); }
@@ -921,7 +921,7 @@ h3, h4, h5 {
 
 .chapter-quote {
   position: relative;
-  background: rgba(168, 0, 31, 0.06);
+  background: rgba(13, 138, 128, 0.06);
   border-left: 3px solid var(--blood);
   border-radius: 0 var(--r-sm) var(--r-sm) 0;
   padding: var(--space-5) var(--space-6);
@@ -1137,12 +1137,12 @@ h3, h4, h5 {
   border-radius: var(--r-xs);
 }
 .evento-status--active {
-  background: rgba(255, 26, 60, 0.15);
+  background: rgba(61, 232, 218, 0.1);
   color: var(--blood-bright);
   border: 1px solid var(--blood);
 }
 .evento-status--upcoming {
-  background: rgba(168, 0, 31, 0.08);
+  background: rgba(13, 138, 128, 0.08);
   color: var(--text-muted);
   border: 1px solid var(--border);
 }

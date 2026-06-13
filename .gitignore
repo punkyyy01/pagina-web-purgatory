@@ -49,3 +49,9 @@ Thumbs.db
 ehthumbs.db
 Icon?
 Desktop.ini
+.vercel
+.env*
+
+graphify-out/
+repomix-output.xml
+CLAUDE.md

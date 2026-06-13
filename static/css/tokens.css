@@ -1,35 +1,35 @@
 :root {
-  /* ── Sangre ── */
-  --blood: #a8001f;
-  --blood-bright: #ff1a3c;
-  --blood-dark: #6b0014;
-  --blood-deep: #2a0008;
+  /* ── Fantasma (antes: Sangre) ── */
+  --blood: #0d8a80;
+  --blood-bright: #3de8da;
+  --blood-dark: #065550;
+  --blood-deep: #041615;
 
   /* ── Fondos ── */
-  --bg: #08020a;
-  --bg-1: #0d0408;
-  --bg-2: #15060c;
-  --panel: #0a0306;
-  --panel-hover: #14070d;
+  --bg: #050b0b;
+  --bg-1: #081110;
+  --bg-2: #0d1b1a;
+  --panel: #060d0d;
+  --panel-hover: #0c1817;
 
   /* ── Texto ── */
-  --text: #f0e6e8;
-  --text-muted: rgba(240, 230, 232, 0.8);
-  --text-dim: rgba(240, 230, 232, 0.6);
-  --text-blood: #ff5560;
+  --text: #deeeed;
+  --text-muted: rgba(222, 238, 237, 0.8);
+  --text-dim: rgba(222, 238, 237, 0.6);
+  --text-blood: #5af0e4;
 
   /* ── Bordes ── */
-  --border: rgba(168, 0, 31, 0.3);
-  --border-strong: rgba(255, 26, 60, 0.55);
+  --border: rgba(13, 138, 128, 0.3);
+  --border-strong: rgba(61, 232, 218, 0.55);
   --border-active: var(--blood-bright);
 
   /* ── Glow ── */
-  --glow-blood: 0 0 24px rgba(255, 26, 60, 0.45),
-                0 0 60px rgba(168, 0, 31, 0.35),
-                0 0 120px rgba(168, 0, 31, 0.15);
-  --glow-blood-strong: 0 0 32px rgba(255, 26, 60, 0.7),
-                       0 0 80px rgba(168, 0, 31, 0.5),
-                       0 0 160px rgba(168, 0, 31, 0.25);
+  --glow-blood: 0 0 24px rgba(61, 232, 218, 0.45),
+                0 0 60px rgba(13, 138, 128, 0.35),
+                0 0 120px rgba(13, 138, 128, 0.15);
+  --glow-blood-strong: 0 0 32px rgba(61, 232, 218, 0.7),
+                       0 0 80px rgba(13, 138, 128, 0.5),
+                       0 0 160px rgba(13, 138, 128, 0.25);
 
   /* ── Sombras ── */
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -103,8 +103,8 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(168, 0, 31, 0.12), transparent 60%),
-    radial-gradient(ellipse at 50% 100%, rgba(168, 0, 31, 0.08), transparent 60%);
+    radial-gradient(ellipse at 50% 0%, rgba(13, 138, 128, 0.12), transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(13, 138, 128, 0.08), transparent 60%);
   background-attachment: fixed;
 }
 

@@ -17,6 +17,37 @@
     <meta name="theme-color" content="#08020a">
     <link rel="stylesheet" href="static/css/tokens.css?v=20260429">
     <link rel="stylesheet" href="static/css/styles.css?v=20260429">
+    <style>
+  .lore-toc {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-4) 0;
+    background: var(--bg-1);
+  }
+  .lore-toc-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .lore-toc-list a {
+    font-family: var(--font-display);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 200ms;
+  }
+  .lore-toc-list a:hover { color: var(--blood-bright); }
+  .lore-toc-sep {
+    color: var(--blood-bright);
+    opacity: 0.4;
+    font-size: 0.6rem;
+  }
+</style>
   </head>
   <body>
 
@@ -45,15 +76,27 @@
         <div class="container">
           <div class="divider"><span class="divider-text">Scriptorium</span></div>
           <h1 class="section-title" style="font-size: var(--fs-hero)">El Lore de Purgatory</h1>
-          <p class="section-lead">Cada servidor tiene una historia. El nuestro tiene un mito, leyes sagradas y profecías que no deberías ignorar.</p>
+          <p class="section-lead">El origen, las leyes y la historia de PURG4TORY.</p>
         </div>
       </section>
+
+      <nav class="lore-toc" aria-label="Contenido">
+        <div class="container">
+          <ul class="lore-toc-list">
+            <li><a href="#cap-origen">I. El Origen</a></li>
+            <li><span class="lore-toc-sep">◆</span></li>
+            <li><a href="#cap-leyes">II. Las Leyes</a></li>
+            <li><span class="lore-toc-sep">◆</span></li>
+            <li><a href="#cap-historia">III. La Historia</a></li>
+          </ul>
+        </div>
+      </nav>
 
       <section class="section">
         <div class="container" style="max-width: 860px">
 
           <!-- ── CAPÍTULO I ── -->
-          <article class="chapter-tablet">
+          <article class="chapter-tablet" id="cap-origen">
             <div class="frame frame--highlight">
               <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
               <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
@@ -68,40 +111,23 @@
               </blockquote>
 
               <div class="chapter-body">
-                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">La Diosa que Observaba</h3>
-                <p>En las cumbres del Olympo, donde la luz del sol coronaba templos de mármol, una joven diosa llamada Artemisa pasaba sus días contemplando el mundo de los mortales. Sus risas, sus lágrimas, sus guerras absurdas y sus amores imposibles. Veía las almas perdidas entre los reinos — los no muertos, los olvidados, los que no pertenecían a ningún lado — y sentía algo que los otros dioses habían olvidado hace mucho: compasión.</p>
-
-                <div class="divider"><span class="divider-text">◆</span></div>
-
-                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">La Traición del Olympo</h3>
-                <p>Con el corazón cargado de propósito, Artemisa se presentó ante los grandes dioses. Les habló de los mortales, del sufrimiento de las almas atrapadas entre mundos. Y los dioses, desde sus tronos de indiferencia, se rieron. <em>"¿Por qué deberíamos preocuparnos por las sombras?"</em>, resonó como un trueno. Los seres que creía encarnación de la justicia no eran más que guardianes egoístas de su propio poder. Su fe se hizo añicos.</p>
-
-                <div class="divider"><span class="divider-text">◆</span></div>
-
-                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">El Descenso</h3>
-                <p>Vagó sin rumbo mientras su luz se atenuaba con cada paso. Las columnas del cielo se disolvieron tras ella. Su camino la llevó más allá de los bordes del Edén, atravesando las montañas de un reino de crepúsculo perpetuo: el Purgatorio. Allí no había templos ni altares de oro. Solo almas llorando por vidas que ya no podían vivir, anhelando un toque, una palabra amable, un momento de paz.</p>
-
-                <div class="divider"><span class="divider-text">◆</span></div>
-
-                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">El Nacimiento de Artema</h3>
-                <p>Si los dioses no ayudaban a las almas olvidadas, entonces ella lo haría sola. Abrazó la oscuridad — no como agente del mal, sino como un manto para proteger a los desamparados. Su arco, antes símbolo de la caza divina, se convirtió en herramienta de protección. Sus flechas ya no quitaban la vida; defendían a los que ya la habían perdido. Dejó de ser Artemisa. Se convirtió en <strong>Artema</strong>, Guardiana de los Penitentes.</p>
-
-                <div class="divider"><span class="divider-text">◆</span></div>
-
-                <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text); margin: var(--space-5) 0 var(--space-3)">Reina del Crepúsculo</h3>
-                <p>Los no muertos que vagaban sin rumbo encontraron consuelo en su presencia. Ya no estaban solos. Aunque el Olympo la desterró de su memoria, la leyenda de la diosa de cabello luz de luna fue susurrada para siempre en el reino de los penitentes.</p>
-
-                <blockquote class="chapter-quote" style="margin-top: var(--space-5)">
-                  "Así nació Purgatory: no un castigo, sino un refugio forjado en la oscuridad por alguien que eligió quedarse."
-                </blockquote>
+                <p>Antes de ser Artema, era Artemisa — una diosa que, desde las cumbres del Olympo, observaba a los mortales con una compasión que los otros dioses habían olvidado. Cuando intentó defenderlos, el Olympo se rió. Así comenzó el descenso: más allá del Edén, hacia un reino de crepúsculo perpetuo donde las almas perdidas vagaban sin nombre ni destino.</p>
+                <p>Eligió quedarse. Abrazó la oscuridad — no como agente del mal, sino como manto para los desamparados. Su arco dejó de cazar; empezó a proteger. Dejó de ser Artemisa. Se convirtió en <strong>Artema</strong>, Guardiana de los Penitentes.</p>
               </div>
+
+              <blockquote class="chapter-quote">
+                "Así nació Purgatory: no un castigo, sino un refugio forjado en la oscuridad por alguien que eligió quedarse."
+              </blockquote>
+
+              <blockquote class="chapter-quote" style="margin-top: 0; border-left-color: var(--blood-dark); opacity: 0.7;">
+                "Cuando el último bump no sea respondido, cuando el salseo se congele y las voces del canal se apaguen... entonces vendrá la Quinta Era. No será fuego ni hielo. Será silencio."
+              </blockquote>
+
             </div>
           </article>
 
-          <div class="divider" style="margin: var(--space-8) 0"><span class="divider-text">Leyes Sagradas</span></div>
-
           <!-- ── CAPÍTULO II ── -->
-          <article class="chapter-tablet">
+          <article class="chapter-tablet" id="cap-leyes">
             <div class="frame">
               <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
               <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
@@ -157,11 +183,9 @@
             </div>
           </article>
 
-          <div class="divider" style="margin: var(--space-8) 0"><span class="divider-text">Crónica</span></div>
-
           <!-- ── CAPÍTULO III ── -->
-          <article class="chapter-tablet">
-            <div class="frame">
+          <article class="chapter-tablet" id="cap-historia">
+            <div class="frame frame--highlight">
               <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
               <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
               <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
@@ -205,78 +229,35 @@
                 </article>
 
               </div>
-            </div>
-          </article>
 
-          <div class="divider" style="margin: var(--space-8) 0"><span class="divider-text">Profecía</span></div>
+              <!-- Códex integrado — antes era Cap V separado -->
+              <div style="margin-top: var(--space-8); border-top: 1px solid var(--border); padding-top: var(--space-6)">
+                <p style="font-family: var(--font-display); font-size: var(--fs-xs); letter-spacing: 0.4em; text-transform: uppercase; color: var(--blood-bright); text-align: center; margin-bottom: var(--space-5)">Códex de las Almas</p>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4)">
 
-          <!-- ── CAPÍTULO IV ── -->
-          <article class="chapter-tablet">
-            <div class="frame frame--highlight">
-              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
-              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
-              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
-              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+                  <div style="padding: var(--space-4) var(--space-5); background: var(--bg-1); border-radius: var(--r-md); border: 1px solid var(--border)">
+                    <div style="font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); margin-bottom: var(--space-2)">Almas Penitentes</div>
+                    <p style="font-size: var(--fs-xs); color: var(--text-dim); line-height: 1.6">Los miembros activos que cumplen con sus rituales. La columna vertebral del servidor.</p>
+                  </div>
 
-              <span class="chapter-label">Capítulo IV</span>
-              <h2 class="chapter-title">La Profecía de la Quinta Era</h2>
+                  <div style="padding: var(--space-4) var(--space-5); background: var(--bg-1); border-radius: var(--r-md); border: 1px solid var(--border)">
+                    <div style="font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); margin-bottom: var(--space-2)">Almas Errantes</div>
+                    <p style="font-size: var(--fs-xs); color: var(--text-dim); line-height: 1.6">Los inactivos que aparecen de vez en cuando. El limbo del "última vez conectado hace 3 meses".</p>
+                  </div>
 
-              <blockquote class="chapter-quote">
-                "Cuando el último bump no sea respondido, cuando el salseo se congele y las voces del canal se apaguen... entonces vendrá la Quinta Era. No será fuego ni hielo. Será silencio."
-              </blockquote>
+                  <div style="padding: var(--space-4) var(--space-5); background: var(--bg-1); border-radius: var(--r-md); border: 1px solid var(--border)">
+                    <div style="font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); margin-bottom: var(--space-2)">Almas Condenadas</div>
+                    <p style="font-size: var(--fs-xs); color: var(--text-dim); line-height: 1.6">Los enviados a los Círculos del Infierno. Sus nombres están grabados como advertencia eterna.</p>
+                  </div>
 
-              <div class="chapter-body">
-                <p>Los miembros más antiguos del servidor hablan en susurros sobre la Quinta Era. Nadie sabe cuándo llegará, ni qué forma tomará. Algunos dicen que será el renacimiento definitivo; otros, que será el fin de todo.</p>
-                <p>Lo único que se sabe es que Artema ya lo ha visto. Y no sonríe.</p>
-                <p>Solo hay una certeza: mientras haya salseo, habrá Purgatorio.</p>
-              </div>
-            </div>
-          </article>
+                  <div style="padding: var(--space-4) var(--space-5); background: var(--bg-1); border-radius: var(--r-md); border: 1px solid var(--border)">
+                    <div style="font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); margin-bottom: var(--space-2)">Almas Ascendidas</div>
+                    <p style="font-size: var(--fs-xs); color: var(--text-dim); line-height: 1.6">El Staff. Elegidos por Artema (o por Renas, que es lo mismo según él).</p>
+                  </div>
 
-          <div class="divider" style="margin: var(--space-8) 0"><span class="divider-text">Códex</span></div>
-
-          <!-- ── CAPÍTULO V ── -->
-          <article class="chapter-tablet">
-            <div class="frame">
-              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
-              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
-              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
-              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
-
-              <span class="chapter-label">Capítulo V</span>
-              <h2 class="chapter-title">El Códex de las Almas</h2>
-
-              <div class="chapter-body">
-                <p>Cada miembro que cruza el portal del Purgatorio es registrado en el Códex de las Almas. Este registro eterno clasifica a cada habitante según su naturaleza:</p>
+                </div>
               </div>
 
-              <div style="display: grid; gap: var(--space-4); margin-top: var(--space-6)">
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">I.</span>
-                  <div class="sacred-law-title">Almas Penitentes</div>
-                  <p>Los miembros activos que cumplen con sus rituales. Son la columna vertebral del servidor y Artema los protege.</p>
-                </div>
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">II.</span>
-                  <div class="sacred-law-title">Almas Errantes</div>
-                  <p>Los miembros inactivos que aparecen de vez en cuando como fantasmas. Existen en el limbo del "última vez conectado hace 3 meses".</p>
-                </div>
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">III.</span>
-                  <div class="sacred-law-title">Almas Condenadas</div>
-                  <p>Los que fueron enviados a los Círculos del Infierno. Sus nombres están grabados en los muros como advertencia eterna. No hay redención.</p>
-                </div>
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">IV.</span>
-                  <div class="sacred-law-title">Almas Ascendidas</div>
-                  <p>El Staff y los moderadores. Elegidos por Artema (o por Renas, que es lo mismo según él) para mantener el orden en el caos.</p>
-                </div>
-
-              </div>
             </div>
           </article>
 

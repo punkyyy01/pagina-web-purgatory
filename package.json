@@ -6,6 +6,7 @@
     "test:api": "node test-api.js"
   },
   "devDependencies": {
+    "canvas": "^3.2.3",
     "node-fetch": "^3.3.2",
     "serve": "^14.2.4"
   }

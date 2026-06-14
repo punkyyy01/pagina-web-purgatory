@@ -21,14 +21,12 @@
     <meta name="twitter:title" content="El Void — PURG4TORY" />
     <meta name="twitter:description" content="Has llegado al Void. Esta página no existe en el Purgatorio." />
     <meta name="twitter:image" content="https://purg4t0ry.com/static/img/og-image.png" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.discordapp.com; object-src 'none'; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://cdn.discordapp.com; object-src 'none'; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap"></noscript>
+    <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
+    <link rel="preload" href="static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="static/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="static/css/fonts.css?v=20260614">
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
     <meta name="theme-color" content="#3de8da">
     <link rel="stylesheet" href="static/css/tokens.css?v=20260429">

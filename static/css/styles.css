@@ -3,9 +3,6 @@
    Frames · Cards · Buttons · Header · Footer · Layout
    ═══════════════════════════════════════════════════════════ */
 
-/* ── Fonts ────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=UnifrakturMaguntia&display=swap');
-
 /* ── Layout base ──────────────────────────────────────────── */
 .container {
   width: 100%;

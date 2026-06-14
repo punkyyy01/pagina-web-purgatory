@@ -216,6 +216,7 @@
 (function initGSAP() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (document.documentElement.classList.contains('lite-mode')) return;
 
   gsap.registerPlugin(ScrollTrigger);
 

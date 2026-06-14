@@ -15,7 +15,8 @@ import {
   scrambleText,
 } from './vendor/anime.esm.min.js';
 
-if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+    !document.documentElement.classList.contains('lite-mode')) {
   document.readyState === 'loading'
     ? document.addEventListener('DOMContentLoaded', init, { once: true })
     : init();
@@ -100,7 +101,8 @@ function init() {
   if (document.querySelector('.chapter-tablet'))  initLore();
   if (document.querySelector('.void-title'))       init404();
   if (document.getElementById('char-grid'))        initPersonajes();
-  if (document.querySelector('.hero-frame'))       initHeroCorners();
+  if (document.querySelector('.hero-frame'))       initHero();
+  initPageHeroes();
 }
 
 // ── Lore page ─────────────────────────────────────────────────────────────────
@@ -320,9 +322,83 @@ function initPersonajes() {
   }
 }
 
-// ── Index hero frame ──────────────────────────────────────────────────────────
+// ── Index hero ────────────────────────────────────────────────────────────────
 
-function initHeroCorners() {
+function initHero() {
   const heroFrame = document.querySelector('.hero-frame');
-  if (heroFrame) inlineAndAnimateCorners(heroFrame, { duration: 2000, ease: 'inOutSine', stagger: 200 });
+  if (!heroFrame) return;
+
+  // 1. Corner draw-in
+  inlineAndAnimateCorners(heroFrame, { duration: 2000, ease: 'inOutSine', stagger: 200 });
+
+  // 2. Scramble en "PURG4TORY"
+  const heroTitle = heroFrame.querySelector('.hero-title');
+  if (heroTitle) {
+    animate(heroTitle, {
+      textContent: scrambleText({ chars: '†∞⚔☽░▓◆', duration: 1500 }),
+    });
+  }
+
+  // 3. Eyebrow fade-in sincronizado con el scramble
+  const eyebrow = heroFrame.querySelector('.hero-eyebrow');
+  if (eyebrow) {
+    eyebrow.style.opacity = '0';
+    animate(eyebrow, {
+      opacity: [0, 0.75],
+      duration: 600,
+      ease: 'outQuad',
+      delay: 400,
+    });
+  }
+
+  // 4. Lead text — word stagger después del scramble
+  const heroLead = heroFrame.querySelector('.hero-lead');
+  if (heroLead) {
+    const splitter = splitText(heroLead, { words: {} });
+    splitter.words.forEach(w => { w.style.opacity = '0'; });
+    animate(splitter.words, {
+      opacity:    [0, 1],
+      translateY: [10, 0],
+      duration:   450,
+      ease:       'outQuad',
+      delay:      stagger(50, { start: 900 }),
+    });
+  }
+
+  // 5. Botones — slide-up con delay al final
+  const heroBtns = heroFrame.querySelectorAll('.hero-actions .btn');
+  if (heroBtns.length) {
+    heroBtns.forEach(b => {
+      b.style.opacity   = '0';
+      b.style.transform = 'translateY(18px)';
+    });
+    animate(heroBtns, {
+      opacity:    [0, 1],
+      translateY: [18, 0],
+      duration:   380,
+      ease:       'outQuad',
+      delay:      stagger(120, { start: 1300 }),
+    });
+  }
+}
+
+// ── Títulos de page-hero en páginas secundarias ───────────────────────────────
+// (Lore e Index tienen su propia animación; esta cubre personajes, eventos, mapa)
+
+function initPageHeroes() {
+  if (document.querySelector('.chapter-tablet')) return; // lore
+  if (document.querySelector('.hero-frame'))     return; // index
+  if (document.querySelector('.void-title'))     return; // 404
+
+  const pageTitle = document.querySelector('.page-hero .section-title');
+  if (!pageTitle) return;
+
+  const obs = new MutationObserver(() => {
+    if (!pageTitle.classList.contains('revealed')) return;
+    obs.disconnect();
+    animate(pageTitle, {
+      textContent: scrambleText({ chars: '†∞⚔☽░▓◆', duration: 1200 }),
+    });
+  });
+  obs.observe(pageTitle, { attributes: true, attributeFilter: ['class'] });
 }

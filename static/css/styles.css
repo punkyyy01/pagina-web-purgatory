@@ -1296,6 +1296,17 @@ h3, h4, h5 {
 
 /* === Eventos: cards === */
 
+/* ── Grid de eventos ── */
+.eventos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-5);
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .eventos-grid { grid-template-columns: 1fr; }
+}
+
 /* ── Corner system for event cards ── */
 .evento-naipe > .frame-corner,
 .evento-edicto > .frame-corner {
@@ -1322,8 +1333,8 @@ h3, h4, h5 {
 /* ── Variante A — Naipe casual ── */
 .evento-naipe {
   position: relative;
-  margin-top: 20px;
-  margin-bottom: var(--space-5);
+  margin-top: 0;
+  margin-bottom: 0;
   padding: var(--space-7) var(--space-6);
   background: linear-gradient(180deg,
     color-mix(in srgb, var(--blood-dark) 40%, transparent) 0%,
@@ -1406,8 +1417,8 @@ h3, h4, h5 {
   font-weight: 500;
 }
 .naipe-desc {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-body);
+  font-style: normal;
   font-size: var(--fs-sm);
   color: var(--text-muted);
   line-height: 1.5;
@@ -1437,8 +1448,9 @@ h3, h4, h5 {
 /* ── Variante B — Edicto featured ── */
 .evento-edicto {
   position: relative;
-  max-width: 460px;
-  margin: 20px auto var(--space-5);
+  max-width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
   border: 1px solid color-mix(in srgb, var(--blood) 25%, transparent);
   border-radius: var(--r-md);
   background: linear-gradient(180deg,
@@ -1551,8 +1563,8 @@ h3, h4, h5 {
   font-weight: 500;
 }
 .edicto-desc {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-body);
+  font-style: normal;
   font-size: var(--fs-sm);
   color: var(--text-muted);
   line-height: 1.6;

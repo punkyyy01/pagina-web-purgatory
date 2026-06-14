@@ -140,11 +140,11 @@
 
     if (emptyEl) emptyEl.style.display = 'none';
 
-    var html = '';
+    var html = '<div class="eventos-grid">';
     events.forEach(function (ev) {
       html += ev.image ? renderFeaturedCard(ev) : renderCasualCard(ev);
     });
-
+    html += '</div>';
     container.innerHTML = html;
   }
 

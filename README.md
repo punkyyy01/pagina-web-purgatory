@@ -15,7 +15,7 @@
 
 [![Desplegado en Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://vercel.com)
 [![HTML estático](https://img.shields.io/badge/HTML-E34F26?style=flat&logo=html5&logoColor=white)](.)
-[![Sin frameworks](https://img.shields.io/badge/Sin%20frameworks-✓-7c5cff?style=flat)](.)
+[![Vanilla JS](https://img.shields.io/badge/Vanilla%20JS-✓-0d8a80?style=flat)](.)
 [![Discord](https://img.shields.io/badge/Discord-PURG4TORY-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/aTFMEVzcew)
 
 </div>
@@ -24,7 +24,7 @@
 
 ## ¿Qué es esto?
 
-**Purgatory** es la página de lore del servidor de Discord **PURG4TORY**: un sitio estático de alto impacto visual que recoge la mitología, los personajes, el mapa histórico y los eventos del servidor. Diseñado para proyectar una estética oscura y premium — gradientes morado/cian, tipografía de época, animaciones suaves y secretos escondidos para quienes buscan.
+**Purgatory** es la página de lore del servidor de Discord **PURG4TORY**: un sitio estático de alto impacto visual que recoge la mitología, los personajes, el mapa histórico y los eventos del servidor. Diseñado para proyectar una estética oscura y premium — gradientes teal/cian, tipografía de época, animaciones suaves y secretos escondidos para quienes buscan.
 
 ---
 
@@ -86,51 +86,67 @@ pagina-web-purgatory/
 ├── mapa.html               ← Mapa histórico interactivo
 ├── eventos.html            ← Eventos del servidor
 ├── 404.html                ← El Void
+├── _headers                ← Cabeceras para Netlify / Cloudflare Pages
+├── .env.example            ← Ejemplo de variables de entorno
+├── vercel.json             ← Configuración de despliegue y cabeceras
+├── package.json
 ├── api/
 │   └── discord-events.js   ← Serverless function (Vercel)
+├── scripts/
+│   ├── download-fonts.js   ← Descarga fuentes woff2 desde Google Fonts
+│   └── generate-og.js      ← Genera imagen Open Graph (1200×630)
 ├── assets/
 │   ├── artema-hero.svg     ← Arte principal de Artema
 │   ├── era-*.svg           ← Iconos de eras (×8)
 │   ├── icon-*.svg          ← Iconos de canales Discord
 │   └── ...                 ← Más SVGs temáticos
-├── static/
-│   ├── css/
-│   │   ├── tokens.css      ← Design tokens (paleta, tipografía, espaciado)
-│   │   └── styles.css      ← Estilos globales + componentes
-│   ├── js/
-│   │   ├── scripts.js          ← Cursor, scroll, partículas, contadores
-│   │   ├── easter-eggs.js      ← Secretos interactivos
-│   │   ├── eventos-loader.js   ← Renderizado de eventos con ETag polling
-│   │   ├── index-events.js     ← Preview de eventos en homepage
-│   │   ├── void-quotes.js      ← Citas del 404
-│   │   └── vendor/
-│   │       ├── gsap.min.js
-│   │       └── ScrollTrigger.min.js
-│   ├── data/
-│   │   ├── personajes-data.js  ← Datos de personajes (PURGATORY_CHARS)
-│   │   └── mapa-data.js        ← Nodos y conexiones del mapa histórico
-│   └── img/
-│       ├── logo.svg
-│       └── ornaments/          ← Sistema de marcos decorativos (×8 SVGs)
-├── vercel.json             ← Configuración de despliegue y cabeceras
-└── package.json
+└── static/
+    ├── css/
+    │   ├── tokens.css      ← Design tokens (paleta, tipografía, espaciado)
+    │   ├── styles.css      ← Estilos globales + componentes
+    │   ├── fonts.css       ← Reglas @font-face para fuentes autoalojadas
+    │   └── lite-mode.css   ← Estilos para modo lite (dispositivos de bajos recursos)
+    ├── js/
+    │   ├── scripts.js          ← Cursor, scroll, partículas, contadores
+    │   ├── easter-eggs.js      ← Secretos interactivos
+    │   ├── eventos-loader.js   ← Renderizado de eventos con ETag polling
+    │   ├── interactions.js     ← Interacciones UI
+    │   ├── anime-effects.js    ← Efectos de animación (Anime.js)
+    │   ├── lite-mode-detect.js ← Detección automática de modo lite
+    │   ├── void-quotes.js      ← Citas del 404
+    │   └── vendor/
+    │       ├── gsap.min.js
+    │       ├── ScrollTrigger.min.js
+    │       └── anime.esm.min.js
+    ├── data/
+    │   ├── personajes-data.js  ← Datos de personajes (PURGATORY_CHARS)
+    │   └── mapa-data.js        ← Nodos y conexiones del mapa histórico
+    ├── fonts/
+    │   ├── inter-*.woff2       ← Inter (400, 500, 700)
+    │   ├── cormorant-*.woff2   ← Cormorant Garamond (500, 500i, 700)
+    │   └── unifraktur-400.woff2
+    └── img/
+        ├── logo.svg
+        ├── og-image.png        ← Imagen Open Graph
+        └── ornaments/          ← Sistema de marcos decorativos (×8 SVGs)
 ```
 
 ### Stack
 
-- **HTML + CSS + JS vanilla** — sin frameworks, sin bundler, sin dependencias de producción
+- **HTML + CSS + JS vanilla** — sin bundler, sin frameworks de aplicación
 - **GSAP + ScrollTrigger** — animaciones de scroll y transiciones
+- **Anime.js** — efectos de animación complementarios
 - **Vercel** — despliegue estático + serverless function para la API de Discord
-- **Google Fonts** — Inter · Cormorant Garamond · UnifrakturMaguntia
+- **Fuentes autoalojadas** — Inter · Cormorant Garamond · UnifrakturMaguntia (woff2)
 
 ### Paleta de diseño
 
 | Token | Valor | Uso |
 |---|---|---|
-| Morado principal | `#7c5cff` | Acentos, glow |
-| Cian | `#00e0ff` | Detalles, highlights |
-| Rojo marca | `#a8001f` | Logo, elementos de condena |
-| Fondo base | `#08020a` | Oscuridad profunda |
+| Fantasma | `#0d8a80` | Color primario, bordes, glow |
+| Fantasma bright | `#3de8da` | Highlights, acentos, texto |
+| Fondo base | `#050b0b` | Oscuridad profunda |
+| Texto | `#deeeed` | Texto principal |
 
 ---
 
@@ -155,7 +171,7 @@ El endpoint `/api/discord-events` es una **Vercel Serverless Function** que obti
 └─────────────────────────────────────────────────────────┘
 ```
 
-**Variables de entorno necesarias** (configurar en Vercel Dashboard):
+**Variables de entorno necesarias** (ver `.env.example`):
 
 ```
 DISCORD_BOT_TOKEN   Token del bot de Discord
@@ -176,9 +192,9 @@ El sitio esconde tres secretos para quien los busque:
 
 ## Seguridad
 
-El sitio implementa cabeceras de seguridad completas tanto en `vercel.json` como en los meta-tags HTML de cada página:
+El sitio implementa cabeceras de seguridad completas tanto en `vercel.json` como en el archivo `_headers` (para Netlify / Cloudflare Pages) y en los meta-tags HTML de cada página:
 
-- `Content-Security-Policy` — solo recursos propios y fuentes de Google
+- `Content-Security-Policy` — solo recursos propios y fuentes autoalojadas
 - `X-Frame-Options: DENY` — sin iframes externos
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: strict-origin-when-cross-origin`
@@ -200,6 +216,10 @@ vercel
 vercel --prod
 ```
 
+### Netlify / Cloudflare Pages
+
+El archivo `_headers` contiene las cabeceras de seguridad y caché necesarias para despliegues en estos plataformas.
+
 ### Local
 
 ```bash
@@ -210,12 +230,21 @@ npm run dev        # Servidor local en http://localhost:3000
 Para probar la API de Discord localmente:
 
 ```bash
-# Configurar variables de entorno
-export DISCORD_BOT_TOKEN="tu_token"
-export DISCORD_GUILD_ID="tu_guild_id"
+# Copiar variables de entorno
+cp .env.example .env
+# Rellena DISCORD_BOT_TOKEN y DISCORD_GUILD_ID en .env
 
 npm run test:api
 ```
+
+---
+
+## Scripts de utilidad
+
+| Script | Descripción |
+|---|---|
+| `scripts/download-fonts.js` | Descarga las fuentes woff2 desde Google Fonts a `static/fonts/` |
+| `scripts/generate-og.js` | Genera la imagen Open Graph (`static/img/og-image.png`, 1200×630) |
 
 ---
 

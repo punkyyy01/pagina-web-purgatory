@@ -104,8 +104,7 @@
       '<article class="evento-edicto ' + s.cls + '">' +
         CORNERS +
         '<div class="evento-edicto__hero">' +
-          '<img class="edicto-portada" src="' + ev.image + '" alt="' + escapeHTML(ev.name) + '"' +
-            ' onerror="this.closest(\'article\').classList.add(\'no-image\')">' +
+          '<img class="edicto-portada" src="' + escapeHTML(ev.image) + '" alt="' + escapeHTML(ev.name) + '">' +
           '<div class="edicto-fecha-medallon">' +
             '<div class="edicto-fecha-medallon-inner">' +
               '<div class="medallon-day">' + dp.day + '</div>' +
@@ -147,6 +146,13 @@
     html += '</div>';
     container.innerHTML = html;
   }
+
+  container.addEventListener('error', function (e) {
+    if (e.target.classList && e.target.classList.contains('edicto-portada')) {
+      var article = e.target.closest('article');
+      if (article) article.classList.add('no-image');
+    }
+  }, true);
 
   function renderError(msg) {
     var emptyEl = document.getElementById('events-empty');

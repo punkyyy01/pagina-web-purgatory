@@ -11,7 +11,6 @@
   const btnTop   = $('#back-to-top');
   const navToggle = $('#nav-toggle');
   const navLinks  = $('#nav-links');
-  const modal        = $('#char-detail-modal');
 
     /* ═══════════════════════════════════════════════════════
       2. MANEJO DE SCROLL (un único listener `passive`)
@@ -92,26 +91,8 @@
   revealEls.forEach(el => revealObs.observe(el));
 
     /* ═══════════════════════════════════════════════════════
-      7. MODAL DE PERSONAJES — usa PURGATORY_CHARS (fuente única)
+      7. MODAL DE PERSONAJES — handlers en personajes-data.js
       ═══════════════════════════════════════════════════════ */
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-  }
-
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal || e.target.classList.contains('modal-close') || e.target.closest('.modal-close')) {
-        closeModal();
-      }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && (modal.classList.contains('is-open') || modal.getAttribute('aria-hidden') === 'false')) {
-        closeModal();
-      }
-    });
-  }
 
     /* ═══════════════════════════════════════════════════════
       8. CONTADORES ANIMADOS (una sola ejecución vía IntersectionObserver)

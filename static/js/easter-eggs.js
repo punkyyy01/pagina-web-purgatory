@@ -72,9 +72,10 @@
   var secretWord = 'mantequilla';
   var typedBuffer = '';
 
-  document.addEventListener('keypress', function (e) {
+  document.addEventListener('keydown', function (e) {
     /* Skip if user is typing in an input/textarea */
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key.length !== 1) return;
     typedBuffer += e.key.toLowerCase();
     if (typedBuffer.length > secretWord.length) {
       typedBuffer = typedBuffer.slice(-secretWord.length);
@@ -178,8 +179,9 @@
   var bumpWord = 'bump';
   var bumpBuffer = '';
 
-  document.addEventListener('keypress', function (e) {
+  document.addEventListener('keydown', function (e) {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key.length !== 1) return;
     bumpBuffer += e.key.toLowerCase();
     if (bumpBuffer.length > bumpWord.length) {
       bumpBuffer = bumpBuffer.slice(-bumpWord.length);

@@ -259,7 +259,7 @@
         '<ul style="margin-top:var(--space-2)">' + relationsHTML + '</ul>' +
       '</div>' +
       '<div style="text-align:center;margin-top:var(--space-5)">' +
-        '<button class="btn btn-blood modal-close-btn" onclick="(function(){var m=document.getElementById(\'char-detail-modal\');if(m){m.classList.remove(\'is-open\');m.setAttribute(\'aria-hidden\',\'true\');}})()">Cerrar</button>' +
+        '<button class="btn btn-blood modal-close-btn">Cerrar</button>' +
       '</div>';
 
     modal.classList.add('is-open');

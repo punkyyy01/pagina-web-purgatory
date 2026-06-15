@@ -133,7 +133,7 @@ pagina-web-purgatory/
 
 ### Stack
 
-- **HTML + CSS + JS vanilla** — sin bundler, sin frameworks de aplicación
+- **HTML + CSS + JS vanilla** — sin bundler, con pocas dependencias vendor
 - **GSAP + ScrollTrigger** — animaciones de scroll y transiciones
 - **Anime.js** — efectos de animación complementarios
 - **Vercel** — despliegue estático + serverless function para la API de Discord
@@ -202,40 +202,9 @@ El sitio implementa cabeceras de seguridad completas tanto en `vercel.json` como
 
 ---
 
-## Despliegue
+## Modo Lite
 
-### Vercel (recomendado)
-
-El proyecto se despliega automáticamente al hacer push a `main`.
-
-```bash
-# Primera vez
-vercel
-
-# Producción
-vercel --prod
-```
-
-### Netlify / Cloudflare Pages
-
-El archivo `_headers` contiene las cabeceras de seguridad y caché necesarias para despliegues en estos plataformas.
-
-### Local
-
-```bash
-npm install
-npm run dev        # Servidor local en http://localhost:3000
-```
-
-Para probar la API de Discord localmente:
-
-```bash
-# Copiar variables de entorno
-cp .env.example .env
-# Rellena DISCORD_BOT_TOKEN y DISCORD_GUILD_ID en .env
-
-npm run test:api
-```
+El sitio detecta automáticamente dispositivos con bajos recursos o conexiones lentas y activa un "modo lite" que desactiva animaciones complejas y reduce el uso de JS/CSS para una experiencia más fluida.
 
 ---
 

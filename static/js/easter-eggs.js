@@ -120,7 +120,7 @@
 
   /* ─── 4. Void Whispers — subtle text on deep scroll ─── */
   var whispers = [
-    'Las sombras susurran tu nombre...',
+    'El bump de hoy todavía no lo hizo nadie.',
     'El Olympo cayó, pero sus ecos permanecen.',
     'Artema nunca olvida.',
     '"Te amo miamor" — Nelcon',
@@ -130,7 +130,7 @@
     'La dictadura de Renas es eterna.',
     'Las Fosas nunca cierran del todo.',
     'Cada bump es un ritual sagrado.',
-    'Bienvenido al crepúsculo eterno.',
+    'Guacamayo ya lo documentó. Siempre lo documenta.',
     '¿Escuchas eso? Es el salseo.',
     'Frambuesa ya sabe lo que dijiste.',
     'El Inquisidor te está mirando.'

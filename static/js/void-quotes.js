@@ -5,7 +5,7 @@
   'use strict';
 
   var quotes = [
-    '"Las sombras susurran tu nombre, pero esta página no existe." — Artema',
+    '"Esta página no existe. Pero vos sí estabas buscando." — Artema',
     '"Te amo miamor... pero esta URL no." — Nelcon',
     '"Mantequilla negra." — Luigi, sin contexto, como siempre.',
     '"Ni siquiera el Staff puede encontrar lo que buscas." — Renas',

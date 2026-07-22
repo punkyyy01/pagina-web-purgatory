@@ -129,11 +129,23 @@
     );
   }
 
-  function renderEvents(events) {
+  /* ─── Estado + filtro por tab ─── */
+  var lastEvents = [];
+  var activeTab  = 'all'; // all | proximo | activo | pasado
+  var TAB_CLASS  = { proximo: 'is-proximo', activo: 'is-activo', pasado: 'is-pasado' };
+
+  function filterByTab(events) {
+    if (activeTab === 'all') return events;
+    var cls = TAB_CLASS[activeTab];
+    return events.filter(function (ev) { return getStateInfo(ev).cls === cls; });
+  }
+
+  function buildGrid(events) {
     var emptyEl = document.getElementById('events-empty');
 
     if (!events || events.length === 0) {
       if (emptyEl) emptyEl.style.display = '';
+      container.innerHTML = '';
       return;
     }
 
@@ -145,6 +157,23 @@
     });
     html += '</div>';
     container.innerHTML = html;
+  }
+
+  function renderEvents(events) {
+    lastEvents = events || [];
+    buildGrid(filterByTab(lastEvents));
+  }
+
+  var tabsEl = document.getElementById('events-filters');
+  if (tabsEl) {
+    tabsEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.filter-tab[data-tab]');
+      if (!btn) return;
+      tabsEl.querySelectorAll('.filter-tab').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeTab = btn.getAttribute('data-tab');
+      buildGrid(filterByTab(lastEvents));
+    });
   }
 
   container.addEventListener('error', function (e) {

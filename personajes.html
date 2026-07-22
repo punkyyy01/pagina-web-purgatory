@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <script src="static/js/lite-mode-detect.js"></script>
+    <script>(function(){try{var t=localStorage.getItem('purgatory_theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();</script>
     <title>Personajes — Purgatory</title>
     <meta name="description" content="Galería completa de personajes canónicos de Purgatory. Sus historias, alianzas y momentos más icónicos." />
     <!-- Open Graph -->
@@ -22,7 +23,7 @@
     <meta name="twitter:title" content="Personajes — PURG4TORY" />
     <meta name="twitter:description" content="El registro completo de Purgatory. Once almas canónicas, sus momentos y sus chismes." />
     <meta name="twitter:image" content="https://purg4t0ry.com/static/img/og-image.png" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://cdn.discordapp.com; object-src 'none'; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L0IzETgzhHHFQg/cujcI7Kyu+WNfOWlUT6c1nE5Un3s='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://cdn.discordapp.com; object-src 'none'; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
     <link rel="preload" href="static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -42,6 +43,7 @@
           <img src="static/img/logo.svg" alt="Purgatory" />
           <span class="brand-name">Purgatory</span>
         </a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema"></button>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">Inicio</a></li>
@@ -74,6 +76,10 @@
             <button class="filter-tab" data-filter="fosas">Las Fosas</button>
             <button class="filter-tab" data-filter="olympo">Olympo</button>
             <button class="filter-tab" data-filter="purgatory">Purgatory</button>
+          </div>
+
+          <div style="max-width: 360px; margin: 0 auto var(--space-5)">
+            <input type="search" id="char-search" placeholder="Buscar personaje..." class="char-search-input">
           </div>
 
           <!-- Grid de naipes — generado por JS -->

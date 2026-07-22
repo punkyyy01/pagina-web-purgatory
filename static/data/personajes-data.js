@@ -192,8 +192,29 @@
 
   renderCards(characters);
 
-  /* ── Era filter tabs ── */
+  /* ── Filtro de era + búsqueda combinados ── */
+  var searchInput = document.getElementById('char-search');
   var activeFilter = 'all';
+  var activeQuery = '';
+
+  function normalize(str) {
+    return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function applyFilters() {
+    var list = activeFilter === 'all'
+      ? characters
+      : characters.filter(function (c) { return c.era === activeFilter; });
+    if (activeQuery) {
+      list = list.filter(function (c) {
+        return normalize(c.name).indexOf(activeQuery) !== -1 ||
+               normalize(c.alias).indexOf(activeQuery) !== -1 ||
+               normalize(c.quote).indexOf(activeQuery) !== -1;
+      });
+    }
+    renderCards(list);
+  }
+
   if (filtersContainer) {
     filtersContainer.addEventListener('click', function (e) {
       var btn = e.target.closest('.filter-tab[data-filter]');
@@ -201,10 +222,18 @@
       filtersContainer.querySelectorAll('.filter-tab').forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
       activeFilter = btn.getAttribute('data-filter');
-      var filtered = activeFilter === 'all'
-        ? characters
-        : characters.filter(function (c) { return c.era === activeFilter; });
-      renderCards(filtered);
+      applyFilters();
+    });
+  }
+
+  if (searchInput) {
+    var searchTimer = null;
+    searchInput.addEventListener('input', function () {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function () {
+        activeQuery = normalize(searchInput.value.trim());
+        applyFilters();
+      }, 150);
     });
   }
 

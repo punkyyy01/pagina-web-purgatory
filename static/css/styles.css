@@ -262,7 +262,7 @@ h3, h4, h5 {
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  background: rgba(8, 2, 10, 0.96);
+  background: var(--panel);
   border-bottom: 1px solid var(--border-strong);
   height: var(--header-h);
   display: flex;
@@ -346,6 +346,18 @@ h3, h4, h5 {
   transform: translateY(-1px);
 }
 
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: var(--space-2);
+}
+.theme-toggle::before { content: "\2600"; } /* ☀ */
+[data-theme="light"] .theme-toggle::before { content: "\263E"; } /* ☾ */
+
 /* Mobile nav toggle */
 .nav-toggle {
   display: none;
@@ -364,7 +376,7 @@ h3, h4, h5 {
     position: absolute;
     top: var(--header-h);
     left: 0; right: 0;
-    background: rgba(8, 2, 10, 0.98);
+    background: var(--panel);
     border-bottom: 1px solid var(--border-strong);
     flex-direction: column;
     padding: var(--space-4) var(--space-5);
@@ -766,6 +778,56 @@ h3, h4, h5 {
 .filter-tab.active,
 .filter-tab:hover { color: var(--blood-bright); }
 .filter-tab.active { text-shadow: 0 0 8px var(--blood); }
+
+/* ── Countdown widget (home) ──────────────────────────────── */
+.countdown-frame {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--space-5) var(--space-6);
+}
+.countdown-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blood-bright);
+  margin-bottom: var(--space-2);
+}
+.countdown-name {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-3);
+}
+.countdown-clock {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  letter-spacing: 0.1em;
+  color: var(--text);
+  margin-bottom: var(--space-4);
+}
+.countdown-empty {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.char-search-input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--space-3) var(--space-4);
+}
+.char-search-input:focus {
+  outline: none;
+  border-color: var(--border-strong);
+}
+.char-search-input::placeholder { color: var(--text-dim); }
 
 /* Legacy filter-btn support */
 .severity-filter { display: flex; gap: var(--space-3); flex-wrap: wrap; }

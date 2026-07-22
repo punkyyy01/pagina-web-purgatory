@@ -91,6 +91,35 @@
   color-scheme: dark;
 }
 
+/* ── Tema claro — pergamino cálido, mismo acento teal ── */
+[data-theme="light"] {
+  --bg: #f3ece0;
+  --bg-1: #ece3d4;
+  --bg-2: #e4d8c4;
+  --panel: #faf6ec;
+  --panel-hover: #f0e9db;
+
+  --text: #241f18;
+  --text-muted: rgba(36, 31, 24, 0.75);
+  --text-dim: rgba(36, 31, 24, 0.55);
+
+  --border: rgba(13, 138, 128, 0.28);
+  --border-strong: rgba(13, 138, 128, 0.5);
+
+  --glow-blood: 0 0 20px rgba(13, 138, 128, 0.25),
+                0 0 50px rgba(13, 138, 128, 0.18),
+                0 0 100px rgba(13, 138, 128, 0.08);
+  --glow-blood-strong: 0 0 28px rgba(13, 138, 128, 0.4),
+                       0 0 70px rgba(13, 138, 128, 0.28),
+                       0 0 140px rgba(13, 138, 128, 0.14);
+
+  --shadow-sm: 0 4px 12px rgba(36, 31, 24, 0.12);
+  --shadow-md: 0 8px 24px rgba(36, 31, 24, 0.16);
+  --shadow-lg: 0 16px 48px rgba(36, 31, 24, 0.2);
+
+  color-scheme: light;
+}
+
 html { font-size: 18px; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

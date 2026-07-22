@@ -11,6 +11,19 @@
   const btnTop   = $('#back-to-top');
   const navToggle = $('#nav-toggle');
   const navLinks  = $('#nav-links');
+  const themeToggle = $('#theme-toggle');
+
+    /* ═══════════════════════════════════════════════════════
+      1a. TEMA CLARO/OSCURO — el <html data-theme> ya lo fija el
+      script inline del <head> (evita flash); esto solo alterna.
+      ═══════════════════════════════════════════════════════ */
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('purgatory_theme', next); } catch (e) { /* Safari privado */ }
+    });
+  }
 
     /* ═══════════════════════════════════════════════════════
       1b. PARALLAX SUTIL DEL HERO — único "detalle de personalidad"

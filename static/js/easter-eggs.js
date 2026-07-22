@@ -119,63 +119,7 @@
     setTimeout(function () { counter.classList.remove('show'); }, 4000);
   }
 
-  /* ─── 4. Void Whispers — subtle text on deep scroll ─── */
-  var whispers = [
-    'El bump de hoy todavía no lo hizo nadie.',
-    'El Olympo cayó, pero sus ecos permanecen.',
-    'Artema nunca olvida.',
-    '"Te amo miamor" — Nelcon',
-    'El Void te observa.',
-    'Los condenados no descansan.',
-    'mantequilla negra...',
-    'La dictadura de Renas es eterna.',
-    'Las Fosas nunca cierran del todo.',
-    'Cada bump es un ritual sagrado.',
-    'Guacamayo ya lo documentó. Siempre lo documenta.',
-    '¿Escuchas eso? Es el salseo.',
-    'Frambuesa ya sabe lo que dijiste.',
-    'El Inquisidor te está mirando.'
-  ];
-  var lastWhisperScroll = 0;
-  var whisperCooldown = false;
-
-  window.addEventListener('scroll', function () {
-    if (whisperCooldown) return;
-    var y = window.scrollY;
-    if (Math.abs(y - lastWhisperScroll) > 800) {
-      lastWhisperScroll = y;
-      if (Math.random() < 0.15) { /* 15% chance */
-        whisperCooldown = true;
-        spawnWhisper();
-        setTimeout(function () { whisperCooldown = false; }, 8000);
-      }
-    }
-  }, { passive: true });
-
-  function spawnWhisper() {
-    var el = document.createElement('div');
-    el.className = 'void-whisper';
-    el.textContent = whispers[Math.floor(Math.random() * whispers.length)];
-    el.style.left = (Math.random() * 60 + 20) + '%';
-    el.style.top = (window.scrollY + window.innerHeight * (Math.random() * 0.6 + 0.2)) + 'px';
-    document.body.appendChild(el);
-    setTimeout(function () { el.remove(); }, 4200);
-  }
-
-  /* ─── 5. Secret double-click on "Purgatory" brand → glitch flash ─── */
-  var brandName = document.querySelector('.brand-name');
-  if (brandName) {
-    brandName.addEventListener('dblclick', function () {
-      document.body.style.transition = 'filter .1s';
-      document.body.style.filter = 'invert(1) hue-rotate(180deg)';
-      setTimeout(function () {
-        document.body.style.filter = '';
-        showToast('⚡', 'Glitch del Purgatorio detectado');
-      }, 150);
-    });
-  }
-
-  /* ─── 6. Secret "bump" word → Ritual del Bump ─── */
+  /* ─── 4. Secret "bump" word → Ritual del Bump ─── */
   var bumpWord = 'bump';
   var bumpBuffer = '';
 

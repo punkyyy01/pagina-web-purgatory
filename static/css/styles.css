@@ -3,6 +3,13 @@
    Frames · Cards · Buttons · Header · Footer · Layout
    ═══════════════════════════════════════════════════════════ */
 
+/* ── Fade-in único del sitio (disparado por scripts.js) ──────── */
+.reveal-init { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+.reveal-init.revealed { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init { opacity: 1; transform: none; transition: none; }
+}
+
 /* ── Layout base ──────────────────────────────────────────── */
 .container {
   width: 100%;

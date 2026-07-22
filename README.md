@@ -107,17 +107,12 @@ pagina-web-purgatory/
     │   ├── fonts.css       ← Reglas @font-face para fuentes autoalojadas
     │   └── lite-mode.css   ← Estilos para modo lite (dispositivos de bajos recursos)
     ├── js/
-    │   ├── scripts.js          ← Cursor, scroll, partículas, contadores
+    │   ├── scripts.js          ← Scroll, fade-in reveal, parallax del hero, contadores
     │   ├── easter-eggs.js      ← Secretos interactivos
     │   ├── eventos-loader.js   ← Renderizado de eventos con ETag polling
-    │   ├── interactions.js     ← Interacciones UI
-    │   ├── anime-effects.js    ← Efectos de animación (Anime.js)
+    │   ├── countdown.js        ← Cuenta regresiva al próximo evento (home)
     │   ├── lite-mode-detect.js ← Detección automática de modo lite
-    │   ├── void-quotes.js      ← Citas del 404
-    │   └── vendor/
-    │       ├── gsap.min.js
-    │       ├── ScrollTrigger.min.js
-    │       └── anime.esm.min.js
+    │   └── void-quotes.js      ← Citas del 404
     ├── data/
     │   ├── personajes-data.js  ← Datos de personajes (PURGATORY_CHARS)
     │   └── mapa-data.js        ← Nodos y conexiones del mapa histórico
@@ -133,11 +128,16 @@ pagina-web-purgatory/
 
 ### Stack
 
-- **HTML + CSS + JS vanilla** — sin bundler, con pocas dependencias vendor
-- **GSAP + ScrollTrigger** — animaciones de scroll y transiciones
-- **Anime.js** — efectos de animación complementarios
+- **HTML + CSS + JS vanilla** — sin bundler, sin dependencias vendor
+- **Fade-in único con `IntersectionObserver`** (`.reveal-init`/`.revealed`) + parallax sutil del hero en scroll
 - **Vercel** — despliegue estático + serverless function para la API de Discord
 - **Fuentes autoalojadas** — Inter · Cormorant Garamond · UnifrakturMaguntia (woff2)
+
+### Funcionalidades
+
+- Buscador + filtros combinados en Personajes y Eventos
+- Cuenta regresiva al próximo evento del servidor (home)
+- Modo claro/oscuro persistido en `localStorage`
 
 ### Paleta de diseño
 
@@ -182,11 +182,12 @@ DISCORD_GUILD_ID    ID numérico del servidor
 
 ## Easter eggs
 
-El sitio esconde tres secretos para quien los busque:
+El sitio esconde varios secretos para quien los busque:
 
 - **Código Konami** (`↑ ↑ ↓ ↓ ← → ← → B A`) — activa el Void Portal
-- **Void Whispers** — susurros del vacío que aparecen de forma aleatoria
-- **Soul Counter** — contador de almas persistido en `localStorage`
+- Escribir **"mantequilla"** — invoca a Luigi
+- **7 clics en el logo** — revela el Soul Counter, persistido en `localStorage`
+- Escribir **"bump"** — completa el Ritual del Bump
 
 ---
 

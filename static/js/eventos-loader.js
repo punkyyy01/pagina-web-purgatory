@@ -91,7 +91,7 @@
     return (
       '<article class="evento-edicto ' + s.cls + '">' +
         '<div class="evento-edicto__hero">' +
-          '<img class="edicto-portada" src="' + escapeHTML(ev.image) + '" alt="' + escapeHTML(ev.name) + '">' +
+          '<img class="edicto-portada" src="' + escapeHTML(ev.image) + '" alt="' + escapeHTML(ev.name) + '" loading="lazy">' +
         '</div>' +
         '<div class="evento-edicto__body">' +
           '<span class="stamp edicto-badge">' + escapeHTML(s.label) + '</span>' +

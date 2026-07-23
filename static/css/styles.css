@@ -971,7 +971,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 }
 .evento-edicto.is-pasado { opacity: 0.5; }
 
-.evento-edicto__hero { height: 200px; margin-bottom: var(--space-4); }
+.evento-edicto__hero { height: 200px; margin-bottom: var(--space-4); background: var(--rule); }
 .edicto-portada { width: 100%; height: 100%; object-fit: cover; display: block; }
 .evento-edicto.no-image .evento-edicto__hero { display: none; }
 

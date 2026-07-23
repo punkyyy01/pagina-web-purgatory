@@ -107,7 +107,7 @@ pagina-web-purgatory/
     │   ├── fonts.css       ← Reglas @font-face para fuentes autoalojadas
     │   └── lite-mode.css   ← Estilos para modo lite (dispositivos de bajos recursos)
     ├── js/
-    │   ├── scripts.js          ← Scroll, fade-in reveal, parallax del hero, contadores
+    │   ├── scripts.js          ← Scroll, fade-in reveal, tema claro/oscuro, contadores
     │   ├── easter-eggs.js      ← Secretos interactivos
     │   ├── eventos-loader.js   ← Renderizado de eventos con ETag polling
     │   ├── countdown.js        ← Cuenta regresiva al próximo evento (home)
@@ -119,19 +119,20 @@ pagina-web-purgatory/
     ├── fonts/
     │   ├── inter-*.woff2       ← Inter (400, 500, 700)
     │   ├── cormorant-*.woff2   ← Cormorant Garamond (500, 500i, 700)
+    │   ├── jetbrains-mono-*.woff2 ← JetBrains Mono (400, 500) — toda la metadata
     │   └── unifraktur-400.woff2
     └── img/
         ├── logo.svg
         ├── og-image.png        ← Imagen Open Graph
-        └── ornaments/          ← Sistema de marcos decorativos (×8 SVGs)
+        └── ornaments/          ← Marcos decorativos heredados (sin usar en el diseño actual)
 ```
 
 ### Stack
 
 - **HTML + CSS + JS vanilla** — sin bundler, sin dependencias vendor
-- **Fade-in único con `IntersectionObserver`** (`.reveal-init`/`.revealed`) + parallax sutil del hero en scroll
+- **Fade-in único con `IntersectionObserver`** (`.reveal-init`/`.revealed`)
 - **Vercel** — despliegue estático + serverless function para la API de Discord
-- **Fuentes autoalojadas** — Inter · Cormorant Garamond · UnifrakturMaguntia (woff2)
+- **Fuentes autoalojadas** — Inter · Cormorant Garamond · JetBrains Mono · UnifrakturMaguntia (woff2)
 
 ### Funcionalidades
 
@@ -139,14 +140,22 @@ pagina-web-purgatory/
 - Cuenta regresiva al próximo evento del servidor (home)
 - Modo claro/oscuro persistido en `localStorage`
 
-### Paleta de diseño
+### Dirección visual
+
+Expediente/registro con lenguaje de tribunal parodiado: un solo acento (teal), tres roles
+tipográficos fijos (serif solo para el wordmark y nombres propios, sans para cuerpo/UI, mono
+para toda la metadata — fechas, casos, eras, veredictos) y un único elemento decorativo: el
+sello del "4" en el wordmark, reutilizado como sello de veredicto en Círculos del Infierno y
+estados de evento. Sin glow, sin marcos ornamentales, sin el bloque eyebrow+título+subtítulo
+repetido por sección.
 
 | Token | Valor | Uso |
 |---|---|---|
-| Fantasma | `#0d8a80` | Color primario, bordes, glow |
-| Fantasma bright | `#3de8da` | Highlights, acentos, texto |
-| Fondo base | `#050b0b` | Oscuridad profunda |
-| Texto | `#deeeed` | Texto principal |
+| `--ink` | `#0a0a0a` | Fondo (pergamino claro en tema claro) |
+| `--paper` | `#e8e4da` | Texto principal |
+| `--stamp` | `#0d8a80` | El único acento — bordes, sello |
+| `--stamp-bright` | `#3de8da` | Variante clara del acento |
+| `--rule` | `rgba(232,228,218,.14)` | Divisores — sin glow |
 
 ---
 
@@ -218,20 +227,12 @@ El sitio detecta automáticamente dispositivos con bajos recursos o conexiones l
 
 ---
 
-## Sistema de ornamentos
+## Ornamentos heredados
 
-Los marcos decorativos que aparecen en el sitio están formados por **8 SVGs modulares** que funcionan como un sistema:
-
-```
-corner-tl.svg ─────────── edge-h.svg ─────────── corner-tr.svg
-     │                                                  │
-     │              frame-full.svg                      │
-     │                                                  │
-corner-bl.svg ─────────── edge-h.svg ─────────── corner-br.svg
-
-diamond.svg          → acento/bullet
-divider-flower.svg   → separador horizontal con flor central
-```
+`static/img/ornaments/` conserva los 8 SVGs del sistema de marcos decorativos de una dirección
+visual anterior (esquinas, bordes, diamantes). Ya no se usan — el único elemento decorativo
+del diseño actual es el sello del "4" (ver [Dirección visual](#dirección-visual)) — pero se
+mantienen en el repo por si sirven para algo puntual más adelante.
 
 ---
 

@@ -28,21 +28,19 @@
     <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
     <link rel="preload" href="static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="static/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="static/css/fonts.css?v=20260614">
+    <link rel="preload" href="static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="static/css/fonts.css?v=20260722">
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#3de8da">
-    <link rel="stylesheet" href="static/css/tokens.css?v=20260614">
-    <link rel="stylesheet" href="static/css/styles.css?v=20260615">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="stylesheet" href="static/css/tokens.css?v=20260722">
+    <link rel="stylesheet" href="static/css/styles.css?v=20260722">
     <link rel="stylesheet" href="static/css/lite-mode.css?v=20260614">
   </head>
   <body>
 
     <header class="site-header" id="site-header">
       <nav class="nav">
-        <a class="brand" href="index.html">
-          <img src="static/img/logo.svg" alt="Purgatory" />
-          <span class="brand-name">Purgatory</span>
-        </a>
+        <a class="brand wordmark-small" href="index.html">PURG<span class="seal-sm">4</span>TORY</a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema"></button>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
         <ul class="nav-links" id="nav-links">
@@ -61,16 +59,13 @@
       <!-- Hero -->
       <section class="page-hero">
         <div class="container">
-          <div class="divider"><span class="divider-text">PURG4TORY</span></div>
-          <h1 class="section-title" style="font-size: var(--fs-hero)">Personajes Canónicos</h1>
-          <p class="section-lead">El registro completo. Aquí el "Te amo miamor" tiene página propia. Aquí los momentos no se olvidan.</p>
+          <h1 class="section-title">Personajes Canónicos</h1>
         </div>
       </section>
 
       <section class="section">
         <div class="container">
 
-          <!-- Filtros con divisores diamante -->
           <div class="filter-tabs" id="char-filters">
             <button class="filter-tab active" data-filter="all">Todos</button>
             <button class="filter-tab" data-filter="fosas">Las Fosas</button>
@@ -78,7 +73,7 @@
             <button class="filter-tab" data-filter="purgatory">Purgatory</button>
           </div>
 
-          <div style="max-width: 360px; margin: 0 auto var(--space-5)">
+          <div style="margin-bottom: var(--space-6)">
             <input type="search" id="char-search" placeholder="Buscar personaje..." class="char-search-input">
           </div>
 
@@ -91,10 +86,6 @@
       <!-- Modal ficha de personaje -->
       <div id="char-detail-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-char-name">
         <div class="modal-panel" style="max-width:700px">
-          <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="" style="position:absolute;width:32px;height:32px;top:12px;left:12px;color:var(--blood-bright);pointer-events:none">
-          <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="" style="position:absolute;width:32px;height:32px;top:12px;right:12px;color:var(--blood-bright);pointer-events:none;transform:scaleX(-1)">
-          <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="" style="position:absolute;width:32px;height:32px;bottom:12px;left:12px;color:var(--blood-bright);pointer-events:none;transform:scaleY(-1)">
-          <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="" style="position:absolute;width:32px;height:32px;bottom:12px;right:12px;color:var(--blood-bright);pointer-events:none;transform:scale(-1,-1)">
           <button class="modal-close" id="modal-close" aria-label="Cerrar">&#215;</button>
           <div id="char-modal-content"></div>
         </div>
@@ -106,10 +97,8 @@
 
     <footer class="site-footer">
       <div class="container">
-        <div class="divider"><span class="divider-text">PURG4TORY</span></div>
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="static/img/logo.svg" alt="">
             <div>
               <div class="footer-brand-text">PURGATORY</div>
               <div class="footer-tagline">Donde las historias no mueren, solo arden.</div>

@@ -34,6 +34,10 @@ const REQUESTS = [
   {
     url: 'https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap',
     prefix: 'unifraktur'
+  },
+  {
+    url: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap',
+    prefix: 'jetbrains-mono'
   }
 ];
 

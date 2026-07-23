@@ -4,52 +4,17 @@
    El detector en static/js/lite-mode-detect.js decide cuándo aplicarlo.
    ═══════════════════════════════════════════════════════════ */
 
-/* 1. Desactivar animaciones infinitas (las que más consumen GPU) */
-.lite-mode .evento-dot,
-.lite-mode .edicto-dot,
-.lite-mode [class*="diamond-spin"],
-.lite-mode .naipe-fecha,
-.lite-mode .edicto-fecha {
+/* 1. Desactivar animaciones infinitas (loading dots) */
+.lite-mode .loading-diamond {
   animation: none !important;
 }
 
-/* 2. Eliminar backdrop-filter (el efecto más caro en GPUs integradas) */
-.lite-mode .modal-overlay,
-.lite-mode #char-detail-modal,
-.lite-mode [class*="modal"] {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  background: rgba(5, 11, 11, 0.92) !important;
-}
-
-/* 3. Quitar will-change (libera capas de GPU permanentes) */
+/* 2. Quitar will-change (libera capas de GPU permanentes) */
 .lite-mode * {
   will-change: auto !important;
 }
 
-/* 4. Simplificar sombras con blur grande (caras de pintar) */
-.lite-mode .evento-naipe,
-.lite-mode .evento-edicto,
-.lite-mode .frame--highlight {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
-}
-
-/* 5. Eliminar glows con múltiples capas */
-.lite-mode .btn-primary:hover,
-.lite-mode .era-card:hover,
-.lite-mode .stat-number {
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
-
-/* 6. Transiciones más cortas y simples */
+/* 3. Transiciones más cortas y simples */
 .lite-mode * {
   transition-duration: 0.15s !important;
-}
-
-/* 7. Desactivar transforms en hover de cards (recálculo de layout) */
-.lite-mode .era-card:hover,
-.lite-mode .condemned-card:hover,
-.lite-mode .evento-naipe:hover {
-  transform: none !important;
 }

@@ -39,12 +39,6 @@
   }
 
   /* ─── Render ─── */
-  var CORNERS =
-    '<img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">' +
-    '<img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">' +
-    '<img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">' +
-    '<img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">';
-
   function getStateInfo(ev) {
     var now   = Date.now();
     var start = new Date(ev.start).getTime();
@@ -72,25 +66,19 @@
     var url = 'https://discord.com/events/' + ev.guild_id + '/' + ev.id;
     return (
       '<article class="evento-naipe ' + s.cls + '">' +
-        CORNERS +
-        '<div class="evento-naipe__sello ' + s.cls + '">' +
-          '<span class="naipe-sello-diamond">◆</span>' +
-          escapeHTML(s.label) +
-          '<span class="naipe-sello-diamond">◆</span>' +
-        '</div>' +
+        '<span class="stamp evento-naipe__sello">' + escapeHTML(s.label) + '</span>' +
         '<div class="evento-naipe__fecha">' +
-          '<div class="naipe-day">' + dp.day + '</div>' +
-          '<div class="naipe-month">' + dp.month + '</div>' +
-          '<div class="naipe-year">' + dp.year + '</div>' +
+          '<span class="naipe-day">' + dp.day + '</span>' +
+          '<span class="naipe-month">' + dp.month + '</span>' +
+          '<span class="naipe-year">' + dp.year + '</span>' +
         '</div>' +
-        '<div class="evento-naipe__divider"></div>' +
         '<div class="evento-naipe__content">' +
           '<h3 class="naipe-title">' + escapeHTML(ev.name) + '</h3>' +
           (ev.description ? '<p class="naipe-desc">' + escapeHTML(ev.description) + '</p>' : '') +
-          (ev.user_count > 0 ? '<div class="naipe-meta">◆ ' + ev.user_count + ' almas convocadas</div>' : '') +
+          (ev.user_count > 0 ? '<div class="naipe-meta">' + ev.user_count + ' almas convocadas</div>' : '') +
         '</div>' +
         '<div class="evento-naipe__cta">' +
-          '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn naipe-btn-ritual">VER RITUAL ›</a>' +
+          '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn naipe-btn-ritual">Ver ritual ›</a>' +
         '</div>' +
       '</article>'
     );
@@ -102,27 +90,17 @@
     var url = 'https://discord.com/events/' + ev.guild_id + '/' + ev.id;
     return (
       '<article class="evento-edicto ' + s.cls + '">' +
-        CORNERS +
         '<div class="evento-edicto__hero">' +
           '<img class="edicto-portada" src="' + escapeHTML(ev.image) + '" alt="' + escapeHTML(ev.name) + '">' +
-          '<div class="edicto-fecha-medallon">' +
-            '<div class="edicto-fecha-medallon-inner">' +
-              '<div class="medallon-day">' + dp.day + '</div>' +
-              '<div class="medallon-month">' + dp.month + '</div>' +
-            '</div>' +
-          '</div>' +
         '</div>' +
         '<div class="evento-edicto__body">' +
-          '<div class="edicto-badge ' + s.cls + '">' +
-            '<span class="edicto-dot"></span>' +
-            'RITUAL ' + escapeHTML(s.label) +
-          '</div>' +
+          '<span class="stamp edicto-badge">' + escapeHTML(s.label) + '</span>' +
           '<h3 class="edicto-title">' + escapeHTML(ev.name) + '</h3>' +
-          '<div class="divider"><span class="divider-text"></span></div>' +
+          '<div class="record-meta">' + dp.day + ' ' + dp.month + ' ' + dp.year + '</div>' +
           (ev.description ? '<p class="edicto-desc">' + escapeHTML(ev.description) + '</p>' : '') +
           '<div class="edicto-footer">' +
-            (ev.user_count > 0 ? '<span class="edicto-almas">' + ev.user_count + ' ALMAS</span>' : '<span></span>') +
-            '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn naipe-btn-ritual">VER RITUAL ›</a>' +
+            (ev.user_count > 0 ? '<span class="edicto-almas">' + ev.user_count + ' almas convocadas</span>' : '<span></span>') +
+            '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn naipe-btn-ritual">Ver ritual ›</a>' +
           '</div>' +
         '</div>' +
       '</article>'

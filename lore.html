@@ -28,52 +28,43 @@
     <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
     <link rel="preload" href="static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="static/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="static/css/fonts.css?v=20260614">
+    <link rel="preload" href="static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="static/css/fonts.css?v=20260722">
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#3de8da">
-    <link rel="stylesheet" href="static/css/tokens.css?v=20260614">
-    <link rel="stylesheet" href="static/css/styles.css?v=20260615">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="stylesheet" href="static/css/tokens.css?v=20260722">
+    <link rel="stylesheet" href="static/css/styles.css?v=20260722">
     <link rel="stylesheet" href="static/css/lite-mode.css?v=20260614">
     <style>
   .lore-toc {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
     padding: var(--space-4) 0;
-    background: var(--bg-1);
   }
   .lore-toc-list {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-4);
+    gap: var(--space-5);
     list-style: none;
     flex-wrap: wrap;
   }
   .lore-toc-list a {
-    font-family: var(--font-display);
+    font-family: var(--font-mono);
     font-size: var(--fs-xs);
-    letter-spacing: 0.3em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--dim);
     text-decoration: none;
     transition: color 200ms;
   }
-  .lore-toc-list a:hover { color: var(--blood-bright); }
-  .lore-toc-sep {
-    color: var(--blood-bright);
-    opacity: 0.4;
-    font-size: 0.6rem;
-  }
+  .lore-toc-list a:hover { color: var(--stamp-bright); }
 </style>
   </head>
   <body>
 
     <header class="site-header" id="site-header">
       <nav class="nav">
-        <a class="brand" href="index.html">
-          <img src="static/img/logo.svg" alt="Purgatory" />
-          <span class="brand-name">Purgatory</span>
-        </a>
+        <a class="brand wordmark-small" href="index.html">PURG<span class="seal-sm">4</span>TORY</a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema"></button>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
         <ul class="nav-links" id="nav-links">
@@ -92,8 +83,7 @@
       <!-- Hero de página -->
       <section class="page-hero">
         <div class="container">
-          <div class="divider"><span class="divider-text">Scriptorium</span></div>
-          <h1 class="section-title" style="font-size: var(--fs-hero)">El Lore de Purgatory</h1>
+          <h1 class="section-title">El Lore de Purgatory</h1>
           <p class="section-lead">El origen, las leyes y la historia de PURG4TORY.</p>
         </div>
       </section>
@@ -102,9 +92,7 @@
         <div class="container">
           <ul class="lore-toc-list">
             <li><a href="#cap-origen">I. El Origen</a></li>
-            <li><span class="lore-toc-sep">◆</span></li>
             <li><a href="#cap-leyes">II. Las Leyes</a></li>
-            <li><span class="lore-toc-sep">◆</span></li>
             <li><a href="#cap-historia">III. La Historia</a></li>
           </ul>
         </div>
@@ -115,174 +103,143 @@
 
           <!-- ── CAPÍTULO I ── -->
           <article class="chapter-tablet" id="cap-origen">
-            <div class="frame frame--highlight">
-              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
-              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
-              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
-              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+            <span class="chapter-label">Capítulo I</span>
+            <h2 class="chapter-title">El Origen de Artema</h2>
 
-              <span class="chapter-label">Capítulo I</span>
-              <h2 class="chapter-title">El Origen de Artema</h2>
+            <blockquote class="chapter-quote">
+              "El individuo en contra de los dioses."
+            </blockquote>
 
-              <blockquote class="chapter-quote">
-                "El individuo en contra de los dioses."
-              </blockquote>
-
-              <div class="chapter-body">
-                <p>Artema no es una diosa ni un personaje de fantasía. Es un concepto — el núcleo de la razón por la que el admin decidió dejar de depender de administraciones ajenas y construir su propio espacio. Es el alma de la decisión. El impulso que nace cuando ves, una y otra vez, cómo la mala gestión destruye lo que la comunidad construye.</p>
-                <p>Los "dioses" en esta historia son los admins que abusaron, que acosaron, que dieron poder a quien no debía tenerlo, que cayeron por sus propias manos. <strong>Artema</strong> es el principio que los desafió — no desde las alturas del Olympo, sino desde abajo, junto a la comunidad que aguantó cada caída y eligió seguir.</p>
-                <p>Purg4tory es la comunidad hecha para que las personas sean su yo real. Opiniones, actitudes y acciones bienvenidas, siempre y cuando sean en pro de una sociedad que valora la libre opinión y la interacción de individuos de todo tipo de ambiente. Eso es lo que Artema representa: el rechazo a la hipocresía de otras administraciones y la apuesta por algo propio.</p>
-              </div>
-
-              <blockquote class="chapter-quote">
-                "Así nació Purgatory: no un castigo, sino un refugio construido por alguien que ya había visto suficiente."
-              </blockquote>
-
-              <blockquote class="chapter-quote" style="margin-top: 0; border-left-color: var(--blood-dark); opacity: 0.7;">
-                "Cuando el último bump no sea respondido, cuando el salseo se congele y las voces del canal se apaguen... entonces vendrá la Quinta Era. No llegará con drama. Llegará con el último /bump sin respuesta."
-              </blockquote>
-
+            <div class="chapter-body">
+              <p>Artema no es una diosa ni un personaje de fantasía. Es un concepto — el núcleo de la razón por la que el admin decidió dejar de depender de administraciones ajenas y construir su propio espacio. Es el alma de la decisión. El impulso que nace cuando ves, una y otra vez, cómo la mala gestión destruye lo que la comunidad construye.</p>
+              <p>Los "dioses" en esta historia son los admins que abusaron, que acosaron, que dieron poder a quien no debía tenerlo, que cayeron por sus propias manos. <strong>Artema</strong> es el principio que los desafió — no desde las alturas del Olympo, sino desde abajo, junto a la comunidad que aguantó cada caída y eligió seguir.</p>
+              <p>Purg4tory es la comunidad hecha para que las personas sean su yo real. Opiniones, actitudes y acciones bienvenidas, siempre y cuando sean en pro de una sociedad que valora la libre opinión y la interacción de individuos de todo tipo de ambiente. Eso es lo que Artema representa: el rechazo a la hipocresía de otras administraciones y la apuesta por algo propio.</p>
             </div>
+
+            <blockquote class="chapter-quote">
+              "Así nació Purgatory: no un castigo, sino un refugio construido por alguien que ya había visto suficiente."
+            </blockquote>
+
+            <blockquote class="chapter-quote">
+              "Cuando el último bump no sea respondido, cuando el salseo se congele y las voces del canal se apaguen... entonces vendrá la Quinta Era. No llegará con drama. Llegará con el último /bump sin respuesta."
+            </blockquote>
           </article>
 
           <!-- ── CAPÍTULO II ── -->
           <article class="chapter-tablet" id="cap-leyes">
-            <div class="frame">
-              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
-              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
-              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
-              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+            <span class="chapter-label">Capítulo II</span>
+            <h2 class="chapter-title">Las Leyes Sagradas del Purgatorio</h2>
 
-              <span class="chapter-label">Capítulo II</span>
-              <h2 class="chapter-title">Las Leyes Sagradas del Purgatorio</h2>
+            <div class="chapter-body">
+              <p>Todo reino necesita ley. El Purgatorio no es una democracia — es una dictadura benevolente (según Renas). Estas son las leyes que rigen la existencia en este plano:</p>
+            </div>
 
-              <div class="chapter-body">
-                <p>Todo reino necesita ley. El Purgatorio no es una democracia — es una dictadura benevolente (según Renas). Estas son las leyes que rigen la existencia en este plano:</p>
+            <div style="display: grid; gap: var(--space-4); margin-top: var(--space-6)">
+
+              <div class="sacred-law">
+                <span class="sacred-law-num">I.</span>
+                <div class="sacred-law-title">La Ley del Bump</div>
+                <p>El comando /bump es un ritual sagrado. No es una sugerencia, es una obligación. Cada bump mantiene vivo el portal entre los mundos. Artema observa cada bump y juzga a los negligentes.</p>
               </div>
 
-              <div style="display: grid; gap: var(--space-4); margin-top: var(--space-6)">
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">I.</span>
-                  <div class="sacred-law-title">La Ley del Bump</div>
-                  <p>El comando /bump es un ritual sagrado. No es una sugerencia, es una obligación. Cada bump mantiene vivo el portal entre los mundos. Artema observa cada bump y juzga a los negligentes.</p>
-                </div>
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">II.</span>
-                  <div class="sacred-law-title">La Ley del Salseo</div>
-                  <p>El chisme es la moneda del Purgatorio. Todo se sabe, todo se comenta. El salseo no es el problema — es la razón por la que nadie se va.</p>
-                </div>
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">III.</span>
-                  <div class="sacred-law-title">La Ley del Staff</div>
-                  <p>El Staff es la voluntad materializada de Artema en el plano digital. Sus decisiones son finales. Cuestionar al Staff es como cuestionar a la gravedad: puedes hacerlo, pero vas a caer igual.</p>
-                </div>
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">IV.</span>
-                  <div class="sacred-law-title">La Ley del Infierno</div>
-                  <p>Quien cruce las líneas imperdonables será documentado públicamente. No hay redención, no hay apelación. Tu nombre quedará grabado como advertencia eterna.</p>
-                </div>
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">V.</span>
-                  <div class="sacred-law-title">La Ley del Amorodio</div>
-                  <p>En el Purgatorio, el amor y el odio son la misma cosa. Los lazos aquí se forjan en el fuego del cringe, la humillación mutua y la confianza dañada. Si no puedes con eso, Instagram te espera.</p>
-                </div>
-
-                <div class="sacred-law">
-                  <span class="sacred-law-num">VI.</span>
-                  <div class="sacred-law-title">La Ley de los Menores</div>
-                  <p>Los menores están bajo protección activa. Quien los comprometa activa, pasiva o indirectamente no espera juicio — va directo al círculo más profundo. Esta ley no negocia.</p>
-                </div>
-
+              <div class="sacred-law">
+                <span class="sacred-law-num">II.</span>
+                <div class="sacred-law-title">La Ley del Salseo</div>
+                <p>El chisme es la moneda del Purgatorio. Todo se sabe, todo se comenta. El salseo no es el problema — es la razón por la que nadie se va.</p>
               </div>
+
+              <div class="sacred-law">
+                <span class="sacred-law-num">III.</span>
+                <div class="sacred-law-title">La Ley del Staff</div>
+                <p>El Staff es la voluntad materializada de Artema en el plano digital. Sus decisiones son finales. Cuestionar al Staff es como cuestionar a la gravedad: puedes hacerlo, pero vas a caer igual.</p>
+              </div>
+
+              <div class="sacred-law">
+                <span class="sacred-law-num">IV.</span>
+                <div class="sacred-law-title">La Ley del Infierno</div>
+                <p>Quien cruce las líneas imperdonables será documentado públicamente. No hay redención, no hay apelación. Tu nombre quedará grabado como advertencia eterna.</p>
+              </div>
+
+              <div class="sacred-law">
+                <span class="sacred-law-num">V.</span>
+                <div class="sacred-law-title">La Ley del Amorodio</div>
+                <p>En el Purgatorio, el amor y el odio son la misma cosa. Los lazos aquí se forjan en el fuego del cringe, la humillación mutua y la confianza dañada. Si no puedes con eso, Instagram te espera.</p>
+              </div>
+
+              <div class="sacred-law">
+                <span class="sacred-law-num">VI.</span>
+                <div class="sacred-law-title">La Ley de los Menores</div>
+                <p>Los menores están bajo protección activa. Quien los comprometa activa, pasiva o indirectamente no espera juicio — va directo al círculo más profundo. Esta ley no negocia.</p>
+              </div>
+
             </div>
           </article>
 
           <!-- ── CAPÍTULO III ── -->
           <article class="chapter-tablet" id="cap-historia">
-            <div class="frame frame--highlight">
-              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
-              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
-              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
-              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+            <span class="chapter-label">Capítulo III</span>
+            <h2 class="chapter-title">Las Cuatro Eras</h2>
 
-              <span class="chapter-label">Capítulo III</span>
-              <h2 class="chapter-title">Las Cuatro Eras</h2>
+            <div class="timeline" style="margin-top: var(--space-6)">
 
-              <div class="timeline" style="margin-top: var(--space-6)">
+              <article class="era-card record">
+                <div class="record-meta">Era I · 2024</div>
+                <h3 class="era-card-title">Las Fosas — El Origen</h3>
+                <p class="era-card-desc">El servidor original, fundado por Ozy. Aquí nació el concepto que definiría a toda la comunidad: el <strong>Amorodio</strong>. "Por mucho que se insultaran al entrar, todos entendíamos que era nuestra forma de interactuar y aun así nos queríamos." Un vínculo forjado en el insulto mutuo y la confianza real. La pelea entre Daku y Nelcon en una llamada muy void incomodó a todos y empezó a hundir lo que quedaba. Los audios prohibidos — donde Nelcon aceptaba el amor de Ozymandias — quedaron como reliquia. Cayó por mala administración.</p>
+              </article>
 
-                <article class="era-card">
-                  <div class="era-card-inner">
-                    <span class="era-numeral">Era I</span>
-                    <h3 class="era-card-title">Las Fosas — El Origen (2024)</h3>
-                    <p class="era-card-desc">El servidor original, fundado por Ozy. Aquí nació el concepto que definiría a toda la comunidad: el <strong>Amorodio</strong>. "Por mucho que se insultaran al entrar, todos entendíamos que era nuestra forma de interactuar y aun así nos queríamos." Un vínculo forjado en el insulto mutuo y la confianza real. La pelea entre Daku y Nelcon en una llamada muy void incomodó a todos y empezó a hundir lo que quedaba. Los audios prohibidos — donde Nelcon aceptaba el amor de Ozymandias — quedaron como reliquia. Cayó por mala administración.</p>
-                  </div>
-                </article>
+              <article class="era-card record">
+                <div class="record-meta">Era II · 2025</div>
+                <h3 class="era-card-title">Los Pibes Shitposters — La Era Oscura</h3>
+                <p class="era-card-desc">Onil tomó las riendas y las usó para todo lo contrario de lo que debía. Acosó a Cat. Puso a Filo — un acosador — como administrador. El golpe final: metió al admin de otro servidor como co-admin del grupo en menos de tres horas de que ese tipo hubiera entrado. La comunidad, que ya había sobrevivido la caída de Las Fosas, vio el patrón repetirse. Mala administración, segunda vez.</p>
+              </article>
 
-                <article class="era-card">
-                  <div class="era-card-inner">
-                    <span class="era-numeral">Era II</span>
-                    <h3 class="era-card-title">Los Pibes Shitposters — La Era Oscura (2025)</h3>
-                    <p class="era-card-desc">Onil tomó las riendas y las usó para todo lo contrario de lo que debía. Acosó a Cat. Puso a Filo — un acosador — como administrador. El golpe final: metió al admin de otro servidor como co-admin del grupo en menos de tres horas de que ese tipo hubiera entrado. La comunidad, que ya había sobrevivido la caída de Las Fosas, vio el patrón repetirse. Mala administración, segunda vez.</p>
-                  </div>
-                </article>
+              <article class="era-card record">
+                <div class="record-meta">Era III · 2025</div>
+                <h3 class="era-card-title">OLYMPO — La Edad de los Refugiados</h3>
+                <p class="era-card-desc">El Éxodo Blanco llegó cuando el grupo de Doomentio se separó por la voideada de Twoky, y la mayoría de los redimibles terminaron en OLYMPO. El servidor creció. El grupo original de Las Fosas se reintegró. Nacieron momentos legendarios: Ivan, Cat y Matus hablando como doctops — chistes que no requieren explicación si estuviste ahí. Pero Ivan y Cat no supieron administrar lo que tenían. El patrón, tercera vez: mala administración.</p>
+              </article>
 
-                <article class="era-card">
-                  <div class="era-card-inner">
-                    <span class="era-numeral">Era III</span>
-                    <h3 class="era-card-title">OLYMPO — La Edad de los Refugiados (2025)</h3>
-                    <p class="era-card-desc">El Éxodo Blanco llegó cuando el grupo de Doomentio se separó por la voideada de Twoky, y la mayoría de los redimibles terminaron en OLYMPO. El servidor creció. El grupo original de Las Fosas se reintegró. Nacieron momentos legendarios: Ivan, Cat y Matus hablando como doctops — chistes que no requieren explicación si estuviste ahí. Pero Ivan y Cat no supieron administrar lo que tenían. El patrón, tercera vez: mala administración.</p>
-                  </div>
-                </article>
+              <article class="era-card record">
+                <div class="record-meta">Era IV · Actual — 12 de noviembre</div>
+                <h3 class="era-card-title">PURG4TORY — La Dictadura</h3>
+                <p class="era-card-desc">Renas no se autoproclamó — el pueblo lo siguió. "Una decisión en la que me siguió el pueblo por un mejor futuro." Fundado el 12 de noviembre, PURG4TORY es la era más larga y la única construida con la memoria colectiva de todo lo que no debía repetirse. El ritual del /bump sigue vivo: no puede pasar un día sin él, o el tiempo deja de fluir. ~85 miembros. Todo el camino ha sido importante.</p>
+              </article>
 
-                <article class="era-card">
-                  <div class="era-card-inner">
-                    <span class="era-numeral">Era IV — Actual</span>
-                    <h3 class="era-card-title">PURG4TORY — La Dictadura (12 de noviembre)</h3>
-                    <p class="era-card-desc">Renas no se autoproclamó — el pueblo lo siguió. "Una decisión en la que me siguió el pueblo por un mejor futuro." Fundado el 12 de noviembre, PURG4TORY es la era más larga y la única construida con la memoria colectiva de todo lo que no debía repetirse. El ritual del /bump sigue vivo: no puede pasar un día sin él, o el tiempo deja de fluir. ~85 miembros. Todo el camino ha sido importante.</p>
-                  </div>
-                </article>
+            </div>
 
-              </div>
+            <!-- Códex integrado — antes era Cap V separado -->
+            <div class="record" style="margin-top: var(--space-8)">
+              <div class="record-meta">Códex de las Almas</div>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5)">
 
-              <!-- Códex integrado — antes era Cap V separado -->
-              <div style="margin-top: var(--space-8); border-top: 1px solid var(--border); padding-top: var(--space-6)">
-                <p style="font-family: var(--font-display); font-size: var(--fs-xs); letter-spacing: 0.4em; text-transform: uppercase; color: var(--blood-bright); text-align: center; margin-bottom: var(--space-5)">Códex de las Almas</p>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4)">
-
-                  <div style="padding: var(--space-4) var(--space-5); background: var(--bg-1); border-radius: var(--r-md); border: 1px solid var(--border)">
-                    <div style="font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); margin-bottom: var(--space-2)">Almas Penitentes</div>
-                    <p style="font-size: var(--fs-xs); color: var(--text-dim); line-height: 1.6">Los miembros activos que cumplen con sus rituales. La columna vertebral del servidor.</p>
-                  </div>
-
-                  <div style="padding: var(--space-4) var(--space-5); background: var(--bg-1); border-radius: var(--r-md); border: 1px solid var(--border)">
-                    <div style="font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); margin-bottom: var(--space-2)">Almas Errantes</div>
-                    <p style="font-size: var(--fs-xs); color: var(--text-dim); line-height: 1.6">Los inactivos que aparecen de vez en cuando. El limbo del "última vez conectado hace 3 meses".</p>
-                  </div>
-
-                  <div style="padding: var(--space-4) var(--space-5); background: var(--bg-1); border-radius: var(--r-md); border: 1px solid var(--border)">
-                    <div style="font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); margin-bottom: var(--space-2)">Almas Condenadas</div>
-                    <p style="font-size: var(--fs-xs); color: var(--text-dim); line-height: 1.6">Los enviados a los Círculos del Infierno. Sus nombres no se borran. El Infierno no olvida.</p>
-                  </div>
-
-                  <div style="padding: var(--space-4) var(--space-5); background: var(--bg-1); border-radius: var(--r-md); border: 1px solid var(--border)">
-                    <div style="font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); margin-bottom: var(--space-2)">Almas Ascendidas</div>
-                    <p style="font-size: var(--fs-xs); color: var(--text-dim); line-height: 1.6">El Staff. Elegidos por Artema (o por Renas, que es lo mismo según él).</p>
-                  </div>
-
+                <div style="border-top: 1px solid var(--rule); padding-top: var(--space-3)">
+                  <div style="font-weight: 600; color: var(--paper); margin-bottom: var(--space-1)">Almas Penitentes</div>
+                  <p style="font-size: var(--fs-xs); color: var(--dim); line-height: 1.6">Los miembros activos que cumplen con sus rituales. La columna vertebral del servidor.</p>
                 </div>
-              </div>
 
+                <div style="border-top: 1px solid var(--rule); padding-top: var(--space-3)">
+                  <div style="font-weight: 600; color: var(--paper); margin-bottom: var(--space-1)">Almas Errantes</div>
+                  <p style="font-size: var(--fs-xs); color: var(--dim); line-height: 1.6">Los inactivos que aparecen de vez en cuando. El limbo del "última vez conectado hace 3 meses".</p>
+                </div>
+
+                <div style="border-top: 1px solid var(--rule); padding-top: var(--space-3)">
+                  <div style="font-weight: 600; color: var(--paper); margin-bottom: var(--space-1)">Almas Condenadas</div>
+                  <p style="font-size: var(--fs-xs); color: var(--dim); line-height: 1.6">Los enviados a los Círculos del Infierno. Sus nombres no se borran. El Infierno no olvida.</p>
+                </div>
+
+                <div style="border-top: 1px solid var(--rule); padding-top: var(--space-3)">
+                  <div style="font-weight: 600; color: var(--paper); margin-bottom: var(--space-1)">Almas Ascendidas</div>
+                  <p style="font-size: var(--fs-xs); color: var(--dim); line-height: 1.6">El Staff. Elegidos por Artema (o por Renas, que es lo mismo según él).</p>
+                </div>
+
+              </div>
             </div>
           </article>
 
-          <div style="text-align:center; margin-top: var(--space-7)">
+          <div style="margin-top: var(--space-7); display:flex; gap: var(--space-4); flex-wrap:wrap">
             <a href="mapa.html" class="btn btn-blood">Explorar el Mapa del Purgatorio</a>
-            <a href="personajes.html" class="btn" style="margin-left: var(--space-4)">Ver Personajes</a>
+            <a href="personajes.html" class="btn">Ver Personajes</a>
           </div>
 
         </div>
@@ -294,10 +251,8 @@
 
     <footer class="site-footer">
       <div class="container">
-        <div class="divider"><span class="divider-text">PURG4TORY</span></div>
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="static/img/logo.svg" alt="">
             <div>
               <div class="footer-brand-text">PURGATORY</div>
               <div class="footer-tagline">Donde las historias no mueren, solo arden.</div>

@@ -82,9 +82,8 @@
     var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
     line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
-    line.setAttribute('stroke', 'rgba(168,0,31,0.4)');
-    line.setAttribute('stroke-width', '1.5');
-    line.setAttribute('stroke-dasharray', '6 5');
+    line.style.stroke = 'var(--rule)';
+    line.setAttribute('stroke-width', '1');
     svg.appendChild(line);
   });
 
@@ -119,10 +118,10 @@
   function openTooltip(n) {
     if (!tooltip || !tooltipContent) return;
     tooltipContent.innerHTML =
-      '<div class="divider" style="margin-top:0"><span class="divider-text">' + n.tag + '</span></div>' +
-      '<h3 style="font-family:var(--font-display);font-size:var(--fs-xl);color:var(--text);margin-bottom:var(--space-3)">' + n.title + '</h3>' +
-      '<p style="font-family:var(--font-serif);font-size:var(--fs-md);color:var(--text-muted);line-height:1.65">' + n.desc + '</p>' +
-      '<p style="font-family:var(--font-display);font-size:var(--fs-xs);letter-spacing:0.25em;color:var(--blood-bright);margin-top:var(--space-4);text-transform:uppercase">' + n.subtitle + '</p>';
+      '<div class="record-meta">' + n.tag + '</div>' +
+      '<h3 style="font-family:var(--font-serif);font-weight:600;font-size:var(--fs-xl);color:var(--paper);margin-bottom:var(--space-3)">' + n.title + '</h3>' +
+      '<p style="font-size:var(--fs-md);color:var(--paper);opacity:0.85;line-height:1.65">' + n.desc + '</p>' +
+      '<p class="record-meta" style="margin-top:var(--space-4);margin-bottom:0">' + n.subtitle + '</p>';
     tooltip.classList.add('is-open');
     tooltip.setAttribute('aria-hidden', 'false');
   }

@@ -23,20 +23,20 @@
 
   function renderEvent(name, url) {
     el.innerHTML =
-      '<div class="frame countdown-frame">' +
+      '<div class="countdown-frame">' +
         '<p class="countdown-label">Próximo Ritual</p>' +
         '<h3 class="countdown-name">' + escapeHTML(name) + '</h3>' +
         '<div class="countdown-clock" id="countdown-clock">--:--:--:--</div>' +
-        '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn btn-blood countdown-cta">Ver en Discord</a>' +
+        '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn btn-blood">Ver en Discord</a>' +
       '</div>';
   }
 
   function renderFallback() {
     el.innerHTML =
-      '<div class="frame countdown-frame">' +
+      '<div class="countdown-frame">' +
         '<p class="countdown-label">Próximo Ritual</p>' +
         '<p class="countdown-empty">No hay rituales programados por ahora.</p>' +
-        '<a href="' + DISCORD_URL + '" target="_blank" rel="noopener noreferrer" class="btn btn-blood countdown-cta">Entrar al Discord</a>' +
+        '<a href="' + DISCORD_URL + '" target="_blank" rel="noopener noreferrer" class="btn btn-blood">Entrar al Discord</a>' +
       '</div>';
   }
 

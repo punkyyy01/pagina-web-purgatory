@@ -28,11 +28,12 @@
     <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
     <link rel="preload" href="static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="static/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="static/css/fonts.css?v=20260614">
+    <link rel="preload" href="static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="static/css/fonts.css?v=20260722">
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#3de8da">
-    <link rel="stylesheet" href="static/css/tokens.css?v=20260614">
-    <link rel="stylesheet" href="static/css/styles.css?v=20260615">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="stylesheet" href="static/css/tokens.css?v=20260722">
+    <link rel="stylesheet" href="static/css/styles.css?v=20260722">
     <link rel="stylesheet" href="static/css/lite-mode.css?v=20260614">
     <style>
       .void-page {
@@ -43,37 +44,32 @@
         padding: var(--space-6);
         text-align: center;
       }
-      .void-content {
-        max-width: 560px;
-      }
+      .void-content { max-width: 480px; }
       .void-number {
-        font-family: var(--font-display);
+        font-family: var(--font-serif);
+        font-weight: 600;
         font-size: clamp(6rem, 20vw, 12rem);
-        color: var(--blood);
+        color: var(--paper);
         line-height: 1;
-        text-shadow: 0 0 60px rgba(168,0,31,0.5);
         display: block;
-        margin-bottom: var(--space-3);
+        margin-bottom: var(--space-4);
       }
       .void-title {
-        font-family: var(--font-display);
         font-size: var(--fs-2xl);
-        color: var(--text);
+        font-weight: 600;
+        color: var(--paper);
         margin-bottom: var(--space-4);
       }
       .void-desc {
-        font-family: var(--font-serif);
-        font-style: italic;
         font-size: var(--fs-md);
-        color: var(--text-muted);
+        color: var(--dim);
         line-height: 1.6;
         margin-bottom: var(--space-6);
       }
       .void-quote {
-        font-family: var(--font-serif);
-        font-style: italic;
-        font-size: var(--fs-sm);
-        color: var(--text-dim);
+        font-family: var(--font-mono);
+        font-size: var(--fs-xs);
+        color: var(--dim);
         margin-top: var(--space-6);
         min-height: 1.5em;
       }
@@ -83,24 +79,16 @@
 
     <div class="void-page">
       <div class="void-content">
-        <div class="frame frame--highlight" style="padding: var(--space-8) var(--space-7)">
-          <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
-          <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
-          <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
-          <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
+        <span class="void-number"><span class="seal">4</span>04</span>
+        <h1 class="void-title">Has caído al Void</h1>
+        <p class="void-desc">Esta región del Purgatorio no existe — o fue borrada por el Staff. El vacío entre los mundos te ha reclamado temporalmente.</p>
 
-          <div class="divider" style="margin-top:0"><span class="divider-text">El Void</span></div>
-          <span class="void-number">404</span>
-          <h1 class="void-title">Has caído al Void</h1>
-          <p class="void-desc">Esta región del Purgatorio no existe — o fue borrada por el Staff. El vacío entre los mundos te ha reclamado temporalmente.</p>
-
-          <div style="display:flex; gap: var(--space-4); justify-content:center; flex-wrap:wrap">
-            <a href="index.html" class="btn btn-blood">Volver al Purgatorio</a>
-            <a href="mapa.html" class="btn">Explorar el Mapa</a>
-          </div>
-
-          <p class="void-quote" id="void-quote"></p>
+        <div style="display:flex; gap: var(--space-4); justify-content:center; flex-wrap:wrap">
+          <a href="index.html" class="btn btn-blood">Volver al Purgatorio</a>
+          <a href="mapa.html" class="btn">Explorar el Mapa</a>
         </div>
+
+        <p class="void-quote" id="void-quote"></p>
       </div>
     </div>
 

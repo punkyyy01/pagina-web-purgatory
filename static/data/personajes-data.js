@@ -153,11 +153,11 @@
 
   if (!grid) return;
 
-  /* ── Render naipe cards ── */
+  /* ── Render — mini-expediente plano, sin flip ── */
   function renderCards(list) {
     grid.innerHTML = '';
     if (list.length === 0) {
-      grid.innerHTML = '<p style="color:var(--text-dim);text-align:center;grid-column:1/-1;padding:40px 0;font-family:var(--font-serif);font-style:italic">No hay almas con ese criterio.</p>';
+      grid.innerHTML = '<p style="color:var(--dim);grid-column:1/-1;padding:40px 0">No hay almas con ese criterio.</p>';
       return;
     }
     list.forEach(function (c) {
@@ -169,23 +169,10 @@
       card.setAttribute('tabindex', '0');
       card.setAttribute('aria-label', c.name);
       card.innerHTML =
-        '<div class="card-naipe-inner">' +
-          '<div class="card-face card-face-back">' +
-            '<div class="card-back-emblem">' +
-              '<img src="static/img/logo.svg" alt="">' +
-            '</div>' +
-          '</div>' +
-          '<div class="card-face card-face-front">' +
-            '<div class="card-portrait">' +
-              '<img src="static/img/ornaments/diamond.svg" class="card-portrait-placeholder" alt="">' +
-            '</div>' +
-            '<div class="card-info">' +
-              '<div class="card-name">' + c.name + '</div>' +
-              '<div class="card-alias">' + c.alias + '</div>' +
-              '<div class="card-era">' + c.eraLabel + '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
+        '<div class="card-name">' + c.name + '</div>' +
+        '<div class="card-alias">' + c.alias + '</div>' +
+        '<div class="card-era">' + c.eraLabel + '</div>' +
+        '<div class="card-desc">' + c.desc + '</div>';
       grid.appendChild(card);
     });
   }
@@ -260,34 +247,19 @@
   function openModal(c) {
     var relationsHTML = c.relations.length
       ? c.relations.map(function (r) { return '<li>' + r + '</li>'; }).join('')
-      : '<li style="color:var(--text-dim)">Sin relaciones registradas.</li>';
+      : '<li style="color:var(--dim);border-left:none;padding-left:0">Sin relaciones registradas.</li>';
 
     modalContent.innerHTML =
-      '<div class="divider" style="margin-top:0"><span class="divider-text">' + c.eraLabel + '</span></div>' +
+      '<div class="record-meta">' + c.eraLabel + ' · ' + c.role + '</div>' +
       '<h2 class="modal-title" id="modal-char-name">' + c.name + '</h2>' +
-      '<p class="modal-alias">' + c.alias + ' · ' + c.role + '</p>' +
-      '<div class="char-modal-grid">' +
-        '<div class="char-modal-portrait">' +
-          '<img src="static/img/ornaments/diamond.svg" style="width:40%;opacity:0.3" alt="">' +
-        '</div>' +
-        '<div>' +
-          '<div class="char-detail-field">' +
-            '<span class="char-detail-label">Era</span>' +
-            '<span class="char-detail-value">' + c.eraLabel + '</span>' +
-          '</div>' +
-          '<div class="char-detail-field">' +
-            '<span class="char-detail-label">Rol</span>' +
-            '<span class="char-detail-value">' + c.role + '</span>' +
-          '</div>' +
-          (c.quote ? '<blockquote class="char-quote">' + c.quote + '</blockquote>' : '') +
-        '</div>' +
-      '</div>' +
+      '<p class="modal-alias">' + c.alias + '</p>' +
+      (c.quote ? '<blockquote class="char-quote">' + c.quote + '</blockquote>' : '') +
       '<p class="char-bio">' + c.fullBio + '</p>' +
-      '<div class="char-relations" style="margin-top:var(--space-4)">' +
-        '<span class="char-detail-label">Relaciones</span>' +
+      '<div class="char-relations">' +
+        '<span class="record-meta">Relaciones</span>' +
         '<ul style="margin-top:var(--space-2)">' + relationsHTML + '</ul>' +
       '</div>' +
-      '<div style="text-align:center;margin-top:var(--space-5)">' +
+      '<div style="margin-top:var(--space-5)">' +
         '<button class="btn btn-blood modal-close-btn">Cerrar</button>' +
       '</div>';
 

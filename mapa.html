@@ -28,21 +28,19 @@
     <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
     <link rel="preload" href="static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="static/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="static/css/fonts.css?v=20260614">
+    <link rel="preload" href="static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="static/css/fonts.css?v=20260722">
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#3de8da">
-    <link rel="stylesheet" href="static/css/tokens.css?v=20260614">
-    <link rel="stylesheet" href="static/css/styles.css?v=20260614">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="stylesheet" href="static/css/tokens.css?v=20260722">
+    <link rel="stylesheet" href="static/css/styles.css?v=20260722">
     <link rel="stylesheet" href="static/css/lite-mode.css?v=20260614">
   </head>
   <body>
 
     <header class="site-header" id="site-header">
       <nav class="nav">
-        <a class="brand" href="index.html">
-          <img src="static/img/logo.svg" alt="Purgatory" />
-          <span class="brand-name">Purgatory</span>
-        </a>
+        <a class="brand wordmark-small" href="index.html">PURG<span class="seal-sm">4</span>TORY</a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema"></button>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
         <ul class="nav-links" id="nav-links">
@@ -61,9 +59,8 @@
       <!-- Hero -->
       <section class="page-hero">
         <div class="container">
-          <div class="divider"><span class="divider-text">Cartografía</span></div>
-          <h1 class="section-title" style="font-size: var(--fs-hero)">Mapa del Purgatorio</h1>
-          <p class="section-lead">Los cuatro servidores y los eventos que los definieron. Una línea de tiempo real. Haz clic en cada carta para explorar su lore.</p>
+          <h1 class="section-title">Mapa del Purgatorio</h1>
+          <p class="section-lead">Los cuatro servidores y los eventos que los definieron.</p>
         </div>
       </section>
 
@@ -83,13 +80,13 @@
           </div>
 
           <!-- Leyenda -->
-          <div style="display:flex; gap: var(--space-5); flex-wrap:wrap; margin-top: var(--space-5); justify-content:center">
-            <div style="display:flex; align-items:center; gap: var(--space-2); font-family: var(--font-display); font-size: var(--fs-xs); letter-spacing:0.2em; color: var(--text-muted)">
-              <span style="width:10px;height:10px;background:var(--blood-bright);display:inline-block;transform:rotate(45deg)"></span>
+          <div style="display:flex; gap: var(--space-5); flex-wrap:wrap; margin-top: var(--space-5)">
+            <div style="display:flex; align-items:center; gap: var(--space-2); font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing:0.1em; text-transform:uppercase; color: var(--dim)">
+              <span style="width:8px;height:8px;border:1px solid var(--stamp);display:inline-block"></span>
               Servidores
             </div>
-            <div style="display:flex; align-items:center; gap: var(--space-2); font-family: var(--font-display); font-size: var(--fs-xs); letter-spacing:0.2em; color: var(--text-muted)">
-              <span style="width:10px;height:10px;background:var(--text-dim);display:inline-block;transform:rotate(45deg)"></span>
+            <div style="display:flex; align-items:center; gap: var(--space-2); font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing:0.1em; text-transform:uppercase; color: var(--dim)">
+              <span style="width:8px;height:8px;border:1px solid var(--rule);display:inline-block"></span>
               Eventos
             </div>
           </div>
@@ -100,10 +97,6 @@
       <!-- Tooltip modal -->
       <div class="mapa-tooltip" id="mapa-tooltip" aria-hidden="true">
         <div class="mapa-tooltip-panel">
-          <img src="static/img/ornaments/corner-tl.svg" alt="" style="position:absolute;width:28px;height:28px;top:8px;left:8px;color:var(--blood-bright);pointer-events:none">
-          <img src="static/img/ornaments/corner-tr.svg" alt="" style="position:absolute;width:28px;height:28px;top:8px;right:8px;color:var(--blood-bright);pointer-events:none;transform:scaleX(-1)">
-          <img src="static/img/ornaments/corner-bl.svg" alt="" style="position:absolute;width:28px;height:28px;bottom:8px;left:8px;color:var(--blood-bright);pointer-events:none;transform:scaleY(-1)">
-          <img src="static/img/ornaments/corner-br.svg" alt="" style="position:absolute;width:28px;height:28px;bottom:8px;right:8px;color:var(--blood-bright);pointer-events:none;transform:scale(-1,-1)">
           <button class="modal-close" id="mapa-tooltip-close" aria-label="Cerrar">&#215;</button>
           <div id="mapa-tooltip-content"></div>
         </div>
@@ -115,10 +108,8 @@
 
     <footer class="site-footer">
       <div class="container">
-        <div class="divider"><span class="divider-text">PURG4TORY</span></div>
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="static/img/logo.svg" alt="">
             <div>
               <div class="footer-brand-text">PURGATORY</div>
               <div class="footer-tagline">Donde las historias no mueren, solo arden.</div>

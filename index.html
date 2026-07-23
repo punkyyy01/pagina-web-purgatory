@@ -28,21 +28,19 @@
     <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
     <link rel="preload" href="static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="static/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="static/css/fonts.css?v=20260614">
+    <link rel="preload" href="static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="static/css/fonts.css?v=20260722">
     <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#3de8da">
-    <link rel="stylesheet" href="static/css/tokens.css?v=20260614">
-    <link rel="stylesheet" href="static/css/styles.css?v=20260615">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="stylesheet" href="static/css/tokens.css?v=20260722">
+    <link rel="stylesheet" href="static/css/styles.css?v=20260722">
     <link rel="stylesheet" href="static/css/lite-mode.css?v=20260614">
   </head>
   <body>
 
     <header class="site-header" id="site-header">
       <nav class="nav">
-        <a class="brand" href="index.html">
-          <img src="static/img/logo.svg" alt="Purgatory" />
-          <span class="brand-name">Purgatory</span>
-        </a>
+        <a class="brand wordmark-small" href="index.html">PURG<span class="seal-sm">4</span>TORY</a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema"></button>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
         <ul class="nav-links" id="nav-links">
@@ -62,22 +60,11 @@
            HERO
       ══════════════════════════════════════ -->
       <section class="hero" id="home">
-        <div class="hero-banner">
-          <img src="static/img/f8b3e41c77033386d67c4461ede34fcc.png" alt="" decoding="async" fetchpriority="high" />
-          <div class="hero-banner-overlay"></div>
-        </div>
-
         <div class="hero-content">
           <div class="container">
-            <div class="hero-frame frame frame--highlight">
-              <img src="static/img/ornaments/corner-tl.svg" class="frame-corner frame-corner-tl" alt="">
-              <img src="static/img/ornaments/corner-tr.svg" class="frame-corner frame-corner-tr" alt="">
-              <img src="static/img/ornaments/corner-bl.svg" class="frame-corner frame-corner-bl" alt="">
-              <img src="static/img/ornaments/corner-br.svg" class="frame-corner frame-corner-br" alt="">
-
-              <p class="hero-eyebrow">CRÓNICA DEL SERVIDOR</p>
-              <h1 class="hero-title">PURG4TORY</h1>
-              <p class="hero-lead">Donde las historias no mueren, solo arden.</p>
+            <div class="hero-frame">
+              <p class="hero-eyebrow">crónica del servidor</p>
+              <h1 class="hero-title">PURG<span class="seal">4</span>TORY</h1>
 
               <div class="hero-actions">
                 <a href="lore.html" class="btn btn-blood">Explorar el Lore</a>
@@ -85,7 +72,7 @@
               </div>
             </div>
 
-            <div id="countdown-widget" style="margin-top: var(--space-6)"></div>
+            <div id="countdown-widget" style="margin-top: var(--space-7)"></div>
           </div>
         </div>
       </section>
@@ -95,95 +82,37 @@
       ══════════════════════════════════════ -->
       <section class="section" id="personajes-destacados">
         <div class="container">
-          <div class="divider"><span class="divider-text">Personajes Canónicos</span></div>
           <h2 class="section-title">Las Almas de Purgatory</h2>
-          <p class="section-lead">Once personas reales. Cada una con su chisme, su momento, y su lugar en el registro. Pasá el cursor o tocá para revelar.</p>
 
-          <div class="cards-grid cards-grid--4" style="margin-top: var(--space-6)">
+          <div class="cards-grid cards-grid--4">
 
-            <div class="card-naipe" role="button" tabindex="0" aria-label="Nelcon">
-              <div class="card-naipe-inner">
-                <div class="card-face card-face-back">
-                  <div class="card-back-emblem">
-                    <img src="static/img/logo.svg" alt="">
-                  </div>
-                </div>
-                <div class="card-face card-face-front">
-                  <div class="card-portrait">
-                    <img src="static/img/ornaments/diamond.svg" class="card-portrait-placeholder" alt="">
-                  </div>
-                  <div class="card-info">
-                    <div class="card-name">Nelcon</div>
-                    <div class="card-alias">"El arquitecto del caos"</div>
-                    <div class="card-era">Era I · Las Fosas</div>
-                  </div>
-                </div>
-              </div>
+            <div class="card-naipe">
+              <div class="card-name">Nelcon</div>
+              <div class="card-alias">"El arquitecto del caos"</div>
+              <div class="card-era">Era I · Las Fosas</div>
             </div>
 
-            <div class="card-naipe" role="button" tabindex="0" aria-label="Renas">
-              <div class="card-naipe-inner">
-                <div class="card-face card-face-back">
-                  <div class="card-back-emblem">
-                    <img src="static/img/logo.svg" alt="">
-                  </div>
-                </div>
-                <div class="card-face card-face-front">
-                  <div class="card-portrait">
-                    <img src="static/img/ornaments/diamond.svg" class="card-portrait-placeholder" alt="">
-                  </div>
-                  <div class="card-info">
-                    <div class="card-name">Renas</div>
-                    <div class="card-alias">"El Dictador"</div>
-                    <div class="card-era">Era IV · Purgatory</div>
-                  </div>
-                </div>
-              </div>
+            <div class="card-naipe">
+              <div class="card-name">Renas</div>
+              <div class="card-alias">"El Dictador"</div>
+              <div class="card-era">Era IV · Purgatory</div>
             </div>
 
-            <div class="card-naipe" role="button" tabindex="0" aria-label="Twoky">
-              <div class="card-naipe-inner">
-                <div class="card-face card-face-back">
-                  <div class="card-back-emblem">
-                    <img src="static/img/logo.svg" alt="">
-                  </div>
-                </div>
-                <div class="card-face card-face-front">
-                  <div class="card-portrait">
-                    <img src="static/img/ornaments/diamond.svg" class="card-portrait-placeholder" alt="">
-                  </div>
-                  <div class="card-info">
-                    <div class="card-name">Twoky</div>
-                    <div class="card-alias">"El Titán de los Videos"</div>
-                    <div class="card-era">Era III · Olympo</div>
-                  </div>
-                </div>
-              </div>
+            <div class="card-naipe">
+              <div class="card-name">Twoky</div>
+              <div class="card-alias">"El Titán de los Videos"</div>
+              <div class="card-era">Era III · Olympo</div>
             </div>
 
-            <div class="card-naipe" role="button" tabindex="0" aria-label="Frambuesa">
-              <div class="card-naipe-inner">
-                <div class="card-face card-face-back">
-                  <div class="card-back-emblem">
-                    <img src="static/img/logo.svg" alt="">
-                  </div>
-                </div>
-                <div class="card-face card-face-front">
-                  <div class="card-portrait">
-                    <img src="static/img/ornaments/diamond.svg" class="card-portrait-placeholder" alt="">
-                  </div>
-                  <div class="card-info">
-                    <div class="card-name">Frambuesa</div>
-                    <div class="card-alias">"La Moderadora Implacable"</div>
-                    <div class="card-era">Era III-IV · Olympo / Purgatory</div>
-                  </div>
-                </div>
-              </div>
+            <div class="card-naipe">
+              <div class="card-name">Frambuesa</div>
+              <div class="card-alias">"La Moderadora Implacable"</div>
+              <div class="card-era">Era III-IV · Olympo / Purgatory</div>
             </div>
 
           </div>
 
-          <div style="text-align:center; margin-top: var(--space-6)">
+          <div style="margin-top: var(--space-6)">
             <a href="personajes.html" class="btn btn-blood">Ver todos los personajes</a>
           </div>
         </div>
@@ -194,51 +123,37 @@
       ══════════════════════════════════════ -->
       <section class="section" id="timeline">
         <div class="container">
-          <div class="divider"><span class="divider-text">Historia</span></div>
           <h2 class="section-title">Las Cuatro Eras</h2>
-          <p class="section-lead">Tres servidores caídos por la misma razón. Uno que no. La crónica completa de PURG4TORY.</p>
 
-          <div class="timeline" style="margin-top: var(--space-7)">
+          <div class="timeline">
 
-            <article class="era-card">
-              <div class="era-card-inner">
-                <span class="era-numeral">Era I</span>
-                <h3 class="era-card-title">Las Fosas — El Big Bang</h3>
-                <p class="era-card-desc">El salvaje oeste de Discord: sin reglas, puro caos y el origen de los famosos "audios prohibidos". Aquí nació la leyenda de Nelcon y se forjó el "Amorodio".</p>
-                <span class="era-tag">Caos Absoluto</span>
-              </div>
+            <article class="era-card record">
+              <div class="record-meta">Era I · Caos Absoluto</div>
+              <h3 class="era-card-title">Las Fosas — El Big Bang</h3>
+              <p class="era-card-desc">El salvaje oeste de Discord: sin reglas, puro caos y el origen de los famosos "audios prohibidos". Aquí nació la leyenda de Nelcon y se forjó el "Amorodio".</p>
             </article>
 
-            <article class="era-card">
-              <div class="era-card-inner">
-                <span class="era-numeral">Era II</span>
-                <h3 class="era-card-title">Los Pibes Shitposters — El Bache</h3>
-                <p class="era-card-desc">Onil tomó las riendas y nombró admin a un acosador conocido. En menos de tres horas de que un desconocido entrara al server, ya era co-admin. El patrón: mala administración.</p>
-                <span class="era-tag">Edad Oscura</span>
-              </div>
+            <article class="era-card record">
+              <div class="record-meta">Era II · Edad Oscura</div>
+              <h3 class="era-card-title">Los Pibes Shitposters — El Bache</h3>
+              <p class="era-card-desc">Onil tomó las riendas y nombró admin a un acosador conocido. En menos de tres horas de que un desconocido entrara al server, ya era co-admin. El patrón: mala administración.</p>
             </article>
 
-            <article class="era-card">
-              <div class="era-card-inner">
-                <span class="era-numeral">Era III</span>
-                <h3 class="era-card-title">OLYMPO — La Edad de Oro</h3>
-                <p class="era-card-desc">El "Éxodo Blanco" trajo nombres como Ivan, Matiti y Twoky. La comunidad vivió su apogeo. Aquí nacieron los chistes que no murieron. Ivan, los doctops de Matus, la integración del grupo original de Las Fosas.</p>
-                <span class="era-tag">Edad de Oro</span>
-              </div>
+            <article class="era-card record">
+              <div class="record-meta">Era III · Edad de Oro</div>
+              <h3 class="era-card-title">OLYMPO — La Edad de Oro</h3>
+              <p class="era-card-desc">El "Éxodo Blanco" trajo nombres como Ivan, Matiti y Twoky. La comunidad vivió su apogeo. Aquí nacieron los chistes que no murieron. Ivan, los doctops de Matus, la integración del grupo original de Las Fosas.</p>
             </article>
 
-            <article class="era-card">
-              <div class="era-card-inner">
-                <span class="era-numeral">Era IV — Actual</span>
-                <h3 class="era-card-title">PURG4TORY — La Dictadura</h3>
-                <p class="era-card-desc">Bajo la "Dictadura de Renasarenas", el servidor sobrevive entre rituales como el /bump y el salseo cotidiano que nos mantiene vivos.</p>
-                <span class="era-tag">Era Actual</span>
-              </div>
+            <article class="era-card record">
+              <div class="record-meta">Era IV · Actual</div>
+              <h3 class="era-card-title">PURG4TORY — La Dictadura</h3>
+              <p class="era-card-desc">Bajo la "Dictadura de Renasarenas", el servidor sobrevive entre rituales como el /bump y el salseo cotidiano que nos mantiene vivos.</p>
             </article>
 
           </div>
 
-          <div style="text-align:center; margin-top: var(--space-6)">
+          <div style="margin-top: var(--space-6)">
             <a href="lore.html" class="btn">Leer la historia completa</a>
           </div>
         </div>
@@ -249,11 +164,9 @@
       ══════════════════════════════════════ -->
       <section class="section" id="infierno">
         <div class="container">
-          <div class="divider"><span class="divider-text">Los Condenados</span></div>
           <h2 class="section-title">Círculos del Infierno</h2>
-          <p class="section-lead">Aquellos que cruzaron las líneas imperdonables. Sus nombres viven en el registro permanente. Leerlos es suficiente.</p>
 
-          <div class="severity-filter" style="margin: var(--space-5) 0">
+          <div class="severity-filter" style="margin-bottom: var(--space-6)">
             <button class="filter-btn active" data-filter="all">Todos</button>
             <button class="filter-btn" data-filter="critical">Imperdonable</button>
             <button class="filter-btn" data-filter="high">Grave</button>
@@ -263,76 +176,60 @@
 
           <div class="condemned-grid">
 
-            <article class="condemned-card" data-severity="critical">
-              <div class="condemned-header">
-                <span class="condemned-icon">&#9760;</span>
-                <h3>Onil</h3>
-                <span class="severity-badge critical">Imperdonable</span>
-              </div>
+            <article class="condemned-card record" data-severity="critical">
+              <div class="record-meta">Caso Nº 001</div>
+              <div class="condemned-header"><h3>Onil</h3></div>
               <p>Actitudes de acoso repetidas, presuntas actitudes indebidas con menores de edad, envio lacayos a trollear con cuentas alternativas.</p>
+              <span class="stamp">Imperdonable</span>
             </article>
 
-            <article class="condemned-card" data-severity="critical">
-              <div class="condemned-header">
-                <span class="condemned-icon">&#9760;</span>
-                <h3>Cloudde</h3>
-                <span class="severity-badge critical">Imperdonable</span>
-              </div>
+            <article class="condemned-card record" data-severity="critical">
+              <div class="record-meta">Caso Nº 002</div>
+              <div class="condemned-header"><h3>Cloudde</h3></div>
               <p>Comprometió activamente a menores, acoso constante, múltiples intentos de sobrepasar límites establecidos, mintió sobre su edad.</p>
+              <span class="stamp">Imperdonable</span>
             </article>
 
-            <article class="condemned-card" data-severity="critical">
-              <div class="condemned-header">
-                <span class="condemned-icon">&#9760;</span>
-                <h3>Vahn <span class="alias">/giopengiun</span></h3>
-                <span class="severity-badge critical">Imperdonable</span>
-              </div>
+            <article class="condemned-card record" data-severity="critical">
+              <div class="record-meta">Caso Nº 003</div>
+              <div class="condemned-header"><h3>Vahn <span class="alias">/giopengiun</span></h3></div>
               <p>Abiertamente racista y negacionista del holocausto. Normalizaba el abuso y tenía presunto interés indebido en una ex-usuario menor de edad.</p>
+              <span class="stamp">Imperdonable</span>
             </article>
 
-            <article class="condemned-card" data-severity="critical">
-              <div class="condemned-header">
-                <span class="condemned-icon">&#9760;</span>
-                <h3>SrtaMystia</h3>
-                <span class="severity-badge critical">Imperdonable</span>
-              </div>
+            <article class="condemned-card record" data-severity="critical">
+              <div class="record-meta">Caso Nº 004</div>
+              <div class="condemned-header"><h3>SrtaMystia</h3></div>
               <p>Acusaciones de grooming por su propia comunidad, estafadora serial y autopromovía comisiones falsas múltiples veces.</p>
+              <span class="stamp">Imperdonable</span>
             </article>
 
-            <article class="condemned-card" data-severity="high">
-              <div class="condemned-header">
-                <span class="condemned-icon">&#128293;</span>
-                <h3>Toro <span class="alias">/AnthonyRose</span></h3>
-                <span class="severity-badge high">Grave</span>
-              </div>
+            <article class="condemned-card record" data-severity="high">
+              <div class="record-meta">Caso Nº 005</div>
+              <div class="condemned-header"><h3>Toro <span class="alias">/AnthonyRose</span></h3></div>
               <p>Solicitó dinero en el servidor, actitudes machistas y acosadoras con mujeres. En general, un gigafracasado.</p>
+              <span class="stamp">Grave</span>
             </article>
 
-            <article class="condemned-card" data-severity="high">
-              <div class="condemned-header">
-                <span class="condemned-icon">&#128293;</span>
-                <h3>VonKitami</h3>
-                <span class="severity-badge high">Grave</span>
-              </div>
+            <article class="condemned-card record" data-severity="high">
+              <div class="record-meta">Caso Nº 006</div>
+              <div class="condemned-header"><h3>VonKitami</h3></div>
               <p>Incomodó activamente a las mujeres del servidor, fuckboy de closet, tibio de mierda y un playo.</p>
+              <span class="stamp">Grave</span>
             </article>
 
-            <article class="condemned-card" data-severity="medium">
-              <div class="condemned-header">
-                <span class="condemned-icon">&#9888;</span>
-                <h3>Onyx</h3>
-                <span class="severity-badge medium">Condenado</span>
-              </div>
+            <article class="condemned-card record" data-severity="medium">
+              <div class="record-meta">Caso Nº 007</div>
+              <div class="condemned-header"><h3>Onyx</h3></div>
               <p>Artista fracasado con delirios de grandeza. Se creía mejor que todos porque "está estudiando algo en el futuro".</p>
+              <span class="stamp">Condenado</span>
             </article>
 
-            <article class="condemned-card" data-severity="low">
-              <div class="condemned-header">
-                <span class="condemned-icon">&#128128;</span>
-                <h3>Frankklinton765 &#128523;</h3>
-                <span class="severity-badge low">Meme eterno</span>
-              </div>
+            <article class="condemned-card record" data-severity="low">
+              <div class="record-meta">Caso Nº 008</div>
+              <div class="condemned-header"><h3>Frankklinton765</h3></div>
               <p>"Holaa, estoy aqui por que con un grupo de amigos tenemos un circulo de play station y queriamos saber si es que hay algunas chicas que se quieran unir..." — Sí, fue real.</p>
+              <span class="stamp">Meme eterno</span>
             </article>
 
           </div>
@@ -369,10 +266,8 @@
 
     <footer class="site-footer">
       <div class="container">
-        <div class="divider"><span class="divider-text">PURG4TORY</span></div>
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="static/img/logo.svg" alt="">
             <div>
               <div class="footer-brand-text">PURGATORY</div>
               <div class="footer-tagline">Donde las historias no mueren, solo arden.</div>

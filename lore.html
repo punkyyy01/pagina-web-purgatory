@@ -34,7 +34,7 @@
     <meta name="theme-color" content="#0a0a0a">
     <link rel="stylesheet" href="static/css/tokens.css?v=20260722">
     <link rel="stylesheet" href="static/css/styles.css?v=20260722">
-    <link rel="stylesheet" href="static/css/lite-mode.css?v=20260614">
+    <link rel="stylesheet" href="static/css/lite-mode.css?v=20260722">
     <style>
   .lore-toc {
     border-top: 1px solid var(--rule);
@@ -65,7 +65,6 @@
     <header class="site-header" id="site-header">
       <nav class="nav">
         <a class="brand wordmark-small" href="index.html">PURG<span class="seal-sm">4</span>TORY</a>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema"></button>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">Inicio</a></li>
@@ -73,8 +72,12 @@
           <li><a href="personajes.html">Personajes</a></li>
           <li><a href="mapa.html">Mapa</a></li>
           <li><a href="eventos.html">Eventos</a></li>
-          <li><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
+          <li class="nav-links-cta"><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
         </ul>
+        <div class="nav-end">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema"></button>
+          <a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a>
+        </div>
       </nav>
     </header>
 
@@ -269,7 +272,7 @@
       </div>
     </footer>
 
-    <script src="static/js/scripts.js?v=20260429" defer></script>
+    <script src="static/js/scripts.js?v=20260722" defer></script>
     <script src="static/js/easter-eggs.js?v=20260429" defer></script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>

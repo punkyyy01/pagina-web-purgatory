@@ -24,9 +24,7 @@
   function renderEvent(name, url) {
     el.innerHTML =
       '<div class="countdown-frame">' +
-        '<p class="countdown-label">Próximo Ritual</p>' +
-        '<h3 class="countdown-name">' + escapeHTML(name) + '</h3>' +
-        '<div class="countdown-clock" id="countdown-clock">--:--:--:--</div>' +
+        '<p class="countdown-strip-text">Próximo ritual: <strong>' + escapeHTML(name) + '</strong> — <span class="countdown-clock" id="countdown-clock">--:--:--:--</span></p>' +
         '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn btn-blood">Ver en Discord</a>' +
       '</div>';
   }
@@ -34,8 +32,7 @@
   function renderFallback() {
     el.innerHTML =
       '<div class="countdown-frame">' +
-        '<p class="countdown-label">Próximo Ritual</p>' +
-        '<p class="countdown-empty">No hay rituales programados por ahora.</p>' +
+        '<p class="countdown-strip-text countdown-empty">No hay rituales programados por ahora.</p>' +
         '<a href="' + DISCORD_URL + '" target="_blank" rel="noopener noreferrer" class="btn btn-blood">Entrar al Discord</a>' +
       '</div>';
   }

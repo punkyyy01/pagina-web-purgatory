@@ -85,8 +85,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
    descripción sans, separados por border-top. Nada más.
 ══════════════════════════════════════════════════════════ */
 .record {
-  border-top: 1px solid var(--rule);
-  padding-top: var(--space-6);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  padding: var(--space-6);
 }
 .record-meta {
   font-family: var(--font-mono);
@@ -161,7 +162,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   padding: 0 var(--space-5);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-6);
 }
 
@@ -197,7 +197,22 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   color: var(--stamp-bright);
   border-bottom-color: var(--stamp-bright);
 }
-.nav-links .cta {
+.nav-end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+/* En mobile el CTA vuelve al menú desplegable — agrupado junto al
+   toggle de tema, "Entrar al Server" no entra en la barra angosta. */
+.nav-links-cta { display: none; }
+@media (max-width: 768px) {
+  .nav-end .cta { display: none; }
+  .nav-links-cta { display: list-item; }
+}
+
+.cta {
   font-weight: 600;
   white-space: nowrap;
   background: transparent;
@@ -210,7 +225,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   transition: background var(--dur-base), color var(--dur-base);
   text-decoration: none;
 }
-.nav-links .cta:hover { background: var(--stamp); color: var(--ink) !important; }
+.cta:hover { background: var(--stamp); color: var(--ink) !important; }
 
 .theme-toggle {
   background: none;
@@ -326,15 +341,35 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   max-width: 620px;
 }
 .page-hero .section-title { margin-bottom: var(--space-3); }
+.section-title + .section-lead {
+  margin-top: calc(-1 * var(--space-4));
+  margin-bottom: var(--space-6);
+}
 
 /* ══════════════════════════════════════════════════════════
    HERO (index.html)
 ══════════════════════════════════════════════════════════ */
 .hero {
+  position: relative;
   padding: var(--space-9) 0 var(--space-8);
+  overflow: hidden;
 }
 
-.hero-content { width: 100%; }
+.hero-banner { position: absolute; inset: 0; z-index: 0; }
+.hero-banner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--ink) 0%, transparent 85%);
+}
+
+.hero-content { position: relative; z-index: 1; width: 100%; }
 
 .hero-frame { max-width: 720px; }
 
@@ -392,15 +427,15 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 
 /* ── Card de personaje — mini-expediente plano, sin flip ─────── */
 .card-naipe {
-  border-top: 1px solid var(--rule);
-  padding-top: var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  padding: var(--space-5);
   cursor: pointer;
   background: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: none;
   text-align: left;
+  transition: border-color var(--dur-base);
 }
+.card-naipe:hover { border-color: var(--stamp); }
 .card-name {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -550,36 +585,32 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .char-search-input:focus { outline: none; border-bottom-color: var(--stamp); }
 .char-search-input::placeholder { color: var(--dim); }
 
-/* ── Countdown widget (home) ──────────────────────────────── */
+/* ── Countdown strip (home, aside antes del footer) ──────────── */
+.countdown-strip { padding: var(--space-5) 0; }
 .countdown-frame {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
   border-top: 1px solid var(--rule);
   padding-top: var(--space-5);
-  max-width: 480px;
 }
-.countdown-label {
+.countdown-strip-text {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: var(--fs-sm);
   color: var(--dim);
-  margin-bottom: var(--space-2);
 }
-.countdown-name {
-  font-size: var(--fs-lg);
+.countdown-strip-text strong {
+  font-family: var(--font-body);
+  font-weight: 600;
   color: var(--paper);
-  margin-bottom: var(--space-3);
 }
 .countdown-clock {
-  font-family: var(--font-mono);
-  font-size: var(--fs-2xl);
-  letter-spacing: 0.05em;
   color: var(--stamp-bright);
-  margin-bottom: var(--space-4);
+  letter-spacing: 0.05em;
 }
-.countdown-empty {
-  color: var(--dim);
-  margin-bottom: var(--space-4);
-}
+.countdown-empty { color: var(--dim); }
 
 /* ══════════════════════════════════════════════════════════
    MODAL
@@ -800,12 +831,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .mapa-card-name {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-base);
   color: var(--paper);
 }
 .mapa-card-type {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   color: var(--dim);
   letter-spacing: 0.08em;
   text-transform: uppercase;

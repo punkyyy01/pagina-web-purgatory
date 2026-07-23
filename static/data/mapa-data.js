@@ -82,7 +82,7 @@
     var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
     line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
-    line.style.stroke = 'var(--rule)';
+    line.style.stroke = 'var(--dim)';
     line.setAttribute('stroke-width', '1');
     svg.appendChild(line);
   });

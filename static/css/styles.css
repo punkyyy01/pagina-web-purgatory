@@ -402,6 +402,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 /* ── Card de personaje — naipe con misterio: sello por defecto,
    cross-fade a nombre/rol al interactuar (hover o teclado) ─────── */
 .card-naipe {
+  display: block;
   position: relative;
   aspect-ratio: 2 / 3;
   overflow: hidden;
@@ -409,6 +410,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   border-radius: var(--r-sm);
   cursor: pointer;
   background: var(--panel);
+  text-decoration: none;
   transition: border-color var(--dur-base);
 }
 .card-naipe:hover,
@@ -513,8 +515,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 ══════════════════════════════════════════════════════════ */
 .condemned-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-5);
+}
+@media (max-width: 900px) {
+  .condemned-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .condemned-grid { grid-template-columns: 1fr; }
 }
 .condemned-grid .condemned-card + .condemned-card { margin-top: 0; }
 .condemned-card { /* usa .record */ }

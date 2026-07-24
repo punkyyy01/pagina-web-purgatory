@@ -4,6 +4,7 @@
   --paper:        #e8e4da;                  /* texto principal */
   --dim:          rgba(232, 228, 218, 0.55); /* texto secundario / metadata */
   --rule:         rgba(232, 228, 218, 0.14); /* líneas divisorias — sin glow */
+  --ink-overlay:  rgba(10, 10, 10, 0.55);   /* overlay de --ink sobre fotos (hero) */
   --stamp:        #0d8a80;                  /* el único acento */
   --stamp-bright: #3de8da;                  /* variante clara del acento */
 
@@ -68,6 +69,7 @@
   --paper: #1c1810;
   --dim: rgba(28, 24, 16, 0.55);
   --rule: rgba(28, 24, 16, 0.14);
+  --ink-overlay: rgba(243, 236, 224, 0.72);
 
   color-scheme: light;
 }

@@ -291,11 +291,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   color: var(--paper);
   letter-spacing: 0.02em;
 }
-.footer-tagline {
-  font-size: var(--fs-xs);
-  color: var(--dim);
-  margin-top: var(--space-1);
-}
 .footer-links {
   display: flex;
   gap: var(--space-5);
@@ -351,6 +346,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 ══════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 70vh;
+  max-height: 640px;
   padding: var(--space-9) 0 var(--space-8);
   overflow: hidden;
 }
@@ -366,7 +365,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .hero-banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, var(--ink) 0%, transparent 85%);
+  background: var(--ink-overlay);
 }
 
 .hero-content { position: relative; z-index: 1; width: 100%; }
@@ -425,17 +424,64 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   gap: var(--space-6) var(--space-5);
 }
 
-/* ── Card de personaje — mini-expediente plano, sin flip ─────── */
+/* ── Card de personaje — naipe con misterio: sello por defecto,
+   cross-fade a nombre/rol al interactuar (hover o teclado) ─────── */
 .card-naipe {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
   border: 1px solid var(--rule);
   border-radius: var(--r-sm);
-  padding: var(--space-5);
   cursor: pointer;
   background: none;
-  text-align: left;
   transition: border-color var(--dur-base);
 }
-.card-naipe:hover { border-color: var(--stamp); }
+.card-naipe:hover,
+.card-naipe:focus,
+.card-naipe:focus-within { border-color: var(--stamp); }
+
+.card-naipe__seal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-2xl);
+  color: var(--stamp-bright);
+  opacity: 1;
+  transition: opacity var(--dur-base);
+}
+.card-naipe__seal::before { content: attr(data-initial); position: relative; z-index: 1; }
+.card-naipe__seal::after {
+  content: "";
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border: 1.5px solid var(--stamp);
+  border-radius: 50%;
+  transform: rotate(-8deg);
+}
+.card-naipe:hover .card-naipe__seal,
+.card-naipe:focus .card-naipe__seal,
+.card-naipe:focus-within .card-naipe__seal { opacity: 0; }
+
+.card-naipe__reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-5);
+  text-align: left;
+  opacity: 0;
+  transition: opacity var(--dur-base);
+}
+.card-naipe:hover .card-naipe__reveal,
+.card-naipe:focus .card-naipe__reveal,
+.card-naipe:focus-within .card-naipe__reveal { opacity: 1; }
+
 .card-name {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -454,13 +500,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--dim);
-  margin-top: var(--space-3);
-}
-.card-desc {
-  font-size: var(--fs-sm);
-  color: var(--paper);
-  opacity: 0.8;
-  line-height: 1.55;
   margin-top: var(--space-3);
 }
 
@@ -585,16 +624,18 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .char-search-input:focus { outline: none; border-bottom-color: var(--stamp); }
 .char-search-input::placeholder { color: var(--dim); }
 
-/* ── Countdown strip (home, aside antes del footer) ──────────── */
-.countdown-strip { padding: var(--space-5) 0; }
+/* ── Countdown strip (home, card compacta justo después del hero) ── */
+.countdown-strip { margin-top: var(--space-9); }
 .countdown-frame {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--space-4);
-  border-top: 1px solid var(--rule);
-  padding-top: var(--space-5);
+  max-width: 640px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  padding: var(--space-5);
 }
 .countdown-strip-text {
   font-family: var(--font-mono);

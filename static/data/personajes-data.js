@@ -169,10 +169,12 @@
       card.setAttribute('tabindex', '0');
       card.setAttribute('aria-label', c.name);
       card.innerHTML =
-        '<div class="card-name">' + c.name + '</div>' +
-        '<div class="card-alias">' + c.alias + '</div>' +
-        '<div class="card-era">' + c.eraLabel + '</div>' +
-        '<div class="card-desc">' + c.desc + '</div>';
+        '<div class="card-naipe__seal" aria-hidden="true" data-initial="' + c.name.charAt(0).toUpperCase() + '"></div>' +
+        '<div class="card-naipe__reveal">' +
+          '<div class="card-name">' + c.name + '</div>' +
+          '<div class="card-alias">' + c.alias + '</div>' +
+          '<div class="card-era">' + c.eraLabel + '</div>' +
+        '</div>';
       grid.appendChild(card);
     });
   }

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script src="static/js/lite-mode-detect.js"></script>
+    <script>(function(){try{var t=localStorage.getItem('purgatory_theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){}})();</script>
+    <title>Círculos del Infierno — Purgatory</title>
+    <meta name="description" content="El registro completo de quienes cruzaron líneas serias dentro de la comunidad de Purgatory." />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PURG4TORY" />
+    <meta property="og:url" content="https://purg4t0ry.com/condenados" />
+    <meta property="og:title" content="Círculos del Infierno — PURG4TORY" />
+    <meta property="og:description" content="El registro completo de quienes cruzaron líneas serias dentro de la comunidad de Purgatory." />
+    <meta property="og:image" content="https://purg4t0ry.com/static/img/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PURG4TORY — Donde las historias no mueren, solo arden." />
+    <meta property="og:locale" content="es_ES" />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Círculos del Infierno — PURG4TORY" />
+    <meta name="twitter:description" content="El registro completo de quienes cruzaron líneas serias dentro de la comunidad de Purgatory." />
+    <meta name="twitter:image" content="https://purg4t0ry.com/static/img/og-image.png" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-L0IzETgzhHHFQg/cujcI7Kyu+WNfOWlUT6c1nE5Un3s='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://cdn.discordapp.com; object-src 'none'; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
+    <link rel="preload" href="static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="static/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="static/css/fonts.css?v=20260722">
+    <link rel="icon" href="static/img/logo.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="stylesheet" href="static/css/tokens.css?v=20260722">
+    <link rel="stylesheet" href="static/css/styles.css?v=20260722">
+    <link rel="stylesheet" href="static/css/lite-mode.css?v=20260722">
+  </head>
+  <body>
+
+    <header class="site-header" id="site-header">
+      <nav class="nav">
+        <a class="brand wordmark-small" href="index.html">PURG<span class="seal-sm">4</span>TORY</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="lore.html">Lore</a></li>
+          <li><a href="personajes.html">Personajes</a></li>
+          <li><a href="mapa.html">Mapa</a></li>
+          <li><a href="eventos.html">Eventos</a></li>
+          <li class="nav-links-cta"><a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
+        </ul>
+        <div class="nav-end">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema"></button>
+          <a class="cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- Hero -->
+      <section class="page-hero">
+        <div class="container">
+          <h1 class="section-title">Círculos del Infierno</h1>
+          <p class="section-lead">El registro de quienes cruzaron líneas serias dentro de la comunidad. No es chisme ni un juego.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+
+          <div class="severity-filter" style="margin-bottom: var(--space-6)">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="critical">Imperdonable</button>
+            <button class="filter-btn" data-filter="high">Grave</button>
+            <button class="filter-btn" data-filter="medium">Condenado</button>
+            <button class="filter-btn" data-filter="low">Meme</button>
+          </div>
+
+          <div class="condemned-grid">
+
+            <article class="condemned-card record" data-severity="critical">
+              <div class="record-meta">Caso Nº 001</div>
+              <div class="condemned-header"><h3>Onil</h3></div>
+              <p>Actitudes de acoso repetidas, presuntas actitudes indebidas con menores de edad, envio lacayos a trollear con cuentas alternativas.</p>
+              <span class="stamp">Imperdonable</span>
+            </article>
+
+            <article class="condemned-card record" data-severity="critical">
+              <div class="record-meta">Caso Nº 002</div>
+              <div class="condemned-header"><h3>Cloudde</h3></div>
+              <p>Comprometió activamente a menores, acoso constante, múltiples intentos de sobrepasar límites establecidos, mintió sobre su edad.</p>
+              <span class="stamp">Imperdonable</span>
+            </article>
+
+            <article class="condemned-card record" data-severity="critical">
+              <div class="record-meta">Caso Nº 003</div>
+              <div class="condemned-header"><h3>Vahn <span class="alias">/giopengiun</span></h3></div>
+              <p>Abiertamente racista y negacionista del holocausto. Normalizaba el abuso y tenía presunto interés indebido en una ex-usuario menor de edad.</p>
+              <span class="stamp">Imperdonable</span>
+            </article>
+
+            <article class="condemned-card record" data-severity="critical">
+              <div class="record-meta">Caso Nº 004</div>
+              <div class="condemned-header"><h3>SrtaMystia</h3></div>
+              <p>Acusaciones de grooming por su propia comunidad, estafadora serial y autopromovía comisiones falsas múltiples veces.</p>
+              <span class="stamp">Imperdonable</span>
+            </article>
+
+            <article class="condemned-card record" data-severity="high">
+              <div class="record-meta">Caso Nº 005</div>
+              <div class="condemned-header"><h3>Toro <span class="alias">/AnthonyRose</span></h3></div>
+              <p>Solicitó dinero en el servidor, actitudes machistas y acosadoras con mujeres. En general, un gigafracasado.</p>
+              <span class="stamp">Grave</span>
+            </article>
+
+            <article class="condemned-card record" data-severity="high">
+              <div class="record-meta">Caso Nº 006</div>
+              <div class="condemned-header"><h3>VonKitami</h3></div>
+              <p>Incomodó activamente a las mujeres del servidor, fuckboy de closet, tibio de mierda y un playo.</p>
+              <span class="stamp">Grave</span>
+            </article>
+
+            <article class="condemned-card record" data-severity="medium">
+              <div class="record-meta">Caso Nº 007</div>
+              <div class="condemned-header"><h3>Onyx</h3></div>
+              <p>Artista fracasado con delirios de grandeza. Se creía mejor que todos porque "está estudiando algo en el futuro".</p>
+              <span class="stamp">Condenado</span>
+            </article>
+
+            <article class="condemned-card record" data-severity="low">
+              <div class="record-meta">Caso Nº 008</div>
+              <div class="condemned-header"><h3>Frankklinton765</h3></div>
+              <p>"Holaa, estoy aqui por que con un grupo de amigos tenemos un circulo de play station y queriamos saber si es que hay algunas chicas que se quieran unir..." — Sí, fue real.</p>
+              <span class="stamp">Meme eterno</span>
+            </article>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <button id="back-to-top" aria-label="Volver arriba">&uarr;</button>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div>
+              <div class="footer-brand-text">PURGATORY</div>
+            </div>
+          </div>
+          <nav class="footer-links">
+            <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="lore.html">Lore</a>
+            <a href="personajes.html">Personajes</a>
+            <a href="mapa.html">Mapa</a>
+            <a href="eventos.html">Eventos</a>
+            <a href="condenados.html">Condenados</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <script src="static/js/scripts.js?v=20260722" defer></script>
+    <script src="static/js/easter-eggs.js?v=20260429" defer></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>

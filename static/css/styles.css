@@ -214,6 +214,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 
 .cta {
   font-weight: 600;
+  text-transform: uppercase;
   white-space: nowrap;
   background: transparent;
   border: 1px solid var(--stamp);
@@ -224,6 +225,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   font-size: var(--fs-xs);
   transition: background var(--dur-base), color var(--dur-base);
   text-decoration: none;
+  display: inline-block;
 }
 .cta:hover { background: var(--stamp); color: var(--ink) !important; }
 

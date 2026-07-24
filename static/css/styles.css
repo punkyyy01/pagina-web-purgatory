@@ -345,30 +345,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
    HERO (index.html)
 ══════════════════════════════════════════════════════════ */
 .hero {
-  position: relative;
   display: flex;
   align-items: center;
   min-height: 70vh;
   max-height: 640px;
   padding: var(--space-9) 0 var(--space-8);
-  overflow: hidden;
 }
 
-.hero-banner { position: absolute; inset: 0; z-index: 0; }
-.hero-banner img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hero-banner-overlay {
-  position: absolute;
-  inset: 0;
-  background: var(--ink-overlay);
-}
-
-.hero-content { position: relative; z-index: 1; width: 100%; }
+.hero-content { width: 100%; }
 
 .hero-frame { max-width: 720px; }
 

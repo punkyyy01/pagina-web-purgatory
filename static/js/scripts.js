@@ -26,23 +26,6 @@
   }
 
     /* ═══════════════════════════════════════════════════════
-      1b. PARALLAX SUTIL DEL HERO — único "detalle de personalidad"
-      Guardado por prefers-reduced-motion y .lite-mode.
-      ═══════════════════════════════════════════════════════ */
-  const heroEl        = $('.hero');
-  const heroBannerImg = $('.hero-banner img');
-  const canParallax    = heroEl && heroBannerImg &&
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function applyHeroParallax(y) {
-    if (!canParallax || document.documentElement.classList.contains('lite-mode')) return;
-    const rect = heroEl.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight) return; // fuera de viewport
-    const offset = Math.min(y * 0.08, 40);
-    heroBannerImg.style.transform = `translateY(${offset}px)`;
-  }
-
-    /* ═══════════════════════════════════════════════════════
       2. MANEJO DE SCROLL (un único listener `passive`)
       ═══════════════════════════════════════════════════════ */
   let scrollTick = false;
@@ -62,8 +45,6 @@
 
     /* back-to-top */
     if (btnTop) btnTop.classList.toggle('visible', y > 500);
-
-    applyHeroParallax(y);
 
     scrollTick = false;
   }

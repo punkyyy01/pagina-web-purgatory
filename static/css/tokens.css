@@ -1,6 +1,7 @@
 :root {
   /* ── Paleta — expediente/registro, un solo acento ── */
   --ink:          #0a0a0a;                  /* fondo */
+  --panel:        #141414;                  /* fondo de cards — apenas más claro que --ink */
   --paper:        #e8e4da;                  /* texto principal */
   --dim:          rgba(232, 228, 218, 0.55); /* texto secundario / metadata */
   --rule:         rgba(232, 228, 218, 0.14); /* líneas divisorias — sin glow */
@@ -67,7 +68,7 @@ html { font-size: 18px; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--ink);
+  background: radial-gradient(ellipse at top, #131313 0%, var(--ink) 55%);
   color: var(--paper);
   font-family: var(--font-body);
   font-size: var(--fs-base);

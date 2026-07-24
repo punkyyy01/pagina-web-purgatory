@@ -85,6 +85,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
    descripción sans, separados por border-top. Nada más.
 ══════════════════════════════════════════════════════════ */
 .record {
+  background: var(--panel);
   border: 1px solid var(--rule);
   border-radius: var(--r-sm);
   padding: var(--space-6);
@@ -407,7 +408,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   border: 1px solid var(--rule);
   border-radius: var(--r-sm);
   cursor: pointer;
-  background: none;
+  background: var(--panel);
   transition: border-color var(--dur-base);
 }
 .card-naipe:hover,
@@ -501,14 +502,21 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   line-height: 1.65;
   max-width: 620px;
 }
+.era-card-hint {
+  font-size: var(--fs-sm);
+  color: var(--dim);
+  margin-top: var(--space-2);
+}
 
 /* ══════════════════════════════════════════════════════════
    CONDENADOS (Círculos del Infierno)
 ══════════════════════════════════════════════════════════ */
 .condemned-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-5);
 }
+.condemned-grid .condemned-card + .condemned-card { margin-top: 0; }
 .condemned-card { /* usa .record */ }
 .condemned-header {
   display: flex;
@@ -607,6 +615,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   flex-wrap: wrap;
   gap: var(--space-4);
   max-width: 640px;
+  background: var(--panel);
   border: 1px solid var(--rule);
   border-radius: var(--r-sm);
   padding: var(--space-5);

@@ -204,8 +204,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   margin-left: auto;
 }
 
-/* En mobile el CTA vuelve al menú desplegable — agrupado junto al
-   toggle de tema, "Entrar al Server" no entra en la barra angosta. */
+/* En mobile el CTA vuelve al menú desplegable —
+   "Entrar al Server" no entra en la barra angosta. */
 .nav-links-cta { display: none; }
 @media (max-width: 768px) {
   .nav-end .cta { display: none; }
@@ -228,18 +228,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   display: inline-block;
 }
 .cta:hover { background: var(--stamp); color: var(--ink) !important; }
-
-.theme-toggle {
-  background: none;
-  border: none;
-  color: var(--paper);
-  font-size: 1.1rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: var(--space-2);
-}
-.theme-toggle::before { content: "\2600"; } /* ☀ */
-[data-theme="light"] .theme-toggle::before { content: "\263E"; } /* ☾ */
 
 /* Mobile nav toggle */
 .nav-toggle {

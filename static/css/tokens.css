@@ -62,16 +62,6 @@
   color-scheme: dark;
 }
 
-/* ── Tema claro — mismo sistema, fondo/texto invertidos, acento intacto ── */
-[data-theme="light"] {
-  --ink: #f3ece0;
-  --paper: #1c1810;
-  --dim: rgba(28, 24, 16, 0.55);
-  --rule: rgba(28, 24, 16, 0.14);
-
-  color-scheme: light;
-}
-
 html { font-size: 18px; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

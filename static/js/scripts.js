@@ -12,6 +12,11 @@
   const navToggle = $('#nav-toggle');
   const navLinks  = $('#nav-links');
 
+  /* El CSS no alcanza: behavior:'smooth' pedido desde JS le gana a
+     scroll-behavior:auto, así que la preferencia se consulta acá también. */
+  const scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? 'auto' : 'smooth';
+
     /* ═══════════════════════════════════════════════════════
       2. MANEJO DE SCROLL (un único listener `passive`)
       ═══════════════════════════════════════════════════════ */
@@ -40,7 +45,7 @@
       3. BOTÓN "VOLVER ARRIBA"
       ═══════════════════════════════════════════════════════ */
   if (btnTop) {
-    btnTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    btnTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: scrollBehavior }));
   }
 
     /* ═══════════════════════════════════════════════════════
@@ -54,7 +59,7 @@
     const target = document.querySelector(id);
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
       /* Close mobile nav if open */
       if (navLinks) navLinks.classList.remove('is-open');
     }
@@ -150,7 +155,8 @@
     /* ═══════════════════════════════════════════════════════
       9. FILTRO DE SEVERIDAD (mostrar/ocultar cartas condenadas)
       ═══════════════════════════════════════════════════════ */
-  const filterBtns = $$('.filter-btn[data-filter]');
+  // Scopeado al contenedor: personajes.html usa .filter-tab[data-filter] con su propia lógica.
+  const filterBtns = $$('#condenados-filters .filter-tab[data-filter]');
   const condemnedCards = $$('.condemned-card[data-severity]');
 
   filterBtns.forEach(btn => {
@@ -198,18 +204,5 @@
     });
   })();
 
-})();
-
-/* ===== Header height helper: ensure banner sits below fixed header ===== */
-(function setHeaderCSSVar(){
-  try{
-    const hdr = document.getElementById('site-header');
-    function apply(){
-      const h = hdr ? Math.ceil(hdr.getBoundingClientRect().height) + 'px' : '64px';
-      document.documentElement.style.setProperty('--site-header-height', h);
-    }
-    apply();
-    window.addEventListener('resize', apply, { passive: true });
-  }catch(e){/* silent */}
 })();
 

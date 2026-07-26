@@ -7,10 +7,25 @@
    ═══════════════════════════════════════════════════════════ */
 
 /* ── Fade-in único del sitio (disparado por scripts.js) ──────── */
-.reveal-init { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+.reveal-init {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--dur-slow) var(--ease-out-expo), transform var(--dur-slow) var(--ease-out-expo);
+}
 .reveal-init.revealed { opacity: 1; transform: none; }
+
+/* ── Movimiento reducido — política única del sitio ────────────
+   Si el usuario lo pidió, se corta el movimiento en TODOS lados, no solo
+   en el fade-in. lite-mode.css se retira cuando esta media query aplica,
+   para que no queden dos respuestas distintas a la misma preferencia. */
 @media (prefers-reduced-motion: reduce) {
-  .reveal-init { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-init { opacity: 1; transform: none; }
 }
 
 /* ── Layout base (.container vive en tokens.css) ─────────────── */
@@ -43,14 +58,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   transform: rotate(-8deg);
 }
 
-.wordmark {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: var(--fs-hero);
-  line-height: 1;
-  letter-spacing: 0.01em;
-  color: var(--paper);
-}
+/* Nivel completo: hero (.hero-title) + nav (.wordmark-small) comparten
+   serif 600 + anillo .seal/.seal-sm. El footer usa el nivel discreto:
+   la ortografía "PURG4TORY" sin anillo (.footer-brand-text). */
 .seal {
   position: relative;
   color: var(--stamp-bright);
@@ -120,27 +130,34 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
    BUTTONS — contorno, se rellena en hover. Sin glow.
 ══════════════════════════════════════════════════════════ */
 .btn {
+  --btn-py: 12px;
+  --btn-px: 28px;
+  --btn-fs: var(--fs-sm);
+
   font-family: var(--font-body);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   white-space: nowrap;
-  font-size: var(--fs-sm);
-  padding: 12px 28px;
+  font-size: var(--btn-fs);
+  padding: var(--btn-py) var(--btn-px);
   border-radius: var(--r-sm);
-  border: 1px solid var(--stamp);
+  border: 1px solid var(--rule-strong);
   background: transparent;
   color: var(--paper);
   cursor: pointer;
-  transition: background var(--dur-base), color var(--dur-base);
+  transition: background var(--dur-base), color var(--dur-base), border-color var(--dur-base);
   display: inline-block;
   text-decoration: none;
   line-height: 1;
 }
-.btn:hover { background: var(--stamp); color: var(--ink); }
+.btn:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 
-.btn-blood { color: var(--stamp-bright); }
-.btn-blood:hover { background: var(--stamp); color: var(--ink); }
+/* Compacto: header CTA (.cta) y botón de card de evento */
+.btn--sm { --btn-py: 8px; --btn-px: 18px; --btn-fs: var(--fs-xs); }
+
+/* Acción principal: se distingue por un borde más brillante, no por color */
+.btn-blood { border-color: var(--paper); }
 
 /* ══════════════════════════════════════════════════════════
    HEADER / NAV
@@ -154,7 +171,11 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   height: var(--header-h);
   display: flex;
   align-items: center;
+  transition: border-color var(--dur-fast);
 }
+/* Con el fondo del header igual al de la página, en reposo el borde casi no
+   se ve; al scrollear se refuerza para separar la barra del contenido. */
+.site-header.scrolled { border-bottom-color: var(--rule-strong); }
 
 .nav {
   width: 100%;
@@ -172,7 +193,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   gap: var(--space-2);
   text-decoration: none;
 }
-.brand img { display: none; } /* el sello del "4" reemplaza el logo gráfico */
 
 .nav-links {
   display: flex;
@@ -190,13 +210,15 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   text-decoration: none;
   padding: var(--space-2) 0;
   border-bottom: 1px solid transparent;
-  transition: color var(--dur-base), border-color var(--dur-base);
+  transition: color var(--dur-fast), border-color var(--dur-fast);
 }
 .nav-links a:hover { color: var(--paper); }
+/* Página actual: hueso + negrita + subrayado. El teal queda reservado al sello. */
 .nav-links a[aria-current="page"],
 .nav-links a.active {
-  color: var(--stamp-bright);
-  border-bottom-color: var(--stamp-bright);
+  color: var(--paper);
+  font-weight: 600;
+  border-bottom-color: var(--paper);
 }
 .nav-end {
   display: flex;
@@ -213,22 +235,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   .nav-links-cta { display: list-item; }
 }
 
-.cta {
-  font-weight: 600;
-  text-transform: uppercase;
-  white-space: nowrap;
-  background: transparent;
-  border: 1px solid var(--stamp);
-  color: var(--paper) !important;
-  padding: 8px 18px;
-  border-radius: var(--r-sm);
-  letter-spacing: 0.1em;
-  font-size: var(--fs-xs);
-  transition: background var(--dur-base), color var(--dur-base);
-  text-decoration: none;
-  display: inline-block;
-}
-.cta:hover { background: var(--stamp); color: var(--ink) !important; }
+/* .cta ya no declara nada: es .btn.btn--sm.btn-blood en el HTML.
+   La clase sobrevive solo como gancho de layout para el breakpoint de arriba. */
 
 /* Mobile nav toggle */
 .nav-toggle {
@@ -236,7 +244,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   background: none;
   border: none;
   color: var(--paper);
-  font-size: 1.4rem;
+  font-size: var(--fs-lg);
   cursor: pointer;
   padding: var(--space-2);
 }
@@ -274,7 +282,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   align-items: center;
 }
 .footer-brand { display: flex; align-items: center; gap: var(--space-3); }
-.footer-brand img { display: none; }
 .footer-brand-text {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -293,9 +300,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   text-transform: uppercase;
   color: var(--dim);
   text-decoration: none;
-  transition: color var(--dur-fast);
+  transition: color var(--dur-fast); /* mismo criterio que .nav-links a y el TOC de lore */
 }
-.footer-links a:hover { color: var(--stamp-bright); }
+.footer-links a:hover { color: var(--paper); }
 
 @media (max-width: 600px) {
   .footer-grid { grid-template-columns: 1fr; text-align: center; }
@@ -316,6 +323,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   text-align: left;
   margin-bottom: var(--space-6);
   line-height: 1.15;
+}
+/* El h1 sube un escalón (3xl → hero) y gana peso: h2 se queda en 3xl/600,
+   así el título de página no compite con los de sección. */
+h1.section-title {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
 }
 
 .section-lead {
@@ -415,7 +430,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 }
 .card-naipe:hover,
 .card-naipe:focus,
-.card-naipe:focus-within { border-color: var(--stamp); }
+.card-naipe:focus-within { border-color: var(--paper); }
 
 .card-naipe__seal {
   position: absolute;
@@ -574,30 +589,15 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   border-bottom: 1px solid transparent;
   cursor: pointer;
   padding: var(--space-2) 0;
-  transition: color var(--dur-base), border-color var(--dur-base);
-}
-.filter-tab.active,
-.filter-tab:hover { color: var(--stamp-bright); }
-.filter-tab.active { border-bottom-color: var(--stamp-bright); }
-
-/* Legacy filter-btn support (severidad, index.html) */
-.severity-filter { display: flex; gap: var(--space-4); flex-wrap: wrap; }
-.hidden { display: none !important; }
-.filter-btn {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: none;
-  border: none;
-  border-bottom: 1px solid transparent;
-  color: var(--dim);
-  padding: var(--space-2) 0;
-  cursor: pointer;
   transition: color var(--dur-fast), border-color var(--dur-fast);
 }
-.filter-btn.active,
-.filter-btn:hover { color: var(--stamp-bright); border-bottom-color: var(--stamp-bright); }
+/* Hover sólo cambia color; el subrayado es exclusivo del filtro activo. */
+.filter-tab:hover { color: var(--stamp-bright); }
+.filter-tab.active { color: var(--stamp-bright); border-bottom-color: var(--stamp-bright); }
+/* Foco de teclado: contorno hueso — no se confunde con el subrayado del activo. */
+.filter-tab:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+
+.hidden { display: none !important; }
 
 .char-search-input {
   width: 100%;
@@ -611,7 +611,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   border-radius: 0;
   padding: var(--space-2) 0;
 }
-.char-search-input:focus { outline: none; border-bottom-color: var(--stamp); }
+.char-search-input:focus { outline: none; border-bottom-color: var(--paper); }
 .char-search-input::placeholder { color: var(--dim); }
 
 /* ── Countdown strip (home, card compacta justo después del hero) ── */
@@ -639,7 +639,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   color: var(--paper);
 }
 .countdown-clock {
-  color: var(--stamp-bright);
+  color: var(--paper);
   letter-spacing: 0.05em;
 }
 .countdown-empty { color: var(--dim); }
@@ -652,7 +652,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--overlay);
   align-items: center;
   justify-content: center;
   padding: var(--space-5);
@@ -679,13 +679,13 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   background: none;
   border: none;
   color: var(--dim);
-  font-size: 1.5rem;
+  font-size: var(--fs-lg);
   cursor: pointer;
   line-height: 1;
   transition: color var(--dur-fast);
   z-index: 1;
 }
-.modal-close:hover { color: var(--stamp-bright); }
+.modal-close:hover { color: var(--paper); }
 
 .modal-title {
   font-family: var(--font-serif);
@@ -781,19 +781,27 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .chapter-body p:first-of-type::first-letter {
   font-family: var(--font-serif);
   font-size: var(--fs-dropcap);
-  color: var(--stamp-bright);
+  color: var(--paper);
   float: left;
   line-height: 0.8;
   margin-right: var(--space-2);
   margin-top: var(--space-2);
 }
 
+/* Presencia por tipografía, no por color: serif en cursiva, un escalón más
+   grande y sangría profunda. El acento teal sigue reservado al sello. */
 .chapter-quote {
-  border-left: 2px solid var(--stamp);
-  padding: var(--space-2) var(--space-5);
-  margin: var(--space-6) 0;
-  font-size: var(--fs-lg);
-  color: var(--dim);
+  border-left: 2px solid var(--rule);
+  padding: var(--space-3) 0 var(--space-3) var(--space-6);
+  margin: var(--space-7) 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--fs-xl);
+  line-height: 1.4;
+  color: var(--paper);
+  opacity: 0.92;
+  max-width: 620px;
 }
 
 .sacred-law {
@@ -837,6 +845,22 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 }
 .mapa-container:active { cursor: grabbing; }
 
+/* En táctil no hay cursor que indique que se puede arrastrar — se dice. */
+@media (hover: none) {
+  .mapa-container::after {
+    content: "Arrastrá para explorar";
+    position: absolute;
+    left: var(--space-4);
+    top: var(--space-4); /* abajo choca con .mapa-controls en pantallas angostas */
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    pointer-events: none;
+  }
+}
+
 .mapa-canvas {
   position: absolute;
   top: 0; left: 0;
@@ -850,15 +874,19 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   cursor: pointer;
 }
 
+/* Ancho fijo, no min-width: con el ancho librado al texto las cards largas
+   ("Purga de los Menores") se solapaban con sus vecinas. */
 .mapa-card {
   border-top: 1px solid var(--rule);
   padding: var(--space-2) var(--space-3) 0;
-  min-width: 140px;
+  width: 150px;
   background: var(--ink);
   transition: border-color var(--dur-base);
 }
 .mapa-card:hover,
-.mapa-node.active .mapa-card { border-color: var(--stamp); }
+.mapa-node.active .mapa-card { border-color: var(--paper); }
+/* Servidores vs eventos — es la distinción que promete la leyenda de mapa.html */
+.mapa-node--server .mapa-card { border-top-color: var(--paper); }
 
 .mapa-card-name {
   font-family: var(--font-serif);
@@ -868,7 +896,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 }
 .mapa-card-type {
   font-family: var(--font-mono);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   color: var(--dim);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -890,12 +918,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   width: 36px; height: 36px;
   border-radius: var(--r-sm);
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: var(--fs-md);
   display: grid;
   place-items: center;
   transition: border-color var(--dur-fast), color var(--dur-fast);
 }
-.mapa-btn:hover { border-color: var(--stamp); color: var(--stamp-bright); }
+.mapa-btn:hover { border-color: var(--paper); color: var(--paper); }
 
 .mapa-tooltip {
   display: none;
@@ -904,7 +932,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   inset: 0;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--overlay);
   padding: var(--space-5);
 }
 .mapa-tooltip.is-open { display: flex; }
@@ -946,11 +974,13 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   gap: var(--space-2);
   margin-bottom: var(--space-3);
 }
+/* La fecha es metadata: mono en los tres campos, sin mezcla de roles. */
 .naipe-day {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: 1.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-xl);
   line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--paper);
 }
 .naipe-month,
@@ -966,7 +996,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .naipe-title {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: 1.375rem;
+  font-size: var(--fs-lg);
   color: var(--paper);
   margin-bottom: var(--space-2);
 }
@@ -989,13 +1019,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   text-transform: uppercase;
 }
 
-.naipe-btn-ritual {
-  letter-spacing: 0.1em;
-  padding: 10px var(--space-4);
-  font-size: var(--fs-xs);
-  white-space: nowrap;
-}
-
 /* ── Variante B — edicto featured ── */
 .evento-edicto {
   border-top: 1px solid var(--rule);
@@ -1003,7 +1026,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 }
 .evento-edicto.is-pasado { opacity: 0.5; }
 
-.evento-edicto__hero { height: 200px; margin-bottom: var(--space-4); background: var(--rule); }
+.evento-edicto__hero {
+  height: 200px;
+  margin-bottom: var(--space-4);
+  background: var(--panel);
+  border: 1px solid var(--rule);
+}
 .edicto-portada { width: 100%; height: 100%; object-fit: cover; display: block; }
 .evento-edicto.no-image .evento-edicto__hero { display: none; }
 
@@ -1012,7 +1040,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .edicto-title {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: var(--fs-lg);
   color: var(--paper);
   margin-bottom: var(--space-2);
 }
@@ -1049,7 +1077,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .loading-diamond {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--stamp);
+  background: var(--paper);
   animation: loading-pulse 1.2s ease-in-out infinite;
 }
 .loading-diamond:nth-child(2) { animation-delay: 0.2s; }
@@ -1075,14 +1103,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   width: 44px; height: 44px;
   border-radius: var(--r-sm);
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: var(--fs-md);
   display: none;
   place-items: center;
   z-index: 50;
   transition: border-color var(--dur-fast), color var(--dur-fast);
 }
 #back-to-top.visible { display: grid; }
-#back-to-top:hover { border-color: var(--stamp); color: var(--stamp-bright); }
+#back-to-top:hover { border-color: var(--paper); color: var(--paper); }
 
 /* Page hero (páginas distintas al inicio) */
 .page-hero {
@@ -1092,12 +1120,16 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 
 /* Char modal */
 .char-quote {
-  font-size: var(--fs-md);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--fs-lg);
+  line-height: 1.45;
   color: var(--paper);
-  opacity: 0.85;
-  border-left: 2px solid var(--stamp);
-  padding-left: var(--space-4);
-  margin: var(--space-4) 0;
+  opacity: 0.92;
+  border-left: 2px solid var(--rule);
+  padding: var(--space-2) 0 var(--space-2) var(--space-5);
+  margin: var(--space-5) 0;
 }
 .char-bio {
   font-size: var(--fs-sm);
@@ -1119,4 +1151,100 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   opacity: 0.85;
   padding-left: var(--space-4);
   border-left: 1px solid var(--rule);
+}
+
+/* ══════════════════════════════════════════════════════════
+   EASTER EGGS — los emite easter-eggs.js. `.show` es el toggle
+   de visibilidad de los tres: sin esta clase el portal del Void
+   no se podía cerrar.
+══════════════════════════════════════════════════════════ */
+.ee-toast {
+  position: fixed;
+  left: var(--space-5);
+  bottom: var(--space-5);
+  z-index: var(--z-modal);
+  max-width: 320px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: var(--panel);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-sm);
+  padding: var(--space-4);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--paper);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity var(--dur-base), transform var(--dur-base);
+}
+.ee-toast.show { opacity: 1; transform: none; }
+.ee-toast-icon { font-size: var(--fs-md); line-height: 1.3; }
+
+.ee-void-portal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  background: var(--overlay);
+  opacity: 0;
+  visibility: hidden; /* sin esto seguiría capturando clicks estando invisible */
+  transition: opacity var(--dur-base), visibility var(--dur-base);
+}
+.ee-void-portal.show { opacity: 1; visibility: visible; }
+.void-msg {
+  max-width: 480px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-2xl);
+  line-height: 1.2;
+  color: var(--paper);
+}
+.void-msg small {
+  display: block;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: var(--dim);
+}
+
+.ee-soul-counter {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-6);
+  z-index: var(--z-modal);
+  background: var(--panel);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-sm);
+  padding: var(--space-5) var(--space-6);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  pointer-events: none;
+  transition: opacity var(--dur-base), transform var(--dur-base);
+}
+.ee-soul-counter.show { opacity: 1; transform: translate(-50%, 0); }
+.soul-number {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-3xl);
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+  color: var(--paper);
+  margin-bottom: var(--space-2);
 }

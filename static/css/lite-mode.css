@@ -14,7 +14,12 @@
   will-change: auto !important;
 }
 
-/* 3. Transiciones más cortas y simples */
-.lite-mode * {
-  transition-duration: 0.15s !important;
+/* 3. Transiciones más cortas y simples.
+   Se desactiva bajo prefers-reduced-motion: esa preferencia la resuelve
+   styles.css cortando el movimiento del todo, y este archivo carga después,
+   así que sin este guard le ganaría con sus 150ms. */
+@media not all and (prefers-reduced-motion: reduce) {
+  .lite-mode * {
+    transition-duration: 0.15s !important;
+  }
 }

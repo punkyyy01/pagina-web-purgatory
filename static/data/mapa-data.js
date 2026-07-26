@@ -25,7 +25,8 @@
       desc: 'El salto improvisado a Los Pibes Shitposters. Caos administrativo y falta de rumbo que casi rompe todo.', tag: 'Evento' },
     { id: 'drift',     x: 500,  y: 490, type: 'event',  title: 'Comunidad al Límite', subtitle: 'Evento · Pibes',
       desc: 'Dispersión y desgaste: las almas se desconectan, algunos se pierden en el Void, otros esperan que alguien cree algo que valga la pena.', tag: 'Evento' },
-    { id: 'exodo',     x: 580,  y: 50,  type: 'event',  title: 'Éxodo Blanco', subtitle: 'Evento · Olympo',
+    /* x=520 y no 580: a 580 la card se solapaba con la de Olympo (ver scripts/check-mapa-overlap.js) */
+    { id: 'exodo',     x: 520,  y: 50,  type: 'event',  title: 'Éxodo Blanco', subtitle: 'Evento · Olympo',
       desc: 'El grupo de Doomentio implosionó por una voideada de Twoky. Los que valían la pena terminaron en OLYMPO. Así llegaron Ivan, Matiti, y el resto. El server nunca fue lo mismo.', tag: 'Evento' },
     { id: 'caida',     x: 870,  y: 220, type: 'event',  title: 'Caída del Olympo', subtitle: 'Evento · Olympo',
       desc: 'Ivan y Cat no supieron administrar lo que el Éxodo les dio. El patrón, tercera vez: mala administración. La Edad de Oro terminó exactamente como las anteriores.', tag: 'Evento' },
@@ -119,7 +120,7 @@
     if (!tooltip || !tooltipContent) return;
     tooltipContent.innerHTML =
       '<div class="record-meta">' + n.tag + '</div>' +
-      '<h3 style="font-family:var(--font-serif);font-weight:600;font-size:var(--fs-xl);color:var(--paper);margin-bottom:var(--space-3)">' + n.title + '</h3>' +
+      '<h3 id="mapa-tooltip-title" style="font-family:var(--font-serif);font-weight:600;font-size:var(--fs-xl);color:var(--paper);margin-bottom:var(--space-3)">' + n.title + '</h3>' +
       '<p style="font-size:var(--fs-md);color:var(--paper);opacity:0.85;line-height:1.65">' + n.desc + '</p>' +
       '<p class="record-meta" style="margin-top:var(--space-4);margin-bottom:0">' + n.subtitle + '</p>';
     tooltip.classList.add('is-open');
@@ -148,13 +149,16 @@
   /* ── Pan + Zoom ── */
   var tx = 0, ty = 0, scale = 1;
   var MIN_SCALE = 0.4, MAX_SCALE = 2;
+  /* Las cards se dibujan centradas en el nodo (150px de ancho), así que
+     sobresalen del canvas virtual: hay que reservarles lugar en el fit. */
+  var CARD_PAD = 170;
   var dragging = false, startX, startY, startTx, startTy;
 
   function applyTransform() {
     canvas.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
   }
 
-  /* Centra el mapa al cargar */
+  /* Centra el mapa en el contenedor con la escala actual */
   function centerMap() {
     var cw = container.offsetWidth;
     var ch = container.offsetHeight;
@@ -163,12 +167,26 @@
     applyTransform();
   }
 
-  setTimeout(centerMap, 50);
+  /* Escala inicial: entra todo el mapa en el contenedor. Nunca amplía por
+     encima de 1 (en pantallas grandes se ve a tamaño real) ni baja de
+     MIN_SCALE (más chico el texto es ilegible — ahí se arrastra). */
+  function fitMap() {
+    scale = Math.max(MIN_SCALE, Math.min(
+      1,
+      container.offsetWidth  / (CANVAS_W + CARD_PAD),
+      container.offsetHeight / (CANVAS_H + CARD_PAD)
+    ));
+    centerMap();
+  }
+
+  /* ponytail: no re-ajusta en resize — en móvil la barra del navegador
+     dispara resize al scrollear y le tiraría abajo el pan al usuario. */
+  setTimeout(fitMap, 50);
 
   /* Zoom buttons */
   if (btnZoomIn)  btnZoomIn.addEventListener('click',  function () { zoom(0.2); });
   if (btnZoomOut) btnZoomOut.addEventListener('click', function () { zoom(-0.2); });
-  if (btnReset)   btnReset.addEventListener('click',   function () { scale = 1; centerMap(); });
+  if (btnReset)   btnReset.addEventListener('click',   fitMap);
 
   function zoom(delta) {
     scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale + delta));

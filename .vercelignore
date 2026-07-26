@@ -25,3 +25,6 @@ _headers
 # OS
 .DS_Store
 Thumbs.db
+
+# Mockup de dirección visual — referencia interna, no se despliega
+purgatory-design-mockup.html

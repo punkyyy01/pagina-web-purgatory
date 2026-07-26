@@ -78,7 +78,7 @@
           (ev.user_count > 0 ? '<div class="naipe-meta">' + ev.user_count + ' almas convocadas</div>' : '') +
         '</div>' +
         '<div class="evento-naipe__cta">' +
-          '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn naipe-btn-ritual">Ver ritual ›</a>' +
+          '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn btn--sm">Ver ritual ›</a>' +
         '</div>' +
       '</article>'
     );
@@ -100,7 +100,7 @@
           (ev.description ? '<p class="edicto-desc">' + escapeHTML(ev.description) + '</p>' : '') +
           '<div class="edicto-footer">' +
             (ev.user_count > 0 ? '<span class="edicto-almas">' + ev.user_count + ' almas convocadas</span>' : '<span></span>') +
-            '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn naipe-btn-ritual">Ver ritual ›</a>' +
+            '<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="btn btn--sm">Ver ritual ›</a>' +
           '</div>' +
         '</div>' +
       '</article>'
@@ -161,11 +161,12 @@
     }
   }, true);
 
-  function renderError(msg) {
+  /* Único lugar donde se pone el prefijo: quien llama pasa solo el detalle. */
+  function renderError(detail) {
     var emptyEl = document.getElementById('events-empty');
     if (emptyEl) {
       emptyEl.style.display = '';
-      emptyEl.innerHTML = '<p>Error al invocar los rituales: ' + msg + '</p>' +
+      emptyEl.innerHTML = '<p>Error al invocar los rituales: ' + escapeHTML(detail) + '</p>' +
         '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" class="btn btn-blood" style="margin-top:var(--space-4);display:inline-block">Ir al servidor</a>';
     }
   }
@@ -207,7 +208,7 @@
         if (loading) loading.style.display = 'none';
 
         if (data.error) {
-          renderError('No se pudieron cargar los eventos: ' + data.error);
+          renderError(data.error);
         } else {
           renderEvents(data);
         }
@@ -215,9 +216,8 @@
       .catch(function (err) {
         if (isFirstLoad) {
           if (loading) loading.style.display = 'none';
-          var detail = (err && err.apiMessage) ? err.apiMessage
-                     : 'No se pudo conectar con la API.';
-          renderError('Error al invocar los eventos del Void: ' + detail);
+          renderError((err && err.apiMessage) ? err.apiMessage
+                                              : 'No se pudo conectar con la API.');
         }
         /* En polls posteriores, si falla simplemente se mantiene
            lo que ya está renderizado — sin molestar al usuario. */

@@ -28,6 +28,17 @@
   .reveal-init { opacity: 1; transform: none; }
 }
 
+/* ── Foco de teclado — un solo lenguaje para todo el sitio ─────
+   Generaliza el patrón que ya usaba .filter-tab: outline en --paper con
+   offset visible. Solo :focus-visible, así el mouse no lo dispara. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+/* Las cards se recortan contra el borde del grid: el outline va por dentro. */
+.card-naipe:focus-visible { outline-offset: -2px; }
+
 /* ── Layout base (.container vive en tokens.css) ─────────────── */
 .page { max-width: 860px; }
 
@@ -49,11 +60,13 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   color: var(--stamp-bright);
   display: inline-block;
 }
+/* Insets en em: el anillo escala con el tamaño de fuente en vez de deformarse.
+   A 20px son los mismos -4px/-6px de antes; a 12rem (404) sigue proporcionado. */
 .seal-sm::after {
   content: "";
   position: absolute;
-  inset: -4px -6px;
-  border: 1.5px solid var(--stamp);
+  inset: -0.2em -0.3em;
+  border: max(1px, 0.075em) solid var(--stamp);
   border-radius: 50%;
   transform: rotate(-8deg);
 }
@@ -69,13 +82,15 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .seal::after {
   content: "";
   position: absolute;
-  inset: -10px -16px;
-  border: 1.5px solid var(--stamp);
+  inset: -0.13em -0.21em;
+  border: max(1.5px, 0.02em) solid var(--stamp);
   border-radius: 50%;
   transform: rotate(-8deg);
 }
 
-/* Sello reutilizado como veredicto / estado registrado */
+/* Sello reutilizado como veredicto / estado registrado.
+   Base = contorno (nivel menor). El relleno sólido es la excepción,
+   reservada al nivel más grave — ver la regla de abajo. */
 .stamp {
   display: inline-block;
   font-family: var(--font-mono);
@@ -84,10 +99,24 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   text-transform: uppercase;
   color: var(--stamp-bright);
   border: 1.5px solid var(--stamp);
-  padding: 5px 12px;
+  padding: var(--space-1) var(--space-3);
   transform: rotate(-3deg);
   opacity: 0.92;
   white-space: nowrap;
+}
+/* Diferencia por peso, no por color nuevo: Imperdonable/Activo llevan
+   relleno sólido con texto --ink; el resto se queda en el contorno de
+   arriba. Esquinas duras — el sello no adopta forma de píldora. */
+.condemned-card[data-severity="critical"] .stamp,
+.evento-naipe.is-activo .stamp,
+.evento-edicto.is-activo .stamp {
+  background: var(--stamp);
+  border-color: var(--stamp);
+  color: var(--ink);
+  /* La opacity:0.92 de .stamp diluye el sello hacia el fondo de página;
+     sobre --ink casi no hay margen y el contraste caía a 3.90:1. Sólido
+     de verdad, no aguado: 4.68:1, AA para texto normal. */
+  opacity: 1;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -118,7 +147,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 }
 .record-desc {
   font-size: var(--fs-sm);
-  line-height: 1.65;
   color: var(--paper);
   opacity: 0.85;
   max-width: 620px;
@@ -228,9 +256,11 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 }
 
 /* En mobile el CTA vuelve al menú desplegable —
-   "Entrar al Server" no entra en la barra angosta. */
+   "Entrar al Server" no entra en la barra angosta.
+   El corte es 1080px, no 768: con 6 destinos + CTA la barra ya no entra por
+   debajo de ~1050px (y entre 769 y 800 ya se desbordaba con 5). */
 .nav-links-cta { display: none; }
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .nav-end .cta { display: none; }
   .nav-links-cta { display: list-item; }
 }
@@ -249,7 +279,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   padding: var(--space-2);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .nav-toggle { display: block; }
   .nav-links {
     display: none;
@@ -333,6 +363,18 @@ h1.section-title {
   letter-spacing: -0.015em;
 }
 
+/* Un solo interlineado para el rol "párrafo descriptivo" (lead de sección,
+   bajada del hero, descripciones de card, bio de personaje, cuerpo de modal).
+   Antes había 6 valores distintos para la misma función. El cuerpo largo de
+   Lore (.chapter-body) queda aparte: tiene su propio tratamiento de lectura. */
+.section-lead,
+.record-desc,
+.sacred-law p,
+.naipe-desc,
+.edicto-desc,
+.char-bio,
+.modal-body { line-height: 1.65; }
+
 .section-lead {
   font-family: var(--font-body);
   font-size: var(--fs-md);
@@ -341,20 +383,24 @@ h1.section-title {
   text-align: left;
   max-width: 620px;
 }
-.page-hero .section-title { margin-bottom: var(--space-3); }
-.section-title + .section-lead {
-  margin-top: calc(-1 * var(--space-4));
-  margin-bottom: var(--space-6);
-}
+/* Título → bajada: espacio real y positivo. El margen negativo que había acá
+   compensaba un h1 más chico y terminaba solapando las dos líneas de texto. */
+.page-hero .section-title { margin-bottom: var(--space-4); }
+.section-title + .section-lead { margin-bottom: var(--space-6); }
+/* Dentro del page-hero la bajada no paga margen propio: el hero ya cierra con
+   su padding, y la sección siguiente no arranca como si fuera de mitad de página. */
+.page-hero .section-lead { margin-bottom: 0; }
+.page-hero + .section { padding-top: var(--space-6); }
 
 /* ══════════════════════════════════════════════════════════
    HERO (index.html)
 ══════════════════════════════════════════════════════════ */
+/* min-height le ganaba al max-height (así resuelve CSS), así que en viewports
+   altos el hero crecía a 70vh y dejaba un hueco enorme. Un solo valor acotado. */
 .hero {
   display: flex;
   align-items: center;
-  min-height: 70vh;
-  max-height: 640px;
+  min-height: min(70vh, 640px);
   padding: var(--space-9) 0 var(--space-8);
 }
 
@@ -381,11 +427,16 @@ h1.section-title {
   letter-spacing: 0.01em;
 }
 
-.hero-actions {
+/* Fila de acciones — misma composición en el hero y al cierre de una sección.
+   .section-cta agrega la separación superior; en el hero la resuelve el
+   margin-bottom del título. Reemplaza 4 margin-top inline distintos. */
+.hero-actions,
+.section-cta {
   display: flex;
   gap: var(--space-4);
   flex-wrap: wrap;
 }
+.section-cta { margin-top: var(--space-6); }
 
 /* ══════════════════════════════════════════════════════════
    CARDS GRID (generic) + NAIPE GRID (personajes)
@@ -496,14 +547,33 @@ h1.section-title {
 }
 
 /* ══════════════════════════════════════════════════════════
-   TIMELINE (Las Cuatro Eras)
+   TIMELINE (Las Cuatro Eras) — regla + numeral, sin caja.
+   Extiende el lenguaje de .chapter-tablet (rule + label + title, cero
+   fondo/borde perimetral): la secuencia se lee por el numeral corrido
+   en el margen y la línea que separa cada era de la siguiente, no por
+   cuatro rectángulos idénticos.
 ══════════════════════════════════════════════════════════ */
 .timeline {
   display: flex;
   flex-direction: column;
 }
-
-.era-card { /* usa .record */ }
+.era-card {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: var(--space-5);
+  border-top: 1px solid var(--rule);
+  padding: var(--space-6) 0;
+}
+.era-card:first-child { border-top: none; padding-top: 0; }
+.era-card:last-child { padding-bottom: 0; }
+.era-num {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-3xl);
+  line-height: 1;
+  color: var(--dim);
+}
+.era-body { min-width: 0; }
 .era-card-title {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -512,61 +582,37 @@ h1.section-title {
   line-height: 1.15;
   margin-bottom: var(--space-3);
 }
-.era-card-desc {
-  font-size: var(--fs-sm);
-  color: var(--paper);
-  opacity: 0.85;
-  line-height: 1.65;
-  max-width: 620px;
-}
-.era-card-hint {
-  font-size: var(--fs-sm);
-  color: var(--dim);
-  margin-top: var(--space-2);
-}
+/* La descripción larga (solo Lore) usa .record-desc — ver bloque RECORD. */
 
 /* ══════════════════════════════════════════════════════════
-   CONDENADOS (Círculos del Infierno)
+   CONDENADOS (Círculos del Infierno) — registro, no grilla.
+   Mismo lenguaje que .sacred-law: una columna, una línea entre casos,
+   se lee de arriba hacia abajo como un expediente real, no en paralelo.
 ══════════════════════════════════════════════════════════ */
-.condemned-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
-}
-@media (max-width: 900px) {
-  .condemned-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .condemned-grid { grid-template-columns: 1fr; }
-}
-.condemned-grid .condemned-card + .condemned-card { margin-top: 0; }
-.condemned-card { /* usa .record */ }
-.condemned-header {
+.condemned-list {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  flex-wrap: wrap;
-  margin-bottom: var(--space-3);
+  flex-direction: column;
 }
-.condemned-header h3 {
+.condemned-card {
+  border-top: 1px solid var(--rule);
+  padding: var(--space-6) 0;
+}
+.condemned-card:first-child { border-top: none; padding-top: 0; }
+.condemned-card:last-child { padding-bottom: 0; }
+.condemned-name {
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: var(--fs-2xl);
   color: var(--paper);
+  margin-bottom: var(--space-3);
+  line-height: 1.15;
 }
-.condemned-header h3 .alias {
+.condemned-name .alias {
   font-size: var(--fs-sm);
   color: var(--dim);
   font-weight: normal;
 }
-.condemned-card p {
-  font-size: var(--fs-sm);
-  color: var(--paper);
-  opacity: 0.85;
-  line-height: 1.6;
-  max-width: 620px;
-  margin-bottom: var(--space-4);
-}
+/* La descripción de cada caso usa .record-desc — ver bloque RECORD. */
 
 /* ══════════════════════════════════════════════════════════
    FILTROS + BUSCADOR
@@ -611,7 +657,7 @@ h1.section-title {
   border-radius: 0;
   padding: var(--space-2) 0;
 }
-.char-search-input:focus { outline: none; border-bottom-color: var(--paper); }
+.char-search-input:focus { border-bottom-color: var(--paper); }
 .char-search-input::placeholder { color: var(--dim); }
 
 /* ── Countdown strip (home, card compacta justo después del hero) ── */
@@ -702,7 +748,6 @@ h1.section-title {
   font-size: var(--fs-sm);
   color: var(--paper);
   opacity: 0.85;
-  line-height: 1.7;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -827,7 +872,6 @@ h1.section-title {
   font-size: var(--fs-sm);
   color: var(--paper);
   opacity: 0.85;
-  line-height: 1.6;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -964,7 +1008,14 @@ h1.section-title {
   border-top: 1px solid var(--rule);
   padding-top: var(--space-6);
 }
-.evento-naipe.is-pasado { opacity: 0.5; }
+/* "Ya pasó" se comunica con el sello FINALIZADO y el sello en gris, no bajando
+   la opacidad: cualquier opacidad de card tiraba .naipe-meta por debajo de AA
+   (5.15:1 es su techo, ya con --dim a --fs-xs). El texto queda a contraste pleno. */
+.evento-naipe.is-pasado .stamp,
+.evento-edicto.is-pasado .stamp {
+  color: var(--dim);
+  border-color: var(--rule-strong);
+}
 
 .evento-naipe__sello { margin-bottom: var(--space-3); }
 
@@ -1004,7 +1055,6 @@ h1.section-title {
   font-size: var(--fs-sm);
   color: var(--paper);
   opacity: 0.8;
-  line-height: 1.5;
   margin-bottom: var(--space-2);
   overflow: hidden;
   display: -webkit-box;
@@ -1024,7 +1074,8 @@ h1.section-title {
   border-top: 1px solid var(--rule);
   padding-top: var(--space-6);
 }
-.evento-edicto.is-pasado { opacity: 0.5; }
+/* La portada sí se puede apagar: no es texto, no cuesta legibilidad. */
+.evento-edicto.is-pasado .edicto-portada { filter: grayscale(1); opacity: 0.6; }
 
 .evento-edicto__hero {
   height: 200px;
@@ -1048,7 +1099,6 @@ h1.section-title {
   font-size: var(--fs-sm);
   color: var(--paper);
   opacity: 0.8;
-  line-height: 1.6;
   max-width: 480px;
   margin: var(--space-3) 0 var(--space-4);
 }
@@ -1135,7 +1185,6 @@ h1.section-title {
   font-size: var(--fs-sm);
   color: var(--paper);
   opacity: 0.85;
-  line-height: 1.7;
 }
 .char-relations { margin-top: var(--space-4); }
 .char-relations ul {

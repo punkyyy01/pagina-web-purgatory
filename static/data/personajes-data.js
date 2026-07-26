@@ -157,7 +157,7 @@
   function renderCards(list) {
     grid.innerHTML = '';
     if (list.length === 0) {
-      grid.innerHTML = '<p style="color:var(--dim);grid-column:1/-1;padding:40px 0">No hay almas con ese criterio.</p>';
+      grid.innerHTML = '<p style="color:var(--dim);grid-column:1/-1;padding:var(--space-6) 0">No hay almas con ese criterio.</p>';
       return;
     }
     list.forEach(function (c) {
@@ -261,7 +261,7 @@
         '<span class="record-meta">Relaciones</span>' +
         '<ul style="margin-top:var(--space-2)">' + relationsHTML + '</ul>' +
       '</div>' +
-      '<div style="margin-top:var(--space-5)">' +
+      '<div class="section-cta">' +
         '<button class="btn btn-blood modal-close-btn">Cerrar</button>' +
       '</div>';
 

@@ -47,7 +47,7 @@
     var isPast   = end ? end < now : false;
     return {
       cls:   isActive ? 'is-activo' : (isPast ? 'is-pasado'  : 'is-proximo'),
-      label: isActive ? 'ACTIVO'    : (isPast ? 'PASADO'     : 'PRÓXIMO')
+      label: isActive ? 'ACTIVO'    : (isPast ? 'FINALIZADO' : 'PRÓXIMO')
     };
   }
 
@@ -93,10 +93,12 @@
         '<div class="evento-edicto__hero">' +
           '<img class="edicto-portada" src="' + escapeHTML(ev.image) + '" alt="' + escapeHTML(ev.name) + '" loading="lazy">' +
         '</div>' +
+        /* Mismo orden que la variante sin imagen: sello → fecha → título →
+           descripción → almas + CTA. La portada se suma arriba, no reordena. */
         '<div class="evento-edicto__body">' +
           '<span class="stamp edicto-badge">' + escapeHTML(s.label) + '</span>' +
-          '<h3 class="edicto-title">' + escapeHTML(ev.name) + '</h3>' +
           '<div class="record-meta">' + dp.day + ' ' + dp.month + ' ' + dp.year + '</div>' +
+          '<h3 class="edicto-title">' + escapeHTML(ev.name) + '</h3>' +
           (ev.description ? '<p class="edicto-desc">' + escapeHTML(ev.description) + '</p>' : '') +
           '<div class="edicto-footer">' +
             (ev.user_count > 0 ? '<span class="edicto-almas">' + ev.user_count + ' almas convocadas</span>' : '<span></span>') +
@@ -167,7 +169,9 @@
     if (emptyEl) {
       emptyEl.style.display = '';
       emptyEl.innerHTML = '<p>Error al invocar los rituales: ' + escapeHTML(detail) + '</p>' +
-        '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" class="btn btn-blood" style="margin-top:var(--space-4);display:inline-block">Ir al servidor</a>';
+        '<div class="section-cta">' +
+          '<a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer" class="btn btn-blood">Ir al servidor</a>' +
+        '</div>';
     }
   }
 

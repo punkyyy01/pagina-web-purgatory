@@ -88,9 +88,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   transform: rotate(-8deg);
 }
 
-/* Sello reutilizado como veredicto / estado registrado.
-   Base = contorno (nivel menor). El relleno sólido es la excepción,
-   reservada al nivel más grave — ver la regla de abajo. */
+/* Sello reutilizado como veredicto / estado registrado — escala de 4 pasos
+   por peso/relleno de --stamp, nunca por hue nuevo (mismo principio que
+   --dim: es --paper a menor opacidad, no un color distinto).
+   Base = contorno liviano (Condenado / .is-proximo). Nada aquí abajo cambia
+   sin verificar contraste primero — un relleno translúcido con texto --ink
+   reprueba en silencio (ver el comentario de Grave). */
 .stamp {
   display: inline-block;
   font-family: var(--font-mono);
@@ -104,9 +107,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   opacity: 0.92;
   white-space: nowrap;
 }
-/* Diferencia por peso, no por color nuevo: Imperdonable/Activo llevan
-   relleno sólido con texto --ink; el resto se queda en el contorno de
-   arriba. Esquinas duras — el sello no adopta forma de píldora. */
+
+/* Paso 1/4 — Imperdonable / Activo: relleno sólido, texto --ink. El más grave. */
 .condemned-card[data-severity="critical"] .stamp,
 .evento-naipe.is-activo .stamp,
 .evento-edicto.is-activo .stamp {
@@ -116,6 +118,33 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   /* La opacity:0.92 de .stamp diluye el sello hacia el fondo de página;
      sobre --ink casi no hay margen y el contraste caía a 3.90:1. Sólido
      de verdad, no aguado: 4.68:1, AA para texto normal. */
+  opacity: 1;
+}
+
+/* Paso 2/4 — Grave: relleno a media saturación, no sólido.
+   Con texto --ink esto reprueba incluso al 95% de alfa (4.32:1, sigue bajo
+   AA) porque --ink es casi el mismo tono que la página: un relleno que no
+   está lleno del todo nunca le da suficiente separación. Texto --paper en
+   cambio da 7.27:1 sobre el mismo relleno al 55% — ahí es donde vive el
+   contraste, no en diluir menos el --ink. */
+.condemned-card[data-severity="high"] .stamp {
+  background: rgba(13, 138, 128, 0.55); /* --stamp (#0d8a80) al 55% — mismo
+    criterio que --dim: el mismo tono a menor opacidad, no un color nuevo. */
+  border-color: var(--stamp);
+  color: var(--paper);
+  opacity: 1;
+}
+
+/* Paso 3/4 — Condenado: el contorno base de arriba, sin cambios.
+   Paso 4/4 — Meme Eterno: contorno sin acento — mismo lenguaje que el
+   estado FINALIZADO de Eventos (Fase 7): la marca ya no tiene nada que
+   defender, se apaga a neutro. */
+.condemned-card[data-severity="low"] .stamp {
+  border-color: var(--rule-strong);
+  color: var(--dim);
+  /* --rule-strong y --dim ya son rgba propios; la opacity:0.92 heredada de
+     .stamp los diluye una segunda vez y el borde caía a 2.88:1 (bajo el
+     mínimo no-texto de 3:1). Un solo descuento de opacidad, no dos. */
   opacity: 1;
 }
 
@@ -559,17 +588,21 @@ h1.section-title {
 }
 .era-card {
   display: grid;
-  grid-template-columns: 2.5rem 1fr;
+  grid-template-columns: auto 1fr;
   gap: var(--space-5);
   border-top: 1px solid var(--rule);
   padding: var(--space-6) 0;
 }
 .era-card:first-child { border-top: none; padding-top: 0; }
 .era-card:last-child { padding-bottom: 0; }
+/* Sin caja de la que apoyarse, el numeral pesa por tamaño y peso de fuente,
+   no por color: sube a --fs-hero (la propia escala ya alcanzaba) y a 700,
+   pero se queda en --dim para no competir con el título de la era.
+   Columna a "auto" — a este tamaño "III"/"IV" no entran en un ancho fijo. */
 .era-num {
   font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: var(--fs-3xl);
+  font-weight: 700;
+  font-size: var(--fs-hero);
   line-height: 1;
   color: var(--dim);
 }
@@ -764,11 +797,13 @@ h1.section-title {
   gap: var(--space-4);
   text-align: left;
 }
+/* --fs-3xl es del mismo tamaño que un h2 — una cifra de impacto necesita su
+   propia voz, no la de un título de sección. Ver --fs-display en tokens.css. */
 .stat-number {
   display: block;
   font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: var(--fs-3xl);
+  font-weight: 700;
+  font-size: var(--fs-display);
   color: var(--paper);
   line-height: 1;
 }

@@ -25,6 +25,11 @@
   --fs-2xl: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
   --fs-3xl: clamp(2.25rem, 1.5rem + 3vw, 3.5rem);
   --fs-hero: clamp(2.5rem, 1.8rem + 3.5vw, 4.75rem);
+  /* Un escalón por encima de --fs-hero, reservado a un solo rol: la cifra
+     de "estadística de impacto" (.stat-number). --fs-hero ya es la identidad
+     de página (wordmark/h1) — reusarlo para las stats las haría leerse como
+     si compitieran con el título en vez de ser su propia voz puntual. */
+  --fs-display: clamp(3rem, 2rem + 4vw, 5.5rem);
   --fs-dropcap: 5em;
 
   /* ── Espaciado ── */
@@ -65,8 +70,14 @@ html { font-size: 112.5%; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Grano de papel: ruido feTurbulence desaturado a escala de grises (sin tinte
+   de color), horneado como la opacity propia del <rect> — así vive en la capa
+   de fondo de body, por debajo de todo el contenido, sin pseudo-elemento ni
+   z-index. 3% de opacity: da calidad de material, no se lee como iluminación. */
 body {
-  background: var(--ink);
+  background-color: var(--ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
   color: var(--paper);
   font-family: var(--font-body);
   font-size: var(--fs-base);

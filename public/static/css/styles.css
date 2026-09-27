@@ -28,6 +28,16 @@
   .reveal-init { opacity: 1; transform: none; }
 }
 
+/* ── El atributo `hidden` gana siempre ──────────────────────────
+   El default del navegador para [hidden] es `display: none`, pero con
+   la MISMA especificidad que cualquier selector de una sola clase — y
+   una regla de autor (ej. .btn { display: inline-block }) empatada en
+   especificidad le gana al default del user-agent. Resultado real que
+   pasó acá: el JS ponía el.hidden=true en un <a class="btn ...">, y
+   .btn seguía forzando display:inline-block por encima. Con esta regla
+   [hidden] no vuelve a perder ese empate en ningún lado del sitio. */
+[hidden] { display: none !important; }
+
 /* ── Foco de teclado — un solo lenguaje para todo el sitio ─────
    Generaliza el patrón que ya usaba .filter-tab: outline en --paper con
    offset visible. Solo :focus-visible, así el mouse no lo dispara. */
@@ -296,6 +306,57 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 
 /* .cta ya no declara nada: es .btn.btn--sm.btn-blood en el HTML.
    La clase sobrevive solo como gancho de layout para el breakpoint de arriba. */
+
+/* ── Usuario logueado (nav de escritorio) — auth-nav.js la muestra
+   recién cuando confirma sesión; hasta entonces el link de login de
+   arriba ya es funcional por sí solo, sin depender de JS. ────────── */
+.nav-user { position: relative; }
+.nav-user__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-sm);
+  padding: 6px 10px;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+}
+.nav-user__avatar { border-radius: 50%; display: block; background: var(--panel); }
+.nav-user__menu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  min-width: 170px;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  padding: var(--space-2);
+  display: none;
+  flex-direction: column;
+  gap: var(--space-1);
+  z-index: var(--z-header);
+}
+.nav-user.is-open .nav-user__menu { display: flex; }
+.nav-user__menu a,
+.nav-user__menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: var(--r-sm);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  padding: var(--space-2);
+  cursor: pointer;
+  text-decoration: none;
+}
+.nav-user__menu a:hover,
+.nav-user__menu button:hover { background: rgba(232, 228, 218, 0.08); }
 
 /* Mobile nav toggle */
 .nav-toggle {
@@ -740,7 +801,6 @@ h1.section-title {
 }
 .alma-carousel__item + .alma-carousel__item { margin-left: var(--space-4); }
 .alma-carousel__item > a { display: block; height: 100%; text-decoration: none; }
-.alma-carousel__item[hidden] { display: none; }
 
 @media (max-width: 560px) {
   .alma-carousel__item { flex-basis: 160px; }

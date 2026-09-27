@@ -83,6 +83,7 @@ const CSP = "default-src 'self'; script-src 'self' 'sha256-L0IzETgzhHHFQg/cujcI7
 
     <script is:inline src={`/static/js/scripts.js?v=${ASSET_V}`} defer></script>
     <script is:inline src={`/static/js/easter-eggs.js?v=${ASSET_V}`} defer></script>
+    <script is:inline src={`/static/js/auth-nav.js?v=${ASSET_V}`} defer></script>
     {extraScripts.map((src) => <script is:inline src={`${src}?v=${ASSET_V}`} defer></script>)}
     {vercelInsights && <script is:inline defer src="/_vercel/insights/script.js"></script>}
   </body>

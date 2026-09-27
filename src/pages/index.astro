@@ -114,14 +114,21 @@ const almasCarrusel = getGalleryAlmas(almasReales, almasSemilla);
 
     <div class="alma-carousel__runway" id="alma-carousel-runway">
       <div class="alma-carousel__viewport" id="alma-carousel-viewport">
-        <div class="alma-carousel__track" id="alma-carousel-track">
-          {almasCarrusel.map((alma) => (
-            <div class="alma-carousel__item" data-slug={alma.slug}>
-              <a href="/4lma" aria-label={`Ver ${alma.nick}`}>
-                <CardAlma alma={alma} />
-              </a>
-            </div>
-          ))}
+        <!-- Máscara aparte del viewport sticky a propósito: Chromium calcula
+             mal getBoundingClientRect() de un hijo transformado cuando
+             position:sticky y overflow:hidden viven en el MISMO elemento
+             (lo clampeaba al ancho del viewport en vez de dejarlo salir de
+             pantalla). Separado en dos elementos, el bug desaparece. -->
+        <div class="alma-carousel__mask" id="alma-carousel-mask">
+          <div class="alma-carousel__track" id="alma-carousel-track">
+            {almasCarrusel.map((alma) => (
+              <div class="alma-carousel__item" data-slug={alma.slug}>
+                <a href="/4lma" aria-label={`Ver ${alma.nick}`}>
+                  <CardAlma alma={alma} />
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

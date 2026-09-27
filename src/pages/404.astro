@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = true;
+---
+<Layout
+  title="404 — El Void te reclama"
+  description="Has llegado al Void. Esta página no existe en el Purgatorio."
+  ogTitle="El Void — PURG4TORY"
+  ogDescription="Has llegado al Void. Esta página no existe en el Purgatorio."
+  path="/"
+  active={null}
+  extraScripts={["/static/js/void-quotes.js"]}
+  vercelInsights={false}
+>
+  <style is:global slot="head-extra">
+    /* Alineado a la izquierda como el resto del sitio; el layout lo pone
+       .page-hero + .section, igual que las otras páginas. */
+    .void-number {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      font-size: clamp(6rem, 20vw, 12rem);
+      color: var(--paper);
+      line-height: 1;
+      display: block;
+      margin-bottom: var(--space-4);
+    }
+    .void-desc {
+      font-size: var(--fs-md);
+      color: var(--dim);
+      line-height: 1.65;
+      max-width: 620px;
+    }
+    .void-quote {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--dim);
+      margin-top: var(--space-7);
+      min-height: 1.5em;
+    }
+  </style>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="void-number"><span class="seal">4</span>04</span>
+      <h1 class="section-title">Has caído al Void</h1>
+      <p class="void-desc">Esta región del Purgatorio no existe — o fue borrada por el Staff. El vacío entre los mundos te ha reclamado temporalmente.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-cta">
+        <a href="/" class="btn btn-blood">Volver al Purgatorio</a>
+        <a href="/mapa" class="btn">Explorar el Mapa</a>
+      </div>
+      <p class="void-quote" id="void-quote"></p>
+    </div>
+  </section>
+</Layout>

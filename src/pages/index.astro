@@ -1,0 +1,190 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CardAlma from '../components/CardAlma.astro';
+import { almasDemo } from '../data/almas-demo.js';
+
+export const prerender = true;
+---
+<Layout
+  title="Purgatory — Crónica de PURG4TORY"
+  description="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas."
+  ogTitle="PURG4TORY — Crónica del Servidor"
+  ogDescription="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas."
+  path="/"
+  active="inicio"
+  extraScripts={["/static/js/countdown.js", "/static/js/alma-carousel.js"]}
+>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="container">
+        <div class="hero-frame">
+          <p class="hero-eyebrow">crónica del servidor</p>
+          <h1 class="hero-title">PURG<span class="seal">4</span>TORY</h1>
+
+          <div class="hero-actions">
+            <a href="/lore" class="btn btn-blood">Explorar el Lore</a>
+            <a href="#timeline" class="btn">Ver Línea de Tiempo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="countdown-strip">
+    <div class="container">
+      <div id="countdown-widget"></div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════
+       LAS CUATRO ERAS — timeline
+  ══════════════════════════════════════ -->
+  <section class="section" id="timeline">
+    <div class="container">
+      <h2 class="section-title">Las Cuatro Eras</h2>
+      <p class="section-lead">La cronología completa de los servidores.</p>
+
+      <div class="timeline">
+
+        <article class="era-card">
+          <span class="era-num" aria-hidden="true">I</span>
+          <div class="era-body">
+            <div class="record-meta">Era I · 2024</div>
+            <h3 class="era-card-title">Las Fosas — El Origen</h3>
+          </div>
+        </article>
+
+        <article class="era-card">
+          <span class="era-num" aria-hidden="true">II</span>
+          <div class="era-body">
+            <div class="record-meta">Era II · 2025</div>
+            <h3 class="era-card-title">Los Pibes Shitposters — La Era Oscura</h3>
+          </div>
+        </article>
+
+        <article class="era-card">
+          <span class="era-num" aria-hidden="true">III</span>
+          <div class="era-body">
+            <div class="record-meta">Era III · 2025</div>
+            <h3 class="era-card-title">OLYMPO — La Edad de los Refugiados</h3>
+          </div>
+        </article>
+
+        <article class="era-card">
+          <span class="era-num" aria-hidden="true">IV</span>
+          <div class="era-body">
+            <div class="record-meta">Era IV · Actual — 12 de noviembre</div>
+            <h3 class="era-card-title">PURG4TORY — La Dictadura</h3>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="section-cta">
+        <a href="/lore" class="btn">Leer la historia completa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       4LMA — el carrusel de la colección.
+       El HTML trae TODAS las almas de ejemplo; alma-carousel.js elige
+       un subconjunto justo y engancha el desplazamiento al scroll.
+       Sin JS (o con prefers-reduced-motion / lite-mode) esto sigue
+       siendo una fila con scroll horizontal nativo — ver styles.css.
+  ══════════════════════════════════════ -->
+  <section class="section alma-carousel" id="alma-carousel">
+    <div class="container">
+      <h2 class="section-title">4LMA</h2>
+      <p class="section-lead">La colección viva de quienes forman parte de Purgatory — cada alma, a su manera.</p>
+    </div>
+
+    <div class="alma-carousel__runway" id="alma-carousel-runway">
+      <div class="alma-carousel__viewport" id="alma-carousel-viewport">
+        <div class="alma-carousel__track" id="alma-carousel-track">
+          {almasDemo.map((alma) => (
+            <div class="alma-carousel__item" data-slug={alma.slug}>
+              <a href="/4lma" aria-label={`Ver ${alma.nick}`}>
+                <CardAlma alma={alma} />
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section-cta">
+        <a href="/4lma" class="btn btn-blood">Ver todas las almas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       LOS CÍRCULOS DEL INFIERNO
+  ══════════════════════════════════════ -->
+  <section class="section" id="infierno">
+    <div class="container">
+      <h2 class="section-title">Círculos del Infierno</h2>
+      <p class="section-lead">El registro de quienes cruzaron líneas serias dentro de la comunidad. No es chisme ni un juego.</p>
+
+      <div class="condemned-list">
+
+        <article class="condemned-card" data-severity="critical">
+          <div class="record-meta">Caso Nº 001</div>
+          <h3 class="condemned-name">Onil</h3>
+          <p class="record-desc">Actitudes de acoso repetidas, presuntas actitudes indebidas con menores de edad, envio lacayos a trollear con cuentas alternativas.</p>
+          <span class="stamp">Imperdonable</span>
+        </article>
+
+        <article class="condemned-card" data-severity="high">
+          <div class="record-meta">Caso Nº 005</div>
+          <h3 class="condemned-name">Toro <span class="alias">/AnthonyRose</span></h3>
+          <p class="record-desc">Solicitó dinero en el servidor, actitudes machistas y acosadoras con mujeres. En general, un gigafracasado.</p>
+          <span class="stamp">Grave</span>
+        </article>
+
+        <article class="condemned-card" data-severity="low">
+          <div class="record-meta">Caso Nº 008</div>
+          <h3 class="condemned-name">Frankklinton765</h3>
+          <p class="record-desc">"Holaa, estoy aqui por que con un grupo de amigos tenemos un circulo de play station y queriamos saber si es que hay algunas chicas que se quieran unir..." — Sí, fue real.</p>
+          <span class="stamp">Meme eterno</span>
+        </article>
+
+      </div>
+
+      <div class="section-cta">
+        <a href="/condenados" class="btn">Ver el registro completo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       ESTADÍSTICAS
+  ══════════════════════════════════════ -->
+  <section class="stats-bar">
+    <div class="container stats-grid">
+      <div>
+        <span class="stat-number" data-target="15">0</span>
+        <span class="stat-label">Condenados</span>
+      </div>
+      <div>
+        <span class="stat-number" data-target="4">0</span>
+        <span class="stat-label">Eras del servidor</span>
+      </div>
+      <div>
+        <span class="stat-number" data-target="11">0</span>
+        <span class="stat-label">Personajes canónicos</span>
+      </div>
+      <div>
+        <span class="stat-number" data-target="1">0</span>
+        <span class="stat-label">Dictadura vigente</span>
+      </div>
+    </div>
+  </section>
+
+</Layout>

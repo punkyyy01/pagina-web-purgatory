@@ -75,6 +75,6 @@ ctx.fillStyle = DIM;
 ctx.font = '18px monospace';
 ctx.fillText('PURG4T0RY.COM', W / 2, 520);
 
-fs.mkdirSync('static/img', { recursive: true });
-fs.writeFileSync('static/img/og-image.png', canvas.toBuffer('image/png'));
+fs.mkdirSync('public/static/img', { recursive: true });
+fs.writeFileSync('public/static/img/og-image.png', canvas.toBuffer('image/png'));
 console.log('og-image.png generada (1200x630)');

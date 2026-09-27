@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CardAlma from '../../components/CardAlma.astro';
+import { getSessionUser } from '../../lib/auth.js';
+import { getAlma } from '../../lib/db.js';
+import { mergeAlma, getCalidadEfectiva, CALIDAD_LABELS, ERA_LABELS } from '../../lib/alma.js';
+
+export const prerender = false;
+
+const session = await getSessionUser(Astro.cookies);
+if (!session || !session.member?.isMember) {
+  return Astro.redirect('/cuenta');
+}
+
+const almaRow = await getAlma(session.discordId);
+const alma = mergeAlma(session.member, almaRow);
+const calidadEfectiva = getCalidadEfectiva(alma);
+
+const guardado = Astro.url.searchParams.get('guardado') === '1';
+const error = Astro.url.searchParams.get('error');
+const ERROR_MESSAGES = {
+  nick_requerido: 'El nick no puede quedar vacío.',
+};
+const errorMessage = error ? ERROR_MESSAGES[error] ?? 'Algo salió mal guardando tu 4LMA.' : null;
+---
+<Layout
+  title="Editar mi 4LMA — Purgatory"
+  description="Card Builder de PURG4TORY."
+  ogTitle="Editar mi 4LMA — PURG4TORY"
+  ogDescription="Card Builder de PURG4TORY."
+  path="/cuenta/editar"
+  active={null}
+>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="section-title">Tu 4LMA</h1>
+      <p class="section-lead">Lo que se ve acá es lo que van a ver los demás — el avatar y el nombre real siempre vienen de Discord.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container page">
+
+      {guardado && (
+        <div class="record" style="margin-bottom: var(--space-6)">
+          <p class="record-desc" style="opacity:1">Guardado.</p>
+        </div>
+      )}
+      {errorMessage && (
+        <div class="record" style="margin-bottom: var(--space-6)">
+          <p class="record-desc" style="opacity:1">{errorMessage}</p>
+        </div>
+      )}
+
+      <div class="builder-preview">
+        <CardAlma alma={alma} />
+      </div>
+
+      <p class="record-meta">
+        Calidad actual: {calidadEfectiva === 'normal' ? 'Normal (sin sello)' : CALIDAD_LABELS[calidadEfectiva]}
+        {alma.calidadMotivo && ` — motivo: ${alma.calidadMotivo}`}
+        {calidadEfectiva !== alma.calidad && ' (forzada por presencia expulsada)'}
+      </p>
+      <p class="record-desc">
+        La calidad de la carta no se edita acá — sale de tu rol y estado en Discord, o de un logro que te haya
+        otorgado Staff. Esto solo controla el contenido: nick, era, motes, frase y descripción.
+      </p>
+
+      <form method="post" action="/api/alma/save">
+        <div class="builder-field">
+          <label for="nick">Nick</label>
+          <input type="text" id="nick" name="nick" maxlength="40" required value={alma.nick} />
+        </div>
+
+        <div class="builder-field">
+          <label for="era">Era</label>
+          <select id="era" name="era">
+            {Object.entries(ERA_LABELS).map(([key, label]) => (
+              <option value={key} selected={alma.era === key}>{label}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="builder-field">
+          <label for="moteSuperior">Mote superior</label>
+          <input type="text" id="moteSuperior" name="moteSuperior" maxlength="60" placeholder='Ej: "Líder Supremo"' value={alma.moteSuperior} />
+        </div>
+
+        <div class="builder-field">
+          <label for="moteInferior">Mote inferior</label>
+          <input type="text" id="moteInferior" name="moteInferior" maxlength="60" placeholder='Ej: "Dictador de Purgatory"' value={alma.moteInferior} />
+        </div>
+
+        <div class="builder-field">
+          <label for="fraseIconica">Frase icónica</label>
+          <input type="text" id="fraseIconica" name="fraseIconica" maxlength="140" value={alma.fraseIconica} />
+        </div>
+
+        <div class="builder-field">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" name="descripcion" maxlength="600" rows="4">{alma.descripcion}</textarea>
+        </div>
+
+        <div class="builder-field builder-toggle">
+          <input type="checkbox" id="estadoPublicacion" name="estadoPublicacion" value="publicada" checked={alma.estadoPublicacion === 'publicada'} />
+          <label for="estadoPublicacion" style="margin:0">Publicar (visible en la galería)</label>
+        </div>
+
+        <div class="section-cta">
+          <button type="submit" class="btn btn-blood">Guardar</button>
+          <a href="/cuenta" class="btn">Volver a mi cuenta</a>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+</Layout>

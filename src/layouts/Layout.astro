@@ -1,0 +1,90 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle: string;
+  ogDescription: string;
+  path: string;
+  ogUrl?: string;
+  active?: 'inicio' | 'lore' | 'personajes' | 'mapa' | 'eventos' | 'condenados' | null;
+  extraScripts?: string[];
+  vercelInsights?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  path,
+  ogUrl,
+  active = null,
+  extraScripts = [],
+  vercelInsights = true,
+} = Astro.props;
+
+const ASSET_V = '20260726';
+const resolvedOgUrl = ogUrl ?? new URL(path, Astro.site).toString();
+const CSP = "default-src 'self'; script-src 'self' 'sha256-L0IzETgzhHHFQg/cujcI7Kyu+WNfOWlUT6c1nE5Un3s='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://cdn.discordapp.com; object-src 'none'; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';";
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script is:inline src="/static/js/lite-mode-detect.js"></script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PURG4TORY" />
+    <meta property="og:url" content={resolvedOgUrl} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content="https://purg4t0ry.com/static/img/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PURG4TORY — Donde las historias no mueren, solo arden." />
+    <meta property="og:locale" content="es_ES" />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content="https://purg4t0ry.com/static/img/og-image.png" />
+    <meta http-equiv="Content-Security-Policy" content={CSP} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!-- Fuentes auto-hosteadas — sin dependencia de Google -->
+    <link rel="preload" href="/static/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/static/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/static/fonts/cormorant-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href={`/static/css/fonts.css?v=${ASSET_V}`}>
+    <link rel="icon" href="/static/img/logo.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="stylesheet" href={`/static/css/tokens.css?v=${ASSET_V}`}>
+    <link rel="stylesheet" href={`/static/css/styles.css?v=${ASSET_V}`}>
+    <link rel="stylesheet" href={`/static/css/lite-mode.css?v=${ASSET_V}`}>
+    <slot name="head-extra" />
+  </head>
+  <body>
+
+    <Navbar active={active} />
+
+    <main>
+      <slot />
+    </main>
+
+    <button id="back-to-top" aria-label="Volver arriba">&uarr;</button>
+
+    <Footer />
+
+    <script is:inline src={`/static/js/scripts.js?v=${ASSET_V}`} defer></script>
+    <script is:inline src={`/static/js/easter-eggs.js?v=${ASSET_V}`} defer></script>
+    <script is:inline src={`/static/js/auth-nav.js?v=${ASSET_V}`} defer></script>
+    {extraScripts.map((src) => <script is:inline src={`${src}?v=${ASSET_V}`} defer></script>)}
+    {vercelInsights && <script is:inline defer src="/_vercel/insights/script.js"></script>}
+  </body>
+</html>

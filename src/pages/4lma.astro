@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CardAlma from '../components/CardAlma.astro';
+import { almasDemo } from '../data/almas-demo.js';
+
+export const prerender = true;
+---
+<Layout
+  title="4LMA — Purgatory"
+  description="Vista previa del sistema de 4LMA: la identidad de cada usuario dentro del universo de PURG4TORY."
+  ogTitle="4LMA — PURG4TORY"
+  ogDescription="Vista previa del sistema de 4LMA: la identidad de cada usuario dentro del universo de PURG4TORY."
+  path="/4lma"
+  active={null}
+>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="section-title">4LMA</h1>
+      <p class="section-lead">
+        Vista previa del componente de card — todavía no hay Card Builder ni cuentas reales
+        (eso llega en fases siguientes). Estas ocho son de prueba, para validar el diseño
+        contra distintos tipos de contenido.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="naipe-grid">
+        {almasDemo.map((alma) => <CardAlma alma={alma} />)}
+      </div>
+    </div>
+  </section>
+
+</Layout>

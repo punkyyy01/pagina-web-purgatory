@@ -827,10 +827,20 @@ h1.section-title {
    El solapamiento y la inclinación solo existen acá: es lo que hace
    que se sienta un mazo de cartas y no una fila de tarjetas. El acento
    sigue sin aparecer — la inclinación es geometría, no color. */
-.alma-carousel.is-fanned .alma-carousel__viewport { overflow: visible; }
+/* max-width/margin acá (no en .runway): el viewport queda centrado como
+   el resto del contenido del sitio (--container), así el ancho a superar
+   para que haya scroll-link es siempre el mismo — no el ancho real de
+   la pantalla del visitante (antes, en cualquier monitor de escritorio
+   normal —1152px o más— el mazo entraba entero y el scroll-link nunca
+   se activaba: quedaba "estático" siempre, no era un caso raro). */
+.alma-carousel.is-fanned .alma-carousel__viewport {
+  overflow: visible;
+  max-width: var(--container);
+  margin: 0 auto;
+}
 .alma-carousel.is-fanned .alma-carousel__track { padding: var(--space-7) var(--space-6) var(--space-8); }
-.alma-carousel.is-fanned .alma-carousel__item { flex-basis: 200px; }
-.alma-carousel.is-fanned .alma-carousel__item + .alma-carousel__item { margin-left: -52px; }
+.alma-carousel.is-fanned .alma-carousel__item { flex-basis: 220px; }
+.alma-carousel.is-fanned .alma-carousel__item + .alma-carousel__item { margin-left: -36px; }
 
 .alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+1) { transform: rotate(-6deg) translateY(10px); }
 .alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+2) { transform: rotate(3deg) translateY(-8px); }

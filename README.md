@@ -24,7 +24,7 @@
 
 ## ¿Qué es esto?
 
-**Purgatory** es la página de lore del servidor de Discord **PURG4TORY**: un sitio construido con Astro (páginas pre-renderizadas, sin framework de UI en el cliente) que recoge la mitología, los personajes, el mapa histórico y los eventos del servidor. Diseñado para proyectar una estética oscura y premium — gradientes teal/cian, tipografía de época, animaciones suaves y secretos escondidos para quienes buscan.
+**Purgatory** es la página de lore del servidor de Discord **PURG4TORY**: un sitio construido con Astro (páginas pre-renderizadas, sin framework de UI en el cliente) que recoge la mitología, los personajes y los eventos del servidor. Diseñado para proyectar una estética oscura y premium — gradientes teal/cian, tipografía de época, animaciones suaves y secretos escondidos para quienes buscan.
 
 ---
 
@@ -35,7 +35,6 @@
 | [`/`](src/pages/index.astro) | Inicio — hero con arte del servidor, próximos eventos en directo, galería de personajes condenados |
 | [`/lore`](src/pages/lore.astro) | El lore completo — mito de Artema, Las Cuatro Eras, Leyes Sagradas, Códex de las Almas y la Profecía |
 | [`/personajes`](src/pages/personajes.astro) | Galería interactiva de personajes con fichas modales detalladas |
-| [`/mapa`](src/pages/mapa.astro) | Mapa histórico interactivo con pan, zoom y tooltips por nodo |
 | [`/eventos`](src/pages/eventos.astro) | Eventos programados del servidor, actualizados en tiempo real desde Discord |
 | [`/condenados`](src/pages/condenados.astro) | Círculos del Infierno — el registro de quienes cruzaron líneas serias |
 | [`/404`](src/pages/404.astro) | El Void — página de error personalizada con citas del vacío |
@@ -95,14 +94,12 @@ pagina-web-purgatory/
 │       ├── index.astro       ← Homepage
 │       ├── lore.astro        ← Lore completo
 │       ├── personajes.astro  ← Galería de personajes
-│       ├── mapa.astro        ← Mapa histórico interactivo
 │       ├── eventos.astro     ← Eventos del servidor
 │       ├── condenados.astro  ← Círculos del Infierno
 │       ├── 404.astro         ← El Void
 │       └── api/
 │           └── discord-events.js  ← Endpoint (Vercel Function) — eventos de Discord
 ├── scripts/
-│   ├── check-mapa-overlap.js ← Chequeo de solapamiento de nodos del mapa
 │   ├── download-fonts.js     ← Descarga fuentes woff2 desde Google Fonts
 │   └── generate-og.js        ← Genera imagen Open Graph (1200×630)
 └── public/
@@ -120,8 +117,7 @@ pagina-web-purgatory/
         │   ├── lite-mode-detect.js ← Detección automática de modo lite
         │   └── void-quotes.js      ← Citas del 404
         ├── data/
-        │   ├── personajes-data.js  ← Datos de personajes (PURGATORY_CHARS)
-        │   └── mapa-data.js        ← Nodos y conexiones del mapa histórico
+        │   └── personajes-data.js  ← Datos de personajes (PURGATORY_CHARS)
         ├── fonts/
         │   ├── inter-*.woff2          ← Inter (400, 500, 700)
         │   ├── cormorant-*.woff2      ← Cormorant Garamond (500, 500i, 700)
@@ -231,7 +227,6 @@ El sitio detecta automáticamente dispositivos con bajos recursos o conexiones l
 |---|---|
 | `scripts/download-fonts.js` | Descarga las fuentes woff2 desde Google Fonts a `static/fonts/` |
 | `scripts/generate-og.js` | Genera la imagen Open Graph (`public/static/img/og-image.png`, 1200×630) |
-| `scripts/check-mapa-overlap.js` | Verifica que las cards del mapa no se solapen entre sí |
 
 ---
 

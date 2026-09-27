@@ -1,6 +1,6 @@
 ---
 interface Props {
-  active?: 'inicio' | 'lore' | 'personajes' | 'mapa' | 'eventos' | 'condenados' | null;
+  active?: 'inicio' | 'lore' | 'personajes' | 'eventos' | 'condenados' | null;
 }
 
 const { active = null } = Astro.props;
@@ -9,7 +9,6 @@ const links: Array<{ key: NonNullable<Props['active']>; href: string; label: str
   { key: 'inicio', href: '/', label: 'Inicio' },
   { key: 'lore', href: '/lore', label: 'Lore' },
   { key: 'personajes', href: '/personajes', label: 'Personajes' },
-  { key: 'mapa', href: '/mapa', label: 'Mapa' },
   { key: 'eventos', href: '/eventos', label: 'Eventos' },
   { key: 'condenados', href: '/condenados', label: 'Condenados' },
 ];

@@ -1,15 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CardAlma from '../components/CardAlma.astro';
-import { almasDemo } from '../data/almas-demo.js';
+import { almasSemilla } from '../data/almas-semilla.js';
+import { getPublishedAlmas } from '../lib/db.js';
+import { mergeAlma, getGalleryAlmas } from '../lib/alma.js';
 
-export const prerender = true;
+// No se puede prerenderizar (build-time): tiene que reflejar las
+// cartas reales publicadas, no una foto fija del momento del deploy.
+export const prerender = false;
+
+const publicadas = await getPublishedAlmas();
+const almasReales = publicadas.map(({ discordMember, almaRow }) => mergeAlma(discordMember, almaRow));
+const almas = getGalleryAlmas(almasReales, almasSemilla);
 ---
 <Layout
   title="4LMA — Purgatory"
-  description="Vista previa del sistema de 4LMA: la identidad de cada usuario dentro del universo de PURG4TORY."
+  description="La galería de 4LMAs de PURG4TORY: la identidad de cada usuario dentro del universo del servidor."
   ogTitle="4LMA — PURG4TORY"
-  ogDescription="Vista previa del sistema de 4LMA: la identidad de cada usuario dentro del universo de PURG4TORY."
+  ogDescription="La galería de 4LMAs de PURG4TORY: la identidad de cada usuario dentro del universo del servidor."
   path="/4lma"
   active={null}
 >
@@ -18,9 +26,7 @@ export const prerender = true;
     <div class="container">
       <h1 class="section-title">4LMA</h1>
       <p class="section-lead">
-        Vista previa del componente de card — todavía no hay Card Builder ni cuentas reales
-        (eso llega en fases siguientes). Estas ocho son de prueba, para validar el diseño
-        contra distintos tipos de contenido.
+        La colección viva de quienes forman parte de Purgatory — cada alma, a su manera.
       </p>
     </div>
   </section>
@@ -28,7 +34,7 @@ export const prerender = true;
   <section class="section">
     <div class="container">
       <div class="naipe-grid">
-        {almasDemo.map((alma) => <CardAlma alma={alma} />)}
+        {almas.map((alma) => <CardAlma alma={alma} />)}
       </div>
     </div>
   </section>

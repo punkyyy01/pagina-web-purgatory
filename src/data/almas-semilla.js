@@ -1,14 +1,16 @@
 /* ═══════════════════════════════════════════════════════════
-   PURGATORY — 4LMA: datos de ejemplo
+   PURGATORY — 4LMA: relleno de arranque
    ───────────────────────────────────────────────────────────
-   Personas ficticias para probar CardAlma.astro mientras no existe
-   Card Builder ni base de datos (Fase 4/5/6). Cubre a propósito las
-   combinaciones de calidad/presencia/rol y los bordes de contenido
-   (motes vacíos, frase larga, con/sin avatar) para que el componente
-   no se rompa el día que lleguen datos reales.
+   Personas ficticias que rellenan la home y la galería mientras los
+   miembros reales todavía no crearon su propia carta con el Card
+   Builder. Se muestran solo hasta completar este mismo tamaño de
+   lista (ver getGalleryAlmas en src/lib/alma.js) — cuantas más cartas
+   reales y publicadas haya, menos de estas aparecen, sin que haga
+   falta borrar nada acá ni tocar la base de datos: el relleno se
+   retira solo, calculado en cada carga de página.
 
    No reutiliza nombres de personajes-data.js ni de condenados.astro:
-   son personas reales del servidor, un 4lma de ejemplo no puede
+   son personas reales del servidor, un 4lma de relleno no puede
    parecer que les pertenece.
    ═══════════════════════════════════════════════════════════ */
 
@@ -27,7 +29,7 @@ function placeholderAvatar(w, h, from, to) {
   return `data:image/svg+xml,${encodeURIComponent(svg).replace(/'/g, '%27')}`;
 }
 
-export const almasDemo = [
+export const almasSemilla = [
   {
     discordId: '100000000000000001',
     discordUsername: 'centinela.bump',

@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = true;
+---
+<Layout
+  title="Mapa del Purgatorio — Purgatory"
+  description="Mapa interactivo del universo de Purgatory. Explora los reinos, regiones y ubicaciones del lore."
+  ogTitle="Mapa del Purgatorio — PURG4TORY"
+  ogDescription="La evolución del servidor a través de sus cuatro eras y los eventos que las definieron."
+  path="/mapa"
+  active="mapa"
+  extraScripts={["/static/data/mapa-data.js"]}
+>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="section-title">Mapa del Purgatorio</h1>
+      <p class="section-lead">Los cuatro servidores y los eventos que los definieron.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Canvas del mapa con pan+zoom -->
+      <div class="mapa-container" id="mapa-container">
+        <div class="mapa-canvas" id="mapa-canvas">
+          <!-- Las cartas-nodo son generadas por mapa-data.js + scripts.js -->
+        </div>
+        <div class="mapa-controls">
+          <button class="mapa-btn" id="mapa-zoom-in" title="Acercar">+</button>
+          <button class="mapa-btn" id="mapa-zoom-out" title="Alejar">−</button>
+          <button class="mapa-btn" id="mapa-reset" title="Centrar">&#8635;</button>
+        </div>
+      </div>
+
+      <!-- Leyenda -->
+      <div style="display:flex; gap: var(--space-5); flex-wrap:wrap; margin-top: var(--space-5)">
+        <div style="display:flex; align-items:center; gap: var(--space-2); font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing:0.1em; text-transform:uppercase; color: var(--dim)">
+          <span style="width:8px;height:8px;border:1px solid var(--paper);display:inline-block"></span>
+          Servidores
+        </div>
+        <div style="display:flex; align-items:center; gap: var(--space-2); font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing:0.1em; text-transform:uppercase; color: var(--dim)">
+          <span style="width:8px;height:8px;border:1px solid var(--rule);display:inline-block"></span>
+          Eventos
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Tooltip modal -->
+  <div class="mapa-tooltip" id="mapa-tooltip" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="mapa-tooltip-title">
+    <div class="mapa-tooltip-panel">
+      <button class="modal-close" id="mapa-tooltip-close" aria-label="Cerrar">&#215;</button>
+      <div id="mapa-tooltip-content"></div>
+    </div>
+  </div>
+
+</Layout>

@@ -14,7 +14,7 @@
 *Mitos, personajes, historia y eventos — todo en un solo lugar.*
 
 [![Desplegado en Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://vercel.com)
-[![HTML estático](https://img.shields.io/badge/HTML-E34F26?style=flat&logo=html5&logoColor=white)](.)
+[![Astro](https://img.shields.io/badge/Astro-BC52EE?style=flat&logo=astro&logoColor=white)](https://astro.build)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla%20JS-✓-0d8a80?style=flat)](.)
 [![Discord](https://img.shields.io/badge/Discord-PURG4TORY-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/aTFMEVzcew)
 
@@ -24,7 +24,7 @@
 
 ## ¿Qué es esto?
 
-**Purgatory** es la página de lore del servidor de Discord **PURG4TORY**: un sitio estático de alto impacto visual que recoge la mitología, los personajes, el mapa histórico y los eventos del servidor. Diseñado para proyectar una estética oscura y premium — gradientes teal/cian, tipografía de época, animaciones suaves y secretos escondidos para quienes buscan.
+**Purgatory** es la página de lore del servidor de Discord **PURG4TORY**: un sitio construido con Astro (páginas pre-renderizadas, sin framework de UI en el cliente) que recoge la mitología, los personajes, el mapa histórico y los eventos del servidor. Diseñado para proyectar una estética oscura y premium — gradientes teal/cian, tipografía de época, animaciones suaves y secretos escondidos para quienes buscan.
 
 ---
 
@@ -32,12 +32,13 @@
 
 | Ruta | Descripción |
 |---|---|
-| [`/`](index.html) | Inicio — hero con arte del servidor, próximos eventos en directo, galería de personajes condenados |
-| [`/lore`](lore.html) | El lore completo — mito de Artema, Las Cuatro Eras, Leyes Sagradas, Códex de las Almas y la Profecía |
-| [`/personajes`](personajes.html) | Galería interactiva de personajes con fichas modales detalladas |
-| [`/mapa`](mapa.html) | Mapa histórico interactivo con pan, zoom y tooltips por nodo |
-| [`/eventos`](eventos.html) | Eventos programados del servidor, actualizados en tiempo real desde Discord |
-| [`/404`](404.html) | El Void — página de error personalizada con citas del vacío |
+| [`/`](src/pages/index.astro) | Inicio — hero con arte del servidor, próximos eventos en directo, galería de personajes condenados |
+| [`/lore`](src/pages/lore.astro) | El lore completo — mito de Artema, Las Cuatro Eras, Leyes Sagradas, Códex de las Almas y la Profecía |
+| [`/personajes`](src/pages/personajes.astro) | Galería interactiva de personajes con fichas modales detalladas |
+| [`/mapa`](src/pages/mapa.astro) | Mapa histórico interactivo con pan, zoom y tooltips por nodo |
+| [`/eventos`](src/pages/eventos.astro) | Eventos programados del servidor, actualizados en tiempo real desde Discord |
+| [`/condenados`](src/pages/condenados.astro) | Círculos del Infierno — el registro de quienes cruzaron líneas serias |
+| [`/404`](src/pages/404.astro) | El Void — página de error personalizada con citas del vacío |
 
 ---
 
@@ -80,59 +81,65 @@ El futuro del servidor, sellado en el Scriptorium.
 
 ```
 pagina-web-purgatory/
-├── index.html              ← Homepage
-├── lore.html               ← Lore completo
-├── personajes.html         ← Galería de personajes
-├── mapa.html               ← Mapa histórico interactivo
-├── eventos.html            ← Eventos del servidor
-├── 404.html                ← El Void
-├── _headers                ← Cabeceras para Netlify / Cloudflare Pages
-├── .env.example            ← Ejemplo de variables de entorno
-├── vercel.json             ← Configuración de despliegue y cabeceras
+├── astro.config.mjs         ← Config de Astro (output: server, adapter Vercel)
+├── vercel.json               ← Cabeceras de seguridad y caché
+├── .env.example               ← Ejemplo de variables de entorno
 ├── package.json
-├── api/
-│   └── discord-events.js   ← Serverless function (Vercel)
+├── src/
+│   ├── layouts/
+│   │   └── Layout.astro      ← <head> (meta/OG/CSP/fuentes), navbar+footer, scripts comunes
+│   ├── components/
+│   │   ├── Navbar.astro      ← Nav compartido, resalta la página activa
+│   │   └── Footer.astro
+│   └── pages/
+│       ├── index.astro       ← Homepage
+│       ├── lore.astro        ← Lore completo
+│       ├── personajes.astro  ← Galería de personajes
+│       ├── mapa.astro        ← Mapa histórico interactivo
+│       ├── eventos.astro     ← Eventos del servidor
+│       ├── condenados.astro  ← Círculos del Infierno
+│       ├── 404.astro         ← El Void
+│       └── api/
+│           └── discord-events.js  ← Endpoint (Vercel Function) — eventos de Discord
 ├── scripts/
-│   ├── download-fonts.js   ← Descarga fuentes woff2 desde Google Fonts
-│   └── generate-og.js      ← Genera imagen Open Graph (1200×630)
-├── assets/
-│   ├── artema-hero.svg     ← Arte principal de Artema
-│   ├── era-*.svg           ← Iconos de eras (×8)
-│   ├── icon-*.svg          ← Iconos de canales Discord
-│   └── ...                 ← Más SVGs temáticos
-└── static/
-    ├── css/
-    │   ├── tokens.css      ← Design tokens (paleta, tipografía, espaciado)
-    │   ├── styles.css      ← Estilos globales + componentes
-    │   ├── fonts.css       ← Reglas @font-face para fuentes autoalojadas
-    │   └── lite-mode.css   ← Estilos para modo lite (dispositivos de bajos recursos)
-    ├── js/
-    │   ├── scripts.js          ← Scroll, fade-in reveal, tema claro/oscuro, contadores
-    │   ├── easter-eggs.js      ← Secretos interactivos
-    │   ├── eventos-loader.js   ← Renderizado de eventos con ETag polling
-    │   ├── countdown.js        ← Cuenta regresiva al próximo evento (home)
-    │   ├── lite-mode-detect.js ← Detección automática de modo lite
-    │   └── void-quotes.js      ← Citas del 404
-    ├── data/
-    │   ├── personajes-data.js  ← Datos de personajes (PURGATORY_CHARS)
-    │   └── mapa-data.js        ← Nodos y conexiones del mapa histórico
-    ├── fonts/
-    │   ├── inter-*.woff2       ← Inter (400, 500, 700)
-    │   ├── cormorant-*.woff2   ← Cormorant Garamond (500, 500i, 700)
-    │   ├── jetbrains-mono-*.woff2 ← JetBrains Mono (400, 500) — toda la metadata
-    │   └── unifraktur-400.woff2
-    └── img/
-        ├── logo.svg
-        ├── og-image.png        ← Imagen Open Graph
-        └── ornaments/          ← Marcos decorativos heredados (sin usar en el diseño actual)
+│   ├── check-mapa-overlap.js ← Chequeo de solapamiento de nodos del mapa
+│   ├── download-fonts.js     ← Descarga fuentes woff2 desde Google Fonts
+│   └── generate-og.js        ← Genera imagen Open Graph (1200×630)
+└── public/
+    └── static/
+        ├── css/
+        │   ├── tokens.css      ← Design tokens (paleta, tipografía, espaciado)
+        │   ├── styles.css      ← Estilos globales + componentes
+        │   ├── fonts.css       ← Reglas @font-face para fuentes autoalojadas
+        │   └── lite-mode.css   ← Estilos para modo lite (dispositivos de bajos recursos)
+        ├── js/
+        │   ├── scripts.js          ← Scroll, fade-in reveal, tema claro/oscuro, contadores
+        │   ├── easter-eggs.js      ← Secretos interactivos
+        │   ├── eventos-loader.js   ← Renderizado de eventos con ETag polling
+        │   ├── countdown.js        ← Cuenta regresiva al próximo evento (home)
+        │   ├── lite-mode-detect.js ← Detección automática de modo lite
+        │   └── void-quotes.js      ← Citas del 404
+        ├── data/
+        │   ├── personajes-data.js  ← Datos de personajes (PURGATORY_CHARS)
+        │   └── mapa-data.js        ← Nodos y conexiones del mapa histórico
+        ├── fonts/
+        │   ├── inter-*.woff2          ← Inter (400, 500, 700)
+        │   ├── cormorant-*.woff2      ← Cormorant Garamond (500, 500i, 700)
+        │   └── jetbrains-mono-*.woff2 ← JetBrains Mono (400, 500) — toda la metadata
+        └── img/
+            ├── logo.svg
+            └── og-image.png    ← Imagen Open Graph
 ```
+
+Las rutas públicas (`/static/css/...`, `/static/js/...`, etc.) no cambiaron: `public/` en Astro se sirve tal cual en la raíz, así que todo el CSS/JS/fuentes se referencia igual que antes.
 
 ### Stack
 
-- **HTML + CSS + JS vanilla** — sin bundler, sin dependencias vendor
+- **Astro** (SSR, adaptador `@astrojs/vercel`) — cada página se pre-renderiza a HTML estático en build (`export const prerender = true`); el único endpoint dinámico es la API de Discord
+- **CSS + JS vanilla** en `public/static/` — el mismo sistema de siempre, sin bundler ni dependencias vendor
 - **Fade-in único con `IntersectionObserver`** (`.reveal-init`/`.revealed`)
-- **Vercel** — despliegue estático + serverless function para la API de Discord
-- **Fuentes autoalojadas** — Inter · Cormorant Garamond · JetBrains Mono · UnifrakturMaguntia (woff2)
+- **Vercel** — páginas pre-renderizadas servidas desde el edge + Function para la API de Discord
+- **Fuentes autoalojadas** — Inter · Cormorant Garamond · JetBrains Mono (woff2)
 
 ### Funcionalidades
 
@@ -161,7 +168,7 @@ repetido por sección.
 
 ## API de eventos Discord
 
-El endpoint `/api/discord-events` es una **Vercel Serverless Function** que obtiene los eventos programados del servidor. Usa una estrategia de caché en cuatro capas para llegar a coste `$0`:
+El endpoint `/api/discord-events` es un **endpoint de Astro** (`src/pages/api/discord-events.js`, desplegado como Vercel Function) que obtiene los eventos programados del servidor. Usa una estrategia de caché en cuatro capas para llegar a coste `$0`:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -202,7 +209,7 @@ El sitio esconde varios secretos para quien los busque:
 
 ## Seguridad
 
-El sitio implementa cabeceras de seguridad completas tanto en `vercel.json` como en el archivo `_headers` (para Netlify / Cloudflare Pages) y en los meta-tags HTML de cada página:
+El sitio implementa cabeceras de seguridad completas tanto en `vercel.json` como en los meta-tags de cada página (vía `Layout.astro`):
 
 - `Content-Security-Policy` — solo recursos propios y fuentes autoalojadas
 - `X-Frame-Options: DENY` — sin iframes externos
@@ -223,16 +230,8 @@ El sitio detecta automáticamente dispositivos con bajos recursos o conexiones l
 | Script | Descripción |
 |---|---|
 | `scripts/download-fonts.js` | Descarga las fuentes woff2 desde Google Fonts a `static/fonts/` |
-| `scripts/generate-og.js` | Genera la imagen Open Graph (`static/img/og-image.png`, 1200×630) |
-
----
-
-## Ornamentos heredados
-
-`static/img/ornaments/` conserva los 8 SVGs del sistema de marcos decorativos de una dirección
-visual anterior (esquinas, bordes, diamantes). Ya no se usan — el único elemento decorativo
-del diseño actual es el sello del "4" (ver [Dirección visual](#dirección-visual)) — pero se
-mantienen en el repo por si sirven para algo puntual más adelante.
+| `scripts/generate-og.js` | Genera la imagen Open Graph (`public/static/img/og-image.png`, 1200×630) |
+| `scripts/check-mapa-overlap.js` | Verifica que las cards del mapa no se solapen entre sí |
 
 ---
 

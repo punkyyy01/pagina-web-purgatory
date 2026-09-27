@@ -3,7 +3,7 @@ const https = require('https');
 const fs    = require('fs');
 const path  = require('path');
 
-const FONTS_DIR = path.join(__dirname, '..', 'static', 'fonts');
+const FONTS_DIR = path.join(__dirname, '..', 'public', 'static', 'fonts');
 if (!fs.existsSync(FONTS_DIR)) fs.mkdirSync(FONTS_DIR, { recursive: true });
 
 function get(url, headers) {
@@ -81,7 +81,7 @@ async function main() {
     }
   }
 
-  const cssOut = path.join(__dirname, '..', 'static', 'css', 'fonts.css');
+  const cssOut = path.join(__dirname, '..', 'public', 'static', 'css', 'fonts.css');
   fs.writeFileSync(cssOut, fontFaceCss.join('\n\n') + '\n');
   console.log(`\n✓ fonts.css generado con ${fontFaceCss.length} @font-face rules`);
   console.log('✓ Listo. Ahora actualizar los HTML para usar static/css/fonts.css');

@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = true;
+---
+<Layout
+  title="Eventos — Purgatory"
+  description="Eventos activos y próximos del servidor Purgatory en Discord."
+  ogTitle="Rituales — PURG4TORY"
+  ogDescription="Los rituales y ceremonias activos del servidor. Directamente desde Discord, en tiempo real."
+  path="/eventos"
+  active="eventos"
+  extraScripts={["/static/js/eventos-loader.js"]}
+>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="section-title">Eventos del Purgatorio</h1>
+      <p class="section-lead">Los rituales y ceremonias programados en el servidor, en tiempo real.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Filtros por estado -->
+      <div class="filter-tabs" id="events-filters">
+        <button class="filter-tab active" data-tab="all">Todos</button>
+        <button class="filter-tab" data-tab="proximo">Próximos</button>
+        <button class="filter-tab" data-tab="activo">Activos</button>
+        <button class="filter-tab" data-tab="pasado">Pasados</button>
+      </div>
+
+      <!-- Loading state -->
+      <div class="events-loading" id="events-loading">
+        <div class="loading-diamonds">
+          <div class="loading-diamond"></div>
+          <div class="loading-diamond"></div>
+          <div class="loading-diamond"></div>
+        </div>
+        <p style="font-family: var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); font-size: var(--fs-xs)">Invocando rituales…</p>
+      </div>
+
+      <!-- Empty state (se muestra si no hay eventos) -->
+      <div class="events-empty" id="events-empty" style="display:none">
+        <p>Las llamas duermen. Vuelve más tarde.</p>
+      </div>
+
+      <!-- Contenedor de eventos — rellenado por eventos-loader.js -->
+      <div id="events-container"></div>
+
+    </div>
+  </section>
+
+</Layout>

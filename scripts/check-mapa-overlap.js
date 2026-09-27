@@ -11,7 +11,7 @@ const path = require('path');
 const CARD_W = 150;
 const CARD_H = 90;  // peor caso: título en 2 líneas + subtítulo + padding
 
-const src = fs.readFileSync(path.join(__dirname, '../static/data/mapa-data.js'), 'utf8');
+const src = fs.readFileSync(path.join(__dirname, '../public/static/data/mapa-data.js'), 'utf8');
 
 // Extrae { id, x, y } de cada entrada del array de nodos.
 const nodes = [...src.matchAll(/\{\s*id:\s*'([^']+)',\s*x:\s*(-?\d+),\s*y:\s*(-?\d+)/g)]

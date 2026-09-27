@@ -1,0 +1,31 @@
+---
+interface Props {
+  active?: 'inicio' | 'lore' | 'personajes' | 'mapa' | 'eventos' | 'condenados' | null;
+}
+
+const { active = null } = Astro.props;
+
+const links: Array<{ key: NonNullable<Props['active']>; href: string; label: string }> = [
+  { key: 'inicio', href: '/', label: 'Inicio' },
+  { key: 'lore', href: '/lore', label: 'Lore' },
+  { key: 'personajes', href: '/personajes', label: 'Personajes' },
+  { key: 'mapa', href: '/mapa', label: 'Mapa' },
+  { key: 'eventos', href: '/eventos', label: 'Eventos' },
+  { key: 'condenados', href: '/condenados', label: 'Condenados' },
+];
+---
+<header class="site-header" id="site-header">
+  <nav class="nav">
+    <a class="brand wordmark-small" href="/">PURG<span class="seal-sm">4</span>TORY</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
+    <ul class="nav-links" id="nav-links">
+      {links.map((link) => (
+        <li><a href={link.href} aria-current={active === link.key ? 'page' : undefined}>{link.label}</a></li>
+      ))}
+      <li class="nav-links-cta"><a class="btn btn--sm btn-blood cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
+    </ul>
+    <div class="nav-end">
+      <a class="btn btn--sm btn-blood cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a>
+    </div>
+  </nav>
+</header>

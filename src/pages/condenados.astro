@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = true;
+---
+<Layout
+  title="Círculos del Infierno — Purgatory"
+  description="El registro completo de quienes cruzaron líneas serias dentro de la comunidad de Purgatory."
+  ogTitle="Círculos del Infierno — PURG4TORY"
+  ogDescription="El registro completo de quienes cruzaron líneas serias dentro de la comunidad de Purgatory."
+  path="/condenados"
+  active="condenados"
+>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="section-title">Círculos del Infierno</h1>
+      <p class="section-lead">El registro de quienes cruzaron líneas serias dentro de la comunidad. No es chisme ni un juego.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="filter-tabs" id="condenados-filters">
+        <button class="filter-tab active" data-filter="all">Todos</button>
+        <button class="filter-tab" data-filter="critical">Imperdonable</button>
+        <button class="filter-tab" data-filter="high">Grave</button>
+        <button class="filter-tab" data-filter="medium">Condenado</button>
+        <button class="filter-tab" data-filter="low">Meme</button>
+      </div>
+
+      <div class="condemned-list">
+
+        <article class="condemned-card" data-severity="critical">
+          <div class="record-meta">Caso Nº 001</div>
+          <h3 class="condemned-name">Onil</h3>
+          <p class="record-desc">Actitudes de acoso repetidas, presuntas actitudes indebidas con menores de edad, envio lacayos a trollear con cuentas alternativas.</p>
+          <span class="stamp">Imperdonable</span>
+        </article>
+
+        <article class="condemned-card" data-severity="critical">
+          <div class="record-meta">Caso Nº 002</div>
+          <h3 class="condemned-name">Cloudde</h3>
+          <p class="record-desc">Comprometió activamente a menores, acoso constante, múltiples intentos de sobrepasar límites establecidos, mintió sobre su edad.</p>
+          <span class="stamp">Imperdonable</span>
+        </article>
+
+        <article class="condemned-card" data-severity="critical">
+          <div class="record-meta">Caso Nº 003</div>
+          <h3 class="condemned-name">Vahn <span class="alias">/giopengiun</span></h3>
+          <p class="record-desc">Abiertamente racista y negacionista del holocausto. Normalizaba el abuso y tenía presunto interés indebido en una ex-usuario menor de edad.</p>
+          <span class="stamp">Imperdonable</span>
+        </article>
+
+        <article class="condemned-card" data-severity="critical">
+          <div class="record-meta">Caso Nº 004</div>
+          <h3 class="condemned-name">SrtaMystia</h3>
+          <p class="record-desc">Acusaciones de grooming por su propia comunidad, estafadora serial y autopromovía comisiones falsas múltiples veces.</p>
+          <span class="stamp">Imperdonable</span>
+        </article>
+
+        <article class="condemned-card" data-severity="high">
+          <div class="record-meta">Caso Nº 005</div>
+          <h3 class="condemned-name">Toro <span class="alias">/AnthonyRose</span></h3>
+          <p class="record-desc">Solicitó dinero en el servidor, actitudes machistas y acosadoras con mujeres. En general, un gigafracasado.</p>
+          <span class="stamp">Grave</span>
+        </article>
+
+        <article class="condemned-card" data-severity="high">
+          <div class="record-meta">Caso Nº 006</div>
+          <h3 class="condemned-name">VonKitami</h3>
+          <p class="record-desc">Incomodó activamente a las mujeres del servidor, fuckboy de closet, tibio de mierda y un playo.</p>
+          <span class="stamp">Grave</span>
+        </article>
+
+        <article class="condemned-card" data-severity="medium">
+          <div class="record-meta">Caso Nº 007</div>
+          <h3 class="condemned-name">Onyx</h3>
+          <p class="record-desc">Artista fracasado con delirios de grandeza. Se creía mejor que todos porque "está estudiando algo en el futuro".</p>
+          <span class="stamp">Condenado</span>
+        </article>
+
+        <article class="condemned-card" data-severity="low">
+          <div class="record-meta">Caso Nº 008</div>
+          <h3 class="condemned-name">Frankklinton765</h3>
+          <p class="record-desc">"Holaa, estoy aqui por que con un grupo de amigos tenemos un circulo de play station y queriamos saber si es que hay algunas chicas que se quieran unir..." — Sí, fue real.</p>
+          <span class="stamp">Meme eterno</span>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+</Layout>

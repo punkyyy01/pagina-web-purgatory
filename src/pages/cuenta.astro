@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getSessionUser } from '../lib/auth.js';
+import { deriveRol } from '../lib/alma.js';
 
 export const prerender = false;
 
@@ -15,6 +16,7 @@ const ERROR_MESSAGES = {
 const errorMessage = error ? ERROR_MESSAGES[error] ?? 'Ocurrió un error iniciando sesión.' : null;
 
 const isMember = session?.member?.isMember ?? false;
+const esModerador = deriveRol(session?.member ?? null) === 'moderador';
 ---
 <Layout
   title="Mi cuenta — Purgatory"
@@ -75,11 +77,9 @@ const isMember = session?.member?.isMember ?? false;
           <div class="record-meta">Discord ID {session.discordId}</div>
           <h2 class="record-name">{session.member.globalName || session.member.username}</h2>
           <p class="record-desc">Sesión iniciada — sos miembro verificado de Purgatory.</p>
-          <p class="record-desc">
-            El editor de tu 4LMA todavía no existe — llega en la próxima fase. Por ahora esto
-            confirma que el login y la verificación de membresía funcionan de punta a punta.
-          </p>
           <div class="section-cta">
+            <a href="/cuenta/editar" class="btn btn-blood">Editar mi 4LMA</a>
+            {esModerador && <a href="/staff/almas" class="btn">Panel de Staff</a>}
             <form method="post" action="/api/auth/logout">
               <button type="submit" class="btn">Cerrar sesión</button>
             </form>

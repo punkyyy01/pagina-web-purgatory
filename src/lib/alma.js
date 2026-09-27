@@ -65,29 +65,35 @@
  * @property {string} discordId
  * @property {string} discordUsername
  * @property {string | null} discordAvatarUrl
+ * @property {string | null} avatarUrl     Copia de discordAvatarUrl. Existió una
+ *   versión anterior de este campo como autodeclarado (Card Builder); se
+ *   descartó — el avatar de la card es siempre el de Discord, sin excepción,
+ *   igual que rol/presencia. Si es null, se usa el fallback con inicial.
  * @property {string} miembroDesde        Fecha ISO de ingreso al servidor
  *
  * — Rol y presencia (administrado / sistema) —
- * @property {Rol} rol
+ * @property {Rol} rol                    Ver deriveRol() — sale de discordMember.roles
  * @property {Presencia} presencia
  * @property {boolean} esBooster
  *
- * — Calidad de card (sistema, ver getCalidadEfectiva) —
+ * — Calidad de card (sistema, ver getCalidadEfectiva / getCalidadDerivada) —
  * @property {Calidad} calidad
  * @property {CalidadMotivo} calidadMotivo
  *
  * — Autodeclarado (Card Builder, Fase 5) —
- * @property {string} slug                Único, usado en /4lma/[slug] (Fase 7)
+ * @property {string} slug                Único, usado en /4lma/[slug] (Fase 7).
+ *   Se genera una sola vez al crear el alma — no cambia en ediciones futuras.
  * @property {string} nick                Puede diferir del discordUsername
- * @property {string | null} avatarUrl    Si es null, se usa el fallback con inicial
  * @property {EraKey} era
  * @property {string} moteSuperior        Ej: "Líder Supremo" — junto a la Era
  * @property {string} moteInferior        Ej: "Dictador de Purgatory" — bajo el nick
  * @property {string} fraseIconica
  * @property {string} descripcion         No se muestra en la card chica — vive en /4lma/[slug]
  *
- * — Publicación (sistema) —
+ * — Publicación (sistema, con un toggle simple del lado del usuario) —
  * @property {'borrador' | 'publicada' | 'privada'} estadoPublicacion
+ *   El usuario elige entre 'borrador' y 'publicada' desde el Card Builder.
+ *   'privada' está reservado — todavía no tiene un mecanismo que la asigne.
  */
 
 /** Texto del sello por cada calidad. 'normal' no lleva sello — es el
@@ -117,4 +123,89 @@ export const ERA_LABELS = {
 export function getCalidadEfectiva(alma) {
   if (alma.presencia === 'expulsado') return 'void';
   return alma.calidad;
+}
+
+/** IDs de rol de Discord (uno o más, separados por coma en la env var)
+    que cuentan como 'moderador' para efectos de una card. Es la web la
+    que decide qué significa un rol crudo de Discord — el bot solo
+    sincroniza los IDs tal cual (ver purgatory-sync/sql/0001_init.sql). */
+const MODERATOR_ROLE_IDS = (import.meta.env.DISCORD_MODERATOR_ROLE_ID ?? '')
+  .split(',')
+  .map((id) => id.trim())
+  .filter(Boolean);
+
+/**
+ * @param {import('./db.js').DiscordMemberStatus | null} discordMember
+ * @returns {Rol}
+ */
+export function deriveRol(discordMember) {
+  if (!discordMember) return 'normal';
+  const esModerador = discordMember.roles.some((id) => MODERATOR_ROLE_IDS.includes(id));
+  return esModerador ? 'moderador' : 'normal';
+}
+
+/**
+ * Recalcula calidad/calidadMotivo a partir de datos verificados. Se llama
+ * en cada guardado del Card Builder (nunca confía en lo que mande el
+ * cliente para estos dos campos). 'logro' es la única excepción: una vez
+ * otorgado por Staff (vía /staff/almas), persiste aunque la persona deje
+ * de ser moderadora o booster — solo Staff lo revoca a mano. La
+ * revocación automática de 'booster' cuando alguien deja de boostear
+ * queda para más adelante (ver CalidadMotivo).
+ * @param {import('./db.js').DiscordMemberStatus | null} discordMember
+ * @param {Rol} rol
+ * @param {CalidadMotivo} calidadMotivoActual El valor ya guardado en almas, si existe
+ * @returns {{ calidad: Calidad, calidadMotivo: CalidadMotivo }}
+ */
+export function getCalidadDerivada(discordMember, rol, calidadMotivoActual) {
+  if (calidadMotivoActual === 'logro') {
+    return { calidad: 'shiny', calidadMotivo: 'logro' };
+  }
+  if (rol === 'moderador') {
+    return { calidad: 'shiny', calidadMotivo: 'moderador' };
+  }
+  if (discordMember?.isBooster) {
+    return { calidad: 'shiny', calidadMotivo: 'booster' };
+  }
+  return { calidad: 'normal', calidadMotivo: null };
+}
+
+/**
+ * Combina lo verificado de Discord con lo autodeclarado/administrado en
+ * `almas` en el objeto Alma que consume CardAlma.astro. Si `almaRow` es
+ * null (el usuario nunca guardó su Card Builder), se arma un Alma "vacío"
+ * con los defaults del schema — así una página puede previsualizar la
+ * card de un miembro que todavía no la creó.
+ * @param {import('./db.js').DiscordMemberStatus} discordMember
+ * @param {object | null} almaRow Fila cruda de la tabla `almas`, o null
+ * @returns {Alma}
+ */
+export function mergeAlma(discordMember, almaRow) {
+  const rol = deriveRol(discordMember);
+  const { calidad, calidadMotivo } = getCalidadDerivada(discordMember, rol, almaRow?.calidadMotivo ?? null);
+
+  return {
+    discordId: discordMember.discordId,
+    discordUsername: discordMember.username,
+    discordAvatarUrl: discordMember.avatarUrl,
+    avatarUrl: discordMember.avatarUrl,
+    miembroDesde: discordMember.joinedAt ?? null,
+
+    rol,
+    presencia: discordMember.isBanned ? 'expulsado' : discordMember.isMember ? 'activo' : 'inactivo',
+    esBooster: discordMember.isBooster,
+
+    calidad,
+    calidadMotivo,
+
+    slug: almaRow?.slug ?? '',
+    nick: almaRow?.nick || discordMember.globalName || discordMember.username,
+    era: almaRow?.era ?? 'purgatory',
+    moteSuperior: almaRow?.moteSuperior ?? '',
+    moteInferior: almaRow?.moteInferior ?? '',
+    fraseIconica: almaRow?.fraseIconica ?? '',
+    descripcion: almaRow?.descripcion ?? '',
+
+    estadoPublicacion: almaRow?.estadoPublicacion ?? 'borrador',
+  };
 }

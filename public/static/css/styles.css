@@ -774,6 +774,53 @@ h1.section-title {
 }
 
 /* ══════════════════════════════════════════════════════════
+   CARD BUILDER (/cuenta/editar) — mismos inputs subrayados que
+   .char-search-input: sin fondo, sin borde completo, foco = borde
+   --paper. Cero acento teal acá — --stamp se queda reservado al sello,
+   igual que en el resto del sitio.
+══════════════════════════════════════════════════════════ */
+.builder-preview { max-width: 240px; margin-bottom: var(--space-6); }
+
+.builder-field { margin-bottom: var(--space-5); }
+.builder-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: var(--space-2);
+}
+.builder-field input,
+.builder-field select,
+.builder-field textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--paper);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule-strong);
+  border-radius: 0;
+  padding: var(--space-2) 0;
+}
+.builder-field select { color-scheme: dark; }
+.builder-field textarea { resize: vertical; min-height: 4.5em; line-height: 1.5; }
+.builder-field input:focus,
+.builder-field select:focus,
+.builder-field textarea:focus { border-bottom-color: var(--paper); }
+.builder-field input::placeholder,
+.builder-field textarea::placeholder { color: var(--dim); }
+
+.builder-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--paper);
+}
+
+/* ══════════════════════════════════════════════════════════
    ALMA CAROUSEL — la colección de 4LMAs en la home.
    Base (sin JS / prefers-reduced-motion / .lite-mode): fila con scroll
    horizontal nativo — funciona con touch, teclado y rueda sin una sola

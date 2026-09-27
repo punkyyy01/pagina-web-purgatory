@@ -9,24 +9,28 @@ const eraLabel = ERA_LABELS[alma.era];
 const inicial = alma.nick.trim().charAt(0).toUpperCase() || '?';
 ---
 <article class="card-alma" data-calidad={calidad} data-presencia={alma.presencia}>
-  <div class="card-alma__meta">
-    <span>{eraLabel}</span>
-    {alma.moteSuperior && <span>{alma.moteSuperior}</span>}
-  </div>
-
-  <div class="card-alma__avatar">
+  <div class="card-alma__poster">
     {alma.avatarUrl
       ? <img src={alma.avatarUrl} alt="" loading="lazy" />
-      : <div class="card-alma__fallback" aria-hidden="true" data-initial={inicial}></div>
+      : <div class="card-alma__monogram" aria-hidden="true" data-initial={inicial}></div>
     }
   </div>
 
   <div class="card-alma__body">
+    <div class="card-alma__eyebrow">
+      {calidad !== 'normal' && <span class="stamp card-alma__stamp">{CALIDAD_LABELS[calidad]}</span>}
+      <span class="card-alma__era">{eraLabel}</span>
+      {alma.moteSuperior && <span class="card-alma__mote-superior">{alma.moteSuperior}</span>}
+    </div>
+
     <h3 class="card-alma__nick">{alma.nick}</h3>
-    {alma.moteInferior && <div class="card-alma__mote-inferior">{alma.moteInferior}</div>}
-    {alma.fraseIconica && <blockquote class="card-alma__frase">"{alma.fraseIconica}"</blockquote>}
-    {calidad !== 'normal' && (
-      <span class="stamp card-alma__stamp">{CALIDAD_LABELS[calidad]}</span>
+    {alma.moteInferior && <p class="card-alma__mote-inferior">{alma.moteInferior}</p>}
+
+    {alma.fraseIconica && (
+      <>
+        <div class="card-alma__rule"></div>
+        <blockquote class="card-alma__frase">"{alma.fraseIconica}"</blockquote>
+      </>
     )}
   </div>
 </article>

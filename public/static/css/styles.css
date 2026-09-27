@@ -638,13 +638,16 @@ h1.section-title {
 
 /* ══════════════════════════════════════════════════════════
    CARD ALMA (4LMA) — la identidad de un usuario como objeto.
-   Mismo lenguaje que .card-naipe (aspect-ratio 2/3, --panel, borde
-   --rule) pero sin el misterio de sello-oculto: acá la identidad se
-   muestra siempre, no se revela recién al hover — es la propia carta
-   de alguien, no un personaje canónico por descubrir.
-   El único acento teal que puede aparecer es el sello reutilizado de
-   .stamp; el resto de la carta se queda en la escala --paper/--dim/
-   --rule, igual que todo lo demás en el sitio.
+   Estructura tomada de la única carta que los bocetos sí especifican
+   en detalle (eventos.svg / lore.svg): póster arriba → fila de
+   badge+meta → título → subtítulo → regla → frase. Se mantiene el
+   aspect-ratio 2/3 de .card-naipe (acá "carta" es naipe, no afiche de
+   cine — el boceto de eventos era más apaisado porque es un evento,
+   no una identidad), y sin el misterio de sello-oculto de .card-naipe:
+   la identidad se muestra siempre.
+   El único acento teal es el sello (.stamp) — el monograma de
+   respaldo (sin avatarUrl) usaba antes --stamp-bright y por lo tanto
+   rompía esa regla; ahora es enteramente neutro (--paper/--dim/--rule).
 ══════════════════════════════════════════════════════════ */
 .card-alma {
   display: flex;
@@ -668,58 +671,59 @@ h1.section-title {
   box-shadow: 0 16px 28px -12px rgba(0, 0, 0, 0.55);
 }
 
-.card-alma__meta {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-.card-alma__meta span:last-child { text-align: right; }
-
-.card-alma__avatar {
-  flex: 1 1 auto;
-  min-height: 0;
+/* Póster — casi la mitad de la carta, como en el boceto de eventos.
+   Con foto es foto; sin foto es un monograma real, no un ícono chico
+   perdido en un rectángulo vacío. */
+.card-alma__poster {
+  flex: 0 0 40%;
   position: relative;
+  overflow: hidden;
   background: var(--ink);
 }
-.card-alma__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.card-alma__poster img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Sin avatarUrl: mismo patrón que .card-naipe__seal — inicial + anillo,
-   nunca un ícono genérico de "sin foto". */
-.card-alma__fallback {
+.card-alma__monogram {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(155deg, var(--panel) 0%, var(--ink) 100%);
+}
+.card-alma__monogram::before {
+  content: attr(data-initial);
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: var(--fs-2xl);
-  color: var(--stamp-bright);
-}
-.card-alma__fallback::before { content: attr(data-initial); position: relative; z-index: 1; }
-.card-alma__fallback::after {
-  content: "";
-  position: absolute;
-  width: 56px;
-  height: 56px;
-  border: 1.5px solid var(--stamp);
-  border-radius: 50%;
-  transform: rotate(-8deg);
+  font-size: 6em;
+  line-height: 1;
+  color: var(--paper);
+  opacity: 0.14;
 }
 
 .card-alma__body {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   border-top: 1px solid var(--rule);
-  padding: var(--space-4);
+  padding: var(--space-3);
 }
+
+.card-alma__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  margin-bottom: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.card-alma__stamp { margin: 0; }
+
 .card-alma__nick {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -731,18 +735,23 @@ h1.section-title {
   white-space: nowrap;
 }
 .card-alma__mote-inferior {
-  font-family: var(--font-mono);
   font-size: var(--fs-xs);
-  letter-spacing: 0.06em;
   color: var(--dim);
   margin-top: var(--space-1);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-/* Mismo lenguaje que .chapter-quote (serif itálica + regla a la
-   izquierda, nunca color) a escala de card. */
+
+.card-alma__rule { height: 1px; background: var(--rule); margin: var(--space-2) 0; flex: 0 0 auto; }
+
+/* Empuja la frase al piso de la carta — mismo principio que el
+   footer de la carta de eventos (meta al fondo, siempre en el mismo
+   lugar sin importar cuánto texto tenga el resto). */
 .card-alma__frase {
-  border-left: 2px solid var(--rule);
-  padding-left: var(--space-3);
-  margin-top: var(--space-3);
+  margin-top: auto;
   font-family: var(--font-serif);
   font-style: italic;
   font-size: var(--fs-sm);
@@ -758,8 +767,6 @@ h1.section-title {
   overflow: hidden;
 }
 
-.card-alma__stamp { margin-top: var(--space-3); }
-
 /* Void: "la marca ya no tiene nada que defender, se apaga a neutro" —
    mismo principio que el paso 4/4 de .stamp (Meme Eterno, línea ~142).
    No es un filtro nuevo inventado para la ocasión: es el mismo criterio
@@ -768,8 +775,8 @@ h1.section-title {
   border-color: var(--rule-strong);
   color: var(--dim);
 }
-.card-alma[data-calidad="void"] .card-alma__avatar img,
-.card-alma[data-calidad="void"] .card-alma__fallback {
+.card-alma[data-calidad="void"] .card-alma__poster img,
+.card-alma[data-calidad="void"] .card-alma__monogram {
   filter: grayscale(0.6) brightness(0.7);
 }
 

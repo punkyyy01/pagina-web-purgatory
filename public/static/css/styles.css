@@ -916,25 +916,25 @@ h1.section-title {
    tiene que poder entrar y salir por los bordes reales de la ventana
    (ver el mecanismo de scroll-link más abajo, que ya no depende de
    que el mazo "desborde" el viewport para funcionar). */
-.alma-carousel.is-fanned .alma-carousel__viewport { overflow: visible; }
-.alma-carousel.is-fanned .alma-carousel__track { padding: var(--space-7) var(--space-6) var(--space-8); }
-.alma-carousel.is-fanned .alma-carousel__item { flex-basis: 220px; }
-.alma-carousel.is-fanned .alma-carousel__item + .alma-carousel__item { margin-left: -36px; }
+.alma-showcase.is-fanned .alma-carousel__viewport { overflow: visible; }
+.alma-showcase.is-fanned .alma-carousel__track { padding: var(--space-5) var(--space-6) var(--space-6); }
+.alma-showcase.is-fanned .alma-carousel__item { flex-basis: 220px; }
+.alma-showcase.is-fanned .alma-carousel__item + .alma-carousel__item { margin-left: -36px; }
 
-.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+1) { transform: rotate(-6deg) translateY(10px); }
-.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+2) { transform: rotate(3deg) translateY(-8px); }
-.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+3) { transform: rotate(-3deg) translateY(4px); }
-.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+4) { transform: rotate(5deg) translateY(-10px); }
-.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+5) { transform: rotate(-4deg) translateY(2px); }
-.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+6) { transform: rotate(2deg) translateY(-6px); }
-.alma-carousel.is-fanned .alma-carousel__item {
+.alma-showcase.is-fanned .alma-carousel__item:nth-child(6n+1) { transform: rotate(-6deg) translateY(10px); }
+.alma-showcase.is-fanned .alma-carousel__item:nth-child(6n+2) { transform: rotate(3deg) translateY(-8px); }
+.alma-showcase.is-fanned .alma-carousel__item:nth-child(6n+3) { transform: rotate(-3deg) translateY(4px); }
+.alma-showcase.is-fanned .alma-carousel__item:nth-child(6n+4) { transform: rotate(5deg) translateY(-10px); }
+.alma-showcase.is-fanned .alma-carousel__item:nth-child(6n+5) { transform: rotate(-4deg) translateY(2px); }
+.alma-showcase.is-fanned .alma-carousel__item:nth-child(6n+6) { transform: rotate(2deg) translateY(-6px); }
+.alma-showcase.is-fanned .alma-carousel__item {
   transition: transform var(--dur-base), z-index 0s;
 }
 /* Al enfocarse, la carta se endereza y sube por encima de sus vecinas
    — el mismo "foco" que pide la sección 23 del brief, sin animación
    nueva: reutiliza la elevación que ya tiene .card-alma:hover. */
-.alma-carousel.is-fanned .alma-carousel__item:hover,
-.alma-carousel.is-fanned .alma-carousel__item:focus-within {
+.alma-showcase.is-fanned .alma-carousel__item:hover,
+.alma-showcase.is-fanned .alma-carousel__item:focus-within {
   transform: none;
   z-index: 10;
 }
@@ -946,15 +946,15 @@ h1.section-title {
    de pantalla), cruza, y sale por la izquierda (fuera de pantalla).
    Sin JS nunca se llega a este estado — .alma-carousel__runway se queda
    en height:auto y el fallback de scroll nativo sigue funcionando. */
-.alma-carousel.is-scroll-linked .alma-carousel__runway { position: relative; }
-.alma-carousel.is-scroll-linked .alma-carousel__viewport {
+.alma-showcase.is-scroll-linked .alma-carousel__runway { position: relative; }
+.alma-showcase.is-scroll-linked .alma-carousel__viewport {
   position: sticky;
   top: var(--header-h);
 }
 /* El clip vive acá, no en .viewport (ver el comentario en index.astro) —
    position:sticky y overflow:hidden nunca en el mismo elemento. */
-.alma-carousel.is-scroll-linked .alma-carousel__mask { overflow: hidden; }
-.alma-carousel.is-scroll-linked .alma-carousel__track { will-change: transform; }
+.alma-showcase.is-scroll-linked .alma-carousel__mask { overflow: hidden; }
+.alma-showcase.is-scroll-linked .alma-carousel__track { will-change: transform; }
 
 /* ══════════════════════════════════════════════════════════
    LORE PREVIEW (home) — una tab por era en vez de las cuatro
@@ -1112,8 +1112,14 @@ h1.section-title {
 .char-search-input:focus { border-bottom-color: var(--paper); }
 .char-search-input::placeholder { color: var(--dim); }
 
-/* ── Countdown strip (home, card compacta justo después del hero) ── */
-.countdown-strip { margin-top: var(--space-9); }
+/* ── Countdown strip (home, card compacta después del CTA de 4LMA) ──
+   Vive entre dos secciones que ya pagan su propio espacio (.section-cta
+   arriba, .section abajo): un margen/padding completo de --space-9 en
+   los tres puntos se acumulaba en 190px+ de hueco muerto para una sola
+   línea de texto. Mismo criterio que .page-hero + .section: la sección
+   siguiente no vuelve a pagar el padding-top completo. */
+.countdown-strip { margin-top: var(--space-6); }
+.countdown-strip + .section { padding-top: var(--space-6); }
 .countdown-frame {
   display: flex;
   align-items: center;

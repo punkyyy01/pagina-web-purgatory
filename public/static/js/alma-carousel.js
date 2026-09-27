@@ -25,8 +25,12 @@
   // Cuánto scroll vertical (relativo al alto del viewport) hace falta para
   // recorrer el barrido horizontal completo. No depende del ancho del mazo
   // ni de la pantalla — es autónomo, así el "tiempo" del efecto es siempre
-  // parecido sin importar cuántas cards haya.
-  var RUNWAY_HEIGHT_FACTOR = 1.4;
+  // parecido sin importar cuántas cards haya. En 1.4 el barrido se sentía
+  // bien pero, sumado a que el viewport pinneado tiene que volver a
+  // desplazarse su propio alto entero una vez que se despinnea, dejaba
+  // varios cientos de px de scroll con el mazo ya afuera de pantalla antes
+  // del CTA "Ver todas las almas".
+  var RUNWAY_HEIGHT_FACTOR = 0.7;
 
   var root = document.getElementById('alma-carousel');
   if (!root) return;

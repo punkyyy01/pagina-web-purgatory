@@ -713,6 +713,81 @@ h1.section-title {
 }
 
 /* ══════════════════════════════════════════════════════════
+   ALMA CAROUSEL — la colección de 4LMAs en la home.
+   Base (sin JS / prefers-reduced-motion / .lite-mode): fila con scroll
+   horizontal nativo — funciona con touch, teclado y rueda sin una sola
+   línea de JS. alma-carousel.js progresivamente la mejora a un fan
+   inclinado que se recorre scrolleando la página (no al revés: el
+   scroll vertical nunca se secuestra, solo se lee).
+══════════════════════════════════════════════════════════ */
+.alma-carousel__viewport {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.alma-carousel__viewport::-webkit-scrollbar { display: none; }
+
+.alma-carousel__track {
+  display: flex;
+  padding: var(--space-4) var(--space-5) var(--space-6);
+  width: max-content;
+}
+.alma-carousel__item {
+  flex: 0 0 200px;
+  scroll-snap-align: start;
+  position: relative;
+}
+.alma-carousel__item + .alma-carousel__item { margin-left: var(--space-4); }
+.alma-carousel__item > a { display: block; height: 100%; text-decoration: none; }
+.alma-carousel__item[hidden] { display: none; }
+
+@media (max-width: 560px) {
+  .alma-carousel__item { flex-basis: 160px; }
+}
+
+/* ── Mejorado (JS activo, sin reduced-motion, sin lite-mode) ──────
+   El solapamiento y la inclinación solo existen acá: es lo que hace
+   que se sienta un mazo de cartas y no una fila de tarjetas. El acento
+   sigue sin aparecer — la inclinación es geometría, no color. */
+.alma-carousel.is-fanned .alma-carousel__viewport { overflow: visible; }
+.alma-carousel.is-fanned .alma-carousel__track { padding: var(--space-7) var(--space-6) var(--space-8); }
+.alma-carousel.is-fanned .alma-carousel__item { flex-basis: 200px; }
+.alma-carousel.is-fanned .alma-carousel__item + .alma-carousel__item { margin-left: -52px; }
+
+.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+1) { transform: rotate(-6deg) translateY(10px); }
+.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+2) { transform: rotate(3deg) translateY(-8px); }
+.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+3) { transform: rotate(-3deg) translateY(4px); }
+.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+4) { transform: rotate(5deg) translateY(-10px); }
+.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+5) { transform: rotate(-4deg) translateY(2px); }
+.alma-carousel.is-fanned .alma-carousel__item:nth-child(6n+6) { transform: rotate(2deg) translateY(-6px); }
+.alma-carousel.is-fanned .alma-carousel__item {
+  transition: transform var(--dur-base), z-index 0s;
+}
+/* Al enfocarse, la carta se endereza y sube por encima de sus vecinas
+   — el mismo "foco" que pide la sección 23 del brief, sin animación
+   nueva: reutiliza la elevación que ya tiene .card-alma:hover. */
+.alma-carousel.is-fanned .alma-carousel__item:hover,
+.alma-carousel.is-fanned .alma-carousel__item:focus-within {
+  transform: none;
+  z-index: 10;
+}
+
+/* ── Scroll-linked (JS confirma que hay overflow real que recorrer) ──
+   El "runway" es más alto que el viewport a propósito: esa altura extra
+   es la distancia de scroll vertical que se traduce 1:1 en el
+   desplazamiento horizontal del track (ver alma-carousel.js). Sin JS
+   nunca se llega a este estado — .alma-carousel__runway se queda en
+   height:auto y el fallback de scroll nativo sigue funcionando. */
+.alma-carousel.is-scroll-linked .alma-carousel__runway { position: relative; }
+.alma-carousel.is-scroll-linked .alma-carousel__viewport {
+  position: sticky;
+  top: var(--header-h);
+  overflow: hidden;
+}
+.alma-carousel.is-scroll-linked .alma-carousel__track { will-change: transform; }
+
+/* ══════════════════════════════════════════════════════════
    TIMELINE (Las Cuatro Eras) — regla + numeral, sin caja.
    Extiende el lenguaje de .chapter-tablet (rule + label + title, cero
    fondo/borde perimetral): la secuencia se lee por el numeral corrido

@@ -13,6 +13,35 @@ export const prerender = false;
 const publicadas = await getPublishedAlmas();
 const almasReales = publicadas.map(({ discordMember, almaRow }) => mergeAlma(discordMember, almaRow));
 const almasCarrusel = getGalleryAlmas(almasReales, almasSemilla);
+
+// Excerpts cortos de src/pages/lore.astro (Capítulo III) — mismo texto,
+// recortado para la vista previa de la home. El texto completo vive en /lore.
+const ERAS = [
+  {
+    n: 'I',
+    meta: 'Era I · 2024',
+    title: 'Las Fosas — El Origen',
+    excerpt: 'El servidor original, fundado por Ozy. Aquí nació el concepto que definiría a toda la comunidad: el Amorodio — un vínculo forjado en el insulto mutuo y la confianza real. Cayó por mala administración.',
+  },
+  {
+    n: 'II',
+    meta: 'Era II · 2025',
+    title: 'Los Pibes Shitposters — La Era Oscura',
+    excerpt: 'Onil tomó las riendas y las usó para todo lo contrario de lo que debía. Acosó a Cat. Puso a Filo — un acosador — como administrador. Mala administración, segunda vez.',
+  },
+  {
+    n: 'III',
+    meta: 'Era III · 2025',
+    title: 'OLYMPO — La Edad de los Refugiados',
+    excerpt: 'El Éxodo Blanco llegó cuando el grupo de Doomentio se separó por la voideada de Twoky, y la mayoría de los redimibles terminaron en OLYMPO. El servidor creció. Tercera vez: mala administración.',
+  },
+  {
+    n: 'IV',
+    meta: 'Era IV · Actual — 12 de noviembre',
+    title: 'PURG4TORY — La Dictadura',
+    excerpt: 'Renas no se autoproclamó — el pueblo lo siguió. Fundado el 12 de noviembre, es la era más larga: memoria colectiva de todo lo que no debía repetirse. El ritual del /bump sigue vivo.',
+  },
+];
 ---
 <Layout
   title="Purgatory — Crónica de PURG4TORY"
@@ -21,95 +50,38 @@ const almasCarrusel = getGalleryAlmas(almasReales, almasSemilla);
   ogDescription="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas."
   path="/"
   active="inicio"
-  extraScripts={["/static/js/countdown.js", "/static/js/alma-carousel.js"]}
+  extraScripts={["/static/js/countdown.js", "/static/js/alma-carousel.js", "/static/js/lore-tabs.js"]}
 >
 
   <!-- ══════════════════════════════════════
-       HERO
+       HERO — full-bleed, sin .container en el fondo.
+       La imagen es un placeholder (gradiente): todavía no hay una
+       foto/arte real del servidor para usar acá.
   ══════════════════════════════════════ -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <div class="container">
-        <div class="hero-frame">
-          <p class="hero-eyebrow">crónica del servidor</p>
-          <h1 class="hero-title">PURG<span class="seal">4</span>TORY</h1>
-
-          <div class="hero-actions">
-            <a href="/lore" class="btn btn-blood">Explorar el Lore</a>
-            <a href="#timeline" class="btn">Ver Línea de Tiempo</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <aside class="countdown-strip">
-    <div class="container">
-      <div id="countdown-widget"></div>
-    </div>
-  </aside>
-
-  <!-- ══════════════════════════════════════
-       LAS CUATRO ERAS — timeline
-  ══════════════════════════════════════ -->
-  <section class="section" id="timeline">
-    <div class="container">
-      <h2 class="section-title">Las Cuatro Eras</h2>
-      <p class="section-lead">La cronología completa de los servidores.</p>
-
-      <div class="timeline">
-
-        <article class="era-card">
-          <span class="era-num" aria-hidden="true">I</span>
-          <div class="era-body">
-            <div class="record-meta">Era I · 2024</div>
-            <h3 class="era-card-title">Las Fosas — El Origen</h3>
-          </div>
-        </article>
-
-        <article class="era-card">
-          <span class="era-num" aria-hidden="true">II</span>
-          <div class="era-body">
-            <div class="record-meta">Era II · 2025</div>
-            <h3 class="era-card-title">Los Pibes Shitposters — La Era Oscura</h3>
-          </div>
-        </article>
-
-        <article class="era-card">
-          <span class="era-num" aria-hidden="true">III</span>
-          <div class="era-body">
-            <div class="record-meta">Era III · 2025</div>
-            <h3 class="era-card-title">OLYMPO — La Edad de los Refugiados</h3>
-          </div>
-        </article>
-
-        <article class="era-card">
-          <span class="era-num" aria-hidden="true">IV</span>
-          <div class="era-body">
-            <div class="record-meta">Era IV · Actual — 12 de noviembre</div>
-            <h3 class="era-card-title">PURG4TORY — La Dictadura</h3>
-          </div>
-        </article>
-
-      </div>
-
-      <div class="section-cta">
-        <a href="/lore" class="btn">Leer la historia completa</a>
+  <section class="hero hero--full" id="home">
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="container hero__content">
+      <p class="hero-eyebrow">Crónica del servidor</p>
+      <h1 class="hero-title">PURG4TORY: Panic!<br />At The Discord</h1>
+      <div class="hero-actions">
+        <a href="https://discord.gg/aTFMEVzcew" class="btn btn-blood" target="_blank" rel="noopener noreferrer">Servidor</a>
+        <a href="/eventos" class="btn">Eventos</a>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       4LMA — el carrusel de la colección.
-       El HTML trae TODAS las almas de ejemplo; alma-carousel.js elige
-       un subconjunto justo y engancha el desplazamiento al scroll.
-       Sin JS (o con prefers-reduced-motion / lite-mode) esto sigue
-       siendo una fila con scroll horizontal nativo — ver styles.css.
+       4LMA — las cartas son las protagonistas: rompen el borde de la
+       franja de color de abajo en vez de quedar prolijamente adentro
+       de su propia sección. El HTML trae TODAS las almas (reales +
+       relleno); alma-carousel.js elige un subconjunto justo y engancha
+       el desplazamiento al scroll. Sin JS (o con prefers-reduced-motion
+       / lite-mode) esto sigue siendo una fila con scroll horizontal
+       nativo — ver styles.css.
   ══════════════════════════════════════ -->
-  <section class="section alma-carousel" id="alma-carousel">
-    <div class="container">
-      <h2 class="section-title">4LMA</h2>
-      <p class="section-lead">La colección viva de quienes forman parte de Purgatory — cada alma, a su manera.</p>
+  <section class="alma-showcase" id="alma-carousel">
+    <div class="alma-showcase__band">
+      <span class="alma-showcase__brand">4LMA</span>
     </div>
 
     <div class="alma-carousel__runway" id="alma-carousel-runway">
@@ -136,6 +108,51 @@ const almasCarrusel = getGalleryAlmas(almasReales, almasSemilla);
     <div class="container">
       <div class="section-cta">
         <a href="/4lma" class="btn btn-blood">Ver todas las almas</a>
+      </div>
+    </div>
+  </section>
+
+  <aside class="countdown-strip">
+    <div class="container">
+      <div id="countdown-widget"></div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════
+       LORE — una sola carta con tabs por era (I/II/III/IV), no las
+       cuatro siempre abiertas. El texto completo de cada era vive en
+       /lore; acá solo el resumen.
+  ══════════════════════════════════════ -->
+  <section class="section" id="lore-preview">
+    <div class="container">
+      <h2 class="section-title">Lore</h2>
+
+      <div class="lore-tabs" id="lore-tabs" role="tablist">
+        {ERAS.map((era, i) => (
+          <button
+            type="button"
+            class="lore-tab"
+            class:list={[{ active: i === 0 }]}
+            role="tab"
+            aria-selected={i === 0 ? 'true' : 'false'}
+            data-era-tab={era.n}
+          >{era.n}</button>
+        ))}
+      </div>
+
+      <div class="lore-panel-frame">
+        {ERAS.map((era, i) => (
+          <div class="lore-panel" data-era-panel={era.n} hidden={i !== 0}>
+            <div class="record-meta">{era.meta}</div>
+            <h3 class="era-card-title">{era.title}</h3>
+            <div class="lore-panel__excerpt">
+              <p class="record-desc" style="opacity:1">{era.excerpt}</p>
+            </div>
+            <div class="section-cta">
+              <a href="/lore#cap-historia" class="btn">Lore completo</a>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>

@@ -397,11 +397,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--space-6);
-  align-items: center;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--space-7);
 }
-.footer-brand { display: flex; align-items: center; gap: var(--space-3); }
 .footer-brand-text {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -409,25 +407,49 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   color: var(--paper);
   letter-spacing: 0.02em;
 }
-.footer-links {
-  display: flex;
-  gap: var(--space-5);
-  flex-wrap: wrap;
+.footer-tagline {
+  font-size: var(--fs-sm);
+  color: var(--dim);
+  margin-top: var(--space-2);
+  max-width: 320px;
 }
-.footer-links a {
+
+.footer-col { display: flex; flex-direction: column; gap: var(--space-3); }
+.footer-col-title {
+  font-family: var(--font-mono);
   font-size: var(--fs-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: var(--space-1);
+}
+.footer-col a,
+.footer-links a {
+  font-size: var(--fs-sm);
   color: var(--dim);
   text-decoration: none;
   transition: color var(--dur-fast); /* mismo criterio que .nav-links a y el TOC de lore */
 }
+.footer-col a:hover,
 .footer-links a:hover { color: var(--paper); }
 
-@media (max-width: 600px) {
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--dim);
+}
+
+@media (max-width: 700px) {
   .footer-grid { grid-template-columns: 1fr; text-align: center; }
-  .footer-brand { justify-content: center; }
-  .footer-links { justify-content: center; }
+  .footer-tagline { margin-left: auto; margin-right: auto; }
+  .footer-bottom { justify-content: center; text-align: center; }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -498,6 +520,30 @@ h1.section-title {
 
 .hero-frame { max-width: 720px; }
 
+/* ── Hero full-bleed (home) — imagen de fondo a todo el ancho de la
+   pantalla, no acotada a --container. La imagen es un placeholder
+   (gradiente): todavía no hay una foto/arte real del servidor. ── */
+.hero--full {
+  position: relative;
+  min-height: min(78vh, 720px);
+  padding: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 100% at 15% 20%, rgba(13, 138, 128, 0.16) 0%, transparent 55%),
+    linear-gradient(160deg, var(--panel) 0%, var(--ink) 65%);
+}
+.hero--full .hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--ink) 0%, rgba(10, 10, 10, 0.2) 55%, rgba(10, 10, 10, 0.55) 100%);
+}
+.hero--full .hero__content {
+  position: relative;
+  z-index: 1;
+  align-self: flex-end;
+  padding-bottom: var(--space-8);
+}
+
 .hero-eyebrow {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
@@ -515,6 +561,12 @@ h1.section-title {
   line-height: 1;
   margin: 0 0 var(--space-6);
   letter-spacing: 0.01em;
+}
+/* Frase larga (home), no la wordmark sola — misma familia/peso, escala
+   más chica para que dos líneas no empujen el hero fuera de pantalla. */
+.hero--full .hero-title {
+  font-size: var(--fs-3xl);
+  line-height: 1.15;
 }
 
 /* Fila de acciones — misma composición en el hero y al cierre de una sección.
@@ -791,6 +843,38 @@ h1.section-title {
 }
 
 /* ══════════════════════════════════════════════════════════
+   ALMA SHOWCASE — envoltorio de home: las cartas son las protagonistas
+   del sitio, así que rompen el borde limpio de sección en vez de
+   quedar prolijamente adentro de una caja. La franja "4LMA" se solapa
+   con el fondo del hero por arriba, y el mazo de cartas se solapa con
+   la franja por encima — un único acento de color con presencia
+   real, no un section header más.
+══════════════════════════════════════════════════════════ */
+.alma-showcase {
+  position: relative;
+  margin-top: calc(-1 * var(--space-8) - 0.5rem);
+}
+.alma-showcase__band {
+  background: var(--stamp);
+  padding: var(--space-6) 0;
+  display: flex;
+  align-items: center;
+}
+.alma-showcase__brand {
+  max-width: var(--container);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-2xl);
+  color: var(--ink);
+}
+/* El mazo se levanta por encima de la franja — acá vive la "presencia"
+   de las cartas, no en un section-title más. */
+.alma-carousel__runway { margin-top: calc(-1 * var(--space-7) - 0.5rem); }
+
+/* ══════════════════════════════════════════════════════════
    ALMA CAROUSEL — la colección de 4LMAs en la home.
    Base (sin JS / prefers-reduced-motion / .lite-mode): fila con scroll
    horizontal nativo — funciona con touch, teclado y rueda sin una sola
@@ -871,6 +955,44 @@ h1.section-title {
    position:sticky y overflow:hidden nunca en el mismo elemento. */
 .alma-carousel.is-scroll-linked .alma-carousel__mask { overflow: hidden; }
 .alma-carousel.is-scroll-linked .alma-carousel__track { will-change: transform; }
+
+/* ══════════════════════════════════════════════════════════
+   LORE PREVIEW (home) — una tab por era en vez de las cuatro
+   siempre abiertas. Mismo criterio de acento que .filter-tab: el
+   activo se marca con --stamp-bright, no con relleno de color nuevo.
+══════════════════════════════════════════════════════════ */
+.lore-tabs {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+.lore-tab {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--dim);
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-sm);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+}
+.lore-tab:hover { border-color: var(--paper); color: var(--paper); }
+.lore-tab.active {
+  color: var(--stamp-bright);
+  border-color: var(--stamp);
+  background: rgba(13, 138, 128, 0.12); /* --stamp a baja opacidad — mismo criterio que --dim */
+}
+.lore-tab:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+
+.lore-panel-frame {
+  background: rgba(13, 138, 128, 0.08);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  padding: var(--space-6);
+}
+.lore-panel__excerpt { max-width: 680px; }
 
 /* ══════════════════════════════════════════════════════════
    TIMELINE (Las Cuatro Eras) — regla + numeral, sin caja.

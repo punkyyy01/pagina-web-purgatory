@@ -1,36 +1,22 @@
 ---
-import { getCalidadEfectiva, CALIDAD_LABELS, ERA_LABELS } from '../lib/alma.js';
+import { getCalidadEfectiva, CALIDAD_LABELS } from '../lib/alma.js';
 
 /** @type {{ alma: import('../lib/alma.js').Alma }} */
 const { alma } = Astro.props;
 
 const calidad = getCalidadEfectiva(alma);
-const eraLabel = ERA_LABELS[alma.era];
 const inicial = alma.nick.trim().charAt(0).toUpperCase() || '?';
 ---
 <article class="card-alma" data-calidad={calidad} data-presencia={alma.presencia}>
-  <div class="card-alma__poster">
-    {alma.avatarUrl
-      ? <img src={alma.avatarUrl} alt="" loading="lazy" />
-      : <div class="card-alma__monogram" aria-hidden="true" data-initial={inicial}></div>
-    }
-  </div>
+  {alma.avatarUrl
+    ? <img class="card-alma__photo" src={alma.avatarUrl} alt="" loading="lazy" />
+    : <div class="card-alma__monogram" aria-hidden="true" data-initial={inicial}></div>
+  }
 
-  <div class="card-alma__body">
-    <div class="card-alma__eyebrow">
-      {calidad !== 'normal' && <span class="stamp card-alma__stamp">{CALIDAD_LABELS[calidad]}</span>}
-      <span class="card-alma__era">{eraLabel}</span>
-      {alma.moteSuperior && <span class="card-alma__mote-superior">{alma.moteSuperior}</span>}
-    </div>
+  {calidad !== 'normal' && (
+    <span class="stamp card-alma__stamp">{CALIDAD_LABELS[calidad]}</span>
+  )}
 
-    <h3 class="card-alma__nick">{alma.nick}</h3>
-    {alma.moteInferior && <p class="card-alma__mote-inferior">{alma.moteInferior}</p>}
-
-    {alma.fraseIconica && (
-      <>
-        <div class="card-alma__rule"></div>
-        <blockquote class="card-alma__frase">"{alma.fraseIconica}"</blockquote>
-      </>
-    )}
-  </div>
+  <div class="card-alma__scrim" aria-hidden="true"></div>
+  <h3 class="card-alma__nick">{alma.nick}</h3>
 </article>

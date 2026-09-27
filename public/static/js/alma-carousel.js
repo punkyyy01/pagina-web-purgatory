@@ -1,152 +1,92 @@
 /* ═══════════════════════════════════════════════════════════
-   PURGATORY — Carrusel de 4LMA (home)
+   PURGATORY — Deck de 4LMA (home)
    ───────────────────────────────────────────────────────────
-   El HTML ya trae TODAS las cards renderizadas por Astro (CardAlma) —
-   este script no genera markup, solo:
-     1. Elige un subconjunto justo (shuffle-bag en localStorage: no
-        repetir mientras queden almas sin mostrar, y una vez que todas
-        aparecieron, se vuelve a barajar el mazo completo).
-     2. Reordena/oculta el DOM ya existente según esa elección.
-     3. Si sobra ancho para recorrer, engancha el desplazamiento
-        horizontal del track al scroll vertical de la página (nunca al
-        revés — nunca se llama preventDefault ni se intercepta rueda o
-        touch; solo se LEE la posición de scroll).
-
-   Se apaga solo si el usuario pidió menos movimiento o el dispositivo
-   es débil — en esos casos el fallback de scroll horizontal nativo de
-   styles.css (.alma-carousel__viewport) ya es completamente funcional
-   sin esto.
+   Controla la navegación horizontal interactiva del carrusel/deck
+   de cartas 4LMA:
+     1. Botones previo/siguiente con scroll fluido.
+     2. Arrastre con mouse (drag-to-scroll) y soporte táctil fluido.
+     3. Shuffle aleatorio suave en la selección si hay muchas cartas.
+     4. Actualización del estado de los botones de navegación.
    ═══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
-  var SEEN_KEY = 'purgatory:4lma:seen';
-  var FEATURED_COUNT = 7;
-  // Cuánto scroll vertical (relativo al alto del viewport) hace falta para
-  // recorrer el barrido horizontal completo. No depende del ancho del mazo
-  // ni de la pantalla — es autónomo, así el "tiempo" del efecto es siempre
-  // parecido sin importar cuántas cards haya. En 0.7 (con el padding del
-  // track ya recortado, ver styles.css) el barrido completo pasaba en
-  // ~275px de scroll — apenas un par de gestos de rueda/trackpad, así que
-  // el mazo cruzaba la pantalla antes de que se llegara a leer ninguna
-  // card. 1.6 vuelve a dar ~630px de recorrido (lo mismo que ya se había
-  // probado bien con el viewport más alto de antes del recorte), sin
-  // reabrir el hueco muerto post-barrido: ese tramo depende solo del alto
-  // del viewport de cards, no de este factor.
-  var RUNWAY_HEIGHT_FACTOR = 1.6;
+  var deck = document.getElementById('alma-deck');
+  if (!deck) return;
 
-  var root = document.getElementById('alma-carousel');
-  if (!root) return;
+  var prevBtn = document.getElementById('alma-nav-prev');
+  var nextBtn = document.getElementById('alma-nav-next');
+  var items = Array.prototype.slice.call(deck.querySelectorAll('.alma-deck__item'));
+  if (items.length === 0) return;
 
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isLite = document.documentElement.classList.contains('lite-mode');
-
-  var items = Array.prototype.slice.call(root.querySelectorAll('.alma-carousel__item'));
-  if (items.length < 2) return;
-
-  /* ─── 1. Selección justa (shuffle-bag) ─── */
-  function shuffle(arr) {
-    for (var i = arr.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
-    }
-    return arr;
+  // Actualizar visibilidad/deshabilitación de botones
+  function updateNavButtons() {
+    if (!prevBtn || !nextBtn) return;
+    var maxScroll = deck.scrollWidth - deck.clientWidth;
+    prevBtn.style.opacity = deck.scrollLeft <= 5 ? '0.4' : '1';
+    prevBtn.style.pointerEvents = deck.scrollLeft <= 5 ? 'none' : 'auto';
+    nextBtn.style.opacity = deck.scrollLeft >= maxScroll - 5 ? '0.4' : '1';
+    nextBtn.style.pointerEvents = deck.scrollLeft >= maxScroll - 5 ? 'none' : 'auto';
   }
 
-  function readSeen(validSlugs) {
-    var seen;
-    try { seen = JSON.parse(localStorage.getItem(SEEN_KEY)) || []; } catch (e) { seen = []; }
-    if (!Array.isArray(seen)) seen = [];
-    // Descarta slugs que ya no existen (datos de ejemplo que cambiaron)
-    return seen.filter(function (s) { return validSlugs.indexOf(s) !== -1; });
-  }
+  // Scroll con botones
+  var SCROLL_STEP = 280; // aprox ancho de una carta + gap
 
-  function writeSeen(seen) {
-    try { localStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch (e) { /* localStorage no disponible — no rompe nada, solo no persiste */ }
-  }
-
-  function pickFeatured(allSlugs, count) {
-    count = Math.min(count, allSlugs.length);
-    var seen = readSeen(allSlugs);
-    var unseen = shuffle(allSlugs.filter(function (s) { return seen.indexOf(s) === -1; }));
-    var picked = unseen.slice(0, count);
-
-    if (picked.length < count) {
-      // Se agotó el mazo a mitad de la elección: se reinicia y se completa
-      // con lo que falte, sin repetir lo ya elegido en esta misma vuelta.
-      var refill = shuffle(allSlugs.filter(function (s) { return picked.indexOf(s) === -1; }));
-      picked = picked.concat(refill.slice(0, count - picked.length));
-      seen = [];
-    }
-
-    var newSeen = seen.concat(picked);
-    // Mazo completo: la próxima visita vuelve a empezar de cero.
-    if (newSeen.length >= allSlugs.length) newSeen = [];
-    writeSeen(newSeen);
-
-    return picked;
-  }
-
-  var allSlugs = items.map(function (el) { return el.dataset.slug; });
-  var picked = pickFeatured(allSlugs, FEATURED_COUNT);
-  var pickedSet = {};
-  picked.forEach(function (slug) { pickedSet[slug] = true; });
-
-  var byslug = {};
-  items.forEach(function (el) { byslug[el.dataset.slug] = el; });
-
-  var track = document.getElementById('alma-carousel-track');
-  picked.forEach(function (slug) {
-    var el = byslug[slug];
-    if (!el) return;
-    el.hidden = false;
-    track.appendChild(el); // mueve el nodo existente — no clona, no recrea
-  });
-  items.forEach(function (el) {
-    if (!pickedSet[el.dataset.slug]) el.hidden = true;
-  });
-
-  /* ─── 2. Fan visual — se admite salvo que el usuario pida lo contrario ─── */
-  if (prefersReducedMotion || isLite) return; // se queda en el fallback de scroll nativo
-  root.classList.add('is-fanned');
-  root.classList.add('is-scroll-linked');
-
-  /* ─── 3. Scroll-link: el mazo entra por la derecha y sale por la
-     izquierda, cruzando TODA la pantalla — no es un desplazamiento
-     chico dentro del ancho visible. Por eso el recorrido se mide
-     contra el viewport (siempre > 0), nunca contra "cuánto se pasa
-     el mazo del viewport" (eso dependía del ancho de la pantalla del
-     visitante y en monitores anchos daba 0 — el bug de la vez
-     pasada). ─── */
-  var runway = document.getElementById('alma-carousel-runway');
-  var viewport = document.getElementById('alma-carousel-viewport');
-  if (!runway || !viewport) return;
-
-  var travelDistance = 0; // viewport + mazo: de "todo afuera a la derecha" a "todo afuera a la izquierda"
-
-  function measure() {
-    travelDistance = viewport.clientWidth + track.scrollWidth;
-    runway.style.height = (viewport.clientHeight + viewport.clientHeight * RUNWAY_HEIGHT_FACTOR) + 'px';
-  }
-
-  var ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function () {
-      var extra = viewport.clientHeight * RUNWAY_HEIGHT_FACTOR;
-      var rect = runway.getBoundingClientRect();
-      var progress = extra > 0 ? Math.min(1, Math.max(0, -rect.top / extra)) : 0;
-      // progress 0 → todo el mazo esperando afuera a la derecha.
-      // progress 1 → todo el mazo ya salió por la izquierda.
-      var x = viewport.clientWidth - progress * travelDistance;
-      track.style.transform = 'translateX(' + x + 'px)';
-      ticking = false;
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function () {
+      deck.scrollBy({ left: -SCROLL_STEP, behavior: 'smooth' });
     });
   }
 
-  measure();
-  onScroll();
-  window.addEventListener('resize', function () { measure(); onScroll(); }, { passive: true });
-  window.addEventListener('scroll', onScroll, { passive: true });
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function () {
+      deck.scrollBy({ left: SCROLL_STEP, behavior: 'smooth' });
+    });
+  }
+
+  deck.addEventListener('scroll', updateNavButtons, { passive: true });
+  window.addEventListener('resize', updateNavButtons, { passive: true });
+  updateNavButtons();
+
+  // Arrastre con mouse (drag to scroll)
+  var isDown = false;
+  var startX = 0;
+  var scrollLeftStart = 0;
+  var hasDragged = false;
+
+  deck.addEventListener('mousedown', function (e) {
+    // Si hace click en un enlace, permitimos click normal si no arrastra
+    isDown = true;
+    hasDragged = false;
+    startX = e.pageX - deck.offsetLeft;
+    scrollLeftStart = deck.scrollLeft;
+    deck.style.cursor = 'grabbing';
+    deck.style.userSelect = 'none';
+  });
+
+  window.addEventListener('mouseup', function () {
+    if (!isDown) return;
+    isDown = false;
+    deck.style.cursor = '';
+    deck.style.removeProperty('user-select');
+  });
+
+  deck.addEventListener('mousemove', function (e) {
+    if (!isDown) return;
+    var x = e.pageX - deck.offsetLeft;
+    var walk = (x - startX) * 1.5;
+    if (Math.abs(walk) > 5) {
+      hasDragged = true;
+    }
+    deck.scrollLeft = scrollLeftStart - walk;
+  });
+
+  // Prevenir navegación accidental al soltar tras arrastrar
+  deck.addEventListener('click', function (e) {
+    if (hasDragged) {
+      e.preventDefault();
+      e.stopPropagation();
+      hasDragged = false;
+    }
+  }, true);
 })();

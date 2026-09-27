@@ -71,43 +71,58 @@ const ERAS = [
   </section>
 
   <!-- ══════════════════════════════════════
-       4LMA — las cartas son las protagonistas: rompen el borde de la
-       franja de color de abajo en vez de quedar prolijamente adentro
-       de su propia sección. El HTML trae TODAS las almas (reales +
-       relleno); alma-carousel.js elige un subconjunto justo y engancha
-       el desplazamiento al scroll. Sin JS (o con prefers-reduced-motion
-       / lite-mode) esto sigue siendo una fila con scroll horizontal
-       nativo — ver styles.css.
+       4LMA — Colección viva de Almas del Servidor
+       Rediseño completo del concepto de cartas (4LMA):
+       Atmósfera oscura, distinciones de calidad (shiny, normal, void),
+       deck interactivo y fiel a los bocetos.
   ══════════════════════════════════════ -->
-  <section class="alma-showcase" id="alma-carousel">
-    <div class="alma-showcase__band">
-      <span class="alma-showcase__brand">4LMA</span>
-    </div>
+  <section class="alma-showcase" id="alma-showcase">
+    <div class="container">
+      <div class="alma-showcase__header">
+        <div class="alma-showcase__badge">
+          <span class="pulse-dot"></span>
+          <span>4LMA · STATUS DEL PURGATORIO</span>
+        </div>
+        <h2 class="section-title">Almas del Servidor</h2>
+        <p class="section-lead">
+          Tu alma es tu presentación dentro de PURG4TORY. Cartas coleccionables con rangos que evolucionan según la historia, el apoyo y la conducta en la comunidad.
+        </p>
 
-    <div class="alma-carousel__runway" id="alma-carousel-runway">
-      <div class="alma-carousel__viewport" id="alma-carousel-viewport">
-        <!-- Máscara aparte del viewport sticky a propósito: Chromium calcula
-             mal getBoundingClientRect() de un hijo transformado cuando
-             position:sticky y overflow:hidden viven en el MISMO elemento
-             (lo clampeaba al ancho del viewport en vez de dejarlo salir de
-             pantalla). Separado en dos elementos, el bug desaparece. -->
-        <div class="alma-carousel__mask" id="alma-carousel-mask">
-          <div class="alma-carousel__track" id="alma-carousel-track">
-            {almasCarrusel.map((alma) => (
-              <div class="alma-carousel__item" data-slug={alma.slug}>
-                <a href="/4lma" aria-label={`Ver ${alma.nick}`}>
-                  <CardAlma alma={alma} />
-                </a>
-              </div>
-            ))}
-          </div>
+        <div class="alma-legend">
+          <span class="alma-legend__item alma-legend__item--shiny">
+            <span class="legend-symbol">✦</span> <strong>Shiny</strong> · Boosters & Staff
+          </span>
+          <span class="alma-legend__item alma-legend__item--normal">
+            <span class="legend-symbol">◈</span> <strong>Normal</strong> · Almas canónicas
+          </span>
+          <span class="alma-legend__item alma-legend__item--void">
+            <span class="legend-symbol">☠</span> <strong>Void</strong> · Desterrados & expulsados
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- Carrusel / Deck de Almas -->
+    <div class="alma-deck-container">
+      <div class="alma-deck-wrapper">
+        <button class="alma-deck__nav alma-deck__nav--prev" id="alma-nav-prev" type="button" aria-label="Almas anteriores">&#8592;</button>
+        <div class="alma-deck" id="alma-deck">
+          {almasCarrusel.map((alma) => (
+            <div class="alma-deck__item" data-slug={alma.slug}>
+              <a href="/4lma" aria-label={`Ver 4LMA de ${alma.nick}`} class="alma-deck__link">
+                <CardAlma alma={alma} />
+              </a>
+            </div>
+          ))}
+        </div>
+        <button class="alma-deck__nav alma-deck__nav--next" id="alma-nav-next" type="button" aria-label="Siguientes almas">&#8594;</button>
+      </div>
+    </div>
+
     <div class="container">
-      <div class="section-cta">
-        <a href="/4lma" class="btn btn-blood">Ver todas las almas</a>
+      <div class="alma-showcase__actions">
+        <a href="/4lma" class="btn btn-blood">Explorar todas las almas</a>
+        <a href="/cuenta/editar" class="btn">Crear tu 4LMA</a>
       </div>
     </div>
   </section>

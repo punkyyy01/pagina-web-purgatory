@@ -23,6 +23,9 @@
       // ítems sueltos del menú mobile) — se puebla en todos antes de mostrar
       // nada, para que no haya un instante con el bloque visible y vacío.
       document.querySelectorAll('.js-nav-user-name').forEach(function (el) { el.textContent = displayName; });
+      if (data.username) {
+        document.querySelectorAll('.js-nav-user-meta').forEach(function (el) { el.textContent = '@' + data.username; });
+      }
 
       document.querySelectorAll('.js-nav-user').forEach(function (block) {
         var avatar = block.querySelector('.js-nav-user-avatar');

@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = true;
+---
+<Layout
+  title="Privacidad — Purgatory"
+  description="Qué datos guarda PURG4TORY y por qué."
+  ogTitle="Privacidad — PURG4TORY"
+  ogDescription="Qué datos guarda PURG4TORY y por qué."
+  path="/privacidad"
+  active={null}
+>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="section-title">Privacidad</h1>
+      <p class="section-lead">Lo mínimo necesario para que el login y las cartas 4LMA funcionen.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width: 620px">
+      <p class="record-desc" style="opacity:1">
+        Al iniciar sesión con Discord guardamos tu ID de Discord y una cookie de sesión firmada — nada más se lee
+        de tu cuenta. Tu nombre, avatar, rol y estado de membresía se sincronizan directo desde Discord y nunca
+        los edita esta web. El contenido de tu 4LMA (nick, frase, motes) lo escribís vos mismo desde el Card
+        Builder y podés borrarlo o dejarlo en borrador en cualquier momento.
+      </p>
+    </div>
+  </section>
+
+</Layout>

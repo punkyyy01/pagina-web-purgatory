@@ -813,30 +813,20 @@ h1.section-title {
 .section-cta { margin-top: var(--space-6); }
 
 /* ══════════════════════════════════════════════════════════
-   CARDS GRID (generic) + NAIPE GRID (personajes)
+   NAIPE GRID (personajes)
 ══════════════════════════════════════════════════════════ */
-.cards-grid {
-  display: grid;
-  gap: var(--space-6) var(--space-5);
-}
-.cards-grid--4 { grid-template-columns: repeat(4, 1fr); }
-.cards-grid--3 { grid-template-columns: repeat(3, 1fr); }
-.cards-grid--2 { grid-template-columns: repeat(2, 1fr); }
-
-@media (max-width: 900px) {
-  .cards-grid--4 { grid-template-columns: repeat(2, 1fr); }
-  .cards-grid--3 { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .cards-grid--4,
-  .cards-grid--3,
-  .cards-grid--2 { grid-template-columns: 1fr; }
-}
-
 .naipe-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: var(--space-6) var(--space-5);
+}
+/* Sin este breakpoint, minmax(220px,1fr) fuerza una sola columna en
+   celulares (2×220px no entra en ~350px de ancho útil): cada naipe
+   quedaba a pantalla casi completa por un simple círculo con una letra
+   — .alma-gallery-grid ya resuelve el mismo problema así, esta grilla
+   se había quedado afuera de ese ajuste. */
+@media (max-width: 560px) {
+  .naipe-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-4) var(--space-3); }
 }
 
 /* Galería de /4lma — mismo mecanismo de grilla que .naipe-grid, pero las

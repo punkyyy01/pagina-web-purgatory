@@ -457,6 +457,19 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 ══════════════════════════════════════════════════════════ */
 .section { padding: var(--space-9) 0; }
 
+/* Ritmo entre secciones: en páginas con varias .section seguidas (home,
+   sobre todo) el fondo --ink plano de principio a fin las deja leerse
+   como cajas idénticas pegadas una atrás de otra, sin ningún punto de
+   apoyo visual entre título y título. Alternar con --panel (el mismo
+   tono que ya usan las cards) rompe esa monotonía sin sumar un color
+   nuevo a la paleta — es la sección "respirando" un paso más clara,
+   nada más. Se usa con moderación, nunca en secciones consecutivas. */
+.section--panel {
+  background: var(--panel);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
 .section-title {
   font-family: var(--font-body);
   font-weight: 600;
@@ -531,6 +544,28 @@ h1.section-title {
   background:
     radial-gradient(120% 100% at 15% 20%, rgba(13, 138, 128, 0.16) 0%, transparent 55%),
     linear-gradient(160deg, var(--panel) 0%, var(--ink) 65%);
+}
+/* Sin foto de servidor todavía, el hero es puro gradiente — leía como un
+   placeholder a la espera de una imagen, no como algo terminado. En vez de
+   inventar una imagen que no existe, se reutiliza el único motivo
+   decorativo que ya tiene el sitio (el anillo del sello, .seal/.seal-sm)
+   a una escala enorme: mismo lenguaje visual, ningún color ni forma nueva.
+   Pintado antes que .hero__scrim en el DOM, así el degradé de abajo lo
+   apaga hacia donde vive el texto en vez de competir con él. */
+.hero--full::before {
+  content: "";
+  position: absolute;
+  top: 4%;
+  right: -14%;
+  width: min(58vw, 700px);
+  aspect-ratio: 1;
+  border: 1px solid var(--stamp);
+  border-radius: 50%;
+  opacity: 0.1;
+  pointer-events: none;
+}
+@media (max-width: 700px) {
+  .hero--full::before { width: min(85vw, 520px); right: -28%; top: 2%; }
 }
 .hero--full .hero__scrim {
   position: absolute;
@@ -607,6 +642,19 @@ h1.section-title {
   gap: var(--space-6) var(--space-5);
 }
 
+/* Galería de /4lma — mismo mecanismo de grilla que .naipe-grid, pero las
+   4LMA son las protagonistas del sitio (ver alma-showcase en la home):
+   cartas más grandes y más aire entre ellas que la grilla de personajes,
+   para que la página se sienta como una vitrina y no como un listado más. */
+.alma-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-7) var(--space-6);
+}
+@media (max-width: 560px) {
+  .alma-gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-5); }
+}
+
 /* ── Card de personaje — naipe con misterio: sello por defecto,
    cross-fade a nombre/rol al interactuar (hover o teclado) ─────── */
 .card-naipe {
@@ -617,7 +665,7 @@ h1.section-title {
   border: 1px solid var(--rule);
   border-radius: var(--r-sm);
   cursor: pointer;
-  background: var(--panel);
+  background: linear-gradient(155deg, var(--panel) 0%, var(--ink) 100%);
   text-decoration: none;
   transition: border-color var(--dur-base);
 }
@@ -625,6 +673,10 @@ h1.section-title {
 .card-naipe:focus,
 .card-naipe:focus-within { border-color: var(--paper); }
 
+/* El teal es un recurso escaso (ver la nota de --stamp en tokens.css) —
+   once naipes con el sello en --stamp-bright lo convertían en decoración
+   de grilla, no en acento puntual. El anillo (mismo motivo que .seal) se
+   queda; el color pasa a neutro, como el resto del sitio. */
 .card-naipe__seal {
   position: absolute;
   inset: 0;
@@ -633,18 +685,18 @@ h1.section-title {
   justify-content: center;
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: var(--fs-2xl);
-  color: var(--stamp-bright);
+  font-size: var(--fs-3xl);
+  color: var(--paper);
   opacity: 1;
   transition: opacity var(--dur-base);
 }
-.card-naipe__seal::before { content: attr(data-initial); position: relative; z-index: 1; }
+.card-naipe__seal::before { content: attr(data-initial); position: relative; z-index: 1; opacity: 0.85; }
 .card-naipe__seal::after {
   content: "";
   position: absolute;
-  width: 56px;
-  height: 56px;
-  border: 1.5px solid var(--stamp);
+  width: 72px;
+  height: 72px;
+  border: 1.5px solid var(--rule-strong);
   border-radius: 50%;
   transform: rotate(-8deg);
 }
@@ -867,7 +919,8 @@ h1.section-title {
   padding: 0 var(--space-5);
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: var(--fs-2xl);
+  font-size: var(--fs-3xl);
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 /* El mazo se levanta por encima de la franja — acá vive la "presencia"
@@ -1223,12 +1276,19 @@ h1.section-title {
   text-align: left;
 }
 /* --fs-3xl es del mismo tamaño que un h2 — una cifra de impacto necesita su
-   propia voz, no la de un título de sección. Ver --fs-display en tokens.css. */
+   propia voz, no la de un título de sección. Ver --fs-display en tokens.css.
+   Mono, no serif: son números, no un nombre propio — el rol tipográfico que
+   ya reserva --font-mono para "toda la metadata" (ver el comentario de
+   tokens.css). En Cormorant Garamond el 1 se lee como una I mayúscula y el 0
+   como una O — a --fs-display eso deja de ser una cifra y pasa a ser una
+   palabra ambigua. JetBrains Mono no tiene corte 700: 500 es el más grueso
+   disponible (ver fonts.css) — evita el negrita sintético del navegador. */
 .stat-number {
   display: block;
-  font-family: var(--font-serif);
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-weight: 500;
   font-size: var(--fs-display);
+  letter-spacing: -0.03em;
   color: var(--paper);
   line-height: 1;
 }

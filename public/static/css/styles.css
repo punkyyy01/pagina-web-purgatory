@@ -276,10 +276,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   gap: var(--space-2);
   text-decoration: none;
 }
-.nav-brand__logo {
-  width: 26px;
-  height: 26px;
-  display: block;
+.nav-brand__p {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--paper);
+  display: inline-block;
+  margin-right: 2px;
 }
 .nav-brand__name {
   font-family: var(--font-serif);
@@ -398,11 +402,11 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   flex-shrink: 0;
 }
 
-/* En mobile el CTA vuelve al menú desplegable */
-.nav-links-mobile-item { display: none; }
-@media (max-width: 1080px) {
-  .nav-end .cta { display: none; }
-  .nav-links-mobile-item { display: block; width: 100%; margin-top: var(--space-2); }
+@media (max-width: 768px) {
+  .btn-nav-discord span { display: none; }
+  .btn-nav-discord { padding: 6px 10px; }
+  .btn-nav-server { padding: 5px 10px; font-size: 11px; }
+  .nav-slash { display: none; }
 }
 
 /* ── Usuario logueado (nav de escritorio) ── */
@@ -549,18 +553,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
   }
   .nav-link:hover { background: rgba(232, 228, 218, 0.05); }
   .nav-link.is-active::after { display: none; }
-  .nav-link.is-active { background: rgba(57, 153, 75, 0.15); }
-}
-    top: var(--header-h);
-    left: 0; right: 0;
-    background: var(--ink);
-    border-bottom: 1px solid var(--rule);
-    flex-direction: column;
-    padding: var(--space-4) var(--space-5);
-    gap: var(--space-4);
-    align-items: flex-start;
-  }
-  .nav-links.is-open { display: flex; }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -813,6 +805,10 @@ h1.section-title {
   display: flex;
   gap: var(--space-4);
   flex-wrap: wrap;
+}
+.hero-actions {
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-7);
 }
 .section-cta { margin-top: var(--space-6); }
 
@@ -1287,7 +1283,9 @@ h1.section-title {
 ══════════════════════════════════════════════════════════ */
 .alma-showcase {
   position: relative;
-  padding: var(--space-8) 0;
+  padding: var(--space-9) 0 var(--space-8);
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--rule);
   background: radial-gradient(circle at 50% 20%, rgba(13, 138, 128, 0.08) 0%, transparent 65%);
 }
 

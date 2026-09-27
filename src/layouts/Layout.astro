@@ -26,7 +26,7 @@ const {
   vercelInsights = true,
 } = Astro.props;
 
-const ASSET_V = '20260726';
+const ASSET_V = '20260927v2';
 const resolvedOgUrl = ogUrl ?? new URL(path, Astro.site).toString();
 const CSP = "default-src 'self'; script-src 'self' 'sha256-L0IzETgzhHHFQg/cujcI7Kyu+WNfOWlUT6c1nE5Un3s='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://cdn.discordapp.com; object-src 'none'; connect-src 'self' https://va.vercel-scripts.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';";
 ---

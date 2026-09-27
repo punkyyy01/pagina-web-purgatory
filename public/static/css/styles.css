@@ -576,6 +576,143 @@ h1.section-title {
 }
 
 /* ══════════════════════════════════════════════════════════
+   CARD ALMA (4LMA) — la identidad de un usuario como objeto.
+   Mismo lenguaje que .card-naipe (aspect-ratio 2/3, --panel, borde
+   --rule) pero sin el misterio de sello-oculto: acá la identidad se
+   muestra siempre, no se revela recién al hover — es la propia carta
+   de alguien, no un personaje canónico por descubrir.
+   El único acento teal que puede aparecer es el sello reutilizado de
+   .stamp; el resto de la carta se queda en la escala --paper/--dim/
+   --rule, igual que todo lo demás en el sitio.
+══════════════════════════════════════════════════════════ */
+.card-alma {
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  background: var(--panel);
+  text-decoration: none;
+  transition: border-color var(--dur-base), transform var(--dur-base), box-shadow var(--dur-base);
+}
+/* El sitio no usa sombra en reposo (ver "cero glow" arriba de este
+   archivo) — acá se admite una sola, neutra y solo al interactuar, como
+   refuerzo físico de "esto se puede levantar", nunca como estado por
+   defecto. */
+.card-alma:hover,
+.card-alma:focus-within {
+  border-color: var(--paper);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 28px -12px rgba(0, 0, 0, 0.55);
+}
+
+.card-alma__meta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.card-alma__meta span:last-child { text-align: right; }
+
+.card-alma__avatar {
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+  background: var(--ink);
+}
+.card-alma__avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Sin avatarUrl: mismo patrón que .card-naipe__seal — inicial + anillo,
+   nunca un ícono genérico de "sin foto". */
+.card-alma__fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-2xl);
+  color: var(--stamp-bright);
+}
+.card-alma__fallback::before { content: attr(data-initial); position: relative; z-index: 1; }
+.card-alma__fallback::after {
+  content: "";
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border: 1.5px solid var(--stamp);
+  border-radius: 50%;
+  transform: rotate(-8deg);
+}
+
+.card-alma__body {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--rule);
+  padding: var(--space-4);
+}
+.card-alma__nick {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  color: var(--paper);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card-alma__mote-inferior {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  margin-top: var(--space-1);
+}
+/* Mismo lenguaje que .chapter-quote (serif itálica + regla a la
+   izquierda, nunca color) a escala de card. */
+.card-alma__frase {
+  border-left: 2px solid var(--rule);
+  padding-left: var(--space-3);
+  margin-top: var(--space-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  color: var(--paper);
+  opacity: 0.85;
+  line-height: 1.4;
+  /* Frases largas (ver dato de ejemplo "mensaje-en-un-canal") se
+     recortan a 3 líneas — la card no puede crecer con el texto libre
+     del usuario. */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-alma__stamp { margin-top: var(--space-3); }
+
+/* Void: "la marca ya no tiene nada que defender, se apaga a neutro" —
+   mismo principio que el paso 4/4 de .stamp (Meme Eterno, línea ~142).
+   No es un filtro nuevo inventado para la ocasión: es el mismo criterio
+   aplicado también a la imagen. */
+.card-alma[data-calidad="void"] .stamp {
+  border-color: var(--rule-strong);
+  color: var(--dim);
+}
+.card-alma[data-calidad="void"] .card-alma__avatar img,
+.card-alma[data-calidad="void"] .card-alma__fallback {
+  filter: grayscale(0.6) brightness(0.7);
+}
+
+/* ══════════════════════════════════════════════════════════
    TIMELINE (Las Cuatro Eras) — regla + numeral, sin caja.
    Extiende el lenguaje de .chapter-tablet (rule + label + title, cero
    fondo/borde perimetral): la secuencia se lee por el numeral corrido

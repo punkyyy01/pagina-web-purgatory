@@ -826,18 +826,13 @@ h1.section-title {
 /* ── Mejorado (JS activo, sin reduced-motion, sin lite-mode) ──────
    El solapamiento y la inclinación solo existen acá: es lo que hace
    que se sienta un mazo de cartas y no una fila de tarjetas. El acento
-   sigue sin aparecer — la inclinación es geometría, no color. */
-/* max-width/margin acá (no en .runway): el viewport queda centrado como
-   el resto del contenido del sitio (--container), así el ancho a superar
-   para que haya scroll-link es siempre el mismo — no el ancho real de
-   la pantalla del visitante (antes, en cualquier monitor de escritorio
-   normal —1152px o más— el mazo entraba entero y el scroll-link nunca
-   se activaba: quedaba "estático" siempre, no era un caso raro). */
-.alma-carousel.is-fanned .alma-carousel__viewport {
-  overflow: visible;
-  max-width: var(--container);
-  margin: 0 auto;
-}
+   sigue sin aparecer — la inclinación es geometría, no color.
+   Full-bleed a propósito — el viewport ocupa todo el ancho de la
+   pantalla, no el --container acotado del resto del sitio: el mazo
+   tiene que poder entrar y salir por los bordes reales de la ventana
+   (ver el mecanismo de scroll-link más abajo, que ya no depende de
+   que el mazo "desborde" el viewport para funcionar). */
+.alma-carousel.is-fanned .alma-carousel__viewport { overflow: visible; }
 .alma-carousel.is-fanned .alma-carousel__track { padding: var(--space-7) var(--space-6) var(--space-8); }
 .alma-carousel.is-fanned .alma-carousel__item { flex-basis: 220px; }
 .alma-carousel.is-fanned .alma-carousel__item + .alma-carousel__item { margin-left: -36px; }
@@ -860,18 +855,21 @@ h1.section-title {
   z-index: 10;
 }
 
-/* ── Scroll-linked (JS confirma que hay overflow real que recorrer) ──
+/* ── Scroll-linked (siempre que haya JS, sin reduced-motion/lite-mode) ──
    El "runway" es más alto que el viewport a propósito: esa altura extra
-   es la distancia de scroll vertical que se traduce 1:1 en el
-   desplazamiento horizontal del track (ver alma-carousel.js). Sin JS
-   nunca se llega a este estado — .alma-carousel__runway se queda en
-   height:auto y el fallback de scroll nativo sigue funcionando. */
+   es la distancia de scroll vertical que alma-carousel.js traduce en el
+   barrido horizontal completo del track — entra por la derecha (fuera
+   de pantalla), cruza, y sale por la izquierda (fuera de pantalla).
+   Sin JS nunca se llega a este estado — .alma-carousel__runway se queda
+   en height:auto y el fallback de scroll nativo sigue funcionando. */
 .alma-carousel.is-scroll-linked .alma-carousel__runway { position: relative; }
 .alma-carousel.is-scroll-linked .alma-carousel__viewport {
   position: sticky;
   top: var(--header-h);
-  overflow: hidden;
 }
+/* El clip vive acá, no en .viewport (ver el comentario en index.astro) —
+   position:sticky y overflow:hidden nunca en el mismo elemento. */
+.alma-carousel.is-scroll-linked .alma-carousel__mask { overflow: hidden; }
 .alma-carousel.is-scroll-linked .alma-carousel__track { will-change: transform; }
 
 /* ══════════════════════════════════════════════════════════

@@ -21,7 +21,7 @@ const links: Array<{ key: NonNullable<Props['active']>; href: string; label: str
       {links.map((link) => (
         <li><a href={link.href} aria-current={active === link.key ? 'page' : undefined}>{link.label}</a></li>
       ))}
-      <li class="nav-links-cta js-nav-login-item"><a class="btn btn--sm js-nav-login" href="/api/auth/login">Iniciar sesión con Discord</a></li>
+      <li class="nav-links-cta js-nav-login-item"><a class="btn btn--sm js-nav-login" href="/api/auth/login">Iniciar sesión</a></li>
       <li class="nav-links-cta js-nav-user-mobile-item" hidden><a class="btn btn--sm" href="/cuenta"><span class="js-nav-user-name"></span></a></li>
       <li class="nav-links-cta js-nav-user-mobile-item" hidden>
         <form method="post" action="/api/auth/logout"><button type="submit" class="btn btn--sm">Cerrar sesión</button></form>
@@ -29,7 +29,7 @@ const links: Array<{ key: NonNullable<Props['active']>; href: string; label: str
       <li class="nav-links-cta"><a class="btn btn--sm btn-blood cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
     </ul>
     <div class="nav-end">
-      <a class="btn btn--sm cta js-nav-login" href="/api/auth/login">Iniciar sesión con Discord</a>
+      <a class="btn btn--sm cta js-nav-login" href="/api/auth/login">Iniciar sesión</a>
       <div class="nav-user cta js-nav-user" hidden>
         <button class="nav-user__trigger js-nav-user-trigger" type="button" aria-expanded="false">
           <img class="nav-user__avatar js-nav-user-avatar" alt="" width="28" height="28" />

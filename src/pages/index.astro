@@ -50,7 +50,7 @@ const ERAS = [
   ogDescription="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas."
   path="/"
   active="inicio"
-  extraScripts={["/static/js/countdown.js", "/static/js/alma-carousel.js", "/static/js/lore-tabs.js"]}
+  extraScripts={["/static/js/alma-carousel.js", "/static/js/lore-tabs.js"]}
 >
 
   <!-- ══════════════════════════════════════
@@ -112,12 +112,6 @@ const ERAS = [
     </div>
   </section>
 
-  <aside class="countdown-strip">
-    <div class="container">
-      <div id="countdown-widget"></div>
-    </div>
-  </aside>
-
   <!-- ══════════════════════════════════════
        LORE — una sola carta con tabs por era (I/II/III/IV), no las
        cuatro siempre abiertas. El texto completo de cada era vive en
@@ -153,69 +147,6 @@ const ERAS = [
             </div>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       LOS CÍRCULOS DEL INFIERNO
-  ══════════════════════════════════════ -->
-  <section class="section" id="infierno">
-    <div class="container">
-      <h2 class="section-title">Círculos del Infierno</h2>
-      <p class="section-lead">El registro de quienes cruzaron líneas serias dentro de la comunidad. No es chisme ni un juego.</p>
-
-      <div class="condemned-list">
-
-        <article class="condemned-card" data-severity="critical">
-          <div class="record-meta">Caso Nº 001</div>
-          <h3 class="condemned-name">Onil</h3>
-          <p class="record-desc">Actitudes de acoso repetidas, presuntas actitudes indebidas con menores de edad, envio lacayos a trollear con cuentas alternativas.</p>
-          <span class="stamp">Imperdonable</span>
-        </article>
-
-        <article class="condemned-card" data-severity="high">
-          <div class="record-meta">Caso Nº 005</div>
-          <h3 class="condemned-name">Toro <span class="alias">/AnthonyRose</span></h3>
-          <p class="record-desc">Solicitó dinero en el servidor, actitudes machistas y acosadoras con mujeres. En general, un gigafracasado.</p>
-          <span class="stamp">Grave</span>
-        </article>
-
-        <article class="condemned-card" data-severity="low">
-          <div class="record-meta">Caso Nº 008</div>
-          <h3 class="condemned-name">Frankklinton765</h3>
-          <p class="record-desc">"Holaa, estoy aqui por que con un grupo de amigos tenemos un circulo de play station y queriamos saber si es que hay algunas chicas que se quieran unir..." — Sí, fue real.</p>
-          <span class="stamp">Meme eterno</span>
-        </article>
-
-      </div>
-
-      <div class="section-cta">
-        <a href="/condenados" class="btn">Ver el registro completo</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       ESTADÍSTICAS
-  ══════════════════════════════════════ -->
-  <section class="stats-bar">
-    <div class="container stats-grid">
-      <div>
-        <span class="stat-number" data-target="15">0</span>
-        <span class="stat-label">Condenados</span>
-      </div>
-      <div>
-        <span class="stat-number" data-target="4">0</span>
-        <span class="stat-label">Eras del servidor</span>
-      </div>
-      <div>
-        <span class="stat-number" data-target="11">0</span>
-        <span class="stat-label">Personajes canónicos</span>
-      </div>
-      <div>
-        <span class="stat-number" data-target="1">0</span>
-        <span class="stat-label">Dictadura vigente</span>
       </div>
     </div>
   </section>

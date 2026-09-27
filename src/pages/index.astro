@@ -1,9 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CardAlma from '../components/CardAlma.astro';
-import { almasDemo } from '../data/almas-demo.js';
+import { almasSemilla } from '../data/almas-semilla.js';
+import { getPublishedAlmas } from '../lib/db.js';
+import { mergeAlma, getGalleryAlmas } from '../lib/alma.js';
 
-export const prerender = true;
+// No se puede prerenderizar (build-time): el carrusel tiene que
+// reflejar las cartas reales que la gente va publicando, no una foto
+// fija del momento del deploy.
+export const prerender = false;
+
+const publicadas = await getPublishedAlmas();
+const almasReales = publicadas.map(({ discordMember, almaRow }) => mergeAlma(discordMember, almaRow));
+const almasCarrusel = getGalleryAlmas(almasReales, almasSemilla);
 ---
 <Layout
   title="Purgatory — Crónica de PURG4TORY"
@@ -106,7 +115,7 @@ export const prerender = true;
     <div class="alma-carousel__runway" id="alma-carousel-runway">
       <div class="alma-carousel__viewport" id="alma-carousel-viewport">
         <div class="alma-carousel__track" id="alma-carousel-track">
-          {almasDemo.map((alma) => (
+          {almasCarrusel.map((alma) => (
             <div class="alma-carousel__item" data-slug={alma.slug}>
               <a href="/4lma" aria-label={`Ver ${alma.nick}`}>
                 <CardAlma alma={alma} />

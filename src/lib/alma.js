@@ -113,6 +113,24 @@ export const ERA_LABELS = {
 };
 
 /**
+ * Completa la lista de almas reales y publicadas con relleno de
+ * src/data/almas-semilla.js hasta llegar al tamaño de ese mismo
+ * banco de relleno — ni más ni menos. Con 0 almas reales se ven
+ * todas las de relleno; en cuanto las reales igualan o superan ese
+ * número, el relleno desaparece solo, sin tocar la base de datos ni
+ * este archivo. Las reales van primero (más recientes arriba, según
+ * el orden de getPublishedAlmas) — el relleno queda relegado al final
+ * y es lo primero que se corta a medida que se suma gente real.
+ * @param {Alma[]} realAlmas
+ * @param {Alma[]} semilla
+ * @returns {Alma[]}
+ */
+export function getGalleryAlmas(realAlmas, semilla) {
+  if (realAlmas.length >= semilla.length) return realAlmas;
+  return realAlmas.concat(semilla.slice(0, semilla.length - realAlmas.length));
+}
+
+/**
  * La calidad que realmente se debe renderizar. `alma.calidad` es la base
  * elegible (ver CalidadMotivo); `presencia === 'expulsado'` la pisa
  * siempre, sin excepción — un moderador shiny que es expulsado pasa a

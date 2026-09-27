@@ -216,3 +216,53 @@ export async function searchMembersForAdmin(query) {
     estadoPublicacion: row.estado_publicacion ?? 'borrador',
   }));
 }
+
+/**
+ * Todas las almas publicadas, para la home y la galería /4lma. Join
+ * directo en vez de componer getMemberStatus()/getAlma() fila por
+ * fila — evita N+1 queries cuando ya hay muchos miembros reales.
+ * Devuelve los dos lados sin fusionar (discordMember + almaRow) para
+ * que el llamador use mergeAlma() de alma.js, igual que en cualquier
+ * otro punto del sitio.
+ * @returns {Promise<Array<{ discordMember: DiscordMemberStatus, almaRow: AlmaRow }>>}
+ */
+export async function getPublishedAlmas() {
+  const rows = await sql`
+    select
+      m.discord_id, m.username, m.global_name, m.avatar_url, m.joined_at,
+      m.is_member, m.is_banned, m.roles, m.is_booster, m.boosting_since,
+      a.slug, a.nick, a.era, a.mote_superior, a.mote_inferior,
+      a.frase_iconica, a.descripcion, a.calidad, a.calidad_motivo, a.estado_publicacion
+    from almas a
+    join discord_members m on m.discord_id = a.discord_id
+    where a.estado_publicacion = 'publicada'
+    order by a.updated_at desc
+  `;
+  return rows.map((row) => ({
+    discordMember: {
+      discordId: row.discord_id.toString(),
+      username: row.username,
+      globalName: row.global_name,
+      avatarUrl: row.avatar_url,
+      joinedAt: row.joined_at,
+      isMember: row.is_member,
+      isBanned: row.is_banned,
+      roles: (row.roles ?? []).map(String),
+      isBooster: row.is_booster,
+      boostingSince: row.boosting_since,
+    },
+    almaRow: {
+      discordId: row.discord_id.toString(),
+      slug: row.slug,
+      nick: row.nick,
+      era: row.era,
+      moteSuperior: row.mote_superior,
+      moteInferior: row.mote_inferior,
+      fraseIconica: row.frase_iconica,
+      descripcion: row.descripcion,
+      calidad: row.calidad,
+      calidadMotivo: row.calidad_motivo,
+      estadoPublicacion: row.estado_publicacion,
+    },
+  }));
+}

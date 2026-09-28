@@ -319,23 +319,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 /* .cta ya no declara nada: es .btn.btn--sm.btn-blood en el HTML.
    La clase sobrevive solo como gancho de layout para el breakpoint de arriba. */
 
-/* Login con Discord — link con ícono, sin rectángulo (eso queda solo para "Server"). */
-.nav-discord-link {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-body);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dim);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color var(--dur-fast);
-}
-.nav-discord-link:hover { color: var(--paper); }
-.nav-discord-icon { flex-shrink: 0; }
-
 /* ── Usuario logueado (nav de escritorio) — auth-nav.js la muestra
    recién cuando confirma sesión; hasta entonces el link de login de
    arriba ya es funcional por sí solo, sin depender de JS. ────────── */
@@ -572,9 +555,14 @@ h1.section-title {
   inset: 0;
   background: linear-gradient(to top, var(--ink) 0%, rgba(10, 10, 10, 0.2) 55%, rgba(10, 10, 10, 0.55) 100%);
 }
+/* .hero es display:flex, así que sin width:100% el .container (que solo
+   define max-width) se encoge al ancho de su contenido y el margin:auto
+   lo termina centrando como si fuera un item flex más — igual que .nav
+   evita el mismo problema con su propio width:100% explícito. */
 .hero--full .hero__content {
   position: relative;
   z-index: 1;
+  width: 100%;
   align-self: flex-end;
   padding-bottom: var(--space-8);
 }

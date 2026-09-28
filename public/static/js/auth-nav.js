@@ -25,8 +25,9 @@
       document.querySelectorAll('.js-nav-user-name').forEach(function (el) { el.textContent = displayName; });
 
       document.querySelectorAll('.js-nav-user').forEach(function (block) {
-        var avatar = block.querySelector('.js-nav-user-avatar');
-        if (avatar && data.avatarUrl) avatar.src = data.avatarUrl;
+        if (data.avatarUrl) {
+          block.querySelectorAll('.js-nav-user-avatar').forEach(function (avatar) { avatar.src = data.avatarUrl; });
+        }
         block.hidden = false;
 
         var trigger = block.querySelector('.js-nav-user-trigger');

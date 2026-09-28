@@ -18,76 +18,32 @@ const errorMessage = error ? ERROR_MESSAGES[error] ?? 'Ocurrió un error inician
 const isMember = session?.member?.isMember ?? false;
 const esModerador = deriveRol(session?.member ?? null) === 'moderador';
 ---
-<Layout
-  title="Mi cuenta — Purgatory"
-  description="Tu cuenta de PURG4TORY."
-  ogTitle="Mi cuenta — PURG4TORY"
-  ogDescription="Tu cuenta de PURG4TORY."
-  path="/cuenta"
-  active={null}
->
+<Layout title="Cuenta — Purgatory" description="Tu cuenta de Purgatory.">
+  <main>
+    <h1>Cuenta</h1>
+    <p>Frontend visual en reconstrucción. Sin diseño todavía, a propósito.</p>
 
-  <section class="page-hero">
-    <div class="container">
-      <h1 class="section-title">Mi cuenta</h1>
-      <p class="section-lead">
-        {session ? 'Tu identidad dentro de Purgatory.' : 'Iniciá sesión con Discord para continuar.'}
-      </p>
-    </div>
-  </section>
+    {errorMessage && <p role="alert">{errorMessage}</p>}
 
-  <section class="section">
-    <div class="container" style="max-width: 620px">
+    {!session && (
+      <p><a href="/api/auth/login">Iniciar sesión con Discord</a></p>
+    )}
 
-      {errorMessage && (
-        <div class="record" style="margin-bottom: var(--space-6)">
-          <p class="record-desc" style="opacity:1">{errorMessage}</p>
-        </div>
-      )}
+    {session && !isMember && (
+      <p>Iniciaste sesión, pero tu cuenta de Discord no es miembro del servidor.</p>
+    )}
 
-      {!session && (
-        <div class="record">
-          <div class="record-meta">Sin sesión</div>
-          <p class="record-desc">Iniciá sesión con tu cuenta de Discord para acceder a tu 4LMA.</p>
-          <div class="section-cta">
-            <a href="/api/auth/login" class="btn btn-blood">Iniciar sesión con Discord</a>
-          </div>
-        </div>
-      )}
+    {session && isMember && (
+      <>
+        <p>Sesión iniciada como {session.member.globalName ?? session.member.username}.</p>
+        <p><a href="/cuenta/editar">Editar mi 4LMA</a></p>
+        {esModerador && <p><a href="/staff/almas">Panel de staff</a></p>}
+        <form method="post" action="/api/auth/logout">
+          <button type="submit">Cerrar sesión</button>
+        </form>
+      </>
+    )}
 
-      {session && !isMember && (
-        <div class="record">
-          <div class="record-meta">Discord ID {session.discordId}</div>
-          <h2 class="record-name">Todavía no sos parte de Purgatory</h2>
-          <p class="record-desc">
-            Iniciaste sesión, pero no encontramos tu cuenta como miembro activo del servidor —
-            entrá primero y volvé a esta página.
-          </p>
-          <div class="section-cta">
-            <a href="https://discord.gg/aTFMEVzcew" class="btn btn-blood" target="_blank" rel="noopener noreferrer">Entrar al Server</a>
-            <form method="post" action="/api/auth/logout">
-              <button type="submit" class="btn">Cerrar sesión</button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {session && isMember && (
-        <div class="record">
-          <div class="record-meta">Discord ID {session.discordId}</div>
-          <h2 class="record-name">{session.member.globalName || session.member.username}</h2>
-          <p class="record-desc">Sesión iniciada — sos miembro verificado de Purgatory.</p>
-          <div class="section-cta">
-            <a href="/cuenta/editar" class="btn btn-blood">Editar mi 4LMA</a>
-            {esModerador && <a href="/staff/almas" class="btn">Panel de Staff</a>}
-            <form method="post" action="/api/auth/logout">
-              <button type="submit" class="btn">Cerrar sesión</button>
-            </form>
-          </div>
-        </div>
-      )}
-
-    </div>
-  </section>
-
+    <p><a href="/">Inicio</a></p>
+  </main>
 </Layout>

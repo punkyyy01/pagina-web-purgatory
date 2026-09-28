@@ -1,6 +1,7 @@
-/* Lo consume auth-nav.js del lado del cliente para saber si hay que
-   mostrar "Iniciar sesión" o el usuario logueado — el resto del sitio
-   sigue pre-renderizado y estático, esto es la única parte dinámica. */
+/* Endpoint para que el cliente sepa si hay que mostrar "Iniciar sesión"
+   o el usuario logueado. Antes lo consumía auth-nav.js (UI vieja,
+   eliminada) — el contrato de respuesta se mantiene igual para lo que
+   lo reemplace. */
 import { getSessionUser } from '../../../lib/auth.js';
 
 export const prerender = false;

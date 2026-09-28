@@ -15,64 +15,43 @@ if (!session || rolSolicitante !== 'moderador') {
 const q = Astro.url.searchParams.get('q')?.trim() ?? '';
 const resultados = q ? await searchMembersForAdmin(q) : [];
 ---
-<Layout
-  title="Staff — Almas — Purgatory"
-  description="Panel de Staff para otorgar o revocar el logro de una card."
-  ogTitle="Staff — Almas"
-  ogDescription="Panel de Staff para otorgar o revocar el logro de una card."
-  path="/staff/almas"
-  active={null}
->
+<Layout title="Staff · Almas — Purgatory" description="Panel de moderación de 4LMA.">
+  <main>
+    <h1>Staff · Almas</h1>
+    <p>Frontend visual en reconstrucción, sin diseño a propósito. La búsqueda y las acciones de logro ya funcionan de verdad.</p>
 
-  <section class="page-hero">
-    <div class="container">
-      <h1 class="section-title">Staff · Almas</h1>
-      <p class="section-lead">Otorgar o revocar 'logro' como motivo de shiny. No toca rol, booster ni membresía — eso lo sigue sincronizando el bot.</p>
-    </div>
-  </section>
+    <form method="get" action="/staff/almas">
+      <label>
+        Buscar (username o Discord ID)<br />
+        <input type="text" name="q" value={q} />
+      </label>
+      <button type="submit">Buscar</button>
+    </form>
 
-  <section class="section">
-    <div class="container page">
+    {q && resultados.length === 0 && <p>Sin resultados para "{q}".</p>}
 
-      <form method="get" action="/staff/almas" class="builder-field">
-        <label for="q">Buscar por nombre de Discord o ID</label>
-        <input type="text" id="q" name="q" value={q} placeholder="username, nombre visible o ID numérico" />
-        <div class="section-cta" style="margin-top: var(--space-4)">
-          <button type="submit" class="btn">Buscar</button>
-        </div>
-      </form>
-
-      {q && resultados.length === 0 && (
-        <p class="record-desc">Sin resultados para "{q}".</p>
-      )}
-
-      {resultados.map((m) => (
-        <div class="record">
-          <div class="record-meta">Discord ID {m.discordId} · {m.isMember ? 'miembro' : 'no miembro'}{m.isBanned && ' · baneado'}</div>
-          <h2 class="record-name">{m.globalName || m.username}</h2>
-          <p class="record-desc">
-            Nick de card: {m.nick || '(sin Card Builder todavía)'} · Rol: {deriveRol(m)}
-            {m.isBooster && ' · booster'} · calidad_motivo actual: {m.calidadMotivo ?? '(ninguno)'}
-          </p>
-          <div class="section-cta">
-            {m.calidadMotivo === 'logro' ? (
-              <form method="post" action="/api/alma/admin/logro">
-                <input type="hidden" name="discordId" value={m.discordId} />
-                <input type="hidden" name="accion" value="revocar" />
-                <button type="submit" class="btn">Revocar logro</button>
-              </form>
-            ) : (
-              <form method="post" action="/api/alma/admin/logro">
-                <input type="hidden" name="discordId" value={m.discordId} />
-                <input type="hidden" name="accion" value="otorgar" />
-                <button type="submit" class="btn btn-blood">Otorgar logro</button>
-              </form>
-            )}
-          </div>
-        </div>
+    <ul>
+      {resultados.map((r) => (
+        <li>
+          {r.username} ({r.discordId}) — nick: {r.nick || '—'} — calidad: {r.calidad}
+          {' '}
+          {r.calidadMotivo === 'logro' ? (
+            <form method="post" action="/api/alma/admin/logro" style="display:inline">
+              <input type="hidden" name="discordId" value={r.discordId} />
+              <input type="hidden" name="accion" value="revocar" />
+              <button type="submit">Revocar logro</button>
+            </form>
+          ) : (
+            <form method="post" action="/api/alma/admin/logro" style="display:inline">
+              <input type="hidden" name="discordId" value={r.discordId} />
+              <input type="hidden" name="accion" value="otorgar" />
+              <button type="submit">Otorgar logro</button>
+            </form>
+          )}
+        </li>
       ))}
+    </ul>
 
-    </div>
-  </section>
-
+    <p><a href="/cuenta">Volver a mi cuenta</a></p>
+  </main>
 </Layout>

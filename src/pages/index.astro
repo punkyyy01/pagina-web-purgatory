@@ -1,223 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import CardAlma from '../components/CardAlma.astro';
-import { almasSemilla } from '../data/almas-semilla.js';
 import { getPublishedAlmas } from '../lib/db.js';
-import { mergeAlma, getGalleryAlmas } from '../lib/alma.js';
+import { mergeAlma } from '../lib/alma.js';
 
-// No se puede prerenderizar (build-time): el carrusel tiene que
-// reflejar las cartas reales que la gente va publicando, no una foto
-// fija del momento del deploy.
+// No se puede prerenderizar (build-time): tiene que reflejar las
+// cartas reales publicadas, no una foto fija del momento del deploy.
 export const prerender = false;
 
 const publicadas = await getPublishedAlmas();
-const almasReales = publicadas.map(({ discordMember, almaRow }) => mergeAlma(discordMember, almaRow));
-const almasCarrusel = getGalleryAlmas(almasReales, almasSemilla);
-
-// Excerpts cortos de src/pages/lore.astro (Capítulo III) — mismo texto,
-// recortado para la vista previa de la home. El texto completo vive en /lore.
-const ERAS = [
-  {
-    n: 'I',
-    meta: 'Era I · 2024',
-    title: 'Las Fosas — El Origen',
-    excerpt: 'El servidor original, fundado por Ozy. Aquí nació el concepto que definiría a toda la comunidad: el Amorodio — un vínculo forjado en el insulto mutuo y la confianza real. Cayó por mala administración.',
-  },
-  {
-    n: 'II',
-    meta: 'Era II · 2025',
-    title: 'Los Pibes Shitposters — La Era Oscura',
-    excerpt: 'Onil tomó las riendas y las usó para todo lo contrario de lo que debía. Acosó a Cat. Puso a Filo — un acosador — como administrador. Mala administración, segunda vez.',
-  },
-  {
-    n: 'III',
-    meta: 'Era III · 2025',
-    title: 'OLYMPO — La Edad de los Refugiados',
-    excerpt: 'El Éxodo Blanco llegó cuando el grupo de Doomentio se separó por la voideada de Twoky, y la mayoría de los redimibles terminaron en OLYMPO. El servidor creció. Tercera vez: mala administración.',
-  },
-  {
-    n: 'IV',
-    meta: 'Era IV · Actual — 12 de noviembre',
-    title: 'PURG4TORY — La Dictadura',
-    excerpt: 'Renas no se autoproclamó — el pueblo lo siguió. Fundado el 12 de noviembre, es la era más larga: memoria colectiva de todo lo que no debía repetirse. El ritual del /bump sigue vivo.',
-  },
-];
+const almas = publicadas.map(({ discordMember, almaRow }) => mergeAlma(discordMember, almaRow));
 ---
-<Layout
-  title="Purgatory — Crónica de PURG4TORY"
-  description="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas."
-  ogTitle="PURG4TORY — Crónica del Servidor"
-  ogDescription="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas."
-  path="/"
-  active="inicio"
-  extraScripts={["/static/js/countdown.js", "/static/js/alma-carousel.js", "/static/js/lore-tabs.js"]}
->
+<Layout title="Purgatory" description="Comunidad del servidor de Discord Purgatory.">
+  <main>
+    <h1>Purgatory</h1>
+    <p>
+      Frontend visual en reconstrucción — esta página solo confirma que la carga de datos
+      (almas publicadas) sigue funcionando. Sin diseño todavía a propósito.
+    </p>
 
-  <!-- ══════════════════════════════════════
-       HERO — full-bleed, sin .container en el fondo.
-       La imagen es un placeholder (gradiente): todavía no hay una
-       foto/arte real del servidor para usar acá.
-  ══════════════════════════════════════ -->
-  <section class="hero hero--full" id="home">
-    <div class="hero__scrim" aria-hidden="true"></div>
-    <div class="container hero__content">
-      <p class="hero-eyebrow">Crónica del servidor</p>
-      <h1 class="hero-title">PURG4TORY: Panic!<br />At The Discord</h1>
-      <div class="hero-actions">
-        <a href="https://discord.gg/aTFMEVzcew" class="btn btn-blood" target="_blank" rel="noopener noreferrer">Servidor</a>
-        <a href="/eventos" class="btn">Eventos</a>
-      </div>
-    </div>
-  </section>
+    <h2>4LMA publicadas ({almas.length})</h2>
+    <ul>
+      {almas.map((alma) => <li>{alma.nick} — {alma.era}</li>)}
+    </ul>
 
-  <!-- ══════════════════════════════════════
-       4LMA — las cartas son las protagonistas: rompen el borde de la
-       franja de color de abajo en vez de quedar prolijamente adentro
-       de su propia sección. El HTML trae TODAS las almas (reales +
-       relleno); alma-carousel.js elige un subconjunto justo y engancha
-       el desplazamiento al scroll. Sin JS (o con prefers-reduced-motion
-       / lite-mode) esto sigue siendo una fila con scroll horizontal
-       nativo — ver styles.css.
-  ══════════════════════════════════════ -->
-  <section class="alma-showcase" id="alma-carousel">
-    <div class="alma-showcase__band">
-      <span class="alma-showcase__brand">4LMA</span>
-    </div>
-
-    <div class="alma-carousel__runway" id="alma-carousel-runway">
-      <div class="alma-carousel__viewport" id="alma-carousel-viewport">
-        <!-- Máscara aparte del viewport sticky a propósito: Chromium calcula
-             mal getBoundingClientRect() de un hijo transformado cuando
-             position:sticky y overflow:hidden viven en el MISMO elemento
-             (lo clampeaba al ancho del viewport en vez de dejarlo salir de
-             pantalla). Separado en dos elementos, el bug desaparece. -->
-        <div class="alma-carousel__mask" id="alma-carousel-mask">
-          <div class="alma-carousel__track" id="alma-carousel-track">
-            {almasCarrusel.map((alma) => (
-              <div class="alma-carousel__item" data-slug={alma.slug}>
-                <a href="/4lma" aria-label={`Ver ${alma.nick}`}>
-                  <CardAlma alma={alma} />
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="section-cta">
-        <a href="/4lma" class="btn btn-blood">Ver todas las almas</a>
-      </div>
-    </div>
-  </section>
-
-  <aside class="countdown-strip">
-    <div class="container">
-      <div id="countdown-widget"></div>
-    </div>
-  </aside>
-
-  <!-- ══════════════════════════════════════
-       LORE — una sola carta con tabs por era (I/II/III/IV), no las
-       cuatro siempre abiertas. El texto completo de cada era vive en
-       /lore; acá solo el resumen.
-  ══════════════════════════════════════ -->
-  <section class="section" id="lore-preview">
-    <div class="container">
-      <h2 class="section-title">Lore</h2>
-
-      <div class="lore-tabs" id="lore-tabs" role="tablist">
-        {ERAS.map((era, i) => (
-          <button
-            type="button"
-            class="lore-tab"
-            class:list={[{ active: i === 0 }]}
-            role="tab"
-            aria-selected={i === 0 ? 'true' : 'false'}
-            data-era-tab={era.n}
-          >{era.n}</button>
-        ))}
-      </div>
-
-      <div class="lore-panel-frame">
-        {ERAS.map((era, i) => (
-          <div class="lore-panel" data-era-panel={era.n} hidden={i !== 0}>
-            <div class="record-meta">{era.meta}</div>
-            <h3 class="era-card-title">{era.title}</h3>
-            <div class="lore-panel__excerpt">
-              <p class="record-desc" style="opacity:1">{era.excerpt}</p>
-            </div>
-            <div class="section-cta">
-              <a href="/lore#cap-historia" class="btn">Lore completo</a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       LOS CÍRCULOS DEL INFIERNO
-  ══════════════════════════════════════ -->
-  <section class="section" id="infierno">
-    <div class="container">
-      <h2 class="section-title">Círculos del Infierno</h2>
-      <p class="section-lead">El registro de quienes cruzaron líneas serias dentro de la comunidad. No es chisme ni un juego.</p>
-
-      <div class="condemned-list">
-
-        <article class="condemned-card" data-severity="critical">
-          <div class="record-meta">Caso Nº 001</div>
-          <h3 class="condemned-name">Onil</h3>
-          <p class="record-desc">Actitudes de acoso repetidas, presuntas actitudes indebidas con menores de edad, envio lacayos a trollear con cuentas alternativas.</p>
-          <span class="stamp">Imperdonable</span>
-        </article>
-
-        <article class="condemned-card" data-severity="high">
-          <div class="record-meta">Caso Nº 005</div>
-          <h3 class="condemned-name">Toro <span class="alias">/AnthonyRose</span></h3>
-          <p class="record-desc">Solicitó dinero en el servidor, actitudes machistas y acosadoras con mujeres. En general, un gigafracasado.</p>
-          <span class="stamp">Grave</span>
-        </article>
-
-        <article class="condemned-card" data-severity="low">
-          <div class="record-meta">Caso Nº 008</div>
-          <h3 class="condemned-name">Frankklinton765</h3>
-          <p class="record-desc">"Holaa, estoy aqui por que con un grupo de amigos tenemos un circulo de play station y queriamos saber si es que hay algunas chicas que se quieran unir..." — Sí, fue real.</p>
-          <span class="stamp">Meme eterno</span>
-        </article>
-
-      </div>
-
-      <div class="section-cta">
-        <a href="/condenados" class="btn">Ver el registro completo</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       ESTADÍSTICAS
-  ══════════════════════════════════════ -->
-  <section class="stats-bar">
-    <div class="container stats-grid">
-      <div>
-        <span class="stat-number" data-target="15">0</span>
-        <span class="stat-label">Condenados</span>
-      </div>
-      <div>
-        <span class="stat-number" data-target="4">0</span>
-        <span class="stat-label">Eras del servidor</span>
-      </div>
-      <div>
-        <span class="stat-number" data-target="11">0</span>
-        <span class="stat-label">Personajes canónicos</span>
-      </div>
-      <div>
-        <span class="stat-number" data-target="1">0</span>
-        <span class="stat-label">Dictadura vigente</span>
-      </div>
-    </div>
-  </section>
-
+    <p><a href="/4lma">Ver todas</a> · <a href="/cuenta">Mi cuenta</a></p>
+  </main>
 </Layout>

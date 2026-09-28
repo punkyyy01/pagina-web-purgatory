@@ -534,11 +534,17 @@ h1.section-title {
 
 /* ── Hero full-bleed (home) — imagen de fondo a todo el ancho de la
    pantalla, no acotada a --container. La imagen es un placeholder
-   (gradiente): todavía no hay una foto/arte real del servidor. ── */
+   (gradiente): todavía no hay una foto/arte real del servidor.
+   Ocupa el resto del viewport debajo del header sticky, así que es
+   literalmente todo lo que se ve al entrar, sin importar la altura de
+   pantalla. El padding-bottom reserva, por debajo del borde de pantalla,
+   el mismo alto que .alma-showcase después se roba hacia arriba
+   (margin-top negativo): así el solapamiento del mazo de 4LMA cae
+   siempre debajo del fold, nunca dentro del viewport inicial. ── */
 .hero--full {
   position: relative;
-  min-height: min(78vh, 720px);
-  padding: 0;
+  min-height: calc(100vh - var(--header-h) + var(--space-8) + 0.5rem);
+  padding: 0 0 calc(var(--space-8) + 0.5rem);
   overflow: hidden;
   background:
     radial-gradient(120% 100% at 15% 20%, rgba(13, 138, 128, 0.16) 0%, transparent 55%),

@@ -387,6 +387,30 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 600; }
 .nav-user__menu a:hover,
 .nav-user__menu button:hover { background: rgba(232, 228, 218, 0.08); }
 
+/* Cabecera del dropdown: avatar + nick, propio link a /cuenta — separado
+   del resto de ítems con una regla, igual que un encabezado de sección.
+   Selector calzado a la misma especificidad que ".nav-user__menu a" de
+   arriba (clase padre + tag) para pisar su display/width sin !important. */
+.nav-user__menu a.nav-user__menu-account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: auto;
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-user__menu-account .nav-user__avatar { flex-shrink: 0; }
+
+/* Cerrar sesión: única acción destructiva del nav — la única excepción
+   al acento único del sitio (ver --danger en tokens.css). Mismo cálculo
+   de especificidad que arriba, para pisar ".nav-user__menu button" y
+   ".btn:hover" sin !important. */
+.nav-user__menu button.nav-danger,
+.btn.nav-danger { color: var(--danger); }
+.nav-user__menu button.nav-danger:hover,
+.btn.nav-danger:hover { background: rgba(239, 100, 97, 0.12); color: var(--danger); }
+
 /* Mobile nav toggle */
 .nav-toggle {
   display: none;

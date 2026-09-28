@@ -29,8 +29,9 @@ const links: Array<{ key: NonNullable<Props['active']>; href: string; label: str
         </a>
       </li>
       <li class="nav-links-cta js-nav-user-mobile-item" hidden><a class="btn btn--sm" href="/cuenta"><span class="js-nav-user-name"></span></a></li>
+      <li class="nav-links-cta js-nav-user-mobile-item" hidden><a class="btn btn--sm" href="/4lma">4LMA</a></li>
       <li class="nav-links-cta js-nav-user-mobile-item" hidden>
-        <form method="post" action="/api/auth/logout"><button type="submit" class="btn btn--sm">Cerrar sesión</button></form>
+        <form method="post" action="/api/auth/logout"><button type="submit" class="btn btn--sm nav-danger">Cerrar sesión</button></form>
       </li>
     </ul>
     <div class="nav-end">
@@ -45,8 +46,13 @@ const links: Array<{ key: NonNullable<Props['active']>; href: string; label: str
           <span class="js-nav-user-name"></span>
         </button>
         <div class="nav-user__menu">
-          <a href="/cuenta">Mi cuenta</a>
-          <form method="post" action="/api/auth/logout"><button type="submit">Cerrar sesión</button></form>
+          <a class="nav-user__menu-account" href="/cuenta">
+            <img class="nav-user__avatar js-nav-user-avatar" alt="" width="28" height="28" />
+            <span class="js-nav-user-name"></span>
+          </a>
+          <a href="/4lma">4LMA</a>
+          <a href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Servidor</a>
+          <form method="post" action="/api/auth/logout"><button type="submit" class="nav-danger">Cerrar sesión</button></form>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@
   --rule-strong:  rgba(232, 228, 218, 0.40); /* bordes de controles — 3.21:1 sobre --ink (WCAG 1.4.11) */
   --stamp:        #0d8a80;                  /* el único acento — solo sello/veredicto */
   --stamp-bright: #3de8da;                  /* variante clara del acento */
+  --danger:       #ef6461;                  /* única excepción al acento único: acciones destructivas (cerrar sesión) */
   --overlay:      rgba(0, 0, 0, 0.7);       /* velo detrás de modales */
 
   /* ── Tipografía — tres roles, no intercambiables ── */

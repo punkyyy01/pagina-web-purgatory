@@ -113,9 +113,12 @@ export const ERA_LABELS = {
 };
 
 /**
- * Completa la lista de almas reales y publicadas con relleno de
- * src/data/almas-semilla.js hasta llegar al tamaño de ese mismo
- * banco de relleno — ni más ni menos. Con 0 almas reales se ven
+ * Completa la lista de almas reales y publicadas con relleno de un
+ * banco de semilla (mismo shape que Alma) hasta llegar al tamaño de
+ * ese banco — ni más ni menos. Sin caller activo por ahora: el banco
+ * de relleno de la UI vieja (src/data/almas-semilla.js) se eliminó
+ * junto con esa UI; queda lista para reusarse con datos de demo
+ * nuevos. Con 0 almas reales se ven
  * todas las de relleno; en cuanto las reales igualan o superan ese
  * número, el relleno desaparece solo, sin tocar la base de datos ni
  * este archivo. Las reales van primero (más recientes arriba, según
@@ -190,7 +193,7 @@ export function getCalidadDerivada(discordMember, rol, calidadMotivoActual) {
 
 /**
  * Combina lo verificado de Discord con lo autodeclarado/administrado en
- * `almas` en el objeto Alma que consume CardAlma.astro. Si `almaRow` es
+ * `almas` en el objeto Alma que consume el frontend. Si `almaRow` es
  * null (el usuario nunca guardó su Card Builder), se arma un Alma "vacío"
  * con los defaults del schema — así una página puede previsualizar la
  * card de un miembro que todavía no la creó.

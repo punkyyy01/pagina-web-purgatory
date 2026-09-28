@@ -3,8 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "test:api": "node test-api.js"
+    "build": "astro build"
   },
   "devDependencies": {
     "canvas": "^3.2.3",

@@ -1,42 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import CardAlma from '../components/CardAlma.astro';
-import { almasSemilla } from '../data/almas-semilla.js';
 import { getPublishedAlmas } from '../lib/db.js';
-import { mergeAlma, getGalleryAlmas } from '../lib/alma.js';
+import { mergeAlma } from '../lib/alma.js';
 
 // No se puede prerenderizar (build-time): tiene que reflejar las
 // cartas reales publicadas, no una foto fija del momento del deploy.
 export const prerender = false;
 
 const publicadas = await getPublishedAlmas();
-const almasReales = publicadas.map(({ discordMember, almaRow }) => mergeAlma(discordMember, almaRow));
-const almas = getGalleryAlmas(almasReales, almasSemilla);
+const almas = publicadas.map(({ discordMember, almaRow }) => mergeAlma(discordMember, almaRow));
 ---
-<Layout
-  title="4LMA — Purgatory"
-  description="La galería de 4LMAs de PURG4TORY: la identidad de cada usuario dentro del universo del servidor."
-  ogTitle="4LMA — PURG4TORY"
-  ogDescription="La galería de 4LMAs de PURG4TORY: la identidad de cada usuario dentro del universo del servidor."
-  path="/4lma"
-  active={null}
->
+<Layout title="4LMA — Purgatory" description="Galería de 4LMA publicadas por la comunidad de Purgatory.">
+  <main>
+    <h1>4LMA</h1>
+    <p>Frontend visual en reconstrucción. Listado sin diseño, a propósito.</p>
 
-  <section class="page-hero">
-    <div class="container">
-      <h1 class="section-title">4LMA</h1>
-      <p class="section-lead">
-        La colección viva de quienes forman parte de Purgatory — cada alma, a su manera.
-      </p>
-    </div>
-  </section>
+    <ul>
+      {almas.map((alma) => <li>{alma.nick} — {alma.era}</li>)}
+    </ul>
 
-  <section class="section">
-    <div class="container">
-      <div class="naipe-grid">
-        {almas.map((alma) => <CardAlma alma={alma} />)}
-      </div>
-    </div>
-  </section>
-
+    <p><a href="/">Inicio</a></p>
+  </main>
 </Layout>

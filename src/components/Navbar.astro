@@ -15,7 +15,7 @@ const links: Array<{ key: NonNullable<Props['active']>; href: string; label: str
 ---
 <header class="site-header" id="site-header">
   <nav class="nav">
-    <a class="brand wordmark-small" href="/">PURG<span class="seal-sm">4</span>TORY</a>
+    <a class="brand wordmark-small" href="/">P</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
     <ul class="nav-links" id="nav-links">
       {links.map((link) => (
@@ -26,10 +26,11 @@ const links: Array<{ key: NonNullable<Props['active']>; href: string; label: str
       <li class="nav-links-cta js-nav-user-mobile-item" hidden>
         <form method="post" action="/api/auth/logout"><button type="submit" class="btn btn--sm">Cerrar sesión</button></form>
       </li>
-      <li class="nav-links-cta"><a class="btn btn--sm btn-blood cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a></li>
+      <li class="nav-links-cta"><a class="btn btn--sm btn-blood cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Server</a></li>
     </ul>
     <div class="nav-end">
       <a class="btn btn--sm cta js-nav-login" href="/api/auth/login">Iniciar sesión con Discord</a>
+      <a class="btn btn--sm btn-blood cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Server</a>
       <div class="nav-user cta js-nav-user" hidden>
         <button class="nav-user__trigger js-nav-user-trigger" type="button" aria-expanded="false">
           <img class="nav-user__avatar js-nav-user-avatar" alt="" width="28" height="28" />
@@ -40,7 +41,6 @@ const links: Array<{ key: NonNullable<Props['active']>; href: string; label: str
           <form method="post" action="/api/auth/logout"><button type="submit">Cerrar sesión</button></form>
         </div>
       </div>
-      <a class="btn btn--sm btn-blood cta" href="https://discord.gg/aTFMEVzcew" target="_blank" rel="noopener noreferrer">Entrar al Server</a>
     </div>
   </nav>
 </header>

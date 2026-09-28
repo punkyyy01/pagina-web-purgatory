@@ -50,7 +50,7 @@ const ERAS = [
   ogDescription="Crónica y lore del servidor Purgatory. Salseo, personajes y escenas icónicas."
   path="/"
   active="inicio"
-  extraScripts={["/static/js/alma-carousel.js", "/static/js/lore-tabs.js"]}
+  extraScripts={["/static/js/countdown.js", "/static/js/alma-carousel.js", "/static/js/lore-tabs.js"]}
 >
 
   <!-- ══════════════════════════════════════
@@ -71,68 +71,59 @@ const ERAS = [
   </section>
 
   <!-- ══════════════════════════════════════
-       4LMA — Colección viva de Almas del Servidor
-       Rediseño completo del concepto de cartas (4LMA):
-       Atmósfera oscura, distinciones de calidad (shiny, normal, void),
-       deck interactivo y fiel a los bocetos.
+       4LMA — las cartas son las protagonistas: rompen el borde de la
+       franja de color de abajo en vez de quedar prolijamente adentro
+       de su propia sección. El HTML trae TODAS las almas (reales +
+       relleno); alma-carousel.js elige un subconjunto justo y engancha
+       el desplazamiento al scroll. Sin JS (o con prefers-reduced-motion
+       / lite-mode) esto sigue siendo una fila con scroll horizontal
+       nativo — ver styles.css.
   ══════════════════════════════════════ -->
-  <section class="alma-showcase" id="alma-showcase">
-    <div class="container">
-      <div class="alma-showcase__header">
-        <div class="alma-showcase__badge">
-          <span class="pulse-dot"></span>
-          <span>4LMA · STATUS DEL PURGATORIO</span>
-        </div>
-        <h2 class="section-title">Almas del Servidor</h2>
-        <p class="section-lead">
-          Tu alma es tu presentación dentro de PURG4TORY. Cartas coleccionables con rangos que evolucionan según la historia, el apoyo y la conducta en la comunidad.
-        </p>
+  <section class="alma-showcase" id="alma-carousel">
+    <div class="alma-showcase__band">
+      <span class="alma-showcase__brand">4LMA</span>
+    </div>
 
-        <div class="alma-legend">
-          <span class="alma-legend__item alma-legend__item--shiny">
-            <span class="legend-symbol">✦</span> <strong>Shiny</strong> · Boosters & Staff
-          </span>
-          <span class="alma-legend__item alma-legend__item--normal">
-            <span class="legend-symbol">◈</span> <strong>Normal</strong> · Almas canónicas
-          </span>
-          <span class="alma-legend__item alma-legend__item--void">
-            <span class="legend-symbol">☠</span> <strong>Void</strong> · Desterrados & expulsados
-          </span>
+    <div class="alma-carousel__runway" id="alma-carousel-runway">
+      <div class="alma-carousel__viewport" id="alma-carousel-viewport">
+        <!-- Máscara aparte del viewport sticky a propósito: Chromium calcula
+             mal getBoundingClientRect() de un hijo transformado cuando
+             position:sticky y overflow:hidden viven en el MISMO elemento
+             (lo clampeaba al ancho del viewport en vez de dejarlo salir de
+             pantalla). Separado en dos elementos, el bug desaparece. -->
+        <div class="alma-carousel__mask" id="alma-carousel-mask">
+          <div class="alma-carousel__track" id="alma-carousel-track">
+            {almasCarrusel.map((alma) => (
+              <div class="alma-carousel__item" data-slug={alma.slug}>
+                <a href="/4lma" aria-label={`Ver ${alma.nick}`}>
+                  <CardAlma alma={alma} />
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Carrusel / Deck de Almas -->
-    <div class="alma-deck-container">
-      <div class="alma-deck-wrapper">
-        <button class="alma-deck__nav alma-deck__nav--prev" id="alma-nav-prev" type="button" aria-label="Almas anteriores">&#8592;</button>
-        <div class="alma-deck" id="alma-deck">
-          {almasCarrusel.map((alma) => (
-            <div class="alma-deck__item" data-slug={alma.slug}>
-              <a href="/4lma" aria-label={`Ver 4LMA de ${alma.nick}`} class="alma-deck__link">
-                <CardAlma alma={alma} />
-              </a>
-            </div>
-          ))}
-        </div>
-        <button class="alma-deck__nav alma-deck__nav--next" id="alma-nav-next" type="button" aria-label="Siguientes almas">&#8594;</button>
-      </div>
-    </div>
-
     <div class="container">
-      <div class="alma-showcase__actions">
-        <a href="/4lma" class="btn btn-blood">Explorar todas las almas</a>
-        <a href="/cuenta/editar" class="btn">Crear tu 4LMA</a>
+      <div class="section-cta">
+        <a href="/4lma" class="btn btn-blood">Ver todas las almas</a>
       </div>
     </div>
   </section>
+
+  <aside class="countdown-strip">
+    <div class="container">
+      <div id="countdown-widget"></div>
+    </div>
+  </aside>
 
   <!-- ══════════════════════════════════════
        LORE — una sola carta con tabs por era (I/II/III/IV), no las
        cuatro siempre abiertas. El texto completo de cada era vive en
        /lore; acá solo el resumen.
   ══════════════════════════════════════ -->
-  <section class="section section--panel" id="lore-preview">
+  <section class="section" id="lore-preview">
     <div class="container">
       <h2 class="section-title">Lore</h2>
 
@@ -162,6 +153,69 @@ const ERAS = [
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       LOS CÍRCULOS DEL INFIERNO
+  ══════════════════════════════════════ -->
+  <section class="section" id="infierno">
+    <div class="container">
+      <h2 class="section-title">Círculos del Infierno</h2>
+      <p class="section-lead">El registro de quienes cruzaron líneas serias dentro de la comunidad. No es chisme ni un juego.</p>
+
+      <div class="condemned-list">
+
+        <article class="condemned-card" data-severity="critical">
+          <div class="record-meta">Caso Nº 001</div>
+          <h3 class="condemned-name">Onil</h3>
+          <p class="record-desc">Actitudes de acoso repetidas, presuntas actitudes indebidas con menores de edad, envio lacayos a trollear con cuentas alternativas.</p>
+          <span class="stamp">Imperdonable</span>
+        </article>
+
+        <article class="condemned-card" data-severity="high">
+          <div class="record-meta">Caso Nº 005</div>
+          <h3 class="condemned-name">Toro <span class="alias">/AnthonyRose</span></h3>
+          <p class="record-desc">Solicitó dinero en el servidor, actitudes machistas y acosadoras con mujeres. En general, un gigafracasado.</p>
+          <span class="stamp">Grave</span>
+        </article>
+
+        <article class="condemned-card" data-severity="low">
+          <div class="record-meta">Caso Nº 008</div>
+          <h3 class="condemned-name">Frankklinton765</h3>
+          <p class="record-desc">"Holaa, estoy aqui por que con un grupo de amigos tenemos un circulo de play station y queriamos saber si es que hay algunas chicas que se quieran unir..." — Sí, fue real.</p>
+          <span class="stamp">Meme eterno</span>
+        </article>
+
+      </div>
+
+      <div class="section-cta">
+        <a href="/condenados" class="btn">Ver el registro completo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       ESTADÍSTICAS
+  ══════════════════════════════════════ -->
+  <section class="stats-bar">
+    <div class="container stats-grid">
+      <div>
+        <span class="stat-number" data-target="15">0</span>
+        <span class="stat-label">Condenados</span>
+      </div>
+      <div>
+        <span class="stat-number" data-target="4">0</span>
+        <span class="stat-label">Eras del servidor</span>
+      </div>
+      <div>
+        <span class="stat-number" data-target="11">0</span>
+        <span class="stat-label">Personajes canónicos</span>
+      </div>
+      <div>
+        <span class="stat-number" data-target="1">0</span>
+        <span class="stat-label">Dictadura vigente</span>
       </div>
     </div>
   </section>

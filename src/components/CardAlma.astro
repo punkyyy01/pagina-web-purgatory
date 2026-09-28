@@ -1,84 +1,22 @@
 ---
-import { getCalidadEfectiva, CALIDAD_LABELS, ERA_LABELS } from '../lib/alma.js';
+import { getCalidadEfectiva, CALIDAD_LABELS } from '../lib/alma.js';
 
 /** @type {{ alma: import('../lib/alma.js').Alma }} */
 const { alma } = Astro.props;
 
 const calidad = getCalidadEfectiva(alma);
-const inicial = (alma.nick && alma.nick.trim().charAt(0).toUpperCase()) || '?';
-const eraLabel = (alma.era && ERA_LABELS[alma.era]) ? ERA_LABELS[alma.era] : 'Purgatory';
+const inicial = alma.nick.trim().charAt(0).toUpperCase() || '?';
 ---
 <article class="card-alma" data-calidad={calidad} data-presencia={alma.presencia}>
-  <div class="card-alma__inner">
-    <!-- Card Header / Meta -->
-    <div class="card-alma__header">
-      <div class="card-alma__era">
-        <span class="card-alma__era-dot"></span>
-        <span class="card-alma__era-name">{eraLabel}</span>
-      </div>
+  {alma.avatarUrl
+    ? <img class="card-alma__photo" src={alma.avatarUrl} alt="" loading="lazy" />
+    : <div class="card-alma__monogram" aria-hidden="true" data-initial={inicial}></div>
+  }
 
-      {calidad === 'shiny' && (
-        <span class="card-alma__badge card-alma__badge--shiny">
-          <span class="badge-sparkle">✦</span> SHINY
-        </span>
-      )}
-      {calidad === 'void' && (
-        <span class="card-alma__badge card-alma__badge--void">
-          <span class="badge-skull">☠</span> VOID
-        </span>
-      )}
-      {calidad === 'normal' && (
-        <span class="card-alma__badge card-alma__badge--normal">◈ ALMA</span>
-      )}
-    </div>
+  {calidad !== 'normal' && (
+    <span class="stamp card-alma__stamp">{CALIDAD_LABELS[calidad]}</span>
+  )}
 
-    <!-- Card Portrait Frame -->
-    <div class="card-alma__portrait-frame">
-      {alma.avatarUrl ? (
-        <img class="card-alma__photo" src={alma.avatarUrl} alt={alma.nick} loading="lazy" />
-      ) : (
-        <div class="card-alma__sigil" aria-hidden="true">
-          <svg class="card-alma__sigil-rune" viewBox="0 0 120 120" fill="none" stroke="currentColor">
-            <circle cx="60" cy="60" r="54" stroke-width="1" stroke-dasharray="3 3" opacity="0.3" />
-            <circle cx="60" cy="60" r="46" stroke-width="1.5" opacity="0.5" />
-            <circle cx="60" cy="60" r="38" stroke-width="1" stroke-dasharray="6 2" opacity="0.4" />
-            <polygon points="60,18 96,80 24,80" stroke-width="1.2" opacity="0.35" />
-            <polygon points="60,102 96,40 24,40" stroke-width="1.2" opacity="0.35" />
-            <circle cx="60" cy="60" r="22" stroke-width="1.5" opacity="0.7" />
-          </svg>
-          <div class="card-alma__sigil-core">
-            <span class="card-alma__sigil-letter">{inicial}</span>
-          </div>
-        </div>
-      )}
-      <div class="card-alma__portrait-scrim" aria-hidden="true"></div>
-    </div>
-
-    <!-- Card Content -->
-    <div class="card-alma__body">
-      {alma.moteSuperior && (
-        <span class="card-alma__mote-sup">{alma.moteSuperior}</span>
-      )}
-      <h3 class="card-alma__nick" title={alma.nick}>{alma.nick}</h3>
-      {alma.moteInferior && (
-        <span class="card-alma__mote-inf">{alma.moteInferior}</span>
-      )}
-
-      {alma.fraseIconica && (
-        <p class="card-alma__quote">«{alma.fraseIconica}»</p>
-      )}
-    </div>
-
-    <!-- Card Footer -->
-    <div class="card-alma__footer">
-      <span class="card-alma__presence">
-        <span class={`presence-dot presence-dot--${alma.presencia || 'activo'}`}></span>
-        {alma.esBooster ? 'BOOSTER' : (alma.presencia || 'ACTIVO').toUpperCase()}
-      </span>
-      <span class="card-alma__watermark">#PURG4TORY</span>
-    </div>
-  </div>
-
-  <!-- Holographic shimmer layer -->
-  <div class="card-alma__glare" aria-hidden="true"></div>
+  <div class="card-alma__scrim" aria-hidden="true"></div>
+  <h3 class="card-alma__nick">{alma.nick}</h3>
 </article>
